@@ -5,13 +5,15 @@ import {
   Switch
 } from 'react-router-dom'
 import LoginPage from './components/LoginPage'
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (
     <Router>
       <Switch>
         <Route path="/">
-          <LoginPage />
+          {/* <LoginPage /> */}
+          <Dashboard />
         </Route>
       </Switch>
     </Router>

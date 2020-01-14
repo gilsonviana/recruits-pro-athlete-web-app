@@ -1,0 +1,79 @@
+.app__header__top__bar {
+    display: flex;
+    width: 100%;
+    height: 3.5rem;
+    align-items: stretch;
+    box-shadow: rgba(0,0,0,0.1) 0 0 10px;
+}
+                    
+.app__header__top__bar__brand {
+    margin-bottom: 0;
+    padding: 0 .5rem 0 1rem;
+    height: 3.5rem;
+    width: 15rem;
+    font-size: 1.25rem;
+    align-items: center;
+    display: flex;
+}
+
+.app__header__top__bar__brand img {
+    vertical-align: middle;
+    height: 45px;
+}
+
+.app__header__top__bar__list {
+    display: flex;
+    flex: 2;
+    align-items: center;
+}
+
+.app__header__top__bar__item {
+    margin-left: auto;
+}
+
+.app__header__top__bar__item .btn-account {
+    padding: 0 1rem;
+    min-width: 3.5rem;
+    min-height: 3.5rem;
+    border: 0;
+    border-left: 1px solid #00fc00;
+    transition: background-color .15s;
+    outline: 0;
+    align-items: center;
+    background: none;
+    margin: 0;
+    position: relative;
+    color: inherit;
+}
+
+.app__header__top__bar__item .btn-account .user-avatar {
+    position: relative;
+    margin-bottom: 0;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 4rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 2.25rem;
+    margin-right: .75rem;
+}
+
+.app__header__top__bar__item .btn-account .user-avatar img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4rem;
+    object-fit: cover;
+    object-position: top;
+}
+
+.app__header__top__bar__item .btn-account .account-summary {
+    margin-right: .75rem;
+    text-align: left;
+    flex: 1 1;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+}
