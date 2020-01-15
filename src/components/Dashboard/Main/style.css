@@ -1,0 +1,43 @@
+.app__main {
+    padding-left: 15rem;
+    position: relative;
+    padding-right: 0;
+    overflow: hidden;
+}
+
+.app__main .wrapper {
+    position: relative;
+    margin: 0 auto;
+}
+
+.app__main .page {
+    min-height: 646px;
+}
+
+.app__main .page__inner {
+    padding: 1.5rem 0;
+}
+
+.app__main .page__title__bar {
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media screen and (min-width: 992px) {
+    .app__main .page {
+        min-height: calc(100vh - 3.5rem);
+    }
+    
+    .app__main .page__inner {
+        padding-right: 2rem;
+        padding-left: 2rem;
+    }
+    
+    .app__main .page__title__bar {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}

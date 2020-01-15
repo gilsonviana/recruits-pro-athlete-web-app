@@ -12,7 +12,9 @@ function App() {
     <Router>
       <Switch>
         <Route path="/">
-          {/* <LoginPage /> */}
+          <LoginPage />
+        </Route>
+        <Route path="/dashboard">
           <Dashboard />
         </Route>
       </Switch>
