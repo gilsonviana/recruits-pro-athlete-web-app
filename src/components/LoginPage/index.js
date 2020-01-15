@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -9,9 +9,15 @@ import logo from '../../assets/images/logo.png'
 
 import "./style.css";
 
-const LoginPage = props => {
+const LoginPage = ({ history }) => {
   const [showToast, setShowToast] = React.useState(true)
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    history.push('/dashboard')
+  }
+
+    
   return (
     <div className="page__login">
       <Toast onClose={() => setShowToast(false)} show={showToast} delay={5000} autohide style={{
@@ -35,7 +41,7 @@ const LoginPage = props => {
               <div className="page__login__content__box">
                 <div className="page__login__content__box__form">
                   <h3 className="page__login__content__box__form__title">Log in to Athletes Pro</h3>
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <input type="text" placeholder="Enter email" />
                     <input type="password" placeholder="Enter password" />
                     <button type="submit">Log in</button>
@@ -69,4 +75,4 @@ const LoginPage = props => {
   );
 };
 
-export default LoginPage;
+export default withRouter(LoginPage);
