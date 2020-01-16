@@ -1,39 +1,39 @@
-.page__login {
+.page__signup {
     background-color: #F9FAFC;
     height: 100vh;
 }
 
-.page__login__header {
+.page__signup__header {
     padding-top: 40px;
     padding-bottom: 40px;
 }
 
-.page__login__header img {
+.page__signup__header img {
     display: block;
     height: 73px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.page__login__content {
+.page__signup__content {
     width: 100%;
     padding: 0px;
     overflow: visible;
     margin-bottom: 30px;
 }
 
-.page__login__content__box {
+.page__signup__content__box {
     max-width: 400px;
 }
 
-.page__login__content__box__form {
+.page__signup__content__box__form {
     border-radius: 3px;
     padding: 25px 40px;
     box-shadow: rgba(0,0,0,0.1) 0 0 10px;
     background-color: hsl(0, 0%, 100%);
 }
 
-.page__login__content__box__form__title {
+.page__signup__content__box__form__title {
     text-align: center;
     color: #5E6C84;
     font-size: 16px;
@@ -43,7 +43,7 @@
     margin-bottom: 25px;
 }
 
-.page__login__content__box__form input {
+.page__signup__content__box__form input {
     background-color: #FAFBFC;
     border: 1px solid #DFE1E6;
     border-radius: 3px;
@@ -53,7 +53,7 @@
     margin-bottom: 1rem;
 }
 
-.page__login__content__box__form [type=submit] {
+.page__signup__content__box__form [type=submit] {
     background-color: #00EC00;
     color: #eee;
     font-weight: bold;
@@ -65,33 +65,33 @@
     border: none;
 }
 
-.page__login__content__box__form [type=submit]:hover {
+.page__signup__content__box__form [type=submit]:hover {
     background-color: #00fc00;
 }
 
-.page__login__content__footer a {
+.page__signup__content__footer a {
     display: block;
     text-align: center;
     margin-bottom: .2rem;
 }
 
-.page__login__footer {
+.page__signup__footer {
     text-align: center;
 }
 
-.page__login__footer p {
+.page__signup__footer p {
     display: inline-block;
     margin: 0 .6rem;
 }
 
-.page__login__footer a:hover {
+.page__signup__footer a:hover {
     color: #77FF77;
 }
 
 
 
 @media only screen and (min-width: 900px) {
-    .page__login__content__box {
+    .page__signup__content__box {
         margin: 0 auto;
         max-width: 1300px;
     }   

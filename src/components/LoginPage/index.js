@@ -27,22 +27,22 @@ const LoginPage = ({ history }) => {
         backgroundColor: `#eb5a46`,
         color: `#eee`
       }}>
-          <Toast.Body>Unable to login user. Email or password is wrong.</Toast.Body>
-        </Toast>
+        <Toast.Body>Unable to login user. Email or password is wrong.</Toast.Body>
+      </Toast>
       <Container fluid style={{
         justifyContent: 'space-between'
       }}>
         <header className="page__login__header">
-          <img src={logo} />
+          <img src={logo} alt="Recruits pro logo"/>
         </header>
         <Row>
           <Col xs={12} md={{ span: 4, offset: 4 }}>
             <section className="page__login__content">
               <div className="page__login__content__box">
                 <div className="page__login__content__box__form">
-                  <h3 className="page__login__content__box__form__title">Log in to Athletes Pro</h3>
+                  <h3 className="page__login__content__box__form__title font-weight-bold">Log in to Athletes Pro</h3>
                   <form onSubmit={handleSubmit}>
-                    <input type="text" placeholder="Enter email" />
+                    <input type="email" placeholder="Enter email" />
                     <input type="password" placeholder="Enter password" />
                     <button type="submit">Log in</button>
                   </form>
