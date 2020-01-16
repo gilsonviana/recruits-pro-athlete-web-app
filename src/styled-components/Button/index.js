@@ -12,7 +12,10 @@ const Button =  styled.button`
     padding: .5rem;
     margin-bottom: 1rem;
     border: none;
-    cursor: ${({disabled}) => disabled ? `not-allowed` : 'pointer'}
+    cursor: ${({disabled}) => disabled ? `not-allowed` : 'pointer'};
+    &:hover {
+        background-color: #00fc00;
+    }
 `
 export default ({children, ...rest}) => {
     return (

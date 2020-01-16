@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Toast from 'react-bootstrap/Toast'
-import Button from '../../styled-components/Button'
+import { Button, InputText } from '../../styled-components'
 
 import logo from '../../assets/images/logo.png'
 
@@ -61,7 +61,7 @@ const SignupPage = ({ history }) => {
     const { target } = e
 
     if (target.name === 'email') {
-      const reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      const reg = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
       if (!reg.test(target.value)) {
         return setShowError({
@@ -161,9 +161,9 @@ const SignupPage = ({ history }) => {
                         <p className="text-danger my-1">{showError.name.password.message}</p>
                       </>
                     }
-                    <input type="email" placeholder="Enter email" name="email" onChange={handleChange} onBlur={isFieldValid} />
-                    <input type="text" placeholder="Enter full name" name="username" onChange={handleChange} onBlur={isFieldValid} />
-                    <input type="password" placeholder="Enter password" name="password" onChange={handleChange} onBlur={isFieldValid} />
+                    <InputText type="email" placeholder="Enter email" name="email" onChange={handleChange} onBlur={isFieldValid} />
+                    <InputText type="text" placeholder="Enter full name" name="username" onChange={handleChange} onBlur={isFieldValid} />
+                    <InputText type="password" placeholder="Enter password" name="password" onChange={handleChange} onBlur={isFieldValid} />
                     <p className="my-3">
                       By signing up, you agree and accept our <Link to="">terms of use</Link> and <Link to="">privacy policy</Link>.
                     </p>
