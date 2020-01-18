@@ -47,8 +47,7 @@ const SignupPage = ({ history }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(formState)
-    // history.push('/dashboard')
+    history.push('/pricing')
   }
 
   const isFormValid = () => {
@@ -174,7 +173,7 @@ const SignupPage = ({ history }) => {
                     }
                   </form>
                   <div className="page__signup__content__footer">
-                    <Link to="">Login</Link>
+                    <Link to="/">Login</Link>
                   </div>
                 </div>
               </div>

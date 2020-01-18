@@ -146,7 +146,7 @@ const LoginPage = ({ history }) => {
                   </form>
                   <div className="page__login__content__footer">
                     <Link to="">Forgot password?</Link>
-                    <Link to="">Sign up for an account</Link>
+                    <Link to="/signup">Sign up for an account</Link>
                   </div>
                 </div>
               </div>

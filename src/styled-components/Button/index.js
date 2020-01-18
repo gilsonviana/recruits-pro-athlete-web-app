@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 const Button =  styled.button`
-    background-color: #00EC00;
+    background-color: ${({link}) => link ? 'none' : '#00EC00'};
     color: #eee;
     font-weight: bold;
     border-radius: 3px;
@@ -14,7 +14,7 @@ const Button =  styled.button`
     border: none;
     cursor: ${({disabled}) => disabled ? `not-allowed` : 'pointer'};
     &:hover {
-        background-color: #00fc00;
+        background-color: ${({link}) => link ? 'none' : '#00EC00'};
     }
 `
 export default ({children, ...rest}) => {
@@ -28,5 +28,6 @@ export default ({children, ...rest}) => {
 }
 
 Button.propTypes = {
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    link: PropTypes.bool
 }
