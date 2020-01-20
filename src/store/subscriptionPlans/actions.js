@@ -1,6 +1,7 @@
 import { SET_SUBSCRIPTION_PLANS } from './types'
 
 export const getSubscriptionPlans = () => {
+    //TODO make http call to API
     return dispatch => {
         dispatch({
             type: SET_SUBSCRIPTION_PLANS,
