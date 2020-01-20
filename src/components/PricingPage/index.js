@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
-import { Button, SelectInput } from "../../styled-components";
+import { Button } from "../../styled-components";
 import { FiCheck } from "react-icons/fi";
 import Popup from "./pricing-page-popup";
 import { createSubscription } from '../../services/paypal'

@@ -8,7 +8,7 @@ const ProtectedRoute = ({ token, children, ...rest }) => {
         <Route
             {...rest}
             render={({ location }) => (
-                (false) ? (
+                (token) ? (
                     children
                 ) : (
                     <Redirect 
@@ -28,7 +28,7 @@ ProtectedRoute.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-    // token: state.auth.token
+    token: state.auth.token
 })
 
 export default connect(mapStateToProps)(ProtectedRoute)

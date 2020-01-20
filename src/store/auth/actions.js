@@ -1,4 +1,4 @@
-import { SET_TOKEN } from './types'
+import { SET_TOKEN, UNSET_TOKEN } from './types'
 
 export const doLogin = async (credentials) => {
     return dispatch => {
@@ -6,6 +6,14 @@ export const doLogin = async (credentials) => {
         dispatch({
             type: SET_TOKEN,
             payload: 'USER_TOKEN'
+        })
+    }
+}
+
+export const doLogout = () => {
+    return dispatch => {
+        dispatch({
+            type: UNSET_TOKEN
         })
     }
 }
