@@ -1,15 +1,16 @@
 import React from "react";
-import { Link, withRouter, Redirect } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { connect } from 'react-redux'
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Toast from "react-bootstrap/Toast";
 import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
-import { Button } from "../../styled-components";
+import { Button, SelectInput } from "../../styled-components";
 import { FiCheck } from "react-icons/fi";
 import Popup from "./pricing-page-popup";
 import { createSubscription } from '../../services/paypal'
+import Select from 'react-select';
 
 import { ReactComponent as BookmarkIcon } from "../../assets/images/bookmark-black-shape.svg";
 import { ReactComponent as Bg1 } from "../../assets/images/bg-1.svg";
@@ -19,11 +20,32 @@ import logo from "../../assets/images/logo.png";
 
 import "./style.css";
 
-const PricingPage = ({ history }) => {
+const PricingPage = ({ 
+  history,
+  subscriptionPlans 
+}) => {
+  const [selectedOption, setSelectedOption] = React.useState(null)
+  const [plansOption, setPlansOption] = React.useState([])
   const [showPopup, setShowPopup] = React.useState({
     first: true,
     isVisible: false
   })
+  
+  React.useEffect(() => {
+    const setSelectPlanOptions = () => {
+      setPlansOption([...subscriptionPlans.map(({ plan_id, name }) => ({
+        value: plan_id,
+        label: name
+      }))])
+    }
+    setSelectPlanOptions()
+     
+  }, [subscriptionPlans])
+
+  const handleChange = selectedOption => {
+    setSelectedOption({ selectedOption });
+    console.log(`Option selected:`, selectedOption);
+  };
 
   const handleSubmitFree = () => {
     if (showPopup.first) {
@@ -36,7 +58,6 @@ const PricingPage = ({ history }) => {
 
   const handleSubmitSubscriber = async () => {
     const res = await createSubscription('P-2BE45829GU5364001LYRRAVQ', { givenName: 'Gil', surname: 'Viana' })
-    console.log(res)
     window.location = res.links[0].href
   };
 
@@ -53,15 +74,6 @@ const PricingPage = ({ history }) => {
         (showPopup.isVisible) && <Popup handleClose={togglePopup} />
       }
       <div className="page__pricing">
-        {/* <Toast onClose={() => setShowToast(false)} show={showToast} delay={5000} autohide style={{
-        position: 'absolute',
-        left: `50%`,
-        transform: `translateX(${-50}%)`,
-        backgroundColor: `#eb5a46`,
-        color: `#eee`
-      }}>
-        <Toast.Body>Unable to login user. Email or password is wrong.</Toast.Body>
-      </Toast> */}
         <Container
           style={{
             justifyContent: "space-between"
@@ -98,7 +110,6 @@ const PricingPage = ({ history }) => {
                           </Badge>
                           <Card.Title className="d-flex">
                             <h1 className="mb-0">$0</h1>{" "}
-                            {/* <h4 className="text-muted mb-0"></h4> */}
                           </Card.Title>
                           <Card.Subtitle className="my-4">
                             Basic plan for starters.
@@ -130,14 +141,26 @@ const PricingPage = ({ history }) => {
                           <Badge variant="success" className="mb-4">
                             Pro
                           </Badge>
-                          <Card.Title className="d-flex">
-                            <h1 className="mb-0">$5</h1>{" "}
-                            <h4 className="text-muted mb-0">/month</h4>
-                          </Card.Title>
+                          {
+                            (selectedOption) && (selectedOption.label === 'Yearly') ? 
+                            <Card.Title className="d-flex">
+                              <h1 className="mb-0">$50</h1>{" "}
+                              <h4 className="text-muted mb-0">/yearly</h4>
+                            </Card.Title> : 
+                            <Card.Title className="d-flex">
+                              <h1 className="mb-0">$5</h1>{" "}
+                              <h4 className="text-muted mb-0">/month</h4>
+                            </Card.Title>
+                          }
                           <Card.Subtitle className="my-4">
                             The perfect plan to go if you want to up skill your
                             game.
                           </Card.Subtitle>
+                          <Select 
+                            value={selectedOption || 'Monthly'}
+                            onChange={handleChange}
+                            options={plansOption}
+                          />
                           <ul className="page__pricing__card__features">
                             <li className="page__pricing__card__features__item">
                               <FiCheck className="page__pricing__card__features__item__icon" />
@@ -194,4 +217,8 @@ const PricingPage = ({ history }) => {
   );
 };
 
-export default withRouter(PricingPage);
+const mapStateToProps = (state) => ({
+  subscriptionPlans: state.subscriptionPlans
+})
+
+export default connect(mapStateToProps)(withRouter(PricingPage));

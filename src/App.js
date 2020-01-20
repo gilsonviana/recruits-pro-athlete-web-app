@@ -4,6 +4,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
+import ProtectedRoute from './components/ProtectedRoute'
 import { connect } from 'react-redux'
 import LoginPage from './components/LoginPage'
 import Dashboard from './components/Dashboard';
@@ -24,6 +25,9 @@ function App({
           {/* <LoginPage /> */}
           <PricingPage />
         </Route>
+        <Route path="/login" exact>
+          <LoginPage />
+        </Route>
         <Route path="/signup" exact>
           <SignupPage />
         </Route>
@@ -33,9 +37,9 @@ function App({
         <Route path="/process-payment">
           <ProcessPayment />
         </Route>
-        <Route path="/dashboard">
+        <ProtectedRoute path="/dashboard">
           <Dashboard />
-        </Route>
+        </ProtectedRoute>
       </Switch>
     </Router>
   )
