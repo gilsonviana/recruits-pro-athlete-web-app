@@ -5,6 +5,7 @@ const initialState = {
         id: "",
         status: "",
         createTime: "",
+        startTime: "",
         linkSelf: ""
     },
     interests: [],
