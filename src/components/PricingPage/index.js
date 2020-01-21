@@ -58,7 +58,7 @@ const PricingPage = ({
 
   const handleSubmitSubscriber = async () => {
     const res = await createSubscription('P-2BE45829GU5364001LYRRAVQ', { givenName: 'Gil', surname: 'Viana' })
-    window.location = res.links[0].href
+    // window.location = res
   };
 
   const togglePopup = () => {
