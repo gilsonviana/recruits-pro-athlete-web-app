@@ -7,7 +7,7 @@ export const createSubscription = async (token, planId) => {
             method: 'POST',
             url: `${keys.API}/subscription`,
             headers: {
-                "Authorizaiton": token
+                "Authorization": token
             },
             data: {
                 planId

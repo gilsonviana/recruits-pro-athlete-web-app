@@ -3,10 +3,12 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import subscriptionPlans from './subscriptionPlans/reducer'
 import auth from './auth/reducer'
+import error from './error/reducer'
 
 const reducers = combineReducers({
     subscriptionPlans,
-    auth
+    auth,
+    error
 })
 
 export const configureStore = () => {

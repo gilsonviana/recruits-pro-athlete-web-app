@@ -56,9 +56,14 @@ const PricingPage = ({
     }
   };
 
+  // TODO pass the planId as parameter
   const handleSubmitSubscriber = async () => {
-    const res = await createSubscription('P-2BE45829GU5364001LYRRAVQ', { givenName: 'Gil', surname: 'Viana' })
-    // window.location = res
+    // TODO call create subscription with token and planId
+    const res = await createSubscription('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMjYwZTFjOTRkYjlmMzVjYWUwMjYzNCIsImlhdCI6MTU3OTU1MjM3OSwiZXhwIjoxNTgyMTQ0Mzc5fQ.CnZAOfCcd7SseRCRrTJ3MSd36SsHVahukDVruwl4p4k', 'P-2BE45829GU5364001LYRRAVQ')
+    if (!res) {
+      alert('Could not create subscription.')
+    }
+    window.location = res.subscription.href
   };
 
   const togglePopup = () => {
@@ -218,6 +223,7 @@ const PricingPage = ({
 };
 
 const mapStateToProps = (state) => ({
+  token: state.auth.token,
   subscriptionPlans: state.subscriptionPlans
 })
 
