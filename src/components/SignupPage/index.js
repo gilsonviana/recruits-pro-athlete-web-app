@@ -41,6 +41,7 @@ const SignupPage = ({ history, signUp }) => {
 
   const handleChange = (e) => {
     const { target } = e
+    isFieldValid(e)
     setFormState({
       ...formState,
       [target.name]: target.value
