@@ -45,4 +45,11 @@ describe('The profile reducer', () => {
             }
         })        
     })
+
+    it('should set profile is completed', () => {
+        expect(reducer(initialState, {type: types.SET_PROFILE_IS_COMPLETED})).toEqual({
+            ...initialState,
+            isCompleted: true
+        })
+    })
 })

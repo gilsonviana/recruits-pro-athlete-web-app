@@ -22,10 +22,11 @@ import "./style.css";
 
 const PricingPage = ({ 
   history,
+  token,
   subscriptionPlans 
 }) => {
   const [selectedOption, setSelectedOption] = React.useState(null)
-  const [plansOption, setPlansOption] = React.useState([])
+  const [plansOption, setPlansOption] = React.useState(null)
   const [showPopup, setShowPopup] = React.useState({
     first: true,
     isVisible: false
@@ -38,13 +39,19 @@ const PricingPage = ({
         label: name
       }))])
     }
+
+    const setInitialSelectedOption = () => {
+      setSelectedOption(subscriptionPlans.map(({ plan_id, name }) => ({
+        value: plan_id,
+        label: name
+      }))[0])
+    }
     setSelectPlanOptions()
-     
+    setInitialSelectedOption()
   }, [subscriptionPlans])
 
   const handleChange = selectedOption => {
-    setSelectedOption({ selectedOption });
-    console.log(`Option selected:`, selectedOption);
+    setSelectedOption({ ...selectedOption });
   };
 
   const handleSubmitFree = () => {
@@ -56,18 +63,22 @@ const PricingPage = ({
     }
   };
 
-  // TODO pass the planId as parameter
   const handleSubmitSubscriber = async () => {
-    // TODO call create subscription with token and planId
-    const res = await createSubscription('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMjYwZTFjOTRkYjlmMzVjYWUwMjYzNCIsImlhdCI6MTU3OTU1MjM3OSwiZXhwIjoxNTgyMTQ0Mzc5fQ.CnZAOfCcd7SseRCRrTJ3MSd36SsHVahukDVruwl4p4k', 'P-2BE45829GU5364001LYRRAVQ')
+    const res = await createSubscription(token, selectedOption.value)
+
     if (!res) {
       alert('Could not create subscription.')
+      return
     }
     window.location = res.subscription.href
   };
 
   const togglePopup = () => {
     setShowPopup({...showPopup, isVisible: false})
+  }
+
+  if (!plansOption) {
+    return <></>
   }
 
   return (
@@ -147,7 +158,7 @@ const PricingPage = ({
                             Pro
                           </Badge>
                           {
-                            (selectedOption) && (selectedOption.label === 'Yearly') ? 
+                            (selectedOption && selectedOption.label === 'Yearly') ? 
                             <Card.Title className="d-flex">
                               <h1 className="mb-0">$50</h1>{" "}
                               <h4 className="text-muted mb-0">/yearly</h4>
@@ -161,8 +172,9 @@ const PricingPage = ({
                             The perfect plan to go if you want to up skill your
                             game.
                           </Card.Subtitle>
-                          <Select 
-                            value={selectedOption || 'Monthly'}
+                          <Select
+                            className="mb-4"
+                            placeholder="Monthly"
                             onChange={handleChange}
                             options={plansOption}
                           />

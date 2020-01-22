@@ -1,4 +1,4 @@
-import { SET_PROFILE, SET_PROFILE_SUBSCRIPTION } from './types'
+import { SET_PROFILE, SET_PROFILE_SUBSCRIPTION, SET_PROFILE_IS_COMPLETED } from './types'
 
 const initialState = {
     subscription: {
@@ -29,6 +29,11 @@ export default (state = initialState, action) => {
                     ...state.subscription,
                     ...action.payload
                 }
+            }
+        case SET_PROFILE_IS_COMPLETED:
+            return {
+                ...state,
+                isCompleted: true
             }
         default:
             return state;

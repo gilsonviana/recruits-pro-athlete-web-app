@@ -5,7 +5,7 @@ export const getSubscriptionPlans = () => {
     return dispatch => {
         dispatch({
             type: SET_SUBSCRIPTION_PLANS,
-            payload: [{ plan_id: '123', name: 'Monthly' }, { plan_id: '456', name: 'Yearly' }]
+            payload: [{ plan_id: 'P-45B07154RC979151KLYUFWEY', name: 'Monthly' }, { plan_id: 'P-9K0363792J872453WLYUFVGY', name: 'Yearly' }]
         })
     }
 }

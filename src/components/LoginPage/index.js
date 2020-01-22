@@ -1,30 +1,29 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import { connect } from 'react-redux'
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Toast from 'react-bootstrap/Toast'
 import { Button, InputText } from '../../styled-components'
+import { doLogin } from '../../store/auth/actions'
 
 import logo from '../../assets/images/logo.png'
 
 import "./style.css";
 
-const LoginPage = ({ history }) => {
+const LoginPage = ({ history, doLogin }) => {
   const [formState, setFormState] = React.useState({
     email: '',
     password: ''
   })
 
-  const [showToast, setShowToast] = React.useState(true)
+  const [showToast, setShowToast] = React.useState(false)
 
   const [showError, setShowError] = React.useState({
     isVisible: true,
     name: {
       email: {
-        message: null
-      },
-      password: {
         message: null
       }
     }
@@ -32,16 +31,34 @@ const LoginPage = ({ history }) => {
 
   const handleChange = (e) => {
     const { target } = e
+    isFieldValid(e)
     setFormState({
       ...formState,
       [target.name]: target.value
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(formState)
-    // history.push('/dashboard')
+    const res = await doLogin(formState)
+
+    if (!res) {
+      setShowToast(true)
+      return
+    }
+    
+    if (res.user.role !== 'a') {
+      // TODO create welcome page for Evaluator and point user to Mobile App
+      alert('Evaluator')
+      return
+    }
+
+    if (!res.user.isCompleted) {
+      history.push('/choose-plan')
+      return
+    }
+
+    history.push('/dashboard')
   }
 
   const isFormValid = () => {
@@ -67,23 +84,6 @@ const LoginPage = ({ history }) => {
           }
         })
       } 
-
-      res = true
-      _clearErrorMessage(target.name)
-    }
-
-    if (target.name === 'password') {
-      if (!target.value || target.value.length < 6) {
-        return setShowError({
-          isVisible: true,
-          name: {
-            ...showError.name,
-            [target.name]: {
-              message: 'Password must be at least 6 characters.'
-            }
-          }
-        })
-      }
 
       res = true
       _clearErrorMessage(target.name)
@@ -133,11 +133,10 @@ const LoginPage = ({ history }) => {
                       (showError.isVisible) && 
                       <>
                         <p className="text-danger my-1">{showError.name.email.message}</p>
-                        <p className="text-danger my-1">{showError.name.password.message}</p>
                       </>
                     }
                     <InputText type="email" placeholder="Enter email" name="email" onChange={handleChange} onBlur={isFieldValid} />
-                    <InputText type="password" placeholder="Enter password" name="password" onChange={handleChange} onBlur={isFieldValid} />
+                    <InputText type="password" placeholder="Enter password" name="password" onChange={handleChange} />
                     {
                       (isFormValid()) ?
                       <Button disabled={false} type="submit">Log in</Button> :
@@ -173,4 +172,4 @@ const LoginPage = ({ history }) => {
   );
 };
 
-export default withRouter(LoginPage);
+export default connect(null, { doLogin })(withRouter(LoginPage));

@@ -1,16 +1,18 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import { connect } from 'react-redux'
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Toast from 'react-bootstrap/Toast'
 import { Button, InputText } from '../../styled-components'
+import { signUp } from '../../store/auth/actions'
 
 import logo from '../../assets/images/logo.png'
 
 import "./style.css";
 
-const SignupPage = ({ history }) => {
+const SignupPage = ({ history, signUp }) => {
   const [formState, setFormState] = React.useState({
     email: '',
     username: '',
@@ -45,9 +47,19 @@ const SignupPage = ({ history }) => {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    history.push('/pricing')
+    const res = await signUp(formState)
+
+    if (!res) {
+      setShowToast({
+        isVisible: true,
+        message: 'Unable to create account. Login if you have already have an account.'
+      })
+      return
+    }
+
+    history.push('/choose-plan')
   }
 
   const isFormValid = () => {
@@ -137,7 +149,7 @@ const SignupPage = ({ history }) => {
         backgroundColor: `#eb5a46`,
         color: `#eee`
       }}>
-        <Toast.Body>Unable to login user. Email or password is wrong.</Toast.Body>
+        <Toast.Body>{showToast.message}</Toast.Body>
       </Toast>
       <Container fluid style={{
         justifyContent: 'space-between'
@@ -200,4 +212,4 @@ const SignupPage = ({ history }) => {
   );
 };
 
-export default withRouter(SignupPage);
+export default connect(null, { signUp })(withRouter(SignupPage));
