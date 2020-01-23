@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Toast from 'react-bootstrap/Toast'
+import Loader from 'react-loader-spinner'
 import { Button, InputText } from '../../styled-components'
 import { doLogin } from '../../store/auth/actions'
 
@@ -13,6 +14,8 @@ import logo from '../../assets/images/logo.png'
 import "./style.css";
 
 const LoginPage = ({ history, doLogin }) => {
+  const [isLoading, setIsLoading] = React.useState(false)
+
   const [formState, setFormState] = React.useState({
     email: '',
     password: ''
@@ -58,7 +61,12 @@ const LoginPage = ({ history, doLogin }) => {
       return
     }
 
-    history.push('/dashboard')
+    setIsLoading(true)
+
+    setTimeout(() => {
+      setIsLoading(false)
+      history.push('/dashboard')
+    }, 3000)
   }
 
   const isFormValid = () => {
@@ -104,9 +112,19 @@ const LoginPage = ({ history, doLogin }) => {
       }
     })
   }
-    
+
   return (
     <div className="page__login">
+      {(isLoading) && (
+        <div className="page__overlay__loading">
+          <Loader 
+            type="Oval"
+            color="#00FF00"
+            height={100}
+            width={100}
+          />
+        </div>
+      )}
       <Toast onClose={() => setShowToast(false)} show={showToast} delay={5000} autohide style={{
         position: 'absolute',
         left: `50%`,

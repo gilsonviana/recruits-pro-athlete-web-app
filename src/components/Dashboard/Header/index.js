@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { FiUser, FiLogOut } from 'react-icons/fi'
 import Dropdown from 'react-bootstrap/Dropdown'
 
-import brand from '../../../assets/images/logo.png'
+import brand from '../../../assets/images/logo-dashboard.png'
 import avatar from '../../../assets/images/avatar-example.jpg'
 
 import './style.css'
