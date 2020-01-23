@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
+import MetricsFlush from './MetricsFlush'
 import LastEvaluation from './LastEvaluation'
 
 import './style.css'
@@ -67,6 +68,11 @@ const Main = (props) => {
                             </div>
                         </header>
                         <Container fluid>
+                            <Row className="mb-4">
+                                <Col>
+                                    <MetricsFlush />
+                                </Col>
+                            </Row>
                             <Row>
                                 <Col xs={12} md={6} lg={4}>
                                     {(!evaluationsState) ? 

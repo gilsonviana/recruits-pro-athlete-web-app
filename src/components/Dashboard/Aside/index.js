@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FiHome } from 'react-icons/fi'
+import { FiHome, FiVideo } from 'react-icons/fi'
+import { FaWpforms, FaRegNewspaper } from 'react-icons/fa'
 
 import './style.css'
 
@@ -15,6 +16,24 @@ const Aside = () => {
                                 <Link className="menu-item-link text-dark" to="">
                                     <FiHome className="menu-item-icon" />
                                     <span className="menu-item-text">Overview</span>
+                                </Link>
+                            </li>
+                            <li className="menu-item">
+                                <Link className="menu-item-link text-dark" to="">
+                                    <FaWpforms className="menu-item-icon" />
+                                    <span className="menu-item-text">Evaluations</span>
+                                </Link>
+                            </li>
+                            <li className="menu-item">
+                                <Link className="menu-item-link text-dark" to="">
+                                    <FaRegNewspaper className="menu-item-icon" />
+                                    <span className="menu-item-text">Events</span>
+                                </Link>
+                            </li>
+                            <li className="menu-item">
+                                <Link className="menu-item-link text-dark" to="">
+                                    <FiVideo className="menu-item-icon" />
+                                    <span className="menu-item-text">Videos</span>
                                 </Link>
                             </li>
                         </ul>

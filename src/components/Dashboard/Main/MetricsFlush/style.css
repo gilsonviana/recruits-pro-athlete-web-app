@@ -1,0 +1,15 @@
+@media screen and (max-width: 767px) {
+    .widget__metrics__flush div {
+        border: none !important;
+        border-bottom: 1px solid rgba(0,0,0,.125) !important;
+        padding: 1rem 0;
+    }
+
+    .widget__metrics__flush div:last-child {
+        border: none !important;
+    }
+
+    .widget__metrics__flush div p {
+        margin: 0;
+    }
+}
