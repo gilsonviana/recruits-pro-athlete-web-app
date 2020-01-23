@@ -159,7 +159,7 @@ const SignupPage = ({ history, signUp }) => {
           <img src={logo} alt="Recruits pro logo"/>
         </header>
         <Row>
-          <Col xs={12} md={{ span: 4, offset: 4 }}>
+          <Col xs={12} md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }}>
             <section className="page__signup__content">
               <div className="page__signup__content__box">
                 <div className="page__signup__content__box__form">

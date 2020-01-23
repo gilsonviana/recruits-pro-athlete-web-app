@@ -2,6 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FiUser, FiLogOut } from 'react-icons/fi'
 import Dropdown from 'react-bootstrap/Dropdown'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 
 import brand from '../../../assets/images/logo-dashboard.png'
 import avatar from '../../../assets/images/avatar-example.jpg'
@@ -10,6 +13,24 @@ import './style.css'
 
 const Header = () => {
     return (
+        <>
+        <Navbar fixed="top" className="d-md-none" bg="dark" variant="dark" expand="md">
+            <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+            <Navbar.Toggle aria-controls="app-mobile-navbar-nav" />
+            <Navbar.Collapse id="app-mobile-navbar-nav">
+                <Nav className="mr-auto">
+                    <Nav.Link href="#home">Home</Nav.Link>
+                    <Nav.Link href="#link">Link</Nav.Link>
+                    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                    </NavDropdown>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
         <header className="app__header bg-dark">
             <div className="app__header__top__bar">
                 <div className="app__header__top__bar__brand">
@@ -17,7 +38,7 @@ const Header = () => {
                         <img src={brand} alt="Recruits Pro Logo"/>
                     </Link>
                 </div>
-                <div className="app__header__top__bar__list">
+                <div className="app__header__top__bar__list d-none d-md-flex">
                     <div className="app__header__top__bar__item">
                         <Dropdown className="dropdown d-flex text-light">
                             <Dropdown.Toggle
@@ -30,7 +51,7 @@ const Header = () => {
                                 <span className="user-avatar user-avatar-md">
                                     <img src={avatar} alt="user avatar" />
                                 </span> 
-                                <span className="account-summary pr-lg-4 d-none d-lg-block">
+                                <span className="account-summary pr-lg-4 d-lg-block">
                                     <span className="account-name">Beni Arisandi</span> 
                                 </span>
                             </Dropdown.Toggle>
@@ -59,6 +80,7 @@ const Header = () => {
                 </div>
             </div>
         </header>
+        </>
     )
 }
 

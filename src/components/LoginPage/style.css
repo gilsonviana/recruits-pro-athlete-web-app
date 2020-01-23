@@ -39,6 +39,7 @@
 
 .page__login__content__box {
     max-width: 400px;
+    margin: auto;
 }
 
 .page__login__content__box__form {
@@ -106,6 +107,6 @@
 @media only screen and (min-width: 900px) {
     .page__login__content__box {
         margin: 0 auto;
-        max-width: 1300px;
+        max-width: 600px;
     }   
 }

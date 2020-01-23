@@ -6,7 +6,7 @@ import './style.css'
 
 const Aside = () => {
     return (
-        <aside className="app__aside">
+        <aside className="app__aside d-none d-md-block">
             <div className="app__aside__content">
                 <div className="app__aside__content__menu overflow-hidden ps">
                     <nav className="stacked-menu">
