@@ -48,7 +48,7 @@ const Main = (props) => {
 
         setTimeout(() => {
             getEvaluations()
-        }, 3000)
+        }, 0)
     }, [])
 
     return (
