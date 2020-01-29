@@ -1,55 +1,29 @@
+// Dependecies
+// TODO remove useState and useEffect once API is working. Use redux to pass down props to children elements
 import React, { useState, useEffect } from 'react'
-import Skeleton from 'react-loading-skeleton';
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import MetricsFlush from './MetricsFlush'
-import LastEvaluation from './LastEvaluation'
-
-import './style.css'
+// Components
+import Overview from './Overview'
 
 const Main = (props) => {
-    const [evaluationsState, setEvaluationsState] = useState(null)
+    const [overviewProps, setOverviewProps] = useState({})
 
     useEffect(() => {
-        const getEvaluations = () => {
-            // TODO mockup
-            const evaluation = {
-                form: {
-                    sport: 'Baseball',
-                    name: 'Baseball Assessment',
-                    categories: [{
-                        name: 'Hitting'
-                    }, {
-                        name: 'Pitching'
-                    }],
-                    metrics: [{
-                        name: 'Bat speed',
-                        category: 'Hitting',
-                        value: '85',
-                        notes: 'Really good'
-                    }, {
-                        name: 'Arm velocity',
-                        category: 'Pitching',
-                        value: '51',
-                        notes: 'Not so good'
-                    }]
-                },
-                location: {
-                    description: '',
-                    placeId: ''
-                },
-                notes: '',
-                createdAt: ''
-            }
-
-            setEvaluationsState([evaluation])
+        const setOverview = () => {
+            setOverviewProps({
+                athleteName: 'Chris Sam',
+                evaluationsNumber: 4,
+                eventsNumber: 6,
+                videosNumber: 2,
+                lastEvaluation: {
+                    evaluatorName: 'Tim Sam',
+                    date: '2020-01-27T12:08:00.743Z'
+                }
+            })
         }
 
-        setTimeout(() => {
-            getEvaluations()
-        }, 0)
+        setTimeout(() => setOverview(), 2000)
     }, [])
 
     return (
@@ -57,36 +31,17 @@ const Main = (props) => {
             <div className="wrapper">
                 <div className="page">
                     <div className="page__inner">
-                        <header className="page__title__bar">
-                            <div className="d-flex flex-column flex-md-row">
-                                <p className="lead">
-                                    <span className="font-weight-bold">Hi, Beni.</span> 
-                                    <span className="d-block text-muted">
-                                        4 days since your last evaluation.
-                                    </span>
-                                </p>
-                            </div>
-                        </header>
-                        <Container fluid>
-                            <Row className="mb-4">
-                                <Col>
-                                    <MetricsFlush />
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col xs={12} md={6} lg={4}>
-                                    {(!evaluationsState) ? 
-                                        <>
-                                            <Skeleton />
-                                            <Skeleton count={3} />
-                                        </> :
-                                        <LastEvaluation evaluation={evaluationsState[0]} />
-                                    }
-                                </Col>
-                                <Col xs={12} md={6} lg={4}></Col>
-                                <Col xs={12} md={6} lg={4}></Col>
-                            </Row>
-                        </Container>
+                        <Router>
+                            <Switch>
+                                <Route path="/dashboard/" exact>
+                                    <Overview data={overviewProps}/>
+                                    {/* {(!overviewProps) ? 'loading...' : 
+                                    <Overview data={overviewProps}/>
+                                    
+                                    } */}
+                                </Route>
+                            </Switch>
+                        </Router>
                     </div>
                 </div>
             </div>

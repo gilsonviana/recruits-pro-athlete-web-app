@@ -19,14 +19,15 @@ const Header = () => {
             <Navbar.Toggle aria-controls="app-mobile-navbar-nav" />
             <Navbar.Collapse id="app-mobile-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="#home">Home</Nav.Link>
-                    <Nav.Link href="#link">Link</Nav.Link>
-                    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                    <Nav.Link href="#home">Overview</Nav.Link>
+                    <Nav.Link href="#link">Evaluations</Nav.Link>
+                    <Nav.Link href="#link">Events</Nav.Link>
+                    <Nav.Link href="#link">Videos</Nav.Link>
+                    <NavDropdown title="Settings" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="#action/3.3">Overview</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.1">Evaluations</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.2">Events</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.4">Videos</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
             </Navbar.Collapse>

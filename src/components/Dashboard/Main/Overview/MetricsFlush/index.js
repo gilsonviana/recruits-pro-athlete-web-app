@@ -1,4 +1,7 @@
+// Dependencies
 import React from 'react'
+import PropTypes from 'prop-types'
+import Skeleton from 'react-loading-skeleton';
 import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -8,7 +11,7 @@ import { FaWpforms, FaRegNewspaper } from 'react-icons/fa'
 
 import './style.css'
 
-const MetricsFlush = props => {
+const MetricsFlush = ({ evaluationsNumber, eventsNumber, videosNumber }) => {
     return (
         <Card>
             <Container fluid className="widget__metrics__flush">
@@ -17,7 +20,7 @@ const MetricsFlush = props => {
                         <div className="text-center h-100 border-right border-grey">
                             <h4 className="text-muted">Evaluations</h4>
                             <p className="font-weight-bold">
-                                <FaWpforms className="mr-2 text-muted" />4
+                                <FaWpforms className="mr-2 text-muted" />{evaluationsNumber || <Skeleton />}
                             </p>
                         </div>
                     </Col>
@@ -25,7 +28,7 @@ const MetricsFlush = props => {
                         <div className="text-center h-100 border-right border-grey">
                             <h4 className="text-muted">Events</h4>
                             <p className="font-weight-bold">
-                                <FaRegNewspaper className="mr-2 text-muted" />8
+                                <FaRegNewspaper className="mr-2 text-muted" />{eventsNumber || <Skeleton />}
                             </p>
                         </div>
                     </Col>
@@ -33,7 +36,7 @@ const MetricsFlush = props => {
                         <div className="text-center h-100ß">
                             <h4 className="text-muted">Videos</h4>
                             <p className="font-weight-bold">
-                                <FiVideo className="mr-2 text-muted"/>2
+                                <FiVideo className="mr-2 text-muted"/>{videosNumber || <Skeleton />}
                             </p>
                         </div>
                     </Col>
@@ -41,6 +44,12 @@ const MetricsFlush = props => {
             </Container>
         </Card>
     )
+}
+
+MetricsFlush.propTypes = {
+    evaluationsNumber: PropTypes.number.isRequired,
+    eventsNumber: PropTypes.number.isRequired,
+    videosNumber: PropTypes.number.isRequired
 }
 
 export default MetricsFlush
