@@ -1,15 +1,18 @@
 // Dependencies
 import React from 'react'
 import PropTypes from 'prop-types'
+import Container from 'react-bootstrap/Container'
 
 // Components
 import EvaluationDetailsHeader from './EvaluationDetailsHeader'
+import EvaluationDetailsNav from './EvaluationDetailsNav'
 
 const EvaluationDetails = () => {
     return (
-        <div className="page__evaluation__details">
+        <Container fluid className="page__evaluation__details">
             <EvaluationDetailsHeader />
-        </div>
+            <EvaluationDetailsNav />
+        </Container>
     )
 }
 

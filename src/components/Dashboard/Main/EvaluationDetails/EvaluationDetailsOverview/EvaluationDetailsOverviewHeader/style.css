@@ -1,0 +1,15 @@
+@media screen and (max-width: 767px) {
+    .evaluation-details-overview-header div {
+        border: none !important;
+        border-bottom: 1px solid rgba(0,0,0,.125) !important;
+        padding: 1rem 0;
+    }
+
+    .evaluation-details-overview-header div:last-child {
+        border: none !important;
+    }
+
+    .evaluation-details-overview-header div p {
+        margin: 0;
+    }
+}

@@ -1,13 +1,12 @@
 // Dependencies
 import React from 'react'
 import PropTypes from 'prop-types'
-import Skeleton from 'react-loading-skeleton';
-import moment from 'moment'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 // Components
+import OverviewWelcome from './OverviewWelcome'
 import MetricsFlush from './MetricsFlush'
 import LastEvaluation from './LastEvaluation'
 
@@ -16,21 +15,10 @@ import './style.css'
 const Overview = ({ data }) =>  {
     return (
         <div className="page__overview">
-            <header className="page__title__bar">
-                <div className="d-flex flex-column flex-md-row">
-                    <p className="lead">
-                        <span className="font-weight-bold">Hi, {data.athleteName || <Skeleton width={100} />}.</span> 
-                        <span className="d-block text-muted">
-                            {
-                                (!data.lastEvaluation) ?
-                                    <Skeleton /> :
-                                    `${moment(data.lastEvaluation.date).fromNow().slice(0, moment(data.lastEvaluation.date).fromNow().length - 4)} since your last evaluation.`
-                            }
-                        </span>
-                    </p>
-                </div>
-            </header>
-            {/* <Container fluid>
+            <OverviewWelcome 
+                athleteName={data.athleteName} 
+                date={data.lastEvaluation.date}/>
+            <Container fluid>
                 <Row className="mb-4">
                     <Col>
                         <MetricsFlush 
@@ -41,14 +29,12 @@ const Overview = ({ data }) =>  {
                 </Row>
                 <Row>
                     <Col xs={12} md={6} lg={4}>
-                        <LastEvaluation 
-                            evaluatorName={data.lastEvaluation.evaluatorName} 
-                            date={data.lastEvaluation.date} />
+                        <LastEvaluation data={data.lastEvaluation} />
                     </Col>
                     <Col xs={12} md={6} lg={4}></Col>
                     <Col xs={12} md={6} lg={4}></Col>
                 </Row>
-            </Container> */}
+            </Container>
         </div>
     )
 }
@@ -63,7 +49,7 @@ Overview.propTypes = {
             evaluatorName: PropTypes.string.isRequired,
             date: PropTypes.string.isRequired
         })
-    })
+    }).isRequired
 }
 
 export default Overview

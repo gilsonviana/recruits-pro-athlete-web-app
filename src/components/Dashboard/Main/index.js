@@ -5,9 +5,19 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 // Components
 import Overview from './Overview'
+import EvaluationDetails from './EvaluationDetails'
 
 const Main = (props) => {
-    const [overviewProps, setOverviewProps] = useState({})
+    const [overviewProps, setOverviewProps] = useState({
+        athleteName: '',
+        evaluationsNumber: null,
+        eventsNumber: null,
+        videosNumber: null,
+        lastEvaluation: {
+            evaluatorName: '',
+            date: ''
+        }
+    })
 
     useEffect(() => {
         const setOverview = () => {
@@ -35,10 +45,10 @@ const Main = (props) => {
                             <Switch>
                                 <Route path="/dashboard/" exact>
                                     <Overview data={overviewProps}/>
-                                    {/* {(!overviewProps) ? 'loading...' : 
-                                    <Overview data={overviewProps}/>
-                                    
-                                    } */}
+                                    {/* <EvaluationDetails /> */}
+                                </Route>
+                                <Route path="/dashboard/evaluation" exact>
+                                    <EvaluationDetails />
                                 </Route>
                             </Switch>
                         </Router>

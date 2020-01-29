@@ -20,7 +20,7 @@ const MetricsFlush = ({ evaluationsNumber, eventsNumber, videosNumber }) => {
                         <div className="text-center h-100 border-right border-grey">
                             <h4 className="text-muted">Evaluations</h4>
                             <p className="font-weight-bold">
-                                <FaWpforms className="mr-2 text-muted" />{evaluationsNumber || <Skeleton />}
+                                <FaWpforms className="mr-2 text-muted" />{evaluationsNumber || <Skeleton width={20}/>}
                             </p>
                         </div>
                     </Col>
@@ -28,7 +28,7 @@ const MetricsFlush = ({ evaluationsNumber, eventsNumber, videosNumber }) => {
                         <div className="text-center h-100 border-right border-grey">
                             <h4 className="text-muted">Events</h4>
                             <p className="font-weight-bold">
-                                <FaRegNewspaper className="mr-2 text-muted" />{eventsNumber || <Skeleton />}
+                                <FaRegNewspaper className="mr-2 text-muted" />{eventsNumber || <Skeleton width={20}/>}
                             </p>
                         </div>
                     </Col>
@@ -36,7 +36,7 @@ const MetricsFlush = ({ evaluationsNumber, eventsNumber, videosNumber }) => {
                         <div className="text-center h-100ß">
                             <h4 className="text-muted">Videos</h4>
                             <p className="font-weight-bold">
-                                <FiVideo className="mr-2 text-muted"/>{videosNumber || <Skeleton />}
+                                <FiVideo className="mr-2 text-muted"/>{videosNumber || <Skeleton width={20}/>}
                             </p>
                         </div>
                     </Col>

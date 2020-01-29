@@ -53,7 +53,7 @@ const Header = () => {
                                     <img src={avatar} alt="user avatar" />
                                 </span> 
                                 <span className="account-summary pr-lg-4 d-lg-block">
-                                    <span className="account-name">Beni Arisandi</span> 
+                                    <span className="account-name">Chris Sam</span> 
                                 </span>
                             </Dropdown.Toggle>
                             <Dropdown.Menu
