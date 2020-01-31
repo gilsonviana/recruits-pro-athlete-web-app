@@ -6,6 +6,7 @@ import Tab from 'react-bootstrap/Tab'
 
 // Components
 import EvaluationDetailsOverview from '../EvaluationDetailsOverview'
+import EvaluationDetailsNotes from '../EvaluationDetailsNotes'
 
 const EvaluationDetailsNav = () => {
     const [key, setKey] = useState('overview')
@@ -16,7 +17,7 @@ const EvaluationDetailsNav = () => {
                 <EvaluationDetailsOverview />
             </Tab>
             <Tab eventKey="notes" title="Notes">
-                <p>notes</p>
+                <EvaluationDetailsNotes />
             </Tab>
         </Tabs>
     )
