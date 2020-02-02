@@ -1,6 +1,7 @@
+// Dependencies
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -9,86 +10,90 @@ import Badge from "react-bootstrap/Badge";
 import { Button } from "../../styled-components";
 import { FiCheck } from "react-icons/fi";
 import Popup from "./pricing-page-popup";
-import { createSubscription } from '../../services/paypal'
-import Select from 'react-select';
+import { createSubscription } from "../../services/paypal";
+import Select from "react-select";
 
+// Assets
 import { ReactComponent as BookmarkIcon } from "../../assets/images/bookmark-black-shape.svg";
 import { ReactComponent as Bg1 } from "../../assets/images/bg-1.svg";
 import { ReactComponent as Bg2 } from "../../assets/images/bg-2.svg";
 import { ReactComponent as Bg3 } from "../../assets/images/bg-3.svg";
 import logo from "../../assets/images/logo.png";
-
 import "./style.css";
 
-const PricingPage = ({ 
-  history,
-  token,
-  subscriptionPlans 
-}) => {
-  const [selectedOption, setSelectedOption] = React.useState(null)
-  const [plansOption, setPlansOption] = React.useState(null)
+const PricingPage = ({ history, token, subscriptionPlans }) => {
+  const [selectedOption, setSelectedOption] = React.useState(null);
+  const [plansOption, setPlansOption] = React.useState(null);
   const [showPopup, setShowPopup] = React.useState({
     first: true,
     isVisible: false
-  })
-  
+  });
+
   React.useEffect(() => {
+    // Get subscription plans from store and mutate data for dropdown
     const setSelectPlanOptions = () => {
-      setPlansOption([...subscriptionPlans.map(({ plan_id, name }) => ({
-        value: plan_id,
-        label: name
-      }))])
-    }
+      setPlansOption([
+        ...subscriptionPlans.map(({ plan_id, name }) => ({
+          value: plan_id,
+          label: name
+        }))
+      ]);
+    };
 
     const setInitialSelectedOption = () => {
-      setSelectedOption(subscriptionPlans.map(({ plan_id, name }) => ({
-        value: plan_id,
-        label: name
-      }))[0])
-    }
-    setSelectPlanOptions()
-    setInitialSelectedOption()
-  }, [subscriptionPlans])
+      setSelectedOption(
+        subscriptionPlans.map(({ plan_id, name }) => ({
+          value: plan_id,
+          label: name
+        }))[0]
+      );
+    };
+    setSelectPlanOptions();
+    setInitialSelectedOption();
+  }, [subscriptionPlans]);
 
   const handleChange = selectedOption => {
     setSelectedOption({ ...selectedOption });
   };
 
   const handleSubmitFree = () => {
+    // Display popup once
     if (showPopup.first) {
       setShowPopup({
         first: false,
         isVisible: true
-      })
+      });
+
+      return;
     }
+
+    // TODO Redirect user to CreateProfile
   };
 
   const handleSubmitSubscriber = async () => {
-    const res = await createSubscription(token, selectedOption.value)
+    const res = await createSubscription(token, selectedOption.value);
 
     if (!res) {
-      alert('Could not create subscription.')
-      return
+      alert("Could not create subscription.");
+      return;
     }
-    window.location = res.subscription.href
+    window.location = res.subscription.href;
   };
 
   const togglePopup = () => {
-    setShowPopup({...showPopup, isVisible: false})
-  }
+    setShowPopup({ ...showPopup, isVisible: false });
+  };
 
   if (!plansOption) {
-    return <></>
+    return <></>;
   }
 
   return (
     <>
-      <Bg1 className="body__bg" style={{ top: `30rem`, left: `2rem` }}/>
+      <Bg1 className="body__bg" style={{ top: `30rem`, left: `2rem` }} />
       <Bg2 className="body__bg" style={{ top: `0`, right: `2rem` }} />
       <Bg3 className="body__bg" style={{ top: `35%`, right: `5rem` }} />
-      {
-        (showPopup.isVisible) && <Popup handleClose={togglePopup} />
-      }
+      {showPopup.isVisible && <Popup handleClose={togglePopup} handleSignupFree={handleSubmitFree} handleSignupPro={handleSubmitSubscriber} />}
       <div className="page__pricing">
         <Container
           style={{
@@ -146,7 +151,9 @@ const PricingPage = ({
                           </ul>
                         </Card.Body>
                         <Card.Footer className="bg-white border-0">
-                          <Button onClick={handleSubmitFree}>Select plan</Button>
+                          <Button onClick={handleSubmitFree}>
+                            Select plan
+                          </Button>
                         </Card.Footer>
                       </Card>
                     </Col>
@@ -157,17 +164,18 @@ const PricingPage = ({
                           <Badge variant="success" className="mb-4">
                             Pro
                           </Badge>
-                          {
-                            (selectedOption && selectedOption.label === 'Yearly') ? 
+                          {selectedOption &&
+                          selectedOption.label === "Yearly" ? (
                             <Card.Title className="d-flex">
                               <h1 className="mb-0">$50</h1>{" "}
                               <h4 className="text-muted mb-0">/yearly</h4>
-                            </Card.Title> : 
+                            </Card.Title>
+                          ) : (
                             <Card.Title className="d-flex">
                               <h1 className="mb-0">$5</h1>{" "}
                               <h4 className="text-muted mb-0">/month</h4>
                             </Card.Title>
-                          }
+                          )}
                           <Card.Subtitle className="my-4">
                             The perfect plan to go if you want to up skill your
                             game.
@@ -202,7 +210,9 @@ const PricingPage = ({
                           </ul>
                         </Card.Body>
                         <Card.Footer className="bg-white border-0">
-                          <Button onClick={handleSubmitSubscriber}>Select plan</Button>
+                          <Button onClick={handleSubmitSubscriber}>
+                            Select plan
+                          </Button>
                         </Card.Footer>
                       </Card>
                     </Col>
@@ -234,9 +244,9 @@ const PricingPage = ({
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   token: state.auth.token,
   subscriptionPlans: state.subscriptionPlans
-})
+});
 
 export default connect(mapStateToProps)(withRouter(PricingPage));

@@ -1,28 +1,27 @@
+// Dependencies
 import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
   Switch
 } from 'react-router-dom'
+
+// Components
 import ProtectedRoute from './components/ProtectedRoute'
-import { connect } from 'react-redux'
 import LoginPage from './components/LoginPage'
 import Dashboard from './components/Dashboard';
 import SignupPage from './components/SignupPage';
 import PricingPage from './components/PricingPage';
 import ProcessPayment from './components/ProcessPayment';
+import CreateProfile from './components/CreateProfile'
 
-import { getSubscriptionPlans } from './store/subscriptionPlans/actions'
-
-function App({
-  getSubscriptionPlans
-}) {
-  getSubscriptionPlans()
+function App() {
   return (
     <Router>
       <Switch>
         <Route path="/" exact>
-          <LoginPage />
+          {/* <LoginPage /> */}
+          <CreateProfile />
         </Route>
         <Route path="/login" exact>
           <LoginPage />
@@ -44,4 +43,4 @@ function App({
   )
 }
 
-export default connect(null, { getSubscriptionPlans })(App);
+export default App;

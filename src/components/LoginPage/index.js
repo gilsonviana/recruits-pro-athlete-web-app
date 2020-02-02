@@ -1,3 +1,4 @@
+// Dependencies
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from 'react-redux'
@@ -50,12 +51,14 @@ const LoginPage = ({ history, doLogin }) => {
       return
     }
     
+    // Redirect user if profile role different than `a` = Athlete
     if (res.user.role !== 'a') {
       // TODO create welcome page for Evaluator and point user to Mobile App
       alert('Evaluator')
       return
     }
 
+    // Redirect user if profile is incomplete
     if (!res.user.isCompleted) {
       history.push('/choose-plan')
       return
@@ -63,6 +66,7 @@ const LoginPage = ({ history, doLogin }) => {
 
     setIsLoading(true)
 
+    // TODO remove for production mode
     setTimeout(() => {
       setIsLoading(false)
       history.push('/dashboard')

@@ -5,14 +5,9 @@ import { Button } from '../../styled-components'
 
 import "./pricing-page-popup.css"
 
-const PricingPagePopup = ({ handleClose }) => {
+const PricingPagePopup = ({ handleClose, handleSignupFree, handleSignupPro }) => {
     return (
         <div className="pricing-page-popup" onClick={handleClose}>
-            {/* <div className="pricing-page-popup__content">
-                <div className="pricing-page-popup__wrapper">
-                    <h1>Don't!</h1>
-                </div>  
-            </div> */}
             <Card className="pricing-page-popup__content">
                 <Card.Body className="p-4">
                     <Card.Title>
@@ -21,8 +16,8 @@ const PricingPagePopup = ({ handleClose }) => {
 
                 </Card.Body>
                 <Card.Footer className="px-4 bg-light border-0 d-flex flex-row justify-content-between">
-                    <Button onClick={() => alert()}>Select PRO plan</Button>
-                    <Button link className="text-dark">Continue with free plan</Button>
+                    <Button onClick={handleSignupPro}>Select PRO plan</Button>
+                    <Button link className="text-dark" onClick={handleSignupFree}>Continue with free plan</Button>
                 </Card.Footer>
             </Card>
         </div>
@@ -30,7 +25,9 @@ const PricingPagePopup = ({ handleClose }) => {
 }
 
 PricingPagePopup.propTypes = {
-    handleClose: PropTypes.func.isRequired
+    handleClose: PropTypes.func.isRequired,
+    handleSignupFree: PropTypes.func.isRequired,
+    handleSignupPro: PropTypes.func.isRequired
 }
 
 export default PricingPagePopup

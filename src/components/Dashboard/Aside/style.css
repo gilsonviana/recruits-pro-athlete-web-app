@@ -1,14 +1,15 @@
 .app__aside {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     padding: 0;
+    top: 3.5rem;
+    width: 15rem;
     max-width: 16.5rem;
+    height: 100vh;
     backface-visibility: hidden;
     background-color: #f6f7f9;
     border-right: 1px solid rgba(20,20,31,.05);
-    top: 3.5rem;
-    width: 15rem;
     z-index: 6;
 }
 
@@ -24,11 +25,10 @@
 }
 
 .app__aside__content__menu .stacked-menu {
-    padding-top: 1rem;
     width: 100%;
     margin-bottom: 1rem;
     position: relative;
-    padding: 1ß.25rem 0;
+    padding: 1.25rem 0;
     background-color: transparent;
 }
                             

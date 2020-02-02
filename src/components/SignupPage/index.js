@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from 'react-redux'
+import Loader from 'react-loader-spinner'
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -8,11 +9,16 @@ import Toast from 'react-bootstrap/Toast'
 import { Button, InputText } from '../../styled-components'
 import { signUp } from '../../store/auth/actions'
 
+// Redux
+import { getSubscriptionPlans } from '../../store/subscriptionPlans/actions'
+
 import logo from '../../assets/images/logo.png'
 
 import "./style.css";
 
-const SignupPage = ({ history, signUp }) => {
+const SignupPage = ({ history, signUp, getSubscriptionPlans }) => {
+  const [isLoading, setIsLoading] = React.useState(false)
+
   const [formState, setFormState] = React.useState({
     email: '',
     username: '',
@@ -60,7 +66,16 @@ const SignupPage = ({ history, signUp }) => {
       return
     }
 
-    history.push('/choose-plan')
+    getSubscriptionPlans()
+
+    setIsLoading(true)
+
+    // TODO remove for production mode
+    setTimeout(() => {
+      setIsLoading(false)
+      history.push('/choose-plan')
+    }, 3000)
+
   }
 
   const isFormValid = () => {
@@ -143,6 +158,16 @@ const SignupPage = ({ history, signUp }) => {
   
   return (
     <div className="page__signup">
+      {(isLoading) && (
+        <div className="page__overlay__loading">
+          <Loader 
+            type="Oval"
+            color="#00FF00"
+            height={100}
+            width={100}
+          />
+        </div>
+      )}
       <Toast onClose={() => setShowToast({ isVisible: false, message: ''})} show={showToast.isVisible} delay={5000} autohide style={{
         position: 'absolute',
         left: `50%`,
@@ -213,4 +238,4 @@ const SignupPage = ({ history, signUp }) => {
   );
 };
 
-export default connect(null, { signUp })(withRouter(SignupPage));
+export default connect(null, { signUp, getSubscriptionPlans })(withRouter(SignupPage));

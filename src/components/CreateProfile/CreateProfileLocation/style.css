@@ -1,0 +1,9 @@
+.create-profile__location__button-next {
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .create-profile__location__button-next {
+        width: auto !important;
+    }
+}

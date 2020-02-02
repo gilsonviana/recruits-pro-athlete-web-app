@@ -34,15 +34,15 @@ const EvaluationDetailsChart = () => {
     <Card className="evaluation-details-chart shadow-sm pt-3 px-3 mb-4 bg-white rounded">
       <Card.Title>Activity</Card.Title>
       <Card.Body>
-        <EvaluationDetailsChartEmptyState />
-        {/* <div
+        {/* <EvaluationDetailsChartEmptyState /> */}
+        <div
           style={{
             width: '100%',
             height: '15rem'
           }}
         >
           <Chart data={data} axes={axes} />
-        </div> */}
+        </div>
       </Card.Body>
     </Card>
   );
