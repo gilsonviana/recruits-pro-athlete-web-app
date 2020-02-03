@@ -52,7 +52,7 @@ const CreateProfile = () => {
                             <p className="lead bg-light p-2 rounded rounded-sm">
                                 Let's finish setting up your profile. Fill all the fields as your best knowledge.
                             </p>
-                            <Tabs id="controlled-create-profile-nav" activeKey={key} onSelect={k => setKey(k)} className="create-profile-nav">
+                            <Tabs id="controlled-create-profile-nav" activeKey={key} onSelect={k => setKey(k)} className="create-profile-nav mx-0">
                                 <Tab eventKey="personal" title="Personal">
                                     <CreateProfilePersonal handleTabKey={handleChangeTabKey}/>
                                 </Tab>

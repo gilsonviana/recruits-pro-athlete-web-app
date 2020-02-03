@@ -15,7 +15,7 @@ const CreateProfileLocation = ({ handleTabKey }) => {
     return (
         <div className="create-profile__location py-4">
             <Form noValidate>
-                <Form.Row>
+                <Form.Row className="mx-0">
                     <Form.Group as={Col} xs={12} md={8} controlId="createProfileCountry">
                         <Form.Label className="font-weight-bold">Country</Form.Label>
                         <Form.Control type="text" placeholder="USA" name="createProfileCountry" disabled/>
@@ -31,7 +31,7 @@ const CreateProfileLocation = ({ handleTabKey }) => {
                             className="mt-md-3"/>
                     </Form.Group>
                 </Form.Row>
-                <Form.Row>
+                <Form.Row className="mx-0">
                     <Form.Group as={Col} xs={12} md={6} lg={4} controlId="createProfileZipcode" className="mb-0">
                         <Form.Label className="font-weight-bold">Zip code</Form.Label>
                         <Form.Control type="text" placeholder="32839" name="createProfileZipcode" disabled={isForeigner}/>
@@ -42,7 +42,7 @@ const CreateProfileLocation = ({ handleTabKey }) => {
                         </Form.Text>
                     </Form.Group>
                 </Form.Row>
-                <Form.Row>
+                <Form.Row className="mx-0">
                     <Form.Group as={Col} xs={12} md="6" controlId="createProfileCity">
                         <Form.Label className="font-weight-bold">City</Form.Label>
                         <Form.Control type="text" placeholder="Orlando" name="createProfileCity" disabled={isForeigner}/>

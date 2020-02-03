@@ -18,7 +18,7 @@ const CreateProfilePersonal = ({ handleTabKey }) => {
                 <Form.Control type="file" />
             </Form.Group>
             <Form.Label htmlFor="createProfileContactPhone" className="font-weight-bold">Contact</Form.Label>
-            <Form.Row>
+            <Form.Row className="mx-0">
                 <Form.Group as={Col} xs="12" md="8" controlId="createProfileContactPhone">
                     <Form.Label>Phone</Form.Label>
                     <Form.Control type="tel" placeholder="(012)345-6789" pattern="[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}"/>
@@ -33,7 +33,7 @@ const CreateProfilePersonal = ({ handleTabKey }) => {
                 </Form.Group>
             </Form.Row>
             <Form.Label htmlFor="createProfileHeightFeet" className="font-weight-bold">Height</Form.Label>
-            <Form.Row>
+            <Form.Row  className="mx-0">
                 <Form.Group as={Col} xs="12" md="6" controlId="createProfileHeightFeet">
                     <Form.Label>Feet</Form.Label>
                     <Form.Control type="text" placeholder="5" />

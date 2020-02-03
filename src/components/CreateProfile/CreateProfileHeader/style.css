@@ -1,15 +1,88 @@
 .create-profile__header {
-    width: 100vw;
+    width: 100%;
     height: 200px;
     margin-bottom: 1.25rem;
 }
 
-.create-profile__header__background {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
+.create-profile__header__carousel {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    z-index: 0;
 }
+
+.create-profile__header__carousel span {
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    top: 0;
+    left: 0;
+    color: transparent;
+    opacity: 0;
+    z-index: 0;
+    backface-visibility: hidden;
+    animation: imageAnimation 40s linear infinite 0s
+}
+
+.create-profile__header__carousel li:nth-child(1) span {
+    background: url('../../../assets/images/baseball-1.jpg') no-repeat center;
+    background-size: cover;
+  }
+  .create-profile__header__carousel li:nth-child(2) span {
+    background: url('../../../assets/images/basket-1.jpg') no-repeat center;
+    background-size: cover;
+    animation-delay: 5s;
+  }
+  .create-profile__header__carousel li:nth-child(3) span {
+    background: url('../../../assets/images/football-1.jpg') no-repeat center;
+    background-size: cover;
+    animation-delay: 10s;
+  }
+  .create-profile__header__carousel li:nth-child(4) span {
+    background: url('../../../assets/images/soccer-1.jpg') no-repeat center;
+    background-size: cover;
+    animation-delay: 15s;
+  }
+  .create-profile__header__carousel li:nth-child(5) span {
+    background: url('../../../assets/images/baseball-3.jpg') no-repeat center;
+    background-size: cover;
+    animation-delay: 20s;
+  }
+  .create-profile__header__carousel li:nth-child(6) span {
+    background: url('../../../assets/images/basket-2.jpg') no-repeat center;
+    background-size: cover;
+    animation-delay: 25s;
+  }
+  .create-profile__header__carousel li:nth-child(7) span {
+    background: url('../../../assets/images/football-2.jpg') no-repeat center;
+    background-size: cover;
+    animation-delay: 30s;
+  }
+  .create-profile__header__carousel li:nth-child(8) span {
+    background: url('../../../assets/images/soccer-2.jpg') no-repeat center;
+    background-size: cover;
+    animation-delay: 35s;
+  }
+
+  @keyframes imageAnimation {
+    0% {
+      opacity: 0;
+      animation-timing-function: ease-in;
+    }
+    8% {
+      opacity: 1;
+      animation-timing-function: ease-out;
+    }
+    17% {
+      opacity: 1;
+    }
+    45% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 
 .create-profile__header__background img {
     height: 100%;
@@ -34,7 +107,7 @@
 @media screen and (min-width: 768px) {
     .create-profile__header {
         position: absolute;
-        width: 100vw;
+        width: 100%;
         height: 200px;
         margin-bottom: 0;
     }

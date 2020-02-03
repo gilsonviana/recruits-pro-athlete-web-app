@@ -1,15 +1,22 @@
+// Dependencies
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { composeWithDevTools } from 'redux-devtools-extension';
+
+// Reducers
 import subscriptionPlans from './subscriptionPlans/reducer'
 import auth from './auth/reducer'
+import profile from './profile/reducer'
+import createProfile from './createProfile/reducer'
 import error from './error/reducer'
 
 const reducers = combineReducers({
     subscriptionPlans,
     auth,
+    profile,
+    createProfile,
     error
 })
 

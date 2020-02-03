@@ -23,7 +23,7 @@ const CreateProfileEducation = ({ handleTabKey, handleSubmit }) => {
                         <option value="pro">Pro</option>
                     </Form.Control>
                 </Form.Group>
-                <Form.Row>
+                <Form.Row className="mx-0">
                     <Form.Group as={Col} xs={12} md={8} controlId="createProfileSchool">
                         <Form.Label className="font-weight-bold">School name</Form.Label>
                         <Form.Control type="text" placeholder="Cub Bear High School" name="createProfileSchool"/>
@@ -38,13 +38,10 @@ const CreateProfileEducation = ({ handleTabKey, handleSubmit }) => {
                             className="mt-md-3"/>
                     </Form.Group>
                 </Form.Row>
-                <Form.Row>
+                <Form.Row className="mx-0">
                     <Form.Group as={Col} xs="12" md={6} controlId="createProfileGraduationYear">
                         <Form.Label className="font-weight-bold">Graduation Year</Form.Label>
                         <Form.Control type="number" placeholder="2020" step="1.0" min="1980" max="2050" name="createProfileGraduationYear"/>
-                        <Form.Text className="text-muted">
-                            Type your zip code for auto completion.
-                        </Form.Text>
                     </Form.Group>
                     <Form.Group as={Col} xs="12" md={6} controlId="createProfileGPA">
                         <Form.Label className="font-weight-bold">GPA</Form.Label>

@@ -1,3 +1,11 @@
+.page__create-profile {
+    padding-bottom: 5rem;
+}
+
+.create-profile__personal__img__wrapper img {
+    padding: 1rem;
+}
+
 @media screen and (min-width: 768px) {
     .page__create-profile__wrapper {
         padding-top: 8rem;
