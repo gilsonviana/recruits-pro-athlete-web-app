@@ -35,9 +35,7 @@ const Header = () => {
         <header className="app__header bg-dark">
             <div className="app__header__top__bar">
                 <div className="app__header__top__bar__brand">
-                    <Link to="/">
-                        <img src={brand} alt="Recruits Pro Logo"/>
-                    </Link>
+                    <img src={brand} alt="Recruits Pro Logo"/>
                 </div>
                 <div className="app__header__top__bar__list d-none d-md-flex">
                     <div className="app__header__top__bar__item">

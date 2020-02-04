@@ -1,53 +1,39 @@
 import axios from 'axios'
-import { SET_CREATE_PROFILE_PERSONAL, SET_CREATE_PROFILE_LOCATION, SET_CREATE_PROFILE_EDUCATION } from './types'
+import { CREATE_PROFILE_REQUEST, RESET_CREATE_PROFILE } from './types'
 
-export const setCreateProfilePersonal = (token, personal = {
-    avatarUrl: '',
-    phone: {
-        number: '',
-        mobile: false
+export const createProfileRequest = (token, profile = {
+    personal: {
+        avatarUrl: '',
+        phone: {
+            number: '',
+            mobile: false
+        },
+        height: {
+            feet: '',
+            inches: ''
+        },
+        weight: ''
     },
-    height: {
-        feet: '',
-        inches: ''
+    location: {
+        country: 'USA',
+        zipcode: '',
+        state: '',
+        city: ''
     },
-    weight: ''
+    education: {
+        skillLevel: '',
+        schoolName: '',
+        graduated: false,
+        graduationYear: '',
+        gpa: ''
+    }
 }) => {
     return dispatch => {
         dispatch({
-            type: SET_CREATE_PROFILE_PERSONAL,
-            payload: personal
+            type: CREATE_PROFILE_REQUEST,
+            payload: profile
         })
-    }
-}
-export const setCreateProfileLocation = (token, location = {
-    country: {
-        name: 'USA',
-        foreigner: false
-    },
-    zipCode: '',
-    state: '',
-    city: ''
-}) => {
-    return dispatch => {
-        dispatch({
-            type: SET_CREATE_PROFILE_LOCATION,
-            payload: location
-        })
-    }
-}
 
-export const setCreateProfileEducation = (token, education = {
-    skillLevel: '',
-    schoolName: '',
-    graduated: false,
-    graduationYear: '',
-    gpa: ''
-}) => {
-    return dispatch => {
-        dispatch({
-            type: SET_CREATE_PROFILE_EDUCATION,
-            payload: education
-        })
+        // TODO if HTTP request successful, dispatch RESET_CREATE_PROFILE
     }
 }

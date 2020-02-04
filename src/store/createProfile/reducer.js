@@ -1,4 +1,4 @@
-import { SET_CREATE_PROFILE_PERSONAL, SET_CREATE_PROFILE_LOCATION, SET_CREATE_PROFILE_EDUCATION } from './types'
+import { CREATE_PROFILE_REQUEST, RESET_CREATE_PROFILE } from './types'
 
 const initialState = {
     personal: {
@@ -14,11 +14,8 @@ const initialState = {
         weight: ''
     },
     location: {
-        country: {
-            name: 'USA',
-            foreigner: false
-        },
-        zipCode: '',
+        country: 'USA',
+        zipcode: '',
         state: '',
         city: ''
     },
@@ -33,20 +30,14 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case SET_CREATE_PROFILE_PERSONAL:
+        case CREATE_PROFILE_REQUEST:
             return {
                 ...state,
-                personal: action.payload
+                ...action.payload
             }
-        case SET_CREATE_PROFILE_LOCATION:
+        case RESET_CREATE_PROFILE:
             return {
-                ...state,
-                location: action.payload
-            }
-        case SET_CREATE_PROFILE_EDUCATION:
-            return {
-                ...state,
-                education: action.payload
+                ...initialState
             }
         default:
             return state

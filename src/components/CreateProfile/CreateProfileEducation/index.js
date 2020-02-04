@@ -9,13 +9,13 @@ import { FaArrowLeft } from 'react-icons/fa'
 // Assets
 import './style.css'
 
-const CreateProfileEducation = ({ handleTabKey, handleSubmit }) => {
+const CreateProfileEducation = ({ handleTabKey, handleSubmit, handleOnChange }) => {
     return (
         <div className="create-profile__education py-4">
             <Form noValidate onSubmit={handleSubmit}>
                 <Form.Group controlId="createProfileSkill">
                     <Form.Label className="font-weight-bold">Skill level</Form.Label>
-                    <Form.Control as="select" name="createProfileSkill">
+                    <Form.Control as="select" name="skillLevel" onChange={handleOnChange}>
                         <option value="">Choose a skill level</option>
                         <option value="youth">Youth</option>
                         <option value="high_school">High School</option>
@@ -26,12 +26,13 @@ const CreateProfileEducation = ({ handleTabKey, handleSubmit }) => {
                 <Form.Row className="mx-0">
                     <Form.Group as={Col} xs={12} md={8} controlId="createProfileSchool">
                         <Form.Label className="font-weight-bold">School name</Form.Label>
-                        <Form.Control type="text" placeholder="Cub Bear High School" name="createProfileSchool"/>
+                        <Form.Control maxLength="60" type="text" placeholder="Cub Bear High School" name="schoolName" onChange={handleOnChange} />
                     </Form.Group>
                     <Form.Group as={Col} xs={12} md={4} controlId="createProfileGraduated">
                         <Form.Label></Form.Label>
                         <Form.Check 
-                            name="createProfileGraduated"
+                            name="graduated"
+                            onChange={handleOnChange}
                             type="switch" 
                             id="createProfileGraduated"
                             label="Graduated?" 
@@ -41,11 +42,11 @@ const CreateProfileEducation = ({ handleTabKey, handleSubmit }) => {
                 <Form.Row className="mx-0">
                     <Form.Group as={Col} xs="12" md={6} controlId="createProfileGraduationYear">
                         <Form.Label className="font-weight-bold">Graduation Year</Form.Label>
-                        <Form.Control type="number" placeholder="2020" step="1.0" min="1980" max="2050" name="createProfileGraduationYear"/>
+                        <Form.Control maxLength="4" type="number" placeholder="2020" step="1.0" min="1980" max="2050" name="graduationYear" onChange={handleOnChange} />
                     </Form.Group>
                     <Form.Group as={Col} xs="12" md={6} controlId="createProfileGPA">
                         <Form.Label className="font-weight-bold">GPA</Form.Label>
-                        <Form.Control type="text" name="createProfileGPA"/>
+                        <Form.Control type="text" name="gpa" onChange={handleOnChange} />
                     </Form.Group>
                 </Form.Row>
                 <Form.Group className="clearfix">
@@ -63,7 +64,8 @@ const CreateProfileEducation = ({ handleTabKey, handleSubmit }) => {
 
 CreateProfileEducation.propTypes = {
     handleTabKey: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired
+    handleSubmit: PropTypes.func.isRequired,
+    handleOnChange: PropTypes.func.isRequired
 }
 
 export default CreateProfileEducation;

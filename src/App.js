@@ -20,8 +20,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/" exact>
-          {/* <LoginPage /> */}
-          <CreateProfile />
+          <LoginPage />
         </Route>
         <Route path="/login" exact>
           <LoginPage />
@@ -29,6 +28,9 @@ function App() {
         <Route path="/signup" exact>
           <SignupPage />
         </Route>
+        <ProtectedRoute path="/create-profile">
+          <CreateProfile />
+        </ProtectedRoute>
         <ProtectedRoute path="/choose-plan" exact>
           <PricingPage />
         </ProtectedRoute>

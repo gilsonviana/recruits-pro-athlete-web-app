@@ -23,7 +23,7 @@ const ProcessPayment = ({ token, updateProfileSubscription, setProfileIsComplete
         return <p>loading....</p>
     }
 
-    return <Redirect to="/dashboard" />
+    return <Redirect to="/create-profile" />
 }
 
 const mapStateToProps = (state) => ({

@@ -20,6 +20,7 @@ const CreateProfileHeader = () => {
             </ul>
             <div className="create-profile__header__overlay">
                 <img src={brand} alt="Recruits Pro Logo" className="create-profile__header__overlay__img mt-4"/>
+                <h3 className="d-md-none text-center text-white mt-4">Create Profile</h3>
             </div>
         </header>
     )
