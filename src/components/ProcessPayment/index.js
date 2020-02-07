@@ -1,23 +1,22 @@
 import React from "react";
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { updateProfileSubscription, setProfileIsCompleted } from '../../store/profile/actions'
+import { setProfileSubscriptionRequest, setProfileMeta } from '../../store/profile/actions'
 
-const ProcessPayment = ({ token, updateProfileSubscription, setProfileIsCompleted }) => {
+const ProcessPayment = ({ token, setProfileSubscriptionRequest }) => {
     const [isLoading, setIsLoading] = React.useState(true)
     React.useEffect(() => {
         const updateUserProfile = async () => {
             const query = new URLSearchParams(window.location.search)
             const subscriptionId = query.get('subscription_id')
     
-            await updateProfileSubscription(token, subscriptionId)
-            await setProfileIsCompleted(token)
+            await setProfileSubscriptionRequest(token, subscriptionId)
     
             setIsLoading(false)
         }
 
         updateUserProfile()
-    }, [token, setProfileIsCompleted, updateProfileSubscription])
+    }, [token, setProfileSubscriptionRequest])
 
     if (isLoading) {
         return <p>loading....</p>
@@ -30,4 +29,4 @@ const mapStateToProps = (state) => ({
     token: state.auth.token
 })
 
-export default connect(mapStateToProps, { updateProfileSubscription, setProfileIsCompleted })(ProcessPayment)
+export default connect(mapStateToProps, { setProfileSubscriptionRequest, setProfileMeta })(ProcessPayment)

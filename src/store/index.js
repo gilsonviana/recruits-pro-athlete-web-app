@@ -9,14 +9,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import subscriptionPlans from './subscriptionPlans/reducer'
 import auth from './auth/reducer'
 import profile from './profile/reducer'
-import createProfile from './createProfile/reducer'
 import error from './error/reducer'
 
 const reducers = combineReducers({
     subscriptionPlans,
     auth,
     profile,
-    createProfile,
     error
 })
 

@@ -1,28 +1,74 @@
-import { SET_PROFILE, SET_PROFILE_SUBSCRIPTION, SET_PROFILE_IS_COMPLETED } from './types'
+import * as types from './types'
 
 const initialState = {
-    subscription: {
-        id: "",
-        status: "",
-        createTime: "",
-        startTime: "",
-        linkSelf: ""
+    personal: {
+        fullName: '',
+        dob: '',
+        avatarUrl: '',
+        email: '',
+        phone: {
+            number: '',
+            mobile: false
+        },
+        height: {
+            feet: '',
+            inches: ''
+        },
+        weight: ''
     },
-    interests: [],
-    isCompleted: false,
-    email: "",
-    createdAt: "",
-    name: ""
+    location: {
+        country: '',
+        zipcode: '',
+        state: '',
+        city: ''
+    },
+    education: {
+        skillLevel: '',
+        schoolName: '',
+        graduated: false,
+        graduationYear: '',
+        gpa: ''
+    },
+    subscription: {
+        id: '',
+        status: '',
+        createTime: '',
+        linkSelf: '',
+        startTime: '',
+    },
+    meta: {
+        isCompleted: false,
+        lastVisit: ''
+    }
 }
 
 export default (state = initialState, action) => {
-    switch (action.type) {
-        case SET_PROFILE:
+    switch(action.type) {
+        case types.SET_PROFILE_PERSONAL:
             return {
                 ...state,
-                ...action.payload
+                personal: {
+                    ...state.personal,
+                    ...action.payload
+                }
             }
-        case SET_PROFILE_SUBSCRIPTION:
+        case types.SET_PROFILE_LOCATION:
+            return {
+                ...state,
+                location: {
+                    ...state.location,
+                    ...action.payload
+                }
+            }
+        case types.SET_PROFILE_EDUCATION:
+            return {
+                ...state,
+                education: {
+                    ...state.education,
+                    ...action.payload
+                }
+            }
+        case types.SET_PROFILE_SUBSCRIPTION:
             return {
                 ...state,
                 subscription: {
@@ -30,12 +76,28 @@ export default (state = initialState, action) => {
                     ...action.payload
                 }
             }
-        case SET_PROFILE_IS_COMPLETED:
+        case types.SET_PROFILE_META:
             return {
                 ...state,
-                isCompleted: true
+                meta: {
+                    ...state.meta,
+                    ...action.payload
+                }
+            }
+        case types.SET_PROFILE_REQUEST:
+            return {
+                ...state,
+                ...action.payload
+            }
+        case types.SET_PROFILE_SUBSCRIPTION_REQUEST:
+            return {
+                ...state,
+                subscription: {
+                    ...state.subscription,
+                    ...action.payload
+                }
             }
         default:
-            return state;
+            return state
     }
 }

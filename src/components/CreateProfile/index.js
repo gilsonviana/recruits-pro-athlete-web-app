@@ -13,7 +13,7 @@ import Card from "react-bootstrap/Card";
 import Loader from 'react-loader-spinner'
 
 // Redux
-import { createProfileRequest } from '../../store/createProfile/actions'
+import { setProfileRequest } from '../../store/profile/actions'
 
 // Components
 import CreateProfileHeader from "./CreateProfileHeader";
@@ -25,11 +25,12 @@ import CreateProfileEducation from "./CreateProfileEducation";
 import "./style.css";
 import userAvatarPlaceholder from "../../assets/images/user-avatar-placeholder.png";
 
-const CreateProfile = ({ history, token, createProfileRequest }) => {
+const CreateProfile = ({ history, token, setProfileRequest }) => {
     const [isLoading, setIsLoading] = React.useState(false)
     const [previewAvatar, setPreviewAvatar] = useState('')
     const [personalForm, setPersonalForm] = useState({
         avatarUrl: "",
+        dob: "",
         phone: {
             number: "",
             mobile: false
@@ -170,10 +171,13 @@ const CreateProfile = ({ history, token, createProfileRequest }) => {
             },
             education: {
                 ...educationForm
+            },
+            meta: {
+                isCompleted: true
             }
         }
 
-        createProfileRequest(token, profile)
+        setProfileRequest(token, profile)
 
         // TODO remove for production
         setTimeout(() => {
@@ -260,11 +264,11 @@ const CreateProfile = ({ history, token, createProfileRequest }) => {
 
 CreateProfile.propTypes = {
     token: PropTypes.string.isRequired,
-    createProfileRequest: PropTypes.func.isRequired,
+    setProfileRequest: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
     token: state.auth.token  
 })
 
-export default connect(mapStateToProps, { createProfileRequest })(withRouter(CreateProfile));
+export default connect(mapStateToProps, { setProfileRequest })(withRouter(CreateProfile));

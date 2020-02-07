@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { SET_TOKEN, UNSET_TOKEN } from './types'
-import { SET_PROFILE } from '../profile/types'
+import { SET_PROFILE_REQUEST, SET_PROFILE_PERSONAL } from '../profile/types'
 import keys from '../../config/keys'
 
 export const doLogin = (credentials) => {
@@ -21,14 +21,8 @@ export const doLogin = (credentials) => {
             })
     
             dispatch({
-                type: SET_PROFILE,
-                payload: {
-                    interests: data.user.interests,
-                    isCompleted: data.user.isCompleted,
-                    email: data.user.email,
-                    createdAt: data.user.createdAt,
-                    name: data.user.name
-                }
+                type: SET_PROFILE_REQUEST,
+                payload: data.athlete
             })
             
             return data
@@ -64,6 +58,14 @@ export const signUp = (credentials) => {
             dispatch({
                 type: SET_TOKEN,
                 payload: data.token
+            })
+
+            dispatch({
+                type: SET_PROFILE_PERSONAL,
+                payload: {
+                    fullName: credentials.username,
+                    email: credentials.email
+                }
             })
 
             return true

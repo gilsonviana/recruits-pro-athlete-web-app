@@ -1,5 +1,6 @@
 // Dependencies
-import React from "react";
+import React, { useEffect, useState } from "react";
+import PropTypes from 'prop-types'
 import { Link, withRouter } from "react-router-dom";
 import { connect } from 'react-redux'
 import Container from "react-bootstrap/Container";
@@ -14,17 +15,14 @@ import logo from '../../assets/images/logo.png'
 
 import "./style.css";
 
-const LoginPage = ({ history, doLogin }) => {
-  const [isLoading, setIsLoading] = React.useState(false)
-
-  const [formState, setFormState] = React.useState({
+const LoginPage = ({ history, token, isCompleted, doLogin }) => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [formState, setFormState] = useState({
     email: '',
     password: ''
   })
-
-  const [showToast, setShowToast] = React.useState(false)
-
-  const [showError, setShowError] = React.useState({
+  const [showToast, setShowToast] = useState(false)
+  const [showError, setShowError] = useState({
     isVisible: true,
     name: {
       email: {
@@ -32,6 +30,20 @@ const LoginPage = ({ history, doLogin }) => {
       }
     }
   })
+
+  useEffect(() => {
+    const verifyToken = () => {
+      if (token) {
+        if (!isCompleted) {
+          history.push('/create-profile')
+          return
+        }
+        history.push('/dashboard')
+      }
+    }
+
+    verifyToken()
+  }, [token])
 
   const handleChange = (e) => {
     const { target } = e
@@ -60,7 +72,7 @@ const LoginPage = ({ history, doLogin }) => {
 
     // Redirect user if profile is incomplete
     if (!res.user.isCompleted) {
-      history.push('/choose-plan')
+      history.push('/create-profile')
       return
     }
 
@@ -195,4 +207,16 @@ const LoginPage = ({ history, doLogin }) => {
   );
 };
 
-export default connect(null, { doLogin })(withRouter(LoginPage));
+LoginPage.propTypes = {
+  history: PropTypes.object.isRequired,
+  token: PropTypes.string.isRequired,
+  isCompleted: PropTypes.bool.isRequired,
+  doLogin: PropTypes.func.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  token: state.auth.token,
+  isCompleted: state.profile.meta.isCompleted
+})
+
+export default connect(mapStateToProps, { doLogin })(withRouter(LoginPage));

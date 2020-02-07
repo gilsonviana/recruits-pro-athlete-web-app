@@ -22,6 +22,15 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
                         accept=".png,.jpg,.jpeg"
                         onChange={handleOnChange}/>
                 </Form.Group>
+                <Form.Group controlId="createProfileDob">
+                    <Form.Label className="font-weight-bold">Date of Birth</Form.Label>
+                    <Form.Control
+                        type="date"
+                        placeholder=""
+                        name="dob"
+                        onChange={handleOnChange}
+                    />
+                </Form.Group>
                 <Form.Label
                     htmlFor="createProfileContactPhone"
                     className="font-weight-bold"

@@ -1,4 +1,7 @@
+// Dependencies
 import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { FiUser, FiLogOut } from 'react-icons/fi'
 import Dropdown from 'react-bootstrap/Dropdown'
@@ -6,12 +9,16 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 
+// Redux
+import { doLogout } from '../../../store/auth/actions'
+
+// Assets
 import brand from '../../../assets/images/logo-dashboard.png'
 import avatar from '../../../assets/images/avatar-example.jpg'
 
 import './style.css'
 
-const Header = () => {
+const Header = ({ doLogout }) => {
     return (
         <>
         <Navbar fixed="top" className="d-md-none" bg="dark" variant="dark" expand="md">
@@ -40,7 +47,7 @@ const Header = () => {
             <div className="app__header__top__bar">
                 <div className="app__header__top__bar__brand">
                     <img src={brand} alt="Recruits Pro Logo" className="d-none d-md-flex"/>
-                    <h3 className="text-white">Recruits Pro</h3>
+                    <h3 className="text-white d-md-none">Recruits Pro</h3>
                 </div>
                 <div className="app__header__top__bar__list d-none d-md-flex">
                     <div className="app__header__top__bar__item">
@@ -73,10 +80,10 @@ const Header = () => {
                                         <FiUser className="dropdown-icon oi oi-person" /> Profile
                                     </Link>
                                 </Dropdown.Item>
-                                <Dropdown.Item>
-                                    <Link to="" className="dropdown-item">
+                                <Dropdown.Item onClick={doLogout}>
                                         <FiLogOut className="dropdown-icon oi oi-account-logout" /> Logout
-                                    </Link>
+                                    {/* <Link to="" className="dropdown-item">
+                                    </Link> */}
                                 </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
@@ -88,4 +95,8 @@ const Header = () => {
     )
 }
 
-export default Header
+Header.propTypes = {
+    doLogout: PropTypes.func.isRequired
+}
+
+export default connect(null, { doLogout })(Header)
