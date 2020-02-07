@@ -121,9 +121,9 @@ const PricingPage = ({ history, token, subscriptionPlans }) => {
           <Row>
             <Col xs={12} md={{ span: 10, offset: 1 }}>
               <section className="page__pricing__content">
-                <div className="page__pricing__content__box">
+                <div className="page__pricing__content__box mx-auto">
                   <Row>
-                    <Col xs={12} md={6}>
+                    <Col xs={12} lg={6}>
                       <Card className="page__pricing__card">
                         <Card.Body>
                           <Badge variant="success" className="mb-4">
@@ -157,8 +157,8 @@ const PricingPage = ({ history, token, subscriptionPlans }) => {
                         </Card.Footer>
                       </Card>
                     </Col>
-                    <Col xs={12} md={6}>
-                      <Card className="page__pricing__card">
+                    <Col xs={12} lg={6}>
+                      <Card className="page__pricing__card mt-4 mt-md-0">
                         <BookmarkIcon className="page__pricing__card__bookmark" />
                         <Card.Body>
                           <Badge variant="success" className="mb-4">

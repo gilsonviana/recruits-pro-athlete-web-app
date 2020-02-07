@@ -56,25 +56,14 @@ export const signUp = (credentials) => {
                 data: {
                     email: credentials.email,
                     password: credentials.password,
-                    role: 'a'
+                    role: 'a',
+                    fullName: credentials.username
                 }
             })
 
             dispatch({
                 type: SET_TOKEN,
                 payload: data.token
-            })
-
-            await axios({
-                method: "PUT",
-                url: `${keys.API}/profile/self`,
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": data.token
-                },
-                data: {
-                    name: credentials.username
-                }
             })
 
             return true

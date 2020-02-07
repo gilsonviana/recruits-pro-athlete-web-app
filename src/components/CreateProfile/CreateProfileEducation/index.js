@@ -53,7 +53,7 @@ const CreateProfileEducation = ({ handleTabKey, handleSubmit, handleOnChange }) 
                     <Button className="create-profile__education__button-next float-left" onClick={() => handleTabKey('location')}>
                         <FaArrowLeft className="mr-2"/>Previous
                     </Button>
-                    <Button type="submit" className="create-profile__education__button-next float-right">
+                    <Button type="submit" className="create-profile__education__button-next float-right mt-3 mt-md-0">
                         Submit
                     </Button>
                 </Form.Group>

@@ -15,7 +15,11 @@ const Header = () => {
     return (
         <>
         <Navbar fixed="top" className="d-md-none" bg="dark" variant="dark" expand="md">
-            <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+            <Navbar.Brand href="#home">
+                <div className="app__header__top__bar__brand">
+                    <img src={brand} alt="Recruits Pro Logo"/>
+                </div>
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="app-mobile-navbar-nav" />
             <Navbar.Collapse id="app-mobile-navbar-nav">
                 <Nav className="mr-auto">
@@ -35,7 +39,8 @@ const Header = () => {
         <header className="app__header bg-dark">
             <div className="app__header__top__bar">
                 <div className="app__header__top__bar__brand">
-                    <img src={brand} alt="Recruits Pro Logo"/>
+                    <img src={brand} alt="Recruits Pro Logo" className="d-none d-md-flex"/>
+                    <h3 className="text-white">Recruits Pro</h3>
                 </div>
                 <div className="app__header__top__bar__list d-none d-md-flex">
                     <div className="app__header__top__bar__item">

@@ -7,7 +7,7 @@ import "./pricing-page-popup.css"
 
 const PricingPagePopup = ({ handleClose, handleSignupFree, handleSignupPro }) => {
     return (
-        <div className="pricing-page-popup" onClick={handleClose}>
+        <div className="pricing-page-popup px-3" onClick={handleClose}>
             <Card className="pricing-page-popup__content">
                 <Card.Body className="p-4">
                     <Card.Title>

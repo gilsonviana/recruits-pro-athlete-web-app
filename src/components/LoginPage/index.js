@@ -134,7 +134,8 @@ const LoginPage = ({ history, doLogin }) => {
         left: `50%`,
         transform: `translateX(${-50}%)`,
         backgroundColor: `#eb5a46`,
-        color: `#eee`
+        color: `#eee`,
+        width: `100%`
       }}>
         <Toast.Body>Unable to login user. Email or password is wrong.</Toast.Body>
       </Toast>

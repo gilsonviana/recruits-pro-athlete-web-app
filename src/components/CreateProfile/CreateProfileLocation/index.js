@@ -100,9 +100,9 @@ const CreateProfileLocation = ({ handleTabKey, handleOnChange }) => {
                     >
                         <FaArrowLeft className="mr-2" />
                         Previous
-          </Button>
+                    </Button>
                     <Button
-                        className="create-profile__location__button-next float-right"
+                        className="create-profile__location__button-next float-right mt-3 mt-md-0"
                         onClick={() => handleTabKey("education")}
                     >
                         Next

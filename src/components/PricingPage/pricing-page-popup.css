@@ -1,6 +1,6 @@
 .pricing-page-popup {
     display: flex;
-    position: absolute;
+    position: fixed;
     height: 100vh;
     width: 100vw;
     background-color: rgba(80, 80, 80, .5);

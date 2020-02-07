@@ -173,7 +173,8 @@ const SignupPage = ({ history, signUp, getSubscriptionPlans }) => {
         left: `50%`,
         transform: `translateX(${-50}%)`,
         backgroundColor: `#eb5a46`,
-        color: `#eee`
+        color: `#eee`,
+        width: `100%`
       }}>
         <Toast.Body>{showToast.message}</Toast.Body>
       </Toast>
