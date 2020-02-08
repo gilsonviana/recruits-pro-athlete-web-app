@@ -14,6 +14,7 @@ import SignupPage from './components/SignupPage';
 import PricingPage from './components/PricingPage';
 import ProcessPayment from './components/ProcessPayment';
 import CreateProfile from './components/CreateProfile'
+import RedirectTo from './components/RedirectTo';
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
         </Route>
         <Route path="/signup" exact>
           <SignupPage />
+        </Route>
+        <Route path="/redirect" exact>
+          <RedirectTo />
         </Route>
         <ProtectedRoute path="/create-profile">
           <CreateProfile />

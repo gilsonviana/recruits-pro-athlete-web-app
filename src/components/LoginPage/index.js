@@ -15,7 +15,7 @@ import logo from '../../assets/images/logo.png'
 
 import "./style.css";
 
-const LoginPage = ({ history, token, isCompleted, doLogin }) => {
+const LoginPage = ({ history, token, doLogin }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [formState, setFormState] = useState({
     email: '',
@@ -34,16 +34,12 @@ const LoginPage = ({ history, token, isCompleted, doLogin }) => {
   useEffect(() => {
     const verifyToken = () => {
       if (token) {
-        if (!isCompleted) {
-          history.push('/create-profile')
-          return
-        }
-        history.push('/dashboard')
+        history.push('/redirect')
       }
     }
 
     verifyToken()
-  }, [token])
+  }, [])
 
   const handleChange = (e) => {
     const { target } = e
@@ -70,18 +66,12 @@ const LoginPage = ({ history, token, isCompleted, doLogin }) => {
       return
     }
 
-    // Redirect user if profile is incomplete
-    if (!res.user.isCompleted) {
-      history.push('/create-profile')
-      return
-    }
-
     setIsLoading(true)
 
     // TODO remove for production mode
     setTimeout(() => {
       setIsLoading(false)
-      history.push('/dashboard')
+      history.push('/redirect')
     }, 3000)
   }
 
@@ -210,13 +200,11 @@ const LoginPage = ({ history, token, isCompleted, doLogin }) => {
 LoginPage.propTypes = {
   history: PropTypes.object.isRequired,
   token: PropTypes.string.isRequired,
-  isCompleted: PropTypes.bool.isRequired,
   doLogin: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
   token: state.auth.token,
-  isCompleted: state.profile.meta.isCompleted
 })
 
 export default connect(mapStateToProps, { doLogin })(withRouter(LoginPage));
