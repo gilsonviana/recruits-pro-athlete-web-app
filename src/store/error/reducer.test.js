@@ -2,7 +2,8 @@ import reducer from './reducer'
 import * as types from './types'
 
 const initialState = {
-    message: ''
+    message: '',
+    error: ''
 }
 
 describe('The error reducer', () => {
@@ -11,7 +12,7 @@ describe('The error reducer', () => {
     })
 
     it('should set message', () => {
-        expect(reducer(initialState, {type: types.SET_ERROR_MESSAGE, payload: 'this is an error'})).toEqual({
+        expect(reducer(initialState, {type: types.SET_ERROR_MESSAGE, payload: {message: 'this is an error', error: ''}})).toEqual({
             ...initialState,
             message: 'this is an error'
         })

@@ -50,7 +50,10 @@ export const setProfileRequest = (token, profile) => {
         } catch (e) {
             dispatch({
                 type: SET_ERROR_MESSAGE,
-                payload: 'Error while trying to update profile.'
+                payload: {
+                    message: 'Error while trying to update profile.',
+                    error: e.response
+                }
             })
 
             return false
@@ -78,7 +81,10 @@ export const setProfileSubscriptionRequest = (token, subscriptionId) => {
         } catch (e) {
             dispatch({
                 type: SET_ERROR_MESSAGE,
-                payload: 'Error while trying to update profile subscription.'
+                payload: {
+                    message: 'Error while trying to update profile subscription.',
+                    error: e.response
+                }
             })
 
             return false

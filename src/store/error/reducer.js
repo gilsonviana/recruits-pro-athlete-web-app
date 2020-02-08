@@ -1,7 +1,8 @@
 import { SET_ERROR_MESSAGE } from './types'
 
 const initialState = {
-    message: ''
+    message: '',
+    error: ''
 }
 
 export default (state = initialState, action) => {
@@ -9,7 +10,8 @@ export default (state = initialState, action) => {
         case SET_ERROR_MESSAGE:
             return {
                 ...state,
-                message: action.payload
+                message: action.payload.message,
+                error: action.payload.error
             }
         default:
             return state
