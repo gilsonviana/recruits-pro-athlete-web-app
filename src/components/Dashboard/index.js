@@ -1,4 +1,7 @@
-import React from 'react'
+// Dependencies
+import React, { useEffect } from 'react'
+
+// Components
 import Header from './Header'
 import Aside from './Aside'
 import Main from './Main'
@@ -12,4 +15,5 @@ const Dashboard = () => {
         </div>
     )
 }
+
 export default Dashboard

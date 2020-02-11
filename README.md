@@ -9,5 +9,5 @@
 |Choose plan|Start the subscription plan process|POST|api/v2/subscription|:white_check_mark:|
 |Update plan|Finish the subscription plan process|GET|api/v2/subscription/:subscription_id|:white_check_mark:|
 |Update profile|Update profile|PATCH|api/v2/profile/athlete|:white_check_mark:|
-|Get metrics flush|Get athletes metrics|GET|api/v2/profile/athlete/metricflush|:construction:|
+|Get metrics flush|Get athletes metrics|GET|api/v2/profile/athlete/metricflush|:white_check_mark:|
 |Forgot password|Create a new password|      |     |:construction:|

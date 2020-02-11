@@ -10,12 +10,14 @@ import subscriptionPlans from './subscriptionPlans/reducer'
 import auth from './auth/reducer'
 import profile from './profile/reducer'
 import error from './error/reducer'
+import evaluations from './evaluations/reducer'
 
 const reducers = combineReducers({
     subscriptionPlans,
     auth,
     profile,
-    error
+    evaluations,
+    error,
 })
 
 const persistConfig = {
