@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { SET_TOKEN, UNSET_TOKEN } from './types'
 import { SET_PROFILE_REQUEST, SET_PROFILE_PERSONAL } from '../profile/types'
+import { SET_ERROR_MESSAGE } from '../error/types'
 import keys from '../../config/keys'
 
 export const doLogin = (credentials) => {
@@ -27,7 +28,13 @@ export const doLogin = (credentials) => {
             
             return data
         } catch (e) {
-            console.log(e.response)
+            dispatch({
+                type: SET_ERROR_MESSAGE,
+                payload: {
+                    message: 'Could not login',
+                    error: e.response.data
+                }
+            })
             return false
         }
     }

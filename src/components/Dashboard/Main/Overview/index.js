@@ -1,7 +1,5 @@
 // Dependencies
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
+import React from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -11,17 +9,10 @@ import OverviewWelcome from './OverviewWelcome'
 import MetricsFlush from './MetricsFlush'
 import LastEvaluation from './LastEvaluation'
 
-// Redux
-import { getMetricFlush } from '../../../../store/profile/actions'
-
 // Assets
 import './style.css'
 
-const Overview = ({ token, getMetricFlush }) =>  {
-    useEffect(() => {
-        getMetricFlush(token)
-    }, [token])
-
+const Overview = () =>  {
     return (
         <div className="page__overview">
             <OverviewWelcome />
@@ -43,13 +34,4 @@ const Overview = ({ token, getMetricFlush }) =>  {
     )
 }
 
-Overview.propTypes = {
-    token: PropTypes.string.isRequired,
-    getMetricFlush: PropTypes.func.isRequired
-}
-
-const mapStateToProps = (state) => ({
-    token: state.auth.token
-})
-
-export default connect(mapStateToProps, { getMetricFlush })(Overview)
+export default Overview

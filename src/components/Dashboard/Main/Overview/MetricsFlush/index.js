@@ -53,7 +53,7 @@ MetricsFlush.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-    evaluations: state.evaluations
+    evaluations: state.profile.evaluations
 })
 
 export default connect(mapStateToProps)(MetricsFlush)

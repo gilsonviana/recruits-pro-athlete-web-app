@@ -11,8 +11,8 @@ import Loader from 'react-loader-spinner'
 import { Button, InputText } from '../../styled-components'
 import { doLogin } from '../../store/auth/actions'
 
+// Assets
 import logo from '../../assets/images/logo.png'
-
 import "./style.css";
 
 const LoginPage = ({ history, token, doLogin }) => {

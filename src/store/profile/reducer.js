@@ -36,10 +36,14 @@ const initialState = {
         linkSelf: '',
         startTime: '',
     },
+    evaluations: [],
     meta: {
         isCompleted: false,
         lastVisit: ''
-    }
+    },
+    _id: '',
+    createdAt: '',
+    updatedAt: ''
 }
 
 export default (state = initialState, action) => {

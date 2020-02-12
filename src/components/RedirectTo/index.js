@@ -5,23 +5,23 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 const RedirectTo = ({ isCompleted }) => {
-    const [route, setRoute] = useState(null)
+    const [routeName, setRouteName] = useState(null)
 
     useEffect(() => {
         if (isCompleted) {
-            setRoute('/dashboard')
+            setRouteName('/dashboard')
             return
         }
         
-        setRoute('/create-profile')
+        setRouteName('/create-profile')
 
     }, [isCompleted])
     
-    if (!route) {
+    if (!routeName) {
         return <></>
     }
 
-    return <Redirect to={route} />
+    return <Redirect to={routeName} />
 }
 
 RedirectTo.propTypes = {

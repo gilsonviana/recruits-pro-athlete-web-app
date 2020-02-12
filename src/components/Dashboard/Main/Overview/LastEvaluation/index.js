@@ -8,16 +8,16 @@ import { GiWhistle } from "react-icons/gi";
 import moment from 'moment'
 
 const LastEvaluation = ({ evaluation }) => {
-    const date = moment(evaluation.createdAt).format('MMM, Do, YYYY')
+    const date = moment(evaluation.createdAt).format('MMM Do, YYYY')
 
     return (
-        <Link to="/dashboard/evaluation" className="text-dark">
+        <Link to={`/dashboard/evaluation/${evaluation._id}`} className="text-dark">
             <Card className="widget__last-evaluation shadow-sm pt-3 px-3 mb-5 bg-white rounded">
                 <Card.Title>Last evaluation</Card.Title>
                 <Card.Body>
                     <div className="d-flex text-muted">
                         <GiWhistle size={20} className="mr-2" />
-                        {/* <h5>{data.evaluatorName || <Skeleton width={50}/>}</h5> */}
+                        <h5>{evaluation.userId.personal.fullName || <Skeleton width={50}/>}</h5>
                     </div>
                 </Card.Body>
                 <Card.Footer className="bg-transparent border-0 m-0 p-0">
@@ -35,7 +35,7 @@ LastEvaluation.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-    evaluation: state.evaluations[state.evaluations.length - 1]
+    evaluation: state.profile.evaluations[state.profile.evaluations.length - 1]
 })
 
 export default connect(mapStateToProps)(LastEvaluation)
