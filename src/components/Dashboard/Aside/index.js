@@ -14,7 +14,7 @@ const Aside = () => {
                     <nav className="stacked-menu">
                         <ul className="menu">
                             <li className="menu-item">
-                                <Link className="menu-item-link text-dark" to="/dashboard">
+                                <Link className="menu-item-link text-dark" to="/">
                                     <FiHome className="menu-item-icon" />
                                     <span className="menu-item-text">Overview</span>
                                 </Link>

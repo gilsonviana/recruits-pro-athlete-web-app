@@ -2,7 +2,6 @@
 import axios from 'axios'
 import * as types from './types'
 import { SET_ERROR_MESSAGE } from '../error/types'
-import { GET_EVALUATIONS_REQUEST } from '../evaluations/types'
 import keys from '../../config/keys'
 
 export const setProfilePersonal = (personal) => {
@@ -93,29 +92,29 @@ export const setProfileSubscriptionRequest = (token, subscriptionId) => {
     }
 }
 
-export const getMetricFlush = (token) => {
-    console.log("getMetricFlush getMetricFlush getMetricFlush getMetricFlush")
-    return async (dispatch) => {
-        try {
-            const { data } = await axios({
-                method: 'GET',
-                url: `${keys.API}/profile/athlete/metricflush`,
-                headers: {
-                    'Authorization': token
-                }
-            })
-            dispatch({
-                type: GET_EVALUATIONS_REQUEST,
-                payload: data.evaluations
-            })
-        } catch (e) {
-            dispatch({
-                type: SET_ERROR_MESSAGE,
-                payload: {
-                    message: 'Could not get metric flush.',
-                    error: e.response.data
-                }
-            })
-        }
-    }
-}
+// export const getMetricFlush = (token) => {
+//     console.log("getMetricFlush getMetricFlush getMetricFlush getMetricFlush")
+//     return async (dispatch) => {
+//         try {
+//             const { data } = await axios({
+//                 method: 'GET',
+//                 url: `${keys.API}/profile/athlete/metricflush`,
+//                 headers: {
+//                     'Authorization': token
+//                 }
+//             })
+//             dispatch({
+//                 type: GET_EVALUATIONS_REQUEST,
+//                 payload: data.evaluations
+//             })
+//         } catch (e) {
+//             dispatch({
+//                 type: SET_ERROR_MESSAGE,
+//                 payload: {
+//                     message: 'Could not get metric flush.',
+//                     error: e.response.data
+//                 }
+//             })
+//         }
+//     }
+// }

@@ -15,13 +15,13 @@ const Main = () => {
                     <div className="page__inner mt-4 mt-md-0">
                         <Router>
                             <Switch>
-                                <Route path="/dashboard" exact>
+                                <Route path={`/dashboard`} exact>
                                     <Overview />
                                 </Route>
-                                <Route path="/dashboard/evaluation/:evaluationId" exact>
+                                <Route path={`/dashboard/evaluation/:evaluationId`}>
                                     <EvaluationDetails />
                                 </Route>
-                                <Route path="/dashboard/evaluations">
+                                <Route path={`/dashboard/evaluations`}>
                                     <EvaluationListing />
                                 </Route>
                             </Switch>

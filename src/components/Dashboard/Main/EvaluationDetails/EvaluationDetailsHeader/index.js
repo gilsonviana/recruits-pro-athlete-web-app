@@ -5,9 +5,7 @@ import { AiOutlineMail } from 'react-icons/ai'
 
 // Assets
 import './style.css'
-
-// TODO Need image placeholder case no valid image to display
-import ImageEvaluator from '../../../../../assets/images/Ur4_0bmw.png'
+import ImageEvaluator from '../../../../../assets/images/user-avatar-placeholder.png'
 
 const EvaluationDetailsHeader = ({ fullName, email, avatar }) => {
     return (
@@ -16,8 +14,8 @@ const EvaluationDetailsHeader = ({ fullName, email, avatar }) => {
                 <div className="page__evaluation__details__header__img mx-auto mx-md-0 mr-md-4">
                     {
                         (avatar) ? 
-                            <img src={avatar} alt="Evaluator" alt={`${fullName} avatar.`} className="img-fluid rounded-sm"/> :
-                            <img src={ImageEvaluator} alt={`${fullName} does not have an avatar picture.`} className="img-fluid rounded-sm"/>
+                            <img src={avatar} alt={`${fullName} avatar.`} className="img-fluid rounded rounded-sm"/> :
+                            <img src={ImageEvaluator} alt={`${fullName} does not have an avatar.`} className="img-fluid rounded rounded-sm"/>
                     }
                 </div>
                 <div className="page__evaluation__details__header__title text-center text-md-left">
