@@ -15,6 +15,7 @@ import PricingPage from './components/PricingPage';
 import ProcessPayment from './components/ProcessPayment';
 import CreateProfile from './components/CreateProfile'
 import RedirectTo from './components/RedirectTo';
+import ResetPassword from './components/ResetPassword';
 
 function App() {
   return (
@@ -31,6 +32,12 @@ function App() {
         </Route>
         <Route path="/signup/:userId" exact>
           <SignupPage />
+        </Route>
+        <Route path="/reset-password" exact>
+          <ResetPassword />
+        </Route>
+        <Route path="/reset-password/new" exact>
+          <p>reset-password/new</p>
         </Route>
         <Route path="/redirect" exact>
           <RedirectTo />

@@ -1,0 +1,88 @@
+.page__reset-password {
+    background-color: #F9FAFC;
+    height: 100vh;
+}
+
+.page__reset-password__header {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.page__reset-password__header img {
+    display: block;
+    height: 73px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page__reset-password__content {
+    width: 100%;
+    padding: 0px;
+    overflow: visible;
+    margin-bottom: 30px;
+}
+
+.page__reset-password__content__box {
+    max-width: 400px;
+    margin: auto;
+}
+
+.page__reset-password__content__box__form {
+    border-radius: 3px;
+    padding: 25px 40px;
+    box-shadow: rgba(0,0,0,0.1) 0 0 10px;
+    background-color: hsl(0, 0%, 100%);
+}
+
+.page__reset-password__content__box__form__title {
+    text-align: center;
+    color: #5E6C84;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    line-height: 28px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.page__reset-password__content__box__form input {
+    background-color: #FAFBFC;
+    border: 1px solid #DFE1E6;
+    border-radius: 3px;
+    display: block;
+    width: 100%;
+    padding: .5rem;
+    margin-bottom: 1rem;
+}
+
+.page__reset-password__content__box__form [type=submit] {
+    background-color: #00EC00;
+    color: #eee;
+    font-weight: bold;
+    border-radius: 3px;
+    display: block;
+    width: 100%;
+    padding: .5rem;
+    margin-bottom: 1rem;
+    border: none;
+}
+
+.page__reset-password__content__box__form [type=submit]:hover {
+    background-color: #00fc00;
+}
+
+.page__reset-password__content__box__form__icon {
+    width: 160px;
+    margin: 0 auto;
+    display: block;
+}
+
+@media only screen and (min-width: 900px) {
+    .page__reset-password__content__box {
+        margin: 0 auto;
+        max-width: 600px;
+    }   
+
+    .page__reset-password__content__box__form__icon {
+        width: 255px;
+    }
+}

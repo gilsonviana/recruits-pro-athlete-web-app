@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { SET_TOKEN, UNSET_TOKEN } from './types'
+import { SET_TOKEN, UNSET_TOKEN, SET_RESETOKEN } from './types'
 import { SET_PROFILE_REQUEST, SET_PROFILE_PERSONAL } from '../profile/types'
 import { SET_ERROR_MESSAGE } from '../error/types'
 import keys from '../../config/keys'
@@ -78,6 +78,33 @@ export const signUp = (credentials) => {
             return true
         } catch (e) {
             console.log(e.response)
+            return false
+        }
+    }
+}
+
+export const getResetToken = (email) => {
+    return async dispatch => {
+        try {
+            const { data } = await axios({
+                method: 'POST',
+                url: `${keys.API}/auth/password`,
+                data: {
+                    email
+                }
+            })
+    
+            dispatch({
+                type: SET_RESETOKEN,
+                payload: {
+                    resetToken: data.token,
+                    code: data.code
+                }
+            })
+
+            return true
+        } catch (e) {
+            console.log(e)
             return false
         }
     }

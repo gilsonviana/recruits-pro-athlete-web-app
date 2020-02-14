@@ -169,7 +169,7 @@ const LoginPage = ({ history, token, doLogin }) => {
                     }
                   </form>
                   <div className="page__login__content__footer">
-                    <Link to="">Forgot password?</Link>
+                    <Link to="/reset-password">Forgot password?</Link>
                     <Link to="/signup">Sign up for an account</Link>
                   </div>
                 </div>

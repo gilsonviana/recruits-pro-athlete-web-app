@@ -1,7 +1,9 @@
-import { SET_TOKEN, UNSET_TOKEN } from "./types";
+import { SET_TOKEN, UNSET_TOKEN, SET_RESETOKEN } from "./types";
 
 const initialState = {
-    token: ''
+    token: '',
+    resetToken: '',
+    code: ''
 }
 
 export default (state = initialState, action) => {
@@ -15,6 +17,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 token: ''
+            }
+        case SET_RESETOKEN:
+            return {
+                ...state,
+                ...action.payload
             }
         default:
             return state
