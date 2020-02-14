@@ -29,6 +29,9 @@ function App() {
         <Route path="/signup" exact>
           <SignupPage />
         </Route>
+        <Route path="/signup/:userId" exact>
+          <SignupPage />
+        </Route>
         <Route path="/redirect" exact>
           <RedirectTo />
         </Route>

@@ -1,5 +1,6 @@
-import React from "react";
-import { Link, withRouter } from "react-router-dom";
+// Dependencies
+import React, { useState, useEffect } from "react";
+import { Link, withRouter, useParams } from "react-router-dom";
 import { connect } from 'react-redux'
 import Loader from 'react-loader-spinner'
 import Container from "react-bootstrap/Container";
@@ -7,30 +8,33 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Toast from 'react-bootstrap/Toast'
 import { Button, InputText } from '../../styled-components'
-import { signUp } from '../../store/auth/actions'
+
+// Services
+import { getAthleteById } from '../../services/user'
 
 // Redux
+import { signUp } from '../../store/auth/actions'
 import { getSubscriptionPlans } from '../../store/subscriptionPlans/actions'
 
+// Assets
 import logo from '../../assets/images/logo.png'
-
 import "./style.css";
 
 const SignupPage = ({ history, signUp, getSubscriptionPlans }) => {
-  const [isLoading, setIsLoading] = React.useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
-  const [formState, setFormState] = React.useState({
+  const [formState, setFormState] = useState({
     email: '',
     username: '',
     password: ''
   })
 
-  const [showToast, setShowToast] = React.useState({
+  const [showToast, setShowToast] = useState({
     isVisible: false,
     message: '' // Email already in use by another account.
   })
 
-  const [showError, setShowError] = React.useState({
+  const [showError, setShowError] = useState({
     isVisible: true,
     name: {
       email: {
@@ -44,6 +48,23 @@ const SignupPage = ({ history, signUp, getSubscriptionPlans }) => {
       }
     }
   })
+  
+  const { userId } = useParams()
+
+  useEffect(() => {  
+    const getUrlParams = async () => {
+      const res = await getAthleteById(userId)
+      setFormState({
+        ...formState,
+        email: res.email,
+        username: res.fullName
+      })
+    }
+
+    if (userId) {
+      getUrlParams()
+    }
+  }, [])
 
   const handleChange = (e) => {
     const { target } = e
@@ -199,8 +220,8 @@ const SignupPage = ({ history, signUp, getSubscriptionPlans }) => {
                         <p className="text-danger my-1">{showError.name.password.message}</p>
                       </>
                     }
-                    <InputText type="email" placeholder="Enter email" name="email" onChange={handleChange} onBlur={isFieldValid} />
-                    <InputText type="text" placeholder="Enter full name" name="username" onChange={handleChange} onBlur={isFieldValid} />
+                    <InputText value={formState.email} type="email" placeholder="Enter email" name="email" onChange={handleChange} onBlur={isFieldValid} />
+                    <InputText value={formState.username} type="text" placeholder="Enter full name" name="username" onChange={handleChange} onBlur={isFieldValid} />
                     <InputText type="password" placeholder="Enter password" name="password" onChange={handleChange} onBlur={isFieldValid} />
                     <p className="my-3">
                       By signing up, you agree and accept our <Link to="">terms of use</Link> and <Link to="">privacy policy</Link>.
