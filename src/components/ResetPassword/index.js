@@ -40,10 +40,11 @@ const ResetPassword = ({ history, getResetToken }) => {
         setIsLoading(true)
         const res = await getResetToken(formState.email)
         if (!res) {
+            setIsLoading(false)
             setShowToast(true)
             return
         }
-        history.push(`${location.pathname}/new`)
+        history.push(`${location.pathname}/code`)
     }
 
     const handleOnChange = (e) => {
@@ -144,7 +145,7 @@ const ResetPassword = ({ history, getResetToken }) => {
                                                 onBlur={isFieldValid}
                                             />
                                             <Form.Text className="text-muted">
-                                                Enter your email address to receive a confirmation code.
+                                                Enter the email address associated with your Recruits Pro Athlete account.
                                             </Form.Text>
                                         </Form.Group>
                                         {isFormValid() ? 

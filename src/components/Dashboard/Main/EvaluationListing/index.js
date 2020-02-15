@@ -34,7 +34,6 @@ const EvaluationListing = ({ evaluations }) => {
         sport: ''
     }) => {
         const { dateFrom, dateTo, sport } = filter
-        console.log(filter)
 
         setEvaluationsState([...evaluations.filter(evaluation => {
             let date = new Date(evaluation.createdAt)

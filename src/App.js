@@ -16,6 +16,10 @@ import ProcessPayment from './components/ProcessPayment';
 import CreateProfile from './components/CreateProfile'
 import RedirectTo from './components/RedirectTo';
 import ResetPassword from './components/ResetPassword';
+import ResetPasswordCodeRoute from './components/ResetPasswordCodeRoute';
+import ResetPasswordCode from './components/ResetPasswordCode';
+import ResetPasswordNewRoute from './components/ResetPasswordNewRoute';
+import ResetPasswordNew from './components/ResetPasswordNew';
 
 function App() {
   return (
@@ -36,9 +40,12 @@ function App() {
         <Route path="/reset-password" exact>
           <ResetPassword />
         </Route>
-        <Route path="/reset-password/new" exact>
-          <p>reset-password/new</p>
-        </Route>
+        <ResetPasswordCodeRoute path="/reset-password/code" exact>
+          <ResetPasswordCode />
+        </ResetPasswordCodeRoute>
+        <ResetPasswordNewRoute path="/reset-password/new" exact>
+          <ResetPasswordNew />
+        </ResetPasswordNewRoute>
         <Route path="/redirect" exact>
           <RedirectTo />
         </Route>

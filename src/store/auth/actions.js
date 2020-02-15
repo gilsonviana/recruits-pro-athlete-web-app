@@ -109,3 +109,30 @@ export const getResetToken = (email) => {
         }
     }
 }
+
+export const setNewPassword = (token, password) => {
+    return async dispatch => {
+        try {
+            const { data } = await axios({
+                method: 'PATCH',
+                url: `${keys.API}/auth/password/new`,
+                headers: {
+                    'Authorization': token
+                },
+                data: {
+                    password
+                }
+            })
+            return true
+        } catch (e) {
+            dispatch({
+                type: SET_ERROR_MESSAGE,
+                payload: {
+                   message: e.response.data.message,
+                   error: '' 
+                }
+            })
+            return false
+        }
+    }
+}
