@@ -28,6 +28,32 @@ const EvaluationListing = ({ evaluations }) => {
         setEvaluationsState([...evaluations.filter(evaluation => evaluation.userId.personal.fullName.toLocaleLowerCase().indexOf(target.value) >= 0)])
     }
 
+    const handleSearchFilter = (filter = {
+        dateFrom: '',
+        dateTo: '',
+        sport: ''
+    }) => {
+        const { dateFrom, dateTo, sport } = filter
+        console.log(filter)
+
+        setEvaluationsState([...evaluations.filter(evaluation => {
+            let date = new Date(evaluation.createdAt)
+            if (sport) {
+                return date >= dateFrom && date <= dateTo && evaluation.form.sport === sport
+            }
+
+            if (dateFrom && !dateTo) {
+                return date >= dateFrom
+            }
+
+            if (dateFrom && dateTo) {
+                return date >= filter.dateFrom && date <= filter.dateTo
+            }
+
+            return
+        })])
+    }
+
     if (!evaluationsState) {
         return <></>
     }
@@ -40,7 +66,7 @@ const EvaluationListing = ({ evaluations }) => {
                         <Card className="shadow-sm pt-3 px-3 mb-5 bg-white rounded">
                             <Card.Title>Evaluations</Card.Title>
                             <Card.Body>
-                            <EvaluationSearchBar handleOnChange={handleSearch}/>
+                            <EvaluationSearchBar handleOnChange={handleSearch} handleFilter={handleSearchFilter}/>
                             {
                                 evaluationsState.sort((a, b) => {
                                     let x = new Date(b.createdAt), 

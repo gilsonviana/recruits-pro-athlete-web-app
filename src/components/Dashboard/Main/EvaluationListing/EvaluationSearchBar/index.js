@@ -10,7 +10,8 @@ import { MdFilterList } from 'react-icons/md'
 import EvaluationSearchBarFilter from './EvaluationSearchBarFilter'
 
 const EvaluationSearchBar = ({
-    handleOnChange
+    handleOnChange,
+    handleFilter
 }) => {
     const [showFilter, setShowFilter] = useState(false)
 
@@ -30,13 +31,14 @@ const EvaluationSearchBar = ({
                     </Col>
                 </Form.Row>
             </Form>
-            {(showFilter) && <EvaluationSearchBarFilter />}
+            {(showFilter) && <EvaluationSearchBarFilter onSubmit={handleFilter}/>}
         </div>
     )
 }
 
 EvaluationSearchBar.propTypes = {
-    handleOnChange: PropTypes.func.isRequired
+    handleOnChange: PropTypes.func.isRequired,
+    handleFilter: PropTypes.func.isRequired
 }
 
 export default EvaluationSearchBar
