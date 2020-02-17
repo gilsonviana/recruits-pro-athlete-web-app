@@ -16,195 +16,191 @@ import logo from '../../assets/images/logo.png'
 import "./style.css";
 
 const LoginPage = ({ history, token, doLogin }) => {
-  const [isLoading, setIsLoading] = useState(false)
-  const [formState, setFormState] = useState({
-    email: '',
-    password: ''
-  })
-  const [showToast, setShowToast] = useState(false)
-  const [showError, setShowError] = useState({
-    isVisible: true,
-    name: {
-      email: {
-        message: null
-      }
-    }
-  })
-
-  useEffect(() => {
-    const verifyToken = () => {
-      if (token) {
-        history.push('/redirect')
-      }
-    }
-
-    verifyToken()
-  })
-
-  const handleChange = (e) => {
-    const { target } = e
-    isFieldValid(e)
-    setFormState({
-      ...formState,
-      [target.name]: target.value
+    const [isLoading, setIsLoading] = useState(false)
+    const [formState, setFormState] = useState({
+        email: '',
+        password: ''
     })
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    const res = await doLogin(formState)
-
-    if (!res) {
-      setShowToast(true)
-      return
-    }
-    
-    // Redirect user if profile role different than `a` = Athlete
-    if (res.user.role !== 'a') {
-      // TODO create welcome page for Evaluator and point user to Mobile App
-      alert('Evaluator')
-      return
-    }
-
-    setIsLoading(true)
-
-    // TODO remove for production mode
-    setTimeout(() => {
-      setIsLoading(false)
-      history.push('/redirect')
-    }, 3000)
-  }
-
-  const isFormValid = () => {
-    return Object.values(showError.name).every(item => item.message === '')
-  }
-
-  // onBlur event
-  const isFieldValid = (e)=> {
-    let res = false
-    const { target } = e
-
-    if (target.name === 'email') {
-      const reg = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
-      if (!reg.test(target.value)) {
-        return setShowError({
-          isVisible: true,
-          name: {
-            ...showError.name,
-            [target.name]: {
-              message: 'Please, insert a valid email address.'
+    const [showToast, setShowToast] = useState(false)
+    const [showError, setShowError] = useState({
+        isVisible: true,
+        name: {
+            email: {
+                message: null
             }
-          }
-        })
-      } 
+        }
+    })
 
-      res = true
-      _clearErrorMessage(target.name)
+    useEffect(() => {
+        const verifyToken = () => {
+            if (token) {
+                history.push('/redirect')
+            }
+        }
+
+        verifyToken()
+    })
+
+    const handleChange = (e) => {
+        const { target } = e
+        isFieldValid(e)
+        setFormState({
+            ...formState,
+            [target.name]: target.value
+        })
     }
 
-    return res
-  }
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        setIsLoading(true)
+        
+        try {
+            const res = await doLogin(formState)
 
-  // onFocus event
-  const _clearErrorMessage = (name) => {
-    setShowError({
-      ...showError,
-      name: {
-        ...showError.name,
-        [name]: {
-          message: ''
+            // Redirect user if profile role different than `a` = Athlete
+            if (res.user.role !== 'a') {
+                // TODO create welcome page for Evaluator and point user to Mobile App
+                alert('Evaluator')
+                return
+            }
+            history.push('/redirect')
+        } catch (e) {
+            setIsLoading(false)
+            setShowToast(true)
+            return
         }
-      }
-    })
-  }
+    }
 
-  return (
-    <div className="page__login">
-      {(isLoading) && (
-        <div className="page__overlay__loading">
-          <Loader 
-            type="Oval"
-            color="#00FF00"
-            height={100}
-            width={100}
-          />
-        </div>
-      )}
-      <Toast onClose={() => setShowToast(false)} show={showToast} delay={5000} autohide style={{
-        position: 'absolute',
-        left: `50%`,
-        transform: `translateX(${-50}%)`,
-        backgroundColor: `#eb5a46`,
-        color: `#eee`,
-        width: `100%`
-      }}>
-        <Toast.Body>Unable to login user. Email or password is wrong.</Toast.Body>
-      </Toast>
-      <Container fluid style={{
-        justifyContent: 'space-between'
-      }}>
-        <header className="page__login__header">
-          <img src={logo} alt="Recruits pro logo"/>
-        </header>
-        <Row>
-          <Col xs={12} md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }}>
-            <section className="page__login__content">
-              <div className="page__login__content__box">
-                <div className="page__login__content__box__form">
-                  <h3 className="page__login__content__box__form__title font-weight-bold">Log in to Athletes Pro</h3>
-                  <form onSubmit={handleSubmit}>
-                    {
-                      (showError.isVisible) && 
-                      <>
-                        <p className="text-danger my-1">{showError.name.email.message}</p>
-                      </>
+    const isFormValid = () => {
+        return Object.values(showError.name).every(item => item.message === '')
+    }
+
+    // onBlur event
+    const isFieldValid = (e) => {
+        let res = false
+        const { target } = e
+
+        if (target.name === 'email') {
+            const reg = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+            if (!reg.test(target.value)) {
+                return setShowError({
+                    isVisible: true,
+                    name: {
+                        ...showError.name,
+                        [target.name]: {
+                            message: 'Please, insert a valid email address.'
+                        }
                     }
-                    <InputText type="email" placeholder="Enter email" name="email" onChange={handleChange} onBlur={isFieldValid} />
-                    <InputText type="password" placeholder="Enter password" name="password" onChange={handleChange} />
-                    {
-                      (isFormValid()) ?
-                      <Button disabled={false} type="submit">Log in</Button> :
-                      <Button disabled={true} type="submit">Log in</Button>
-                    }
-                  </form>
-                  <div className="page__login__content__footer">
-                    <Link to="/reset-password">Forgot password?</Link>
-                    <Link to="/signup">Sign up for an account</Link>
-                  </div>
+                })
+            }
+
+            res = true
+            _clearErrorMessage(target.name)
+        }
+
+        return res
+    }
+
+    // onFocus event
+    const _clearErrorMessage = (name) => {
+        setShowError({
+            ...showError,
+            name: {
+                ...showError.name,
+                [name]: {
+                    message: ''
+                }
+            }
+        })
+    }
+
+    return (
+        <div className="page__login">
+            {(isLoading) && (
+                <div className="page__overlay__loading">
+                    <Loader
+                        type="Oval"
+                        color="#00FF00"
+                        height={100}
+                        width={100}
+                    />
                 </div>
-              </div>
-            </section>
-          </Col>
-        </Row>
-        <Row style={{
-          position: 'absolute',
-          width: `100%`,
-          bottom: 0,
-          left: 0,
-          height: `3rem`
-        }}>
-          <Col xs={12} md={{ span: 4, offset: 4 }}>
-            <footer className="page__login__footer">
-              <Link to="">Privacy policy</Link>
-              <p>/</p>
-              <Link to="">Terms of service</Link>
-            </footer>
-          </Col>
-        </Row>
-      </Container>
-    </div>
-  );
+            )}
+            <Toast onClose={() => setShowToast(false)} show={showToast} delay={5000} autohide style={{
+                position: 'absolute',
+                left: `50%`,
+                transform: `translateX(${-50}%)`,
+                backgroundColor: `#eb5a46`,
+                color: `#eee`,
+                width: `100%`
+            }}>
+                <Toast.Body>Unable to login user. Email or password is wrong.</Toast.Body>
+            </Toast>
+            <Container fluid style={{
+                justifyContent: 'space-between'
+            }}>
+                <header className="page__login__header">
+                    <img src={logo} alt="Recruits pro logo" />
+                </header>
+                <Row>
+                    <Col xs={12} md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }}>
+                        <section className="page__login__content">
+                            <div className="page__login__content__box">
+                                <div className="page__login__content__box__form">
+                                    <h3 className="page__login__content__box__form__title font-weight-bold">Log in to Athletes Pro</h3>
+                                    <form onSubmit={handleSubmit}>
+                                        {
+                                            (showError.isVisible) &&
+                                            <>
+                                                <p className="text-danger my-1">{showError.name.email.message}</p>
+                                            </>
+                                        }
+                                        <InputText type="email" placeholder="Enter email" name="email" onChange={handleChange} onBlur={isFieldValid} />
+                                        <InputText type="password" placeholder="Enter password" name="password" onChange={handleChange} />
+                                        {
+                                            (!isFormValid() || !formState.password || !formState.email) ?
+                                                <Button disabled={true} type="submit">Log in</Button> :
+                                                <Button disabled={false} type="submit">Log in</Button>
+                                        }
+                                    </form>
+                                    <div className="page__login__content__footer">
+                                        <Link to="/reset-password">Forgot password?</Link>
+                                        <Link to="/signup">Sign up for an account</Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </Col>
+                </Row>
+                <Row style={{
+                    position: 'absolute',
+                    width: `100%`,
+                    bottom: 0,
+                    left: 0,
+                    height: `3rem`
+                }}>
+                    <Col xs={12} md={{ span: 4, offset: 4 }}>
+                        <footer className="page__login__footer">
+                            <Link to="">Privacy policy</Link>
+                            <p>/</p>
+                            <Link to="">Terms of service</Link>
+                        </footer>
+                    </Col>
+                </Row>
+            </Container>
+        </div>
+    );
 };
 
 LoginPage.propTypes = {
-  history: PropTypes.object.isRequired,
-  token: PropTypes.string.isRequired,
-  doLogin: PropTypes.func.isRequired
+    history: PropTypes.object.isRequired,
+    token: PropTypes.string.isRequired,
+    doLogin: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
-  token: state.auth.token,
+    token: state.auth.token,
 })
 
 export default connect(mapStateToProps, { doLogin })(withRouter(LoginPage));
