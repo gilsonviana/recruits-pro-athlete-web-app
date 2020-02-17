@@ -2,7 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { withRouter, Link, useRouteMatch } from 'react-router-dom'
 import { FiUser, FiLogOut } from 'react-icons/fi'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Navbar from 'react-bootstrap/Navbar'
@@ -19,6 +19,8 @@ import avatar from '../../../assets/images/avatar-example.jpg'
 import './style.css'
 
 const Header = ({ doLogout }) => {
+    const match = useRouteMatch()
+
     return (
         <>
         <Navbar fixed="top" className="d-md-none" bg="dark" variant="dark" expand="md">
@@ -75,15 +77,11 @@ const Header = ({ doLogout }) => {
                                     willChange: `top, left`
                                 }}
                             >
-                                <Dropdown.Item>
-                                    <Link to="" className="dropdown-item">
-                                        <FiUser className="dropdown-icon oi oi-person" /> Profile
-                                    </Link>
-                                </Dropdown.Item>
+                                <Link to={`${match.path}/profile`} className="dropdown-item" as={<Dropdown.Item />}>
+                                    <FiUser className="dropdown-icon oi oi-person" /> Profile
+                                </Link>
                                 <Dropdown.Item onClick={doLogout}>
-                                        <FiLogOut className="dropdown-icon oi oi-account-logout" /> Logout
-                                    {/* <Link to="" className="dropdown-item">
-                                    </Link> */}
+                                    <FiLogOut className="dropdown-icon oi oi-account-logout" /> Logout
                                 </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
@@ -99,4 +97,4 @@ Header.propTypes = {
     doLogout: PropTypes.func.isRequired
 }
 
-export default connect(null, { doLogout })(Header)
+export default withRouter(connect(null, { doLogout })(Header))
