@@ -49,7 +49,7 @@ const EvaluationListing = ({ evaluations }) => {
                 return date >= filter.dateFrom && date <= filter.dateTo
             }
 
-            return
+            return true
         })])
     }
 

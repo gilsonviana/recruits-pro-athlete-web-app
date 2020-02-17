@@ -113,7 +113,7 @@ export const getResetToken = (email) => {
 export const setNewPassword = (token, password) => {
     return async dispatch => {
         try {
-            const { data } = await axios({
+            await axios({
                 method: 'PATCH',
                 url: `${keys.API}/auth/password/new`,
                 headers: {

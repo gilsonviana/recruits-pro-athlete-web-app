@@ -39,7 +39,7 @@ const LoginPage = ({ history, token, doLogin }) => {
     }
 
     verifyToken()
-  }, [])
+  })
 
   const handleChange = (e) => {
     const { target } = e

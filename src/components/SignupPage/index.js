@@ -64,7 +64,7 @@ const SignupPage = ({ history, signUp, getSubscriptionPlans }) => {
     if (userId) {
       getUrlParams()
     }
-  }, [])
+  }, [userId])
 
   const handleChange = (e) => {
     const { target } = e
