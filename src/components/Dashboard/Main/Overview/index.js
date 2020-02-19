@@ -9,9 +9,6 @@ import OverviewWelcome from './OverviewWelcome'
 import MetricsFlush from './MetricsFlush'
 import LastEvaluation from './LastEvaluation'
 
-// Assets
-import './style.css'
-
 const Overview = () =>  {
     return (
         <div className="page__overview">

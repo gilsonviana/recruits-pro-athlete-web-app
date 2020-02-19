@@ -1,0 +1,16 @@
+.empty__profile-subscription {
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    .empty__profile-subscription__button {
+        width: 17rem;
+        margin: auto;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .empty__profile-subscription {
+        padding: 4rem 0;
+    }
+}

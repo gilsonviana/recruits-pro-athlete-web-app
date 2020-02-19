@@ -2,7 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter, Link, useRouteMatch } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { FiUser, FiLogOut } from 'react-icons/fi'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Navbar from 'react-bootstrap/Navbar'
@@ -14,13 +14,11 @@ import { doLogout } from '../../../store/auth/actions'
 
 // Assets
 import brand from '../../../assets/images/logo-dashboard.png'
-import avatar from '../../../assets/images/avatar-example.jpg'
+import avatarPlaceholder from '../../../assets/images/user-avatar-placeholder.png'
 
 import './style.css'
 
-const Header = ({ doLogout }) => {
-    const match = useRouteMatch()
-
+const Header = ({ doLogout, fullName, avatarUrl }) => {
     return (
         <>
         <Navbar fixed="top" className="d-md-none" bg="dark" variant="dark" expand="md">
@@ -45,7 +43,7 @@ const Header = ({ doLogout }) => {
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
-        <header className="app__header bg-dark">
+        <header className="app__header bg-dark fixed-top">
             <div className="app__header__top__bar">
                 <div className="app__header__top__bar__brand">
                     <img src={brand} alt="Recruits Pro Logo" className="d-none d-md-flex"/>
@@ -61,11 +59,14 @@ const Header = ({ doLogout }) => {
                                 aria-haspopup="true" 
                                 aria-expanded="false"
                             >
-                                <span className="user-avatar user-avatar-md">
-                                    <img src={avatar} alt="user avatar" />
+                                <span className="user-avatar user-avatar-md bg-light">
+                                    {!avatarUrl ?
+                                        <img src={avatarPlaceholder} alt="user avatar" /> :
+                                        <img src={avatarUrl} alt={`${fullName} avatar`} />
+                                    }
                                 </span> 
                                 <span className="account-summary pr-lg-4 d-lg-block">
-                                    <span className="account-name">Chris Sam</span> 
+                                    <span className="account-name">{fullName}</span> 
                                 </span>
                             </Dropdown.Toggle>
                             <Dropdown.Menu
@@ -77,7 +78,7 @@ const Header = ({ doLogout }) => {
                                     willChange: `top, left`
                                 }}
                             >
-                                <Link to={`${match.path}/profile`} className="dropdown-item" as={<Dropdown.Item />}>
+                                <Link to={`/dashboard/profile`} className="dropdown-item" as={<Dropdown.Item />}>
                                     <FiUser className="dropdown-icon oi oi-person" /> Profile
                                 </Link>
                                 <Dropdown.Item onClick={doLogout}>
@@ -94,7 +95,14 @@ const Header = ({ doLogout }) => {
 }
 
 Header.propTypes = {
-    doLogout: PropTypes.func.isRequired
+    doLogout: PropTypes.func.isRequired,
+    fullName: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string
 }
 
-export default withRouter(connect(null, { doLogout })(Header))
+const mapStateToProps = (state) => ({
+    fullName: state.profile.personal.fullName,
+    avatarUrl: state.profile.personal.avatarUrl
+})
+
+export default connect(mapStateToProps, { doLogout })(Header)

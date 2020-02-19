@@ -1,0 +1,32 @@
+.page__profile__aside .list-group {
+    position: relative;
+}
+
+.page__profile__aside .list-group-item:hover::before {
+    opacity: 1;
+    transition: opacity .35s;
+}
+
+.page__profile__aside .list-group-item::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 10px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #eaebee;
+    opacity: 0;
+}
+
+.page__profile__aside .list-group-item.--active::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 10px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #00ff00;
+    opacity: 1;
+}

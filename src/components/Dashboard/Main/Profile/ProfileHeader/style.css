@@ -1,0 +1,12 @@
+.page__profile__header {
+    margin-top: -1.5rem;
+    margin-left: -2rem;
+    margin-right: -2rem;
+    background-color: #eaebee;
+}
+
+.page__profile__header__img {
+    width: 5rem;
+    height: 5rem;
+    margin: auto;
+}

@@ -1,11 +1,15 @@
 // Dependencies
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 
 // Components
 import Overview from './Overview'
 import EvaluationDetails from './EvaluationDetails'
 import EvaluationListing from './EvaluationListing'
+import Profile from './Profile'
+
+// Assets
+import './style.css'
 
 const Main = () => {
     return (
@@ -23,8 +27,8 @@ const Main = () => {
                             <Route path={`/dashboard/evaluation/:evaluationId`} exact>
                                 <EvaluationDetails />
                             </Route>
-                            <Route path={`/dashboard/profile`} exact>
-                                <p>profile</p>
+                            <Route path={`/dashboard/profile`}>
+                                <Profile />
                             </Route>
                         </Switch>
                     </div>

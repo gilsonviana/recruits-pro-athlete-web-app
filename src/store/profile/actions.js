@@ -31,7 +31,8 @@ export const setProfileSubscription = (subscription) => {
     }
 }
 
-export const setProfileRequest = (token, profile) => {
+// @param opt false | true (false will not make use of http response)
+export const setProfileRequest = (token, profile, opt = true) => {
     return async (dispatch) => {
         try {
             const { data } = await axios({
@@ -43,10 +44,22 @@ export const setProfileRequest = (token, profile) => {
                 },
                 data: profile
             })
+            
+            if (!opt) {
+                dispatch({
+                    type: types.SET_PROFILE_REQUEST,
+                    payload: profile
+                })
+
+                return true
+            }
+ 
             dispatch({
                 type: types.SET_PROFILE_REQUEST,
                 payload: data.athlete
             })
+            return true
+
         } catch (e) {
             dispatch({
                 type: SET_ERROR_MESSAGE,
@@ -91,30 +104,3 @@ export const setProfileSubscriptionRequest = (token, subscriptionId) => {
         }
     }
 }
-
-// export const getMetricFlush = (token) => {
-//     console.log("getMetricFlush getMetricFlush getMetricFlush getMetricFlush")
-//     return async (dispatch) => {
-//         try {
-//             const { data } = await axios({
-//                 method: 'GET',
-//                 url: `${keys.API}/profile/athlete/metricflush`,
-//                 headers: {
-//                     'Authorization': token
-//                 }
-//             })
-//             dispatch({
-//                 type: GET_EVALUATIONS_REQUEST,
-//                 payload: data.evaluations
-//             })
-//         } catch (e) {
-//             dispatch({
-//                 type: SET_ERROR_MESSAGE,
-//                 payload: {
-//                     message: 'Could not get metric flush.',
-//                     error: e.response.data
-//                 }
-//             })
-//         }
-//     }
-// }

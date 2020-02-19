@@ -1,6 +1,7 @@
 .app__main {
     position: relative;
     padding-right: 0;
+    margin-top: 3.5rem;
     overflow: hidden;
 }
 

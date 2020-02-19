@@ -2,9 +2,11 @@ import * as types from './types'
 
 const initialState = {
     personal: {
+        heading: '',
         fullName: '',
         dob: '',
         avatarUrl: '',
+        coverImgUrl: '',
         email: '',
         phone: {
             number: '',
@@ -35,6 +37,26 @@ const initialState = {
         createTime: '',
         linkSelf: '',
         startTime: '',
+    },
+    social: {
+        facebook: '',
+        instagram: '',
+        twitter: '',
+        linkedin: '',
+    },
+    sports: {
+        baseball: {
+            positions: []
+        },
+        basketball: {
+            positions: []
+        },
+        football: {
+            positions: []
+        },
+        soccer: {
+            positions: []
+        }
     },
     evaluations: [],
     meta: {
