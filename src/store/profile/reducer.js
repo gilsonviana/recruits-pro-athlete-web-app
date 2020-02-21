@@ -70,46 +70,6 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch(action.type) {
-        case types.SET_PROFILE_PERSONAL:
-            return {
-                ...state,
-                personal: {
-                    ...state.personal,
-                    ...action.payload
-                }
-            }
-        case types.SET_PROFILE_LOCATION:
-            return {
-                ...state,
-                location: {
-                    ...state.location,
-                    ...action.payload
-                }
-            }
-        case types.SET_PROFILE_EDUCATION:
-            return {
-                ...state,
-                education: {
-                    ...state.education,
-                    ...action.payload
-                }
-            }
-        case types.SET_PROFILE_SUBSCRIPTION:
-            return {
-                ...state,
-                subscription: {
-                    ...state.subscription,
-                    ...action.payload
-                }
-            }
-        case types.SET_PROFILE_META:
-            return {
-                ...state,
-                meta: {
-                    ...state.meta,
-                    ...action.payload
-                }
-            }
         case types.SET_PROFILE_REQUEST:
             return {
                 ...state,
@@ -121,6 +81,13 @@ export default (state = initialState, action) => {
                 subscription: {
                     ...state.subscription,
                     ...action.payload
+                }
+            }
+        case types.SET_PROFILE_UNSUBSCRIBE_REQUEST:
+            return {
+                ...state,
+                subscription: {
+                    ...initialState.subscription
                 }
             }
         default:

@@ -4,33 +4,6 @@ import * as types from './types'
 import { SET_ERROR_MESSAGE } from '../error/types'
 import keys from '../../config/keys'
 
-export const setProfilePersonal = (personal) => {
-    return (dispatch) => {
-        dispatch({
-            type: types.SET_PROFILE_PERSONAL,
-            payload: personal
-        })
-    }
-}
-
-export const setProfileMeta = (meta) => {
-    return (dispatch) => {
-        dispatch({
-            type: types.SET_PROFILE_META,
-            payload: meta
-        })
-    }
-}
-
-export const setProfileSubscription = (subscription) => {
-    return (dispatch) => {
-        dispatch({
-            type: types.SET_PROFILE_SUBSCRIPTION,
-            payload: subscription
-        })
-    }
-}
-
 // @param opt false | true (false will not make use of http response)
 export const setProfileRequest = (token, profile, opt = true) => {
     return async (dispatch) => {
@@ -102,5 +75,13 @@ export const setProfileSubscriptionRequest = (token, subscriptionId) => {
 
             return false
         }
+    }
+}
+
+export const setProfileUnsubscribeRequest = (token, subscriptionId) => {
+    return dispatch => {
+        dispatch({
+            type: types.SET_PROFILE_UNSUBSCRIBE_REQUEST
+        })
     }
 }

@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 import Loader from 'react-loader-spinner'
 
 // Redux
-import { setProfileSubscriptionRequest, setProfileMeta } from '../../store/profile/actions'
+import { setProfileSubscriptionRequest } from '../../store/profile/actions'
 
 const ProcessPayment = ({ token, setProfileSubscriptionRequest }) => {
     const [isLoading, setIsLoading] = React.useState(true)
@@ -42,4 +42,4 @@ const mapStateToProps = (state) => ({
     token: state.auth.token
 })
 
-export default connect(mapStateToProps, { setProfileSubscriptionRequest, setProfileMeta })(ProcessPayment)
+export default connect(mapStateToProps, { setProfileSubscriptionRequest })(ProcessPayment)

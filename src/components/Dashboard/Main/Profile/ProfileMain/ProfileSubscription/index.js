@@ -9,17 +9,20 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
+// Redux
+import { setProfileUnsubscribeRequest } from '../../../../../../store/profile/actions'
+
 // Components
 import ProfileSubscriptionEmptyState from './ProfileSubscriptionEmptyState'
 
-const ProfileSubscription = ({ token, subscription }) => {
+const ProfileSubscription = ({ token, subscription, setProfileUnsubscribeRequest }) => {
 
     if (!subscription.id) {
         return <ProfileSubscriptionEmptyState />
     }
 
     const handleUnsubscribe = () => {
-        // TODO create handle unsubscribe action
+        setProfileUnsubscribeRequest(token, subscription.id)
     }
 
     return (
@@ -31,7 +34,7 @@ const ProfileSubscription = ({ token, subscription }) => {
                             <label>Subscription status</label>
                         </Col>
                         <Col md={9}>
-                            <span className="text-success">ACTIVE</span>
+                            <span className="text-success">{subscription.status}</span>
                         </Col>
                     </Row>
                     <Row>
@@ -59,7 +62,8 @@ const ProfileSubscription = ({ token, subscription }) => {
 
 ProfileSubscription.propTypes = {
     token: PropTypes.string.isRequired,
-    subscription: PropTypes.object.isRequired
+    subscription: PropTypes.object.isRequired,
+    setProfileUnsubscribeRequest: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -67,4 +71,4 @@ const mapStateToProps = (state) => ({
     subscription: state.profile.subscription
 })
 
-export default connect(mapStateToProps)(ProfileSubscription)
+export default connect(mapStateToProps, { setProfileUnsubscribeRequest })(ProfileSubscription)
