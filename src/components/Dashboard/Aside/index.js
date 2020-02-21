@@ -1,11 +1,27 @@
+// Dependencies
 import React from "react";
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { Link } from "react-router-dom";
 import { FiHome, FiVideo } from 'react-icons/fi'
 import { FaWpforms, FaRegNewspaper } from 'react-icons/fa'
+import Badge from 'react-bootstrap/Badge'
 
+// Assets
 import './style.css'
 
-const Aside = () => {
+const Aside = ({ subscription }) => {
+
+    /**
+     * Use to verify if user has a subscription id
+     */
+    const isSubscriber = () => {
+        if (!subscription.id) {
+            return false
+        }
+
+        return true
+    }
     return (
         <aside className="app__aside d-none d-md-block">
             <div className="app__aside__content">
@@ -25,15 +41,17 @@ const Aside = () => {
                                 </Link>
                             </li>
                             <li className="menu-item">
-                                <Link className="menu-item-link text-dark" to="">
+                                <Link className="menu-item-link text-dark" to={(!isSubscriber()) ? '/subscribe-now' : '/'}>
                                     <FaRegNewspaper className="menu-item-icon" />
                                     <span className="menu-item-text">Events</span>
+                                    {(!isSubscriber()) && <Badge pill variant="success" className="float-right mt-1">Pro</Badge>}
                                 </Link>
                             </li>
                             <li className="menu-item">
-                                <Link className="menu-item-link text-dark" to="">
+                                <Link className="menu-item-link text-dark" to={(!isSubscriber()) ? '/subscribe-now' : '/'}>
                                     <FiVideo className="menu-item-icon" />
                                     <span className="menu-item-text">Videos</span>
+                                    {(!isSubscriber()) && <Badge pill variant="success" className="float-right mt-1">Pro</Badge>}
                                 </Link>
                             </li>
                         </ul>
@@ -44,4 +62,12 @@ const Aside = () => {
     )
 }
 
-export default Aside
+Aside.propTypes = {
+    subscription: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+    subscription: state.profile.subscription
+})
+
+export default connect(mapStateToProps)(Aside)

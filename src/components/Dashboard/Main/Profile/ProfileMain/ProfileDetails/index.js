@@ -128,7 +128,6 @@ const ProfileDetails = ({ setProfileRequest, token, profile }) => {
         const res = await setProfileRequest(token, formState, false)
 
         if (!res) {
-            alert()
             setIsLoading(true)
             return
         }

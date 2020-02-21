@@ -1,6 +1,10 @@
+// Dependencies
 import React from "react";
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import Loader from 'react-loader-spinner'
+
+// Redux
 import { setProfileSubscriptionRequest, setProfileMeta } from '../../store/profile/actions'
 
 const ProcessPayment = ({ token, setProfileSubscriptionRequest }) => {
@@ -19,7 +23,16 @@ const ProcessPayment = ({ token, setProfileSubscriptionRequest }) => {
     }, [token, setProfileSubscriptionRequest])
 
     if (isLoading) {
-        return <p>loading....</p>
+        return (
+            <div className="page__overlay__loading">
+                <Loader
+                    type="Oval"
+                    color="#00FF00"
+                    height={100}
+                    width={100}
+                />
+            </div>
+        )
     }
 
     return <Redirect to="/create-profile" />

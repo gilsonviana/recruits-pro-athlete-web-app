@@ -7,6 +7,7 @@ import ProfileDetails from './ProfileDetails'
 import ProfileAccount from './ProfileAccount'
 import ProfileSocial from './ProfileSocial'
 import ProfileSubscription from './ProfileSubscription'
+import ProfileChoosePlan from './ProfileChoosePlan'
 
 const ProfileMain = () => {
     return (
@@ -23,6 +24,9 @@ const ProfileMain = () => {
                 </Route>
                 <Route path="/dashboard/profile/subscription" exact>
                     <ProfileSubscription />
+                </Route>
+                <Route path="/dashboard/profile/subscribe" exact>
+                    <ProfileChoosePlan />
                 </Route>
             </Switch>
         </div>

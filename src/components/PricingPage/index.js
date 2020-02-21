@@ -10,8 +10,10 @@ import Badge from "react-bootstrap/Badge";
 import { Button } from "../../styled-components";
 import { FiCheck } from "react-icons/fi";
 import Popup from "./pricing-page-popup";
-import { createSubscription } from "../../services/paypal";
 import Select from "react-select";
+
+// Services
+import { createSubscription } from "../../services/paypal";
 
 // Assets
 import { ReactComponent as BookmarkIcon } from "../../assets/images/bookmark-black-shape.svg";
@@ -137,15 +139,15 @@ const PricingPage = ({ history, token, subscriptionPlans }) => {
                           </Card.Subtitle>
                           <ul className="page__pricing__card__features">
                             <li className="page__pricing__card__features__item">
-                              <FiCheck className="page__pricing__card__features__item__icon" />
+                              <FiCheck className="page__pricing__card__features__item__icon" color="#fff"/>
                               Create and share your profile
                             </li>
                             <li className="page__pricing__card__features__item">
-                              <FiCheck className="page__pricing__card__features__item__icon" />
+                              <FiCheck className="page__pricing__card__features__item__icon" color="#fff"/>
                               Access to the latest performance evaluation
                             </li>
                             <li className="page__pricing__card__features__item">
-                              <FiCheck className="page__pricing__card__features__item__icon" />
+                              <FiCheck className="page__pricing__card__features__item__icon" color="#fff"/>
                               Search for sport events
                             </li>
                           </ul>
@@ -188,23 +190,23 @@ const PricingPage = ({ history, token, subscriptionPlans }) => {
                           />
                           <ul className="page__pricing__card__features">
                             <li className="page__pricing__card__features__item">
-                              <FiCheck className="page__pricing__card__features__item__icon" />
+                              <FiCheck className="page__pricing__card__features__item__icon" color="#fff"/>
                               Create and share your profile
                             </li>
                             <li className="page__pricing__card__features__item">
-                              <FiCheck className="page__pricing__card__features__item__icon" />
+                              <FiCheck className="page__pricing__card__features__item__icon" color="#fff"/>
                               Access to the latest performance evaluation
                             </li>
                             <li className="page__pricing__card__features__item">
-                              <FiCheck className="page__pricing__card__features__item__icon" />
+                              <FiCheck className="page__pricing__card__features__item__icon" color="#fff"/>
                               Access to all previous evaluations
                             </li>
                             <li className="page__pricing__card__features__item">
-                              <FiCheck className="page__pricing__card__features__item__icon" />
+                              <FiCheck className="page__pricing__card__features__item__icon" color="#fff"/>
                               Access performance charts and coach notes
                             </li>
                             <li className="page__pricing__card__features__item">
-                              <FiCheck className="page__pricing__card__features__item__icon" />
+                              <FiCheck className="page__pricing__card__features__item__icon" color="#fff"/>
                               Upload performance videos
                             </li>
                           </ul>

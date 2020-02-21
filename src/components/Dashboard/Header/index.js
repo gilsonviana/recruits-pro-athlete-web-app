@@ -43,7 +43,7 @@ const Header = ({ doLogout, fullName, avatarUrl }) => {
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
-        <header className="app__header bg-dark fixed-top">
+        <header className="app__header bg-dark fixed-top d-none d-md-block">
             <div className="app__header__top__bar">
                 <div className="app__header__top__bar__brand">
                     <img src={brand} alt="Recruits Pro Logo" className="d-none d-md-flex"/>
@@ -75,7 +75,7 @@ const Header = ({ doLogout, fullName, avatarUrl }) => {
                                     position: `absolute`, 
                                     top: `56px`, 
                                     left: `0px`, 
-                                    willChange: `top, left`
+                                    willChange: `top, left`,
                                 }}
                             >
                                 <Link to={`/dashboard/profile`} className="dropdown-item" as={<Dropdown.Item />}>

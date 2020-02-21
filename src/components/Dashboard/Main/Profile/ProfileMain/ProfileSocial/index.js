@@ -1,5 +1,5 @@
 // Dependencies
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Card from 'react-bootstrap/Card'
@@ -8,10 +8,64 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import { FaTwitter, FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa'
 
-const ProfileSocial = () => {
+// Redux
+import { setProfileRequest } from '../../../../../../store/profile/actions'
+
+const ProfileSocial = ({ token, profile, setProfileRequest }) => {
+    const [isLoading, setIsLoading] = useState(false)
+    const [formState, setFormState] = useState({
+        social: {
+            facebook: '',
+            instagram: '',
+            twitter: '',
+            linkedin: ''
+        }
+    })
+
+    useEffect(() => {
+        const setFormFieldValues = () => {
+            setFormState({
+                profile: {
+                    ...profile.personal
+                },
+                social: {
+                    ...formState.social,
+                    ...profile.social
+                }
+            })
+        }
+
+        setFormFieldValues()
+    }, [profile])
+
+    const handleFieldChange = (e) => {
+        const { target } = e
+
+        setFormState({
+            social: {
+                ...formState.social,
+                [target.name]: target.value
+            }
+        })
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        setIsLoading(true)
+        const res = await setProfileRequest(token, formState, false)
+
+        if (!res) {
+            // TODO set error handler
+            setIsLoading(false)
+            return
+        }
+
+        setIsLoading(false)
+    }
+
     return (
         <Card className="shadow-sm p-4">
-            <Form>
+            <Form noValidate onSubmit={handleSubmit}>
                 <h5>Social networks</h5>
                 <Form.Row>
                     <Col md={1}>
@@ -20,7 +74,7 @@ const ProfileSocial = () => {
                         </div>
                     </Col>
                     <Col md={11} className="mb-3">
-                        <Form.Control type="text" size="sm"/>
+                        <Form.Control name="facebook" value={formState.social.facebook} type="text" size="sm" onChange={handleFieldChange}/>
                     </Col>
                 </Form.Row>
                 <Form.Row>
@@ -30,7 +84,7 @@ const ProfileSocial = () => {
                         </div>
                     </Col>
                     <Col md={11} className="mb-3">
-                        <Form.Control type="text" size="sm"/>
+                        <Form.Control name="instagram" value={formState.social.instagram}  type="text" size="sm" onChange={handleFieldChange}/>
                     </Col>
                 </Form.Row>
                 <Form.Row>
@@ -40,7 +94,7 @@ const ProfileSocial = () => {
                         </div>
                     </Col>
                     <Col md={11} className="mb-3">
-                        <Form.Control type="text" size="sm"/>
+                        <Form.Control name="twitter" value={formState.social.twitter}  type="text" size="sm" onChange={handleFieldChange}/>
                     </Col>
                 </Form.Row>
                 <Form.Row>
@@ -50,7 +104,7 @@ const ProfileSocial = () => {
                         </div>
                     </Col>
                     <Col md={11} className="mb-3">
-                        <Form.Control type="text" size="sm"/>
+                        <Form.Control name="linkedin" value={formState.social.linkedin} type="text" size="sm" onChange={handleFieldChange}/>
                     </Col>
                 </Form.Row>
                 
@@ -60,4 +114,15 @@ const ProfileSocial = () => {
     )
 }
 
-export default ProfileSocial
+ProfileSocial.propTypes = {
+    token: PropTypes.string.isRequired,
+    profile: PropTypes.object.isRequired,
+    setProfileRequest: PropTypes.func.isRequired
+}
+
+const mapStateToProps = (state) => ({
+    token: state.auth.token,
+    profile: state.profile
+})
+
+export default connect(mapStateToProps, { setProfileRequest })(ProfileSocial)

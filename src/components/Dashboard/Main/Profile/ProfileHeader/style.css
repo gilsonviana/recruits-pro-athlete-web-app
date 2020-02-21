@@ -9,4 +9,13 @@
     width: 5rem;
     height: 5rem;
     margin: auto;
+    position: relative;
+}
+
+.page__profile__header__img img {
+    position: absolute;
+    left: 50%;
+    height: 100%;
+    width: auto;
+    transform: translateX(-50%);
 }

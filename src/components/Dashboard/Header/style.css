@@ -30,6 +30,11 @@
     margin-left: auto;
 }
 
+.app__header__top__bar__item .dropdown,
+.app__header__top__bar__item .show.dropdown:focus {
+    outline: none;
+}
+
 .app__header__top__bar__item .btn-account {
     padding: 0 1rem;
     min-width: 3.5rem;
@@ -43,6 +48,21 @@
     margin: 0;
     position: relative;
     color: inherit;
+}
+
+.app__header__top__bar__item .btn-account:focus,
+.app__header__top__bar__item .btn-account:active {
+    box-shadow: none !important;
+    background: rgba(0, 252, 0, .5) !important;
+    border: none;
+}
+
+.app__header__top__bar__item .show > .btn-account {
+    background-color: #00fc00 !important;
+}
+
+.app__header__top__bar__item .show > .btn-account:focus {
+    box-shadow: none;
 }
 
 .app__header__top__bar__item .btn-account .user-avatar {
