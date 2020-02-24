@@ -108,7 +108,7 @@ const ProfileSocial = ({ token, profile, setProfileRequest }) => {
                         <Form.Control name="linkedin" value={formState.social.linkedin} type="text" size="sm" onChange={handleFieldChange}/>
                     </Col>
                 </Form.Row>
-                
+                <hr />
                 <Button 
                     type="submit" 
                     variant="success" 

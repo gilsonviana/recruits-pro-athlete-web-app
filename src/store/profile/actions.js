@@ -79,9 +79,28 @@ export const setProfileSubscriptionRequest = (token, subscriptionId) => {
 }
 
 export const setProfileUnsubscribeRequest = (token, subscriptionId) => {
-    return dispatch => {
-        dispatch({
-            type: types.SET_PROFILE_UNSUBSCRIBE_REQUEST
-        })
+    return async dispatch => {
+        try {
+            await axios({
+                method: 'POST',
+                url: `${keys.API}/subscription/${subscriptionId}/cancel`,
+                headers: {
+                    "Authorization": token
+                }
+            })
+            dispatch({
+                type: types.SET_PROFILE_UNSUBSCRIBE_REQUEST
+            })
+            return true
+        } catch (e) {  
+            dispatch({
+                type: SET_ERROR_MESSAGE,
+                payload: {
+                    message: 'Could not cancel subscription.',
+                    error: e.response.data
+                }
+            })
+            return false
+        }
     }
 }

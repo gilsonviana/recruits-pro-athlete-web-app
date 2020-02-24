@@ -9,13 +9,16 @@ import Col from "react-bootstrap/Col";
 import Toast from 'react-bootstrap/Toast'
 import Loader from 'react-loader-spinner'
 import { Button, InputText } from '../../styled-components'
+
+// Redux
 import { doLogin } from '../../store/auth/actions'
+import { getSubscriptionPlans } from '../../store/subscriptionPlans/actions'
 
 // Assets
 import logo from '../../assets/images/logo.png'
 import "./style.css";
 
-const LoginPage = ({ history, token, doLogin }) => {
+const LoginPage = ({ history, token, doLogin, getSubscriptionPlans }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [formState, setFormState] = useState({
         email: '',
@@ -39,7 +42,9 @@ const LoginPage = ({ history, token, doLogin }) => {
         }
 
         verifyToken()
-    })
+        
+        getSubscriptionPlans()
+    }, [getSubscriptionPlans, history, token])
 
     const handleChange = (e) => {
         const { target } = e
@@ -196,11 +201,12 @@ const LoginPage = ({ history, token, doLogin }) => {
 LoginPage.propTypes = {
     history: PropTypes.object.isRequired,
     token: PropTypes.string.isRequired,
-    doLogin: PropTypes.func.isRequired
+    doLogin: PropTypes.func.isRequired,
+    getSubscriptionPlans: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
     token: state.auth.token,
 })
 
-export default connect(mapStateToProps, { doLogin })(withRouter(LoginPage));
+export default withRouter(connect(mapStateToProps, { doLogin, getSubscriptionPlans })(LoginPage))

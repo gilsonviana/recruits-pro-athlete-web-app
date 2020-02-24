@@ -311,6 +311,7 @@ const ProfileDetails = ({ setProfileRequest, token, profile }) => {
                         <Form.Control value={formState.location.state} disabled={isForeigner} type="text" name="state" onChange={e => handleFieldChange("location", e)}/>
                     </Col>
                 </Form.Row>
+                <hr />
                 <Button type="submit" variant="success" className="d-flex float-right">
                     Update profile
                     {isLoading && <Loader

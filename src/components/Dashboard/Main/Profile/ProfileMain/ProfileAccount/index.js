@@ -129,26 +129,16 @@ const ProfileAccount = ({ setProfileRequest, token, profile }) => {
                     </Col>
                 </Form.Row> */}
                 <hr />
-                <Form.Row>
-                    {/* <Col lg={3}>
-                        <Form.Label className="font-weight-bold">Current password</Form.Label>
-                    </Col>
-                    <Col lg={6}>
-                        <Form.Control autoComplete="off" type="password"/>
-                    </Col> */}
-                    <Col lg={{span: 3, offset: 9}} className="mb-3">
-                        <Button type="submit" variant="success" className="d-flex float-right mt-2 mt-lg-0">
-                            Update account 
-                            {isLoading && <Loader
-                                                className="pl-2"
-                                                type="Oval"
-                                                color="#00FF00"
-                                                width={25}
-                                                height={25}
-                                            />}
-                        </Button>
-                    </Col>
-                </Form.Row>
+                <Button type="submit" variant="success" className="d-flex float-right mt-2 mt-lg-0">
+                    Update account 
+                    {isLoading && <Loader
+                                        className="pl-2"
+                                        type="Oval"
+                                        color="#00FF00"
+                                        width={25}
+                                        height={25}
+                                    />}
+                </Button>
             </Form>
         </Card>
     )

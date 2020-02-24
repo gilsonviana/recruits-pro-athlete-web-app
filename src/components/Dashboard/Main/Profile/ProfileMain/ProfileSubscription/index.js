@@ -20,7 +20,7 @@ const ProfileSubscription = ({ token, subscription, setProfileUnsubscribeRequest
         setProfileUnsubscribeRequest(token, subscription.id)
     }
     
-    if (!subscription.id) {
+    if (!subscription.id || subscription.status !== "ACTIVE") {
         return <ProfileSubscriptionEmptyState />
     }
 

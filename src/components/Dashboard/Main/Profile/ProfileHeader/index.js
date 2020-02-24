@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 // Assets
 import './style.css'
-import avatar from '../../../../../assets/images/avatar-example.jpg'
+import avatar from '../../../../../assets/images/user-avatar-placeholder.png'
 
 const ProfileHeader = ({ avatarUrl, fullName, heading }) => {
     return (

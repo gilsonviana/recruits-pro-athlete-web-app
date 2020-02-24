@@ -90,6 +90,10 @@ export default (state = initialState, action) => {
                     ...initialState.subscription
                 }
             }
+        case types.RESET_PROFILE:
+            return {
+                ...initialState
+            }
         default:
             return state
     }

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { SET_TOKEN, UNSET_TOKEN, SET_RESETOKEN } from './types'
-import { SET_PROFILE_REQUEST, SET_PROFILE_PERSONAL } from '../profile/types'
+import { SET_PROFILE_REQUEST, SET_PROFILE_PERSONAL, RESET_PROFILE } from '../profile/types'
 import { SET_ERROR_MESSAGE } from '../error/types'
 import keys from '../../config/keys'
 
@@ -44,6 +44,9 @@ export const doLogout = () => {
     return dispatch => {
         dispatch({
             type: UNSET_TOKEN
+        })
+        dispatch({
+            type: RESET_PROFILE
         })
     }
 }
