@@ -16,13 +16,12 @@ import { setProfileUnsubscribeRequest } from '../../../../../../store/profile/ac
 import ProfileSubscriptionEmptyState from './ProfileSubscriptionEmptyState'
 
 const ProfileSubscription = ({ token, subscription, setProfileUnsubscribeRequest }) => {
-
-    if (!subscription.id) {
-        return <ProfileSubscriptionEmptyState />
-    }
-
     const handleUnsubscribe = () => {
         setProfileUnsubscribeRequest(token, subscription.id)
+    }
+    
+    if (!subscription.id) {
+        return <ProfileSubscriptionEmptyState />
     }
 
     return (
@@ -45,14 +44,6 @@ const ProfileSubscription = ({ token, subscription, setProfileUnsubscribeRequest
                             {(subscription.startTime) && <span>{moment(subscription.startTime).format("dddd, MMMM Do YYYY")}</span>}
                         </Col>
                     </Row>
-                    <Row>
-                        <Col md={3}>
-                            <label>Last payment</label>
-                        </Col>
-                        <Col md={9}>
-                            <span>{moment(new Date()).format("dddd, MMMM Do YYYY")}</span>
-                        </Col>
-                    </Row>
                     <Button variant="link" className="text-danger p-0" onClick={handleUnsubscribe}>Unsubscribe</Button>
                 </Container>
             </Card>
@@ -68,7 +59,7 @@ ProfileSubscription.propTypes = {
 
 const mapStateToProps = (state) => ({
     token: state.auth.token,
-    subscription: state.profile.subscription
+    subscription: state.profile.subscription,
 })
 
 export default connect(mapStateToProps, { setProfileUnsubscribeRequest })(ProfileSubscription)

@@ -8,14 +8,14 @@ import moment from 'moment'
 const OverviewWelcome = ({ name, evaluations }) => {
     const userName = name.split(' ')[0]
     const lastEvaluation = evaluations[evaluations.length - 1]
-    const date = lastEvaluation.createdAt
+    const date = (lastEvaluation) ? lastEvaluation.createdAt : ''
     return (
         <header className="page__title__bar">
             <div className="d-flex flex-column flex-md-row">
                 <p className="lead">
                     <span className="font-weight-bold">Hi, {userName || <Skeleton width={100} />}.</span> 
                     {
-                        (evaluations.length === 0) ? 
+                        (evaluations.length === 0 || !date) ? 
                         <span className="d-block text-muted">
                             You don't have any evaluations yet.
                         </span> :

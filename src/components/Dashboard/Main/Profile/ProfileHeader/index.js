@@ -26,7 +26,7 @@ const ProfileHeader = ({ avatarUrl, fullName, heading }) => {
 
 ProfileHeader.propTypes = {
     fullName: PropTypes.string.isRequired,
-    heading: PropTypes.string.isRequired,
+    heading: PropTypes.string,
     avatarUrl: PropTypes.string,
     coverImgUrl: PropTypes.string
 }

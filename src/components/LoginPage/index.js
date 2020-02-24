@@ -156,8 +156,8 @@ const LoginPage = ({ history, token, doLogin }) => {
                                                 <p className="text-danger my-1">{showError.name.email.message}</p>
                                             </>
                                         }
-                                        <InputText type="email" placeholder="Enter email" name="email" onChange={handleChange} onBlur={isFieldValid} />
-                                        <InputText type="password" placeholder="Enter password" name="password" onChange={handleChange} />
+                                        <InputText autoComplete="on" type="email" placeholder="Enter email" name="email" onChange={handleChange} onBlur={isFieldValid} />
+                                        <InputText autoComplete="on" type="password" placeholder="Enter password" name="password" onChange={handleChange} />
                                         {
                                             (!isFormValid() || !formState.password || !formState.email) ?
                                                 <Button disabled={true} type="submit">Log in</Button> :

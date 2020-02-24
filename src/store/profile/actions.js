@@ -68,7 +68,7 @@ export const setProfileSubscriptionRequest = (token, subscriptionId) => {
             dispatch({
                 type: SET_ERROR_MESSAGE,
                 payload: {
-                    message: 'Error while trying to update profile subscription.',
+                    message: 'Error while trying to get profile subscription.',
                     error: e.response
                 }
             })

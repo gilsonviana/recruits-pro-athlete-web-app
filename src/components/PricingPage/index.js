@@ -69,7 +69,7 @@ const PricingPage = ({ history, token, subscriptionPlans }) => {
       return;
     }
 
-    // TODO Redirect user to CreateProfile
+    history.push('/dashboard')
   };
 
   const handleSubmitSubscriber = async () => {

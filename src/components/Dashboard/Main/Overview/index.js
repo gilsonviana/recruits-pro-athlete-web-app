@@ -1,5 +1,6 @@
 // Dependencies
 import React from 'react'
+import { connect } from 'react-redux' 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -9,7 +10,7 @@ import OverviewWelcome from './OverviewWelcome'
 import MetricsFlush from './MetricsFlush'
 import LastEvaluation from './LastEvaluation'
 
-const Overview = () =>  {
+const Overview = ({ evaluations }) =>  {
     return (
         <div className="page__overview">
             <OverviewWelcome />
@@ -21,7 +22,7 @@ const Overview = () =>  {
                 </Row>
                 <Row>
                     <Col xs={12} md={6} lg={4}>
-                        <LastEvaluation />
+                        {(evaluations.length > 0) && <LastEvaluation />}
                     </Col>
                     <Col xs={12} md={6} lg={4}></Col>
                     <Col xs={12} md={6} lg={4}></Col>
@@ -31,4 +32,8 @@ const Overview = () =>  {
     )
 }
 
-export default Overview
+const mapStateToProps = (state) => ({
+    evaluations: state.profile.evaluations
+})
+
+export default connect(mapStateToProps)(Overview)

@@ -41,14 +41,14 @@ const Aside = ({ subscription }) => {
                                 </Link>
                             </li>
                             <li className="menu-item">
-                                <Link className="menu-item-link text-dark" to={(!isSubscriber()) ? '/subscribe-now' : '/'}>
+                                <Link className="menu-item-link text-dark" to={(!isSubscriber()) ? '/dashboard/profile/subscribe' : '/'}>
                                     <FaRegNewspaper className="menu-item-icon" />
                                     <span className="menu-item-text">Events</span>
                                     {(!isSubscriber()) && <Badge pill variant="success" className="float-right mt-1">Pro</Badge>}
                                 </Link>
                             </li>
                             <li className="menu-item">
-                                <Link className="menu-item-link text-dark" to={(!isSubscriber()) ? '/subscribe-now' : '/'}>
+                                <Link className="menu-item-link text-dark" to={(!isSubscriber()) ? '/dashboard/profile/subscribe' : '/'}>
                                     <FiVideo className="menu-item-icon" />
                                     <span className="menu-item-text">Videos</span>
                                     {(!isSubscriber()) && <Badge pill variant="success" className="float-right mt-1">Pro</Badge>}

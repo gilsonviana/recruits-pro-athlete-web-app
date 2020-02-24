@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
+import Loader from 'react-loader-spinner'
 import { FaTwitter, FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa'
 
 // Redux
@@ -108,7 +109,13 @@ const ProfileSocial = ({ token, profile, setProfileRequest }) => {
                     </Col>
                 </Form.Row>
                 
-                <Button type="submit" variant="success" className="float-right">Update social</Button>
+                <Button 
+                    type="submit" 
+                    variant="success" 
+                    className="float-right">
+                        Update social  
+                        {isLoading && <Loader className="pl-2" type="Oval" color="#00FF00" width={25} height={25}/>}
+                </Button>
             </Form>
         </Card>
     )

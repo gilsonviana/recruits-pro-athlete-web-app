@@ -144,7 +144,7 @@ const ProfileDetails = ({ setProfileRequest, token, profile }) => {
                         <Form.Label htmlFor="heading">Heading</Form.Label>
                     </Col>
                     <Col md={9} className="mb-3">
-                        <Form.Control autoComplete="off" value={formState.personal.heading} type="text" name="heading" maxLength={120} onChange={(e) => handleFieldChange('personal', e)}/>
+                        <Form.Control autoComplete="off" value={formState.personal.heading || ''} type="text" name="heading" maxLength={120} onChange={(e) => handleFieldChange('personal', e)}/>
                         <Form.Text className="text-muted float-left">Positive message here.</Form.Text>
                         <Form.Text className="float-right">120 max characters.</Form.Text>
                     </Col>
