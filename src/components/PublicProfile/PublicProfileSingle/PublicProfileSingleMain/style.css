@@ -1,0 +1,15 @@
+.page__public-profile-single__main {
+    position: relative;
+    padding-top: 17rem;
+    padding-left: 16rem;
+    min-height: 100vh;
+}
+
+@media screen and (min-width: 992px) {
+    .page__public-profile-single__main {
+        position: relative;
+        padding-top: 17rem;
+        padding-left: 22rem;
+        min-height: 100vh;
+    }
+}

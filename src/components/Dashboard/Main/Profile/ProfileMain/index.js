@@ -1,5 +1,6 @@
 // Dependencies
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Switch, Route } from 'react-router-dom'
 
 // Components
@@ -9,12 +10,12 @@ import ProfileSocial from './ProfileSocial'
 import ProfileSubscription from './ProfileSubscription'
 import ProfileChoosePlan from './ProfileChoosePlan'
 
-const ProfileMain = () => {
+const ProfileMain = ({ handlerPreviewImages }) => {
     return (
         <div className="page__profile__main">
             <Switch>
                 <Route path="/dashboard/profile" exact>
-                    <ProfileDetails />
+                    <ProfileDetails handlerPreviewImages={handlerPreviewImages}/>
                 </Route>
                 <Route path="/dashboard/profile/account" exact>
                     <ProfileAccount />
@@ -31,6 +32,10 @@ const ProfileMain = () => {
             </Switch>
         </div>
     )
+}
+
+ProfileMain.propTypes = {
+    handlerPreviewImages: PropTypes.func.isRequired
 }
 
 export default ProfileMain

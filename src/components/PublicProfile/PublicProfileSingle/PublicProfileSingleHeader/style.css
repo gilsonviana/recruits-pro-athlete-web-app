@@ -1,0 +1,17 @@
+.page__public-profile-single__header {
+    width: 100vw;
+    top: 4rem;
+}
+
+.page__public-profile-single__header__bkg {
+    height: 13rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+@media screen and (min-width: 769px) {
+    .page__public-profile-single__header {
+        position: fixed;
+    }
+}

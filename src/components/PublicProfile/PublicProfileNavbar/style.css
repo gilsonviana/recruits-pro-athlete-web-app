@@ -1,0 +1,19 @@
+.public-profile-navbar form {
+    justify-content: space-between;
+}
+
+.public-profile-navbar form [type=text] {
+    width: auto;
+}
+
+@media screen and (min-width: 576px) {
+    .public-profile-navbar form [type=text] {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .public-profile-navbar form [type=text] {
+        width: auto;
+    }
+}

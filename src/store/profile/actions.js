@@ -47,6 +47,35 @@ export const setProfileRequest = (token, profile, opt = true) => {
     }
 }
 
+export const setProfileImagesRequest = (token, { avatar, cover }) => {
+    return async dispatch => {
+        try {
+            const data = new FormData()
+            data.append('avatar', avatar)
+            data.append('cover', cover)
+            const { data: res } = await axios({
+                url: `${keys.API}/profile/athlete/images`,
+                method: 'POST',
+                headers: {
+                    'Authorization': token,
+                    'Content-Type': 'multipart/form-data'
+                },
+                data
+            })
+
+            dispatch({
+                type: types.SET_PROFILE_IMAGES_REQUEST,
+                payload: {
+                    avatarUrl: res.avatarUrl,
+                    coverImgUrl: res.coverImgUrl
+                }
+            })
+        } catch (e) {
+            console.log(e.response)
+        }
+    }
+}
+
 export const setProfileSubscriptionRequest = (token, subscriptionId) => {
     return async dispatch => {
         try {

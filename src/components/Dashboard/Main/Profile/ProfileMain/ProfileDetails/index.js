@@ -11,18 +11,24 @@ import Datepicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 
 // Redux
-import { setProfileRequest } from '../../../../../../store/profile/actions'
+import { setProfileRequest, setProfileImagesRequest } from '../../../../../../store/profile/actions'
 
 // Assets
 import './style.css'
 
-const ProfileDetails = ({ setProfileRequest, token, profile }) => {
+const ProfileDetails = ({ setProfileRequest, setProfileImagesRequest, handlerPreviewImages, token, profile }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [isForeigner, setIsForeigner] = useState(false)
+    const [previewImages, setPreviewImages] = useState({
+        avatar: '',
+        cover: ''
+    })
     const [formState, setFormState] = useState({
         personal: {
             heading: '',
             dob: new Date(),
+            avatarUrl: '',
+            coverImgUrl: '',
             height: {
                 feet: '',
                 inches: ''
@@ -70,6 +76,14 @@ const ProfileDetails = ({ setProfileRequest, token, profile }) => {
 
     const handleFieldChange = (key, e) => {
         const { target } = e
+
+        if (target.name === 'avatar' || target.name === 'cover') {
+            handlerPreviewImages(e)
+            return setPreviewImages({
+                ...previewImages,
+                [target.name]: target.files[0]
+            })
+        }
 
         if (key === 'personal.height') {
             return setFormState({
@@ -125,14 +139,20 @@ const ProfileDetails = ({ setProfileRequest, token, profile }) => {
         e.preventDefault()
         setIsLoading(true)
 
-        const res = await setProfileRequest(token, formState, false)
+        try {
+            const res = await setProfileRequest(token, formState, false)
 
-        if (!res) {
-            setIsLoading(true)
-            return
+            await setProfileImagesRequest(token, previewImages)
+
+            if (!res) {
+                setIsLoading(true)
+                return
+            }
+
+            setIsLoading(false)
+        } catch (e) {
+            console.log("Error: Could not update profile.")
         }
-
-        setIsLoading(false)
     }
 
     return (
@@ -154,7 +174,7 @@ const ProfileDetails = ({ setProfileRequest, token, profile }) => {
                         <Form.Label>Profile picture</Form.Label>
                     </Col>
                     <Col md={9}>
-                        <Form.Control type="file"/>
+                        <Form.Control name="avatar" type="file" multiple={false} accept=".png,.jpg,.jpeg" onChange={(e) => handleFieldChange('personal', e)}/>
                         <Form.Text className="text-muted mb-2">Upload a new profile picture, ideal size should be 300x300</Form.Text>
                     </Col>
                 </Form.Row>
@@ -163,7 +183,7 @@ const ProfileDetails = ({ setProfileRequest, token, profile }) => {
                         <Form.Label>Cover image</Form.Label>
                     </Col>
                     <Col md={9}>
-                        <Form.Control type="file"/>
+                        <Form.Control name="cover" type="file" multiple={false} accept=".png,.jpg,.jpeg" onChange={(e) => handleFieldChange('personal', e)}/>
                         <Form.Text className="text-muted mb-2">Upload a new cover image, JPG 1200x300</Form.Text>
                     </Col>
                 </Form.Row>
@@ -329,8 +349,10 @@ const ProfileDetails = ({ setProfileRequest, token, profile }) => {
 
 ProfileDetails.propTypes = {
     setProfileRequest: PropTypes.func.isRequired,
+    setProfileImagesRequest: PropTypes.func.isRequired,
+    handlerPreviewImages: PropTypes.func.isRequired,
     token: PropTypes.string.isRequired,
-    profile: PropTypes.object.isRequired
+    profile: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = (state) => ({
@@ -338,4 +360,4 @@ const mapStateToProps = (state) => ({
     profile: state.profile
 })
 
-export default connect(mapStateToProps, { setProfileRequest })(ProfileDetails)
+export default connect(mapStateToProps, { setProfileRequest, setProfileImagesRequest })(ProfileDetails)

@@ -20,6 +20,7 @@ import ResetPasswordCodeRoute from './components/ResetPasswordCodeRoute';
 import ResetPasswordCode from './components/ResetPasswordCode';
 import ResetPasswordNewRoute from './components/ResetPasswordNewRoute';
 import ResetPasswordNew from './components/ResetPasswordNew';
+import PublicProfile from './components/PublicProfile';
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
       <Switch>
         <Route path="/" exact>
           <LoginPage />
+        </Route>
+        <Route path="/public/:fullName" exact>
+          <PublicProfile />
         </Route>
         <Route path="/login" exact>
           <LoginPage />

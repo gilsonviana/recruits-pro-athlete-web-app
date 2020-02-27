@@ -90,6 +90,15 @@ export default (state = initialState, action) => {
                     ...initialState.subscription
                 }
             }
+        case types.SET_PROFILE_IMAGES_REQUEST: 
+            return {
+                ...state,
+                personal: {
+                    ...state.personal,
+                    avatarUrl: action.payload.avatarUrl,
+                    coverImgUrl: action.payload.coverImgUrl
+                }
+            }
         case types.RESET_PROFILE:
             return {
                 ...initialState
