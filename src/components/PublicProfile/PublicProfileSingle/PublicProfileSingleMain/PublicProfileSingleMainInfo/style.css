@@ -1,0 +1,15 @@
+.public-profile__single-main__info {
+    font-size: .8rem;
+}
+
+@media screen and (min-width: 768px) {
+    .public-profile__single-main__info {
+        width: 465px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .public-profile__single-main__info {
+        width: 565px;
+    }
+}

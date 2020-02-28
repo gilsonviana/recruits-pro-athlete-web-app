@@ -20,7 +20,7 @@ const PublicProfileNavbar = () => {
                 </div>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav" className="mt-4">
+            <Navbar.Collapse id="basic-navbar-nav" className="mt-4 mt-md-0">
                 <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                     <Button variant="outline-success">Search</Button>

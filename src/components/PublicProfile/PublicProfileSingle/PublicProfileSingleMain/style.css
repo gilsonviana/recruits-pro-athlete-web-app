@@ -1,8 +1,35 @@
 .page__public-profile-single__main {
-    position: relative;
-    padding-top: 17rem;
-    padding-left: 16rem;
     min-height: 100vh;
+}
+
+.page__public-profile-single__main .nav {
+    justify-content: space-around;
+    background: #f6f7f9;
+}
+
+.page__public-profile-single__main .nav + .tab-content {
+    padding: 1.5rem .5rem;
+}
+
+@media screen and (min-width: 768px) {
+    .page__public-profile-single__main {
+        position: relative;
+        padding-top: 17rem;
+        padding-left: 16rem;
+    }
+
+    .page__public-profile-single__main .nav {
+        justify-content: flex-start;
+        background: #fff;
+        position: fixed;
+        z-index: 3;
+        padding-top: 1.5rem;
+        width: 100%;
+    }
+
+    .page__public-profile-single__main .nav + .tab-content {
+        padding: 8rem 1.5rem;
+    }
 }
 
 @media screen and (min-width: 992px) {
@@ -10,6 +37,5 @@
         position: relative;
         padding-top: 17rem;
         padding-left: 22rem;
-        min-height: 100vh;
     }
 }

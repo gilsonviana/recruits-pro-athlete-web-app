@@ -1,6 +1,7 @@
 .page__public-profile-single__header {
     width: 100vw;
     top: 4rem;
+    z-index: 1;
 }
 
 .page__public-profile-single__header__bkg {

@@ -1,0 +1,12 @@
+.public-profile__single-main__evaluations__item {
+    font-size: .8rem;
+}
+
+.public-profile__evaluations__card__header__img {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.public-profile__evaluations__card__header__img img {
+    height: 100%;
+}
