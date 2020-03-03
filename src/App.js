@@ -27,7 +27,8 @@ function App() {
     <Router>
       <Switch>
         <Route path="/" exact>
-          <LoginPage />
+          {/* <LoginPage /> */}
+          <Dashboard />
         </Route>
         <Route path="/public/:fullName" exact>
           <PublicProfile />

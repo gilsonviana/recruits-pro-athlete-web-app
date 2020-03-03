@@ -36,6 +36,7 @@
 .page__create-profile {
     padding-top: 14rem;
     padding-bottom: 5rem;
+    background: linear-gradient(#F9FAFC 80%,#bbbbbd);
 }
 
 .create-profile__personal__img__wrapper {

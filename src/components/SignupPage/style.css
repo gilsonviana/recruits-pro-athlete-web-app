@@ -1,5 +1,5 @@
 .page__signup {
-    background-color: #F9FAFC;
+    background: linear-gradient(#F9FAFC 80%,#bbbbbd);
     height: 100vh;
 }
 

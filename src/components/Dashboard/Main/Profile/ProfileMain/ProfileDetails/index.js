@@ -151,7 +151,7 @@ const ProfileDetails = ({ setProfileRequest, setProfileImagesRequest, handlerPre
 
             setIsLoading(false)
         } catch (e) {
-            console.log("Error: Could not update profile.")
+            setIsLoading(false)
         }
     }
 

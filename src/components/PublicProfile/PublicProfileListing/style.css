@@ -1,0 +1,20 @@
+.public-profile__listing {
+    padding-top: 7rem;
+    min-height: 100vh;
+    background: #F9FAFC;
+}
+
+.public-profile__listing__wrapper {
+    max-width: 660px;
+    margin: auto;
+}
+
+.public-profile__listing__banner {
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    .public-profile__listing__content {
+        padding: 0 2rem;
+    }
+}

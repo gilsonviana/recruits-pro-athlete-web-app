@@ -1,15 +1,46 @@
 // Dependencies
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { FaArrowRight } from "react-icons/fa";
+import Datepicker from 'react-datepicker'
 
 // Assets
 import "./style.css";
 
 const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
+    const [dob, setDob] = useState(new Date())
+    const [errorMessage, setErrorMessage] = useState({
+        number: '',
+        feet: '',
+        inches: '',
+        weight: ''
+    })
+
+    const handleValidation = (e) => {
+        const { target } = e
+        const regOnlyNumbers = /^\d+$/
+
+        if (!regOnlyNumbers.test(target.value)) {
+            setErrorMessage({
+                ...errorMessage,
+                [target.name]: 'Please insert a valid character.'
+            })
+            return
+        }
+        setErrorMessage({
+            ...errorMessage,
+            [target.name]: ''
+        })
+        handleOnChange(e)
+    }
+
+    const handleDateChange = (date = new Date()) => {
+        setDob(date)
+        handleOnChange({ target: { name: 'dob', value: date } })
+    }
     return (
         <div className="create-profile__personal py-4">
             <Form noValidate>
@@ -17,19 +48,34 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
                     <Form.Label className="font-weight-bold">Profile picture</Form.Label>
                     <Form.Control 
                         type="file" 
-                        name="avatarUrl"
+                        name="avatar"
+                        multiple={false}
+                        accept=".png,.jpg,.jpeg"
+                        onChange={handleOnChange}/>
+                </Form.Group>
+                <Form.Group controlId="createProfilePicture">
+                    <Form.Label className="font-weight-bold">Cover image</Form.Label>
+                    <Form.Control 
+                        type="file" 
+                        name="cover"
                         multiple={false}
                         accept=".png,.jpg,.jpeg"
                         onChange={handleOnChange}/>
                 </Form.Group>
                 <Form.Group controlId="createProfileDob">
                     <Form.Label className="font-weight-bold">Date of Birth</Form.Label>
-                    <Form.Control
-                        type="date"
-                        placeholder=""
-                        name="dob"
-                        onChange={handleOnChange}
-                    />
+                    <div className="form-datepicker-wrapper">
+                        <Datepicker
+                            selected={dob}
+                            name="dob"
+                            showPopperArrow={false}
+                            onChange={(date) => handleDateChange(date)}
+                            peekNextMonth
+                            showMonthDropdown
+                            showYearDropdown
+                            dropdownMode="select"
+                            />
+                    </div>
                 </Form.Group>
                 <Form.Label
                     htmlFor="createProfileContactPhone"
@@ -49,10 +95,10 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
                             type="tel"
                             placeholder="(012)345-6789"
                             maxLength="20"
-                            pattern="[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}"
                             name="number"
-                            onChange={handleOnChange}
+                            onChange={handleValidation}
                         />
+                        <Form.Text className="text-danger">{errorMessage.number}</Form.Text>
                     </Form.Group>
                     <Form.Group
                         as={Col}
@@ -89,9 +135,10 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
                             type="text" 
                             placeholder="5" 
                             name="feet"
-                            onChange={handleOnChange}
+                            onChange={handleValidation}
                             maxLength="2"
                         />
+                        <Form.Text className="text-danger">{errorMessage.feet}</Form.Text>
                     </Form.Group>
                     <Form.Group
                         as={Col}
@@ -104,9 +151,10 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
                             type="text" 
                             placeholder="8" 
                             name="inches"
-                            onChange={handleOnChange} 
+                            onChange={handleValidation} 
                             maxLength="2"
                         />
+                        <Form.Text className="text-danger">{errorMessage.inches}</Form.Text>
                     </Form.Group>
                 </Form.Row>
                 <Form.Group controlId="createProfileWeight">
@@ -115,17 +163,92 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
                         type="text" 
                         placeholder="180" 
                         name="weight"
-                        onChange={handleOnChange} 
+                        onChange={handleValidation} 
                         maxLength="3"
                     />
+                    <Form.Text className="text-danger">{errorMessage.weight}</Form.Text>
                 </Form.Group>
+                <Form.Label
+                    htmlFor="createProfileHeightFeet"
+                    className="font-weight-bold"
+                >
+                    References
+                </Form.Label>
+                <Form.Row className="mx-0">
+                    <Form.Group
+                        as={Col}
+                        xs="12"
+                        md="6"
+                        controlId="createProfileHeightFeet">
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control 
+                            type="text" 
+                            name="first"
+                            onChange={handleOnChange} />
+                    </Form.Group>
+                    <Form.Group
+                        as={Col}
+                        xs="12"
+                        md="6"
+                        controlId="createProfileHeightInches">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control 
+                            type="email" 
+                            name="first"
+                            onChange={handleOnChange} />
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row className="mx-0">
+                    <Form.Group
+                        as={Col}
+                        xs="12"
+                        md="6"
+                        controlId="createProfileHeightFeet">
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control 
+                            type="text" 
+                            name="second"
+                            onChange={handleOnChange} />
+                    </Form.Group>
+                    <Form.Group
+                        as={Col}
+                        xs="12"
+                        md="6"
+                        controlId="createProfileHeightInches">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control 
+                            type="email" 
+                            name="second"
+                            onChange={handleOnChange} />
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row className="mx-0">
+                    <Form.Group
+                        as={Col}
+                        xs="12"
+                        md="6"
+                        controlId="createProfileHeightFeet">
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control 
+                            type="text" 
+                            name="third"
+                            onChange={handleOnChange} />
+                    </Form.Group>
+                    <Form.Group
+                        as={Col}
+                        xs="12"
+                        md="6"
+                        controlId="createProfileHeightInches">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control 
+                            type="email" 
+                            name="third"
+                            onChange={handleOnChange} />
+                    </Form.Group>
+                </Form.Row>
                 <Form.Group className="clearfix">
-                    <Button
-                        className="create-profile__personal__button-next float-right"
-                        onClick={() => handleTabKey("location")}
-                    >
-                        Next
-            <FaArrowRight className="ml-2" />
+                    <Button className="create-profile__personal__button-next float-right" onClick={() => handleTabKey("location")}>
+                        Next <FaArrowRight className="ml-2" />
                     </Button>
                 </Form.Group>
             </Form>

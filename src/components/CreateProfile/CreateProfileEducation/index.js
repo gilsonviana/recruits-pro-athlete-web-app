@@ -1,5 +1,5 @@
 // Dependencies
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
@@ -10,6 +10,27 @@ import { FaArrowLeft } from 'react-icons/fa'
 import './style.css'
 
 const CreateProfileEducation = ({ handleTabKey, handleSubmit, handleOnChange }) => {
+    const [errorMessage, setErrorMessage] = useState({
+        gpa: ''
+    })
+    
+    const handleValidation = (e) => {
+        const { target } = e
+        const regGpa = /^[0]|[0-3]\.(\d?\d?)|[4].[0]$/
+
+        if (!regGpa.test(target.value)) {
+            setErrorMessage({
+                [target.name]: 'Please insert a valid GPA.'
+            })
+            return
+        }
+
+        setErrorMessage({
+            [target.name]: ''
+        })
+        handleOnChange(e)
+    }
+
     return (
         <div className="create-profile__education py-4">
             <Form noValidate onSubmit={handleSubmit}>
@@ -46,7 +67,8 @@ const CreateProfileEducation = ({ handleTabKey, handleSubmit, handleOnChange }) 
                     </Form.Group>
                     <Form.Group as={Col} xs="12" md={6} controlId="createProfileGPA">
                         <Form.Label className="font-weight-bold">GPA</Form.Label>
-                        <Form.Control type="text" name="gpa" onChange={handleOnChange} />
+                        <Form.Control type="text" name="gpa" onChange={handleValidation} />
+                        <Form.Text className="text-danger">{errorMessage.gpa}</Form.Text>
                     </Form.Group>
                 </Form.Row>
                 <Form.Group className="clearfix">

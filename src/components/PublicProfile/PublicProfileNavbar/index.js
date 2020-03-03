@@ -5,7 +5,6 @@ import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
-import NavDropdown from 'react-bootstrap/NavDropdown'
 
 // Assets
 import brand from '../../../assets/images/logo-dashboard.png'
@@ -26,9 +25,9 @@ const PublicProfileNavbar = () => {
                     <Button variant="outline-success">Search</Button>
                 </Form>
                 <Nav className="ml-auto">
-                    <Nav.Link href="#home" className="text-white">Login</Nav.Link>
-                    <Nav.Link variant="success" href="#features" className="text-white d-md-none">Sign up</Nav.Link>
-                    <Nav.Link as={Button} variant="success" href="#features" className="text-white d-none d-md-inline-block">Sign up</Nav.Link>
+                    <Nav.Link href="/login" className="text-white">Login</Nav.Link>
+                    <Nav.Link variant="success" href="/signup" className="text-white d-md-none">Sign up</Nav.Link>
+                    <Nav.Link as={Button} variant="success" href="/signup" className="text-white d-none d-md-inline-block">Sign up</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

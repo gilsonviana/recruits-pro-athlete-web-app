@@ -10,26 +10,37 @@ import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Image from "react-bootstrap/Image";
 import Card from "react-bootstrap/Card";
-import Loader from 'react-loader-spinner'
+import Loader from 'react-loader-spinner';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import Button from 'react-bootstrap/Button';
 
 // Redux
-import { setProfileRequest } from '../../store/profile/actions'
+import { setProfileRequest, setProfileImagesRequest } from '../../store/profile/actions'
 
 // Components
 import CreateProfileHeader from "./CreateProfileHeader";
 import CreateProfilePersonal from "./CreateProfilePersonal";
 import CreateProfileLocation from "./CreateProfileLocation";
 import CreateProfileEducation from "./CreateProfileEducation";
+import CreateProfileSports from "./CreateProfileSports"
 
 // Assets
 import "./style.css";
+import brand from '../../assets/images/logo-dashboard.png'
 import userAvatarPlaceholder from "../../assets/images/user-avatar-placeholder.png";
 
-const CreateProfile = ({ history, token, setProfileRequest }) => {
-    const [isLoading, setIsLoading] = React.useState(false)
-    const [previewAvatar, setPreviewAvatar] = useState('')
+const CreateProfile = ({ history, token, setProfileRequest, setProfileImagesRequest }) => {
+    const [isLoading, setIsLoading] = useState(false)
+    const [previewImages, setPreviewImages] = useState({
+        avatar: '',
+        cover: ''
+    })
+    const [personalImages, setPersonalImages] = useState({
+        avatar: '',
+        cover: ''
+    })
     const [personalForm, setPersonalForm] = useState({
-        avatarUrl: "",
         dob: "",
         phone: {
             number: "",
@@ -39,7 +50,21 @@ const CreateProfile = ({ history, token, setProfileRequest }) => {
             feet: "",
             inches: ""
         },
-        weight: ""
+        weight: "",
+        references: {
+            first: {
+                name: '',
+                email: ''
+            },
+            second: {
+                name: '',
+                email: ''
+            },
+            third: {
+                name: '',
+                email: ''
+            }
+        }
     });
 
     const [locationForm, setLocationForm] = useState({
@@ -69,16 +94,19 @@ const CreateProfile = ({ history, token, setProfileRequest }) => {
     const handlePersonalFormOnChange = (e) => {
         const { target } = e
 
-        if (target.name === "avatarUrl") {
+        if (target.name === "avatar" || target.name === 'cover') {
             const file = target.files[0] || null
             const reader = new FileReader()
             if (file) {
+                setPersonalImages({
+                    ...personalImages,
+                    [target.name]: file
+                })
                 reader.readAsDataURL(file)
                 reader.onload = e => {
-                    setPreviewAvatar(e.target.result)
-                    setPersonalForm({
-                        ...personalForm,
-                        avatarUrl: e.target.result
+                    setPreviewImages({
+                        ...previewImages,
+                        [target.name]: e.target.result
                     })
                 }
                 return
@@ -117,6 +145,37 @@ const CreateProfile = ({ history, token, setProfileRequest }) => {
                 }
             })
             return
+        }
+
+        if (target.name === 'first' || target.name === 'second' || target.name === 'third') {
+            switch(target.type) {
+                case 'text':
+                    setPersonalForm({
+                        ...personalForm,
+                        references: {
+                            ...personalForm.references,
+                            [target.name]: {
+                                ...personalForm.references[target.name],
+                                name: target.value
+                            }
+                        }
+                    })
+                    return
+                case 'email':
+                    setPersonalForm({
+                        ...personalForm,
+                        references: {
+                            ...personalForm.references,
+                            [target.name]: {
+                                ...personalForm.references[target.name],
+                                email: target.value
+                            }
+                        }
+                    })
+                    return
+                default:
+                    return
+            }
         }
 
         setPersonalForm({
@@ -159,7 +218,7 @@ const CreateProfile = ({ history, token, setProfileRequest }) => {
         })
     }
 
-    const handleSubmitForm = e => {
+    const handleSubmitForm = async e => {
         e.preventDefault();
         setIsLoading(true)
         const profile = {
@@ -176,21 +235,33 @@ const CreateProfile = ({ history, token, setProfileRequest }) => {
                 isCompleted: true
             }
         }
+        
+        try {
+            const res = await setProfileRequest(token, profile)
 
-        setProfileRequest(token, profile)
+            await setProfileImagesRequest(token, personalImages)
+            
+            if (!res) {
+                setIsLoading(true)
+                return
+            }
 
-        // TODO remove for production
-        setTimeout(() => {
+            // TODO remove for production
+            setTimeout(() => {
+                setIsLoading(false)
+                history.push('/dashboard')
+            }, 1500)
+        } catch (e) {
             setIsLoading(false)
-            history.push('/dashboard')
-        }, 1500)
+            console.log("Error: Could not update profile.")
+        }
+
     };
 
     const handleRemoveAvatar = () => {
-        setPreviewAvatar('')
-        setPersonalForm({
-            ...personalForm,
-            avatarUrl: ''
+        setPreviewImages({
+            ...previewImages,
+            avatar: ''
         })
     }
 
@@ -206,16 +277,31 @@ const CreateProfile = ({ history, token, setProfileRequest }) => {
                 />
                 </div>
             )}
+            <Navbar bg="dark" expand="md" variant="dark" className="public-profile-navbar" style={{minHeight: `4rem`}}>
+                <Navbar.Brand href="#home">
+                    <div className="app__header__top__bar__brand">
+                        <img src={brand} alt="Recruits Pro Logo"/>
+                    </div>
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav" className="mt-4 mt-md-0">
+                    <Nav className="ml-auto">
+                        <Nav.Link href="/login" className="text-white">Login</Nav.Link>
+                        <Nav.Link variant="success" href="/signup" className="text-white d-md-none">Sign up</Nav.Link>
+                        <Nav.Link as={Button} variant="success" href="/signup" className="text-white d-none d-md-inline-block">Sign up</Nav.Link>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
             <CreateProfileHeader />
             <Container className="page__create-profile__wrapper">
                 <Row>
-                    <Col xs={12} md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }}>
+                    <Col xs={12} md={{ span: 10, offset: 1 }} lg={{ span: 8, offset: 2 }} xl={{ span: 6, offset: 3 }}>
                         <Card className="px-4 shadow-lg">
                             <Card.Title className="text-center my-4 d-none d-md-block">Create Profile</Card.Title>
                             {
-                                (previewAvatar) ?
+                                (previewImages.avatar) ?
                                     <div className="create-profile__personal__img d-flex justify-content-center my-4">
-                                        <Image style={{ width: '122px', height: '122px' }} className="img-fluid rounded-circle" src={previewAvatar} />
+                                        <Image style={{ width: '122px', height: '122px' }} className="img-fluid rounded-circle" src={previewImages.avatar} />
                                         <div
                                             className="create-profile__personal__img--hover rounded-circle"
                                             onClick={handleRemoveAvatar}>
@@ -228,8 +314,8 @@ const CreateProfile = ({ history, token, setProfileRequest }) => {
                                         </div>
                                     </div>
                             }
-                            <p className="lead bg-light p-2 rounded rounded-sm">
-                                Use your best knowledge to complete the form.
+                            <p className="lead">
+                                Your profile will be seen by evaluators, coaches and scouts.
                             </p>
                             <Tabs
                                 id="controlled-create-profile-nav"
@@ -253,6 +339,10 @@ const CreateProfile = ({ history, token, setProfileRequest }) => {
                                         handleSubmit={handleSubmitForm}
                                         handleOnChange={handleEducationFormOnChange} />
                                 </Tab>
+                                <Tab eventKey="sports" title="Sports">
+                                    <CreateProfileSports 
+                                        handleTabKey={handleChangeTabKey}/>
+                                </Tab>
                             </Tabs>
                         </Card>
                     </Col>
@@ -265,10 +355,11 @@ const CreateProfile = ({ history, token, setProfileRequest }) => {
 CreateProfile.propTypes = {
     token: PropTypes.string.isRequired,
     setProfileRequest: PropTypes.func.isRequired,
+    setProfileImagesRequest: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
-    token: state.auth.token  
+    token: state.auth.token
 })
 
-export default connect(mapStateToProps, { setProfileRequest })(withRouter(CreateProfile));
+export default connect(mapStateToProps, { setProfileRequest, setProfileImagesRequest })(withRouter(CreateProfile));

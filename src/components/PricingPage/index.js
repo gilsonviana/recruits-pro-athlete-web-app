@@ -69,7 +69,7 @@ const PricingPage = ({ history, token, subscriptionPlans }) => {
       return;
     }
 
-    history.push('/dashboard')
+    history.push('/create-profile')
   };
 
   const handleSubmitSubscriber = async () => {
@@ -137,6 +137,7 @@ const PricingPage = ({ history, token, subscriptionPlans }) => {
                           <Card.Subtitle className="my-4">
                             Basic plan for starters.
                           </Card.Subtitle>
+                          <div className="mb-4" style={{minHeight: `38px`}}>&nbsp;</div>
                           <ul className="page__pricing__card__features">
                             <li className="page__pricing__card__features__item">
                               <FiCheck className="page__pricing__card__features__item__icon" color="#fff"/>
@@ -154,7 +155,7 @@ const PricingPage = ({ history, token, subscriptionPlans }) => {
                         </Card.Body>
                         <Card.Footer className="bg-white border-0">
                           <Button onClick={handleSubmitFree}>
-                            Select plan
+                            Select Free Plan
                           </Button>
                         </Card.Footer>
                       </Card>
@@ -213,7 +214,7 @@ const PricingPage = ({ history, token, subscriptionPlans }) => {
                         </Card.Body>
                         <Card.Footer className="bg-white border-0">
                           <Button onClick={handleSubmitSubscriber}>
-                            Select plan
+                            Select Pro Plan
                           </Button>
                         </Card.Footer>
                       </Card>
@@ -225,7 +226,6 @@ const PricingPage = ({ history, token, subscriptionPlans }) => {
           </Row>
           <Row
             style={{
-              position: "absolute",
               width: `100%`,
               bottom: 0,
               left: 0,

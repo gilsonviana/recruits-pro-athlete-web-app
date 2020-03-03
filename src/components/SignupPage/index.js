@@ -82,7 +82,7 @@ const SignupPage = ({ history, signUp, getSubscriptionPlans }) => {
     if (!res) {
       setShowToast({
         isVisible: true,
-        message: 'Unable to create account. Login if you have already have an account.'
+        message: 'Email already in use. Login if you have an account.'
       })
       return
     }

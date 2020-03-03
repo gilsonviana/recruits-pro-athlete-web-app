@@ -11,6 +11,7 @@ import { getAthleteByName } from '../../services/user'
 import PublicProfileNavbar from './PublicProfileNavbar'
 import PublicProfile404 from './PublicProfile404'
 import PublicProfileSingle from './PublicProfileSingle'
+import PublicProfileListing from './PublicProfileListing'
 
 
 const PublicProfile = () => {
@@ -43,6 +44,7 @@ const PublicProfile = () => {
                 athleteList.map((athlete, i) => <p key={`public-profile-${i}`}>Test</p>)
             } */}
             <PublicProfileSingle />
+            {/* <PublicProfileListing /> */}
         </div>
     )
 }

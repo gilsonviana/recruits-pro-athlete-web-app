@@ -16,7 +16,21 @@ const initialState = {
             feet: '',
             inches: ''
         },
-        weight: ''
+        weight: '',
+        references: {
+            first: {
+                name: '',
+                email: ''
+            },
+            second: {
+                name: '',
+                email: ''
+            },
+            third: {
+                name: '',
+                email: ''
+            }
+        }
     },
     location: {
         country: '',
@@ -45,16 +59,12 @@ const initialState = {
         linkedin: '',
     },
     sports: {
-        baseball: {
+        primary: {
+            name: '',
             positions: []
         },
-        basketball: {
-            positions: []
-        },
-        football: {
-            positions: []
-        },
-        soccer: {
+        secondary: {
+            name: '',
             positions: []
         }
     },

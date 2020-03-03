@@ -5,7 +5,7 @@ import { FaTwitter, FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/f
 
 const PublicProfileSingleMainSocial = () => {
     return (
-        <div className="public-profile__single__main__social mr-4 mb-4 d-none d-md-block">
+        <div className="public-profile__single__main__social mb-4 d-none d-md-block" style={{marginRight: `2rem`}}>
             <div className="public-profile__single__main__social d-flex justify-content-end">
                 <div className="social-networks-icon-wrapper mr-2 rounded-sm d-flex align-items-center justify-content-center" style={{background: '#365397', width: `2rem`, height: `2rem`}}>
                     <FaFacebookF color="#fff"/>

@@ -7,7 +7,6 @@ import Col from 'react-bootstrap/Col'
 import Badge from 'react-bootstrap/Badge'
 
 // Assets
-import './style.css'
 import avatarImg from "../../../assets/images/avatar-example.jpg"
 
 // Components

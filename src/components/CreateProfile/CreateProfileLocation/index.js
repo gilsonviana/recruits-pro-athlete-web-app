@@ -11,6 +11,57 @@ import "./style.css";
 
 const CreateProfileLocation = ({ handleTabKey, handleOnChange }) => {
     const [isForeigner, setIsForeigner] = useState(false);
+    const [errorMessage, setErrorMessage] = useState({
+        country: '',
+        zipcode: '',
+        city: '',
+        state: ''
+    })
+
+    const handleValidation = (e) => {
+        const { target } = e
+        const regOnlyLetters = /^[a-zA-Z\s]*$/
+        const regOnlyNumbers = /^\d+$/
+        const regZipcode = /^\d{5}$/
+        
+        if (target.name === 'zipcode') {
+            if (!regOnlyNumbers.test(target.value)) {
+                setErrorMessage({
+                    ...errorMessage,
+                    [target.name]: 'Please insert a valid character.'
+                })
+                return
+            }
+
+            if (!regZipcode.test(target.value)) {
+                setErrorMessage({
+                    ...errorMessage,
+                    [target.name]: 'Please insert a valid zipcode.'
+                })
+                return
+            }
+
+            setErrorMessage({
+                ...errorMessage,
+                [target.name]: ''
+            })
+            handleOnChange(e)
+            return
+        }
+        
+        if (!regOnlyLetters.test(target.value)) {
+            setErrorMessage({
+                ...errorMessage,
+                [target.name]: 'Please insert a valid character.'
+            })
+            return
+        }
+        setErrorMessage({
+            ...errorMessage,
+            [target.name]: ''
+        })
+        handleOnChange(e)
+    }
 
     return (
         <div className="create-profile__location py-4">
@@ -19,13 +70,14 @@ const CreateProfileLocation = ({ handleTabKey, handleOnChange }) => {
                     <Form.Group as={Col} xs={12} md={8} controlId="createProfileCountry">
                         <Form.Label className="font-weight-bold">Country</Form.Label>
                         <Form.Control
-                            onChange={handleOnChange}
+                            onChange={handleValidation}
                             type="text"
                             placeholder="USA"
                             name="country"
                             disabled={!isForeigner}
                             maxLength="60"
                         />
+                        <Form.Text className="text-danger">{errorMessage.country}</Form.Text>
                     </Form.Group>
                     <Form.Group
                         as={Col}
@@ -55,13 +107,14 @@ const CreateProfileLocation = ({ handleTabKey, handleOnChange }) => {
                     >
                         <Form.Label className="font-weight-bold">Zip code</Form.Label>
                         <Form.Control
-                            onChange={handleOnChange}
+                            onChange={handleValidation}
                             type="text"
                             placeholder="32839"
                             name="zipcode"
                             disabled={isForeigner}
                             maxLength="6"
                         />
+                        <Form.Text className="text-danger">{errorMessage.zipcode}</Form.Text>
                     </Form.Group>
                     <Form.Group as={Col} xs={12}>
                         <Form.Text className="text-muted">
@@ -73,40 +126,38 @@ const CreateProfileLocation = ({ handleTabKey, handleOnChange }) => {
                     <Form.Group as={Col} xs={12} md="6" controlId="createProfileCity">
                         <Form.Label className="font-weight-bold">City</Form.Label>
                         <Form.Control
-                            onChange={handleOnChange}
+                            onChange={handleValidation}
                             type="text"
                             placeholder="Orlando"
                             name="city"
                             disabled={isForeigner}
                             maxLength="60"
                         />
+                        <Form.Text className="text-danger">{errorMessage.city}</Form.Text>
                     </Form.Group>
                     <Form.Group as={Col} xs={12} md="6" controlId="createProfileState">
                         <Form.Label className="font-weight-bold">State</Form.Label>
                         <Form.Control
-                            onChange={handleOnChange}
+                            onChange={handleValidation}
                             type="text"
                             placeholder="Florida"
                             name="state"
                             disabled={isForeigner}
                             maxLength="60"
                         />
+                        <Form.Text className="text-danger">{errorMessage.state}</Form.Text>
                     </Form.Group>
                 </Form.Row>
                 <Form.Group className="clearfix">
                     <Button
                         className="create-profile__location__button-next float-left"
-                        onClick={() => handleTabKey("personal")}
-                    >
-                        <FaArrowLeft className="mr-2" />
-                        Previous
+                        onClick={() => handleTabKey("personal")}>
+                        <FaArrowLeft className="mr-2" /> Previous
                     </Button>
                     <Button
                         className="create-profile__location__button-next float-right mt-3 mt-md-0"
-                        onClick={() => handleTabKey("education")}
-                    >
-                        Next
-            <FaArrowRight className="ml-2" />
+                        onClick={() => handleTabKey("education")}>
+                        Next<FaArrowRight className="ml-2" />
                     </Button>
                 </Form.Group>
             </Form>

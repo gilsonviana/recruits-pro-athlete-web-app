@@ -47,31 +47,46 @@ export const setProfileRequest = (token, profile, opt = true) => {
     }
 }
 
-export const setProfileImagesRequest = (token, { avatar, cover }) => {
+export const setProfileImagesRequest = (token, { avatar = null, cover = null }) => {
     return async dispatch => {
         try {
             const data = new FormData()
-            data.append('avatar', avatar)
-            data.append('cover', cover)
-            const { data: res } = await axios({
-                url: `${keys.API}/profile/athlete/images`,
-                method: 'POST',
-                headers: {
-                    'Authorization': token,
-                    'Content-Type': 'multipart/form-data'
-                },
-                data
-            })
 
+            if (avatar) {
+                data.append('avatar', avatar)
+            }
+
+            if (cover) {
+                data.append('cover', cover)
+            }
+
+            if (avatar || cover) {
+                const { data: res } = await axios({
+                    url: `${keys.API}/profile/athlete/images`,
+                    method: 'POST',
+                    headers: {
+                        'Authorization': token,
+                        'Content-Type': 'multipart/form-data'
+                    },
+                    data
+                })
+                dispatch({
+                    type: types.SET_PROFILE_IMAGES_REQUEST,
+                    payload: {
+                        avatarUrl: res.avatarUrl,
+                        coverImgUrl: res.coverImgUrl
+                    }
+                })
+            }
+
+        } catch (e) {
             dispatch({
-                type: types.SET_PROFILE_IMAGES_REQUEST,
+                type: SET_ERROR_MESSAGE,
                 payload: {
-                    avatarUrl: res.avatarUrl,
-                    coverImgUrl: res.coverImgUrl
+                    message: 'Could not save your avatar.',
+                    error: e.response.data || e
                 }
             })
-        } catch (e) {
-            console.log(e.response)
         }
     }
 }

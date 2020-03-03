@@ -10,7 +10,7 @@ import PublicProfileSingleMainSocial from '../PublicProfileSingleMain/PublicProf
 const PublicProfileSingleHeader = () => {
     return (
         <header className="page__public-profile-single__header">
-            <div className="page__public-profile-single__header__bkg" style={{background: `url(https://recruits-pro-athletes-avatar-cover.s3.us-east-2.amazonaws.com/15825928136911578421657258D24B5D78-4119-44C7-9AC1-75B846A4BADB.jpg) center center / cover no-repeat`}}>
+            <div className="page__public-profile-single__header__bkg" style={{background: `url(https://recruits-pro-athletes-avatar-cover.s3.us-east-2.amazonaws.com/1582904910224tevarak-phanduang-eOvv4N6yNmk-unsplash.jpg) center center / cover no-repeat`}}>
                 <PublicProfileSingleMainSocial />
             </div>
         </header>

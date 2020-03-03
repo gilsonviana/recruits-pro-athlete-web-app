@@ -17,7 +17,7 @@ const PublicProfileSingleMainEvaluationsItem = () => {
                         </div>
                         <div>
                             <span><b>John Doe</b>, location <b>2401 Lakeshore, Saint Cloud, FL</b></span><br />
-                            <span className="text-muted">Febuary 28 at 10:00 AM</span>
+                            <span className="text-muted">February 28 at 10:00 AM</span>
                         </div>
                     </div>
                 </Card.Body>
