@@ -1,0 +1,14 @@
+.banner__marketing {
+    background: rgba(145, 230, 145, 0.4);
+    margin: -1.5rem 0 0;
+}
+
+.banner__marketing__content {
+    padding: 1.5rem 0;
+}
+
+@media screen and (min-width: 992px) {
+    .banner__marketing {
+        margin: -1.5rem -2.5rem 0;
+    }
+}

@@ -1,5 +1,6 @@
 // Dependencies
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux' 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -9,10 +10,14 @@ import Col from 'react-bootstrap/Col'
 import OverviewWelcome from './OverviewWelcome'
 import MetricsFlush from './MetricsFlush'
 import LastEvaluation from './LastEvaluation'
+import MarketingBanner from '../MarketingBanner'
 
-const Overview = ({ evaluations }) =>  {
+const Overview = ({ evaluations, subscriptionStatus }) =>  {
     return (
         <div className="page__overview">
+            {
+                subscriptionStatus !== 'ACTIVE' && <MarketingBanner />
+            }
             <OverviewWelcome />
             <Container fluid>
                 <Row className="mb-4">
@@ -32,8 +37,14 @@ const Overview = ({ evaluations }) =>  {
     )
 }
 
+Overview.propTypes = {
+    evaluations: PropTypes.array.isRequired,
+    subscriptionStatus: PropTypes.string.isRequired
+}
+
 const mapStateToProps = (state) => ({
-    evaluations: state.profile.evaluations
+    evaluations: state.profile.evaluations,
+    subscriptionStatus: state.profile.subscription.status
 })
 
 export default connect(mapStateToProps)(Overview)

@@ -30,7 +30,7 @@ const ProfileHeader = ({ images, avatarUrl, coverImgUrl, fullName, heading }) =>
     }
 
     return (
-        <header className="page__profile__header text-center px-4 pt-4 pb-2 border-bottom" style={{background: `url(${coverImgUrl}) no-repeat center`}}>
+        <header className="page__profile__header text-center px-4 pt-4 pb-2 border-bottom" style={coverImgUrl ? {background: `url(${coverImgUrl}) no-repeat center`}: {background: `linear-gradient(90deg, rgb(234, 235, 238), transparent)`}}>
             <div className="page__profile__header__img rounded-circle overflow-hidden border border-success">
                 {avatar ? 
                     <img src={avatar} alt="profile"/> : 
