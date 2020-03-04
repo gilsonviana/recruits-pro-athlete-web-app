@@ -12,11 +12,30 @@ import "./style.css";
 const CreateProfileLocation = ({ handleTabKey, handleOnChange }) => {
     const [isForeigner, setIsForeigner] = useState(false);
     const [errorMessage, setErrorMessage] = useState({
-        country: '',
-        zipcode: '',
-        city: '',
-        state: ''
+        country: {
+            required: false,
+            invalid: false
+        },
+        zipcode: {
+            required: false,
+            invalid: false
+        },
+        city: {
+            invalid: false
+        },
+        state: {
+            invalid: false
+        }
     })
+
+    const handleIsForeigner = () => {
+        if (isForeigner) {
+            setIsForeigner(!isForeigner)
+            handleOnChange({ target: {name: "country", value: "USA"} })
+            return
+        }
+        setIsForeigner(!isForeigner)
+    }
 
     const handleValidation = (e) => {
         const { target } = e
@@ -24,26 +43,85 @@ const CreateProfileLocation = ({ handleTabKey, handleOnChange }) => {
         const regOnlyNumbers = /^\d+$/
         const regZipcode = /^\d{5}$/
         
+        if (target.name === 'country') {
+            if (target.value === '') {
+                setErrorMessage({
+                    ...errorMessage,
+                    [target.name]: {
+                        ...errorMessage[target.name],
+                        required: true
+                    }
+                })
+                handleOnChange(e)
+                return
+            }
+
+            if (!regOnlyLetters.test(target.value)) {
+                setErrorMessage({
+                    ...errorMessage,
+                    [target.name]: {
+                        ...errorMessage[target.name],
+                        invalid: 'Please insert a valid character.'
+                    }
+                })
+                handleOnChange(e)
+                return
+            }
+
+            setErrorMessage({
+                ...errorMessage,
+                [target.name]: {
+                    required: false,
+                    invalid: false
+                }
+            })
+            handleOnChange(e)
+            return
+        }
+
         if (target.name === 'zipcode') {
+            if (target.value === '') {
+                setErrorMessage({
+                    ...errorMessage,
+                    [target.name]: {
+                        ...errorMessage[target.name],
+                        required: true
+                    }
+                })
+                handleOnChange(e)
+                return
+            }
+
             if (!regOnlyNumbers.test(target.value)) {
                 setErrorMessage({
                     ...errorMessage,
-                    [target.name]: 'Please insert a valid character.'
+                    [target.name]: {
+                        ...errorMessage[target.name],
+                        invalid: 'Please insert a valid character.'
+                    }
                 })
+                handleOnChange(e)
                 return
             }
 
             if (!regZipcode.test(target.value)) {
                 setErrorMessage({
                     ...errorMessage,
-                    [target.name]: 'Please insert a valid zipcode.'
+                    [target.name]: {
+                        ...errorMessage[target.name],
+                        invalid: 'Please insert a valid zipcode.'
+                    }
                 })
+                handleOnChange(e)
                 return
             }
 
             setErrorMessage({
                 ...errorMessage,
-                [target.name]: ''
+                [target.name]: {
+                    required: false,
+                    invalid: false
+                }
             })
             handleOnChange(e)
             return
@@ -52,20 +130,26 @@ const CreateProfileLocation = ({ handleTabKey, handleOnChange }) => {
         if (!regOnlyLetters.test(target.value)) {
             setErrorMessage({
                 ...errorMessage,
-                [target.name]: 'Please insert a valid character.'
+                [target.name]: {
+                    ...errorMessage[target.name],
+                    invalid: 'Please insert a valid character.'
+                }
             })
+            handleOnChange(e)
             return
         }
         setErrorMessage({
             ...errorMessage,
-            [target.name]: ''
+            [target.name]: {
+                invalid: false
+            }
         })
         handleOnChange(e)
     }
 
     return (
         <div className="create-profile__location py-4">
-            <Form noValidate>
+            <Form noValidate autoComplete="off">
                 <Form.Row className="mx-0">
                     <Form.Group as={Col} xs={12} md={8} controlId="createProfileCountry">
                         <Form.Label className="font-weight-bold">Country</Form.Label>
@@ -77,17 +161,17 @@ const CreateProfileLocation = ({ handleTabKey, handleOnChange }) => {
                             disabled={!isForeigner}
                             maxLength="60"
                         />
-                        <Form.Text className="text-danger">{errorMessage.country}</Form.Text>
+                        <Form.Text className={errorMessage.country.required ? 'text-danger font-weight-bold':'text-muted'}>Required</Form.Text>
+                        <Form.Text className="text-danger">{errorMessage.country.invalid}</Form.Text>
                     </Form.Group>
                     <Form.Group
                         as={Col}
                         xs={12}
                         md={4}
-                        controlId="createProfileForeigner"
-                    >
+                        controlId="createProfileForeigner">
                         <Form.Label></Form.Label>
                         <Form.Check
-                            onChange={() => setIsForeigner(!isForeigner)}
+                            onChange={handleIsForeigner}
                             name="country-foreigner"
                             type="switch"
                             id="createProfileForeigner"
@@ -103,18 +187,18 @@ const CreateProfileLocation = ({ handleTabKey, handleOnChange }) => {
                         md={6}
                         lg={4}
                         controlId="createProfileZipcode"
-                        className="mb-0"
-                    >
+                        className="mb-0">
                         <Form.Label className="font-weight-bold">Zip code</Form.Label>
                         <Form.Control
                             onChange={handleValidation}
                             type="text"
-                            placeholder="32839"
+                            placeholder=""
                             name="zipcode"
                             disabled={isForeigner}
                             maxLength="6"
                         />
-                        <Form.Text className="text-danger">{errorMessage.zipcode}</Form.Text>
+                        <Form.Text className={errorMessage.zipcode.required ? 'text-danger font-weight-bold':'text-muted'}>Required</Form.Text>
+                        <Form.Text className="text-danger">{errorMessage.zipcode.invalid}</Form.Text>
                     </Form.Group>
                     <Form.Group as={Col} xs={12}>
                         <Form.Text className="text-muted">
@@ -128,24 +212,24 @@ const CreateProfileLocation = ({ handleTabKey, handleOnChange }) => {
                         <Form.Control
                             onChange={handleValidation}
                             type="text"
-                            placeholder="Orlando"
+                            placeholder=""
                             name="city"
                             disabled={isForeigner}
                             maxLength="60"
                         />
-                        <Form.Text className="text-danger">{errorMessage.city}</Form.Text>
+                        <Form.Text className="text-danger">{errorMessage.city.invalid}</Form.Text>
                     </Form.Group>
                     <Form.Group as={Col} xs={12} md="6" controlId="createProfileState">
                         <Form.Label className="font-weight-bold">State</Form.Label>
                         <Form.Control
                             onChange={handleValidation}
                             type="text"
-                            placeholder="Florida"
+                            placeholder=""
                             name="state"
                             disabled={isForeigner}
                             maxLength="60"
                         />
-                        <Form.Text className="text-danger">{errorMessage.state}</Form.Text>
+                        <Form.Text className="text-danger">{errorMessage.state.invalid}</Form.Text>
                     </Form.Group>
                 </Form.Row>
                 <Form.Group className="clearfix">

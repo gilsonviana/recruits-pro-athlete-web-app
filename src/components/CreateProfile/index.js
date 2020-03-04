@@ -14,6 +14,7 @@ import Loader from 'react-loader-spinner';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
+import Toast from 'react-bootstrap/Toast'
 
 // Redux
 import { setProfileRequest, setProfileImagesRequest } from '../../store/profile/actions'
@@ -31,15 +32,18 @@ import brand from '../../assets/images/logo-dashboard.png'
 import userAvatarPlaceholder from "../../assets/images/user-avatar-placeholder.png";
 
 const CreateProfile = ({ history, token, setProfileRequest, setProfileImagesRequest }) => {
+    const [showToast, setShowToast] = useState({
+        isVisible: false,
+        message: ''
+    })
     const [isLoading, setIsLoading] = useState(false)
     const [previewImages, setPreviewImages] = useState({
         avatar: '',
-        cover: ''
     })
     const [personalImages, setPersonalImages] = useState({
         avatar: '',
-        cover: ''
     })
+
     const [personalForm, setPersonalForm] = useState({
         dob: "",
         phone: {
@@ -68,7 +72,7 @@ const CreateProfile = ({ history, token, setProfileRequest, setProfileImagesRequ
     });
 
     const [locationForm, setLocationForm] = useState({
-        country: "",
+        country: "USA",
         zipcode: "",
         state: "",
         city: ""
@@ -82,6 +86,17 @@ const CreateProfile = ({ history, token, setProfileRequest, setProfileImagesRequ
         gpa: ""
     });
 
+    const [sportsForm, setSportsForm] = useState({
+        primary: {
+            name: '',
+            positions: ''
+        },
+        secondary: {
+            name: '',
+            positions: ''
+        }
+    })
+
     const [key, setKey] = useState("personal");
 
     // Navigate through tabs
@@ -94,7 +109,7 @@ const CreateProfile = ({ history, token, setProfileRequest, setProfileImagesRequ
     const handlePersonalFormOnChange = (e) => {
         const { target } = e
 
-        if (target.name === "avatar" || target.name === 'cover') {
+        if (target.name === "avatar") {
             const file = target.files[0] || null
             const reader = new FileReader()
             if (file) {
@@ -218,9 +233,31 @@ const CreateProfile = ({ history, token, setProfileRequest, setProfileImagesRequ
         })
     }
 
+    const handleSportsFormOnChange = (e, key = "") => {
+        const { target } = e
+
+        if (target.name === 'other') {
+            setSportsForm({
+                ...sportsForm,
+                [key]: {
+                    ...sportsForm[key],
+                    name: target.value
+                }
+            })
+            return
+        }
+        setSportsForm({
+            ...sportsForm,
+            [key]: {
+                ...sportsForm[key],
+                [target.name]: target.value
+            }
+        })
+    }
+
     const handleSubmitForm = async e => {
         e.preventDefault();
-        setIsLoading(true)
+        
         const profile = {
             personal: {
                 ...personalForm
@@ -231,31 +268,32 @@ const CreateProfile = ({ history, token, setProfileRequest, setProfileImagesRequ
             education: {
                 ...educationForm
             },
+            sports: {
+                ...sportsForm
+            },
             meta: {
                 isCompleted: true
             }
         }
-        
-        try {
-            const res = await setProfileRequest(token, profile)
 
-            await setProfileImagesRequest(token, personalImages)
-            
-            if (!res) {
+        if (_formValidation(profile)) {    
+            try {
                 setIsLoading(true)
-                return
-            }
-
-            // TODO remove for production
-            setTimeout(() => {
+                const res = await setProfileRequest(token, profile)
+                
+                const resImages = await setProfileImagesRequest(token, personalImages)
+                
                 setIsLoading(false)
                 history.push('/dashboard')
-            }, 1500)
-        } catch (e) {
-            setIsLoading(false)
-            console.log("Error: Could not update profile.")
+                return
+            } catch (e) {
+                setIsLoading(false)
+                setShowToast({
+                    isVisible: true,
+                    message: "Unable to update profile."
+                })
+            }
         }
-
     };
 
     const handleRemoveAvatar = () => {
@@ -263,6 +301,69 @@ const CreateProfile = ({ history, token, setProfileRequest, setProfileImagesRequ
             ...previewImages,
             avatar: ''
         })
+    }
+
+    const _formValidation = (form) => {
+        const requiredFields = {
+            personal: [{
+                name: 'dob',
+                label: 'Date of Birth'
+            }],
+            location: [{
+                name: 'country',
+                label: 'Country'
+            }],
+            education: [{
+                name: 'skillLevel',
+                label: 'Skill level'
+            }],
+            sports: [{
+                name: 'name',
+                label: 'Primary sport name'
+            }, {
+                name: 'positions',
+                label: 'Primary sport positions'
+            }]
+        }
+        const errorFields = []
+        const ruleKeys = Object.keys(requiredFields)
+        const formKeys = Object.keys(form)
+
+        if (formKeys.length > 0) {
+            ruleKeys.forEach(rule => {
+                if (form.hasOwnProperty(rule) && rule === 'sports') {
+                    requiredFields[rule].map(({ name: key, label }) => {
+                        if (!form[rule]['primary'][key]) {
+                            errorFields.push(label)
+                            return
+                        }
+                    })
+                    return
+                }
+                if (form.hasOwnProperty(rule)) {
+                    requiredFields[rule].map(({ name: key, label }) => {
+                        if (!form[rule][key]) {
+                            errorFields.push(label)
+                            return
+                        }
+                    })
+                }
+            })
+        }
+
+        if (errorFields.length > 0) {
+            setShowToast({
+                isVisible: true,
+                message: errorFields.length > 1 ? `
+                    The following fields are required: ${errorFields.join(', ')}.
+                `: `
+                    The following field is required: ${errorFields.join(', ')}.
+                `
+            })
+            return false
+        }
+
+        return true
     }
 
     return (
@@ -292,6 +393,18 @@ const CreateProfile = ({ history, token, setProfileRequest, setProfileImagesRequ
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
+            <div className="fixed-top"> 
+                <Toast onClose={() => setShowToast({isVisible: false, message: ''})} show={showToast.isVisible} delay={8000} autohide style={{
+                    position: 'absolute',
+                    left: `50%`,
+                    transform: `translateX(${-50}%)`,
+                    backgroundColor: `#eb5a46`,
+                    color: `#eee`,
+                    width: `100%`
+                }}>
+                    <Toast.Body>{showToast.message}</Toast.Body>
+                </Toast>
+            </div>
             <CreateProfileHeader />
             <Container className="page__create-profile__wrapper">
                 <Row>
@@ -336,12 +449,13 @@ const CreateProfile = ({ history, token, setProfileRequest, setProfileImagesRequ
                                 <Tab eventKey="education" title="Education">
                                     <CreateProfileEducation
                                         handleTabKey={handleChangeTabKey}
-                                        handleSubmit={handleSubmitForm}
                                         handleOnChange={handleEducationFormOnChange} />
                                 </Tab>
                                 <Tab eventKey="sports" title="Sports">
                                     <CreateProfileSports 
-                                        handleTabKey={handleChangeTabKey}/>
+                                        handleTabKey={handleChangeTabKey}
+                                        handleSubmit={handleSubmitForm}
+                                        handleOnChange={handleSportsFormOnChange} />
                                 </Tab>
                             </Tabs>
                         </Card>

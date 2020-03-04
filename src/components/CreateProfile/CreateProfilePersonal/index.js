@@ -16,20 +16,58 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
         number: '',
         feet: '',
         inches: '',
-        weight: ''
+        weight: '',
+        dob: '',
+        avatar: ''
     })
 
     const handleValidation = (e) => {
         const { target } = e
         const regOnlyNumbers = /^\d+$/
 
+        if (target.name === 'avatar') {
+            if (target.files[0].size > 2054305) {
+                setErrorMessage({
+                    ...errorMessage,
+                    [target.name]: 'Avatar size limit is 2 mb.'
+                })
+                handleOnChange(e)
+                return
+            }
+            setErrorMessage({
+                ...errorMessage,
+                [target.name]: ''
+            })
+            handleOnChange(e)
+            return
+        }
+
+        if (target.name === 'dob') {
+            if (!target.value) {
+                setErrorMessage({
+                    ...errorMessage,
+                    [target.name]: 'Date of birth is required.'
+                })
+                handleOnChange(e)
+                return
+            }
+            setErrorMessage({
+                ...errorMessage,
+                [target.name]: ''
+            })
+            handleOnChange(e)
+            return
+        }
+
         if (!regOnlyNumbers.test(target.value)) {
             setErrorMessage({
                 ...errorMessage,
                 [target.name]: 'Please insert a valid character.'
             })
+            handleOnChange(e)
             return
         }
+        
         setErrorMessage({
             ...errorMessage,
             [target.name]: ''
@@ -37,12 +75,15 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
         handleOnChange(e)
     }
 
-    const handleDateChange = (date = new Date()) => {
+    const handleDateChange = (date = '') => {
+        const e = { target: { name: 'dob', value: date } }
         setDob(date)
-        handleOnChange({ target: { name: 'dob', value: date } })
+        handleValidation(e)
+        handleOnChange(e)
     }
     return (
         <div className="create-profile__personal py-4">
+            <input type="hidden" value="prayer" />
             <Form noValidate>
                 <Form.Group controlId="createProfilePicture">
                     <Form.Label className="font-weight-bold">Profile picture</Form.Label>
@@ -51,16 +92,8 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
                         name="avatar"
                         multiple={false}
                         accept=".png,.jpg,.jpeg"
-                        onChange={handleOnChange}/>
-                </Form.Group>
-                <Form.Group controlId="createProfilePicture">
-                    <Form.Label className="font-weight-bold">Cover image</Form.Label>
-                    <Form.Control 
-                        type="file" 
-                        name="cover"
-                        multiple={false}
-                        accept=".png,.jpg,.jpeg"
-                        onChange={handleOnChange}/>
+                        onChange={handleValidation}/>
+                    <Form.Text className="text-danger">{errorMessage.avatar}</Form.Text>
                 </Form.Group>
                 <Form.Group controlId="createProfileDob">
                     <Form.Label className="font-weight-bold">Date of Birth</Form.Label>
@@ -74,8 +107,10 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
                             showMonthDropdown
                             showYearDropdown
                             dropdownMode="select"
+                            autoComplete="new-password"
                             />
                     </div>
+                    <Form.Text className={errorMessage.dob ? 'text-danger font-weight-bold':'text-muted'}>Required</Form.Text>
                 </Form.Group>
                 <Form.Label
                     htmlFor="createProfileContactPhone"
@@ -93,10 +128,11 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
                         <Form.Label>Phone</Form.Label>
                         <Form.Control
                             type="tel"
-                            placeholder="(012)345-6789"
+                            placeholder=""
                             maxLength="20"
                             name="number"
                             onChange={handleValidation}
+                            autoComplete="new-password"
                         />
                         <Form.Text className="text-danger">{errorMessage.number}</Form.Text>
                     </Form.Group>
@@ -133,10 +169,11 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
                         <Form.Label>Feet</Form.Label>
                         <Form.Control 
                             type="text" 
-                            placeholder="5" 
+                            placeholder="" 
                             name="feet"
                             onChange={handleValidation}
                             maxLength="2"
+                            autoComplete="new-password"
                         />
                         <Form.Text className="text-danger">{errorMessage.feet}</Form.Text>
                     </Form.Group>
@@ -149,10 +186,11 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
                         <Form.Label>Inches</Form.Label>
                         <Form.Control 
                             type="text" 
-                            placeholder="8" 
+                            placeholder="" 
                             name="inches"
                             onChange={handleValidation} 
                             maxLength="2"
+                            autoComplete="new-password"
                         />
                         <Form.Text className="text-danger">{errorMessage.inches}</Form.Text>
                     </Form.Group>
@@ -161,10 +199,11 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
                     <Form.Label className="font-weight-bold">Weight</Form.Label>
                     <Form.Control 
                         type="text" 
-                        placeholder="180" 
+                        placeholder="" 
                         name="weight"
                         onChange={handleValidation} 
                         maxLength="3"
+                        autoComplete="new-password"
                     />
                     <Form.Text className="text-danger">{errorMessage.weight}</Form.Text>
                 </Form.Group>
@@ -184,7 +223,8 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
                         <Form.Control 
                             type="text" 
                             name="first"
-                            onChange={handleOnChange} />
+                            onChange={handleOnChange} 
+                            autoComplete="new-password" />
                     </Form.Group>
                     <Form.Group
                         as={Col}
@@ -195,7 +235,8 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
                         <Form.Control 
                             type="email" 
                             name="first"
-                            onChange={handleOnChange} />
+                            onChange={handleOnChange} 
+                            autoComplete="new-password" />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row className="mx-0">
@@ -208,7 +249,8 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
                         <Form.Control 
                             type="text" 
                             name="second"
-                            onChange={handleOnChange} />
+                            onChange={handleOnChange} 
+                            autoComplete="new-password" />
                     </Form.Group>
                     <Form.Group
                         as={Col}
@@ -219,7 +261,8 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
                         <Form.Control 
                             type="email" 
                             name="second"
-                            onChange={handleOnChange} />
+                            onChange={handleOnChange} 
+                            autoComplete="new-password" />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row className="mx-0">
@@ -232,7 +275,8 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
                         <Form.Control 
                             type="text" 
                             name="third"
-                            onChange={handleOnChange} />
+                            onChange={handleOnChange} 
+                            autoComplete="new-password" />
                     </Form.Group>
                     <Form.Group
                         as={Col}
@@ -243,7 +287,8 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
                         <Form.Control 
                             type="email" 
                             name="third"
-                            onChange={handleOnChange} />
+                            onChange={handleOnChange}
+                            autoComplete="new-password" />
                     </Form.Group>
                 </Form.Row>
                 <Form.Group className="clearfix">
