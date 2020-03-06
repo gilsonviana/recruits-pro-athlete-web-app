@@ -134,7 +134,7 @@ const CreateProfileSports = ({ handleTabKey, handleOnChange, handleSubmit }) => 
     
     return (
         <div className="create-profile__sport py-4">
-            <Form noValidate autoComplete="off" onSubmit={handleSubmit}>
+            <Form noValidate onSubmit={handleSubmit}>
                 <Form.Label className="font-weight-bold">Primary</Form.Label>
                 <Form.Group>
                     <Form.Label>Sport</Form.Label>

@@ -5,7 +5,7 @@ import Loader from 'react-loader-spinner'
 
 const Button =  styled.button`
     background-color: ${({link}) => link ? 'none' : '#00EC00'};
-    color: #eee;
+    color: #fff;
     font-weight: bold;
     border-radius: 3px;
     display: block;

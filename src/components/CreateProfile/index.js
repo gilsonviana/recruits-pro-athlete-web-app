@@ -279,9 +279,9 @@ const CreateProfile = ({ history, token, setProfileRequest, setProfileImagesRequ
         if (_formValidation(profile)) {    
             try {
                 setIsLoading(true)
-                const res = await setProfileRequest(token, profile)
                 
-                const resImages = await setProfileImagesRequest(token, personalImages)
+                await setProfileRequest(token, profile)
+                await setProfileImagesRequest(token, personalImages)
                 
                 setIsLoading(false)
                 history.push('/dashboard')

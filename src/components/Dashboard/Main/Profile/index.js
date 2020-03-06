@@ -9,6 +9,9 @@ import ProfileHeader from './ProfileHeader'
 import ProfileAside from './ProfileAside'
 import ProfileMain from './ProfileMain'
 
+// Assets
+import './style.css'
+
 const Profile = () => {
     const [previewImages, setPreviewImages] = useState({
         avatar: null,

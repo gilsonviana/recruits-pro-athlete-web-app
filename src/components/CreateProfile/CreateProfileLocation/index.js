@@ -17,7 +17,6 @@ const CreateProfileLocation = ({ handleTabKey, handleOnChange }) => {
             invalid: false
         },
         zipcode: {
-            required: false,
             invalid: false
         },
         city: {
@@ -80,18 +79,6 @@ const CreateProfileLocation = ({ handleTabKey, handleOnChange }) => {
         }
 
         if (target.name === 'zipcode') {
-            if (target.value === '') {
-                setErrorMessage({
-                    ...errorMessage,
-                    [target.name]: {
-                        ...errorMessage[target.name],
-                        required: true
-                    }
-                })
-                handleOnChange(e)
-                return
-            }
-
             if (!regOnlyNumbers.test(target.value)) {
                 setErrorMessage({
                     ...errorMessage,
@@ -197,7 +184,6 @@ const CreateProfileLocation = ({ handleTabKey, handleOnChange }) => {
                             disabled={isForeigner}
                             maxLength="6"
                         />
-                        <Form.Text className={errorMessage.zipcode.required ? 'text-danger font-weight-bold':'text-muted'}>Required</Form.Text>
                         <Form.Text className="text-danger">{errorMessage.zipcode.invalid}</Form.Text>
                     </Form.Group>
                     <Form.Group as={Col} xs={12}>

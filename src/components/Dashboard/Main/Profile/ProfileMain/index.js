@@ -9,6 +9,7 @@ import ProfileAccount from './ProfileAccount'
 import ProfileSocial from './ProfileSocial'
 import ProfileSubscription from './ProfileSubscription'
 import ProfileChoosePlan from './ProfileChoosePlan'
+import ProfileSports from './ProfileSports'
 
 const ProfileMain = ({ handlerPreviewImages }) => {
     return (
@@ -25,6 +26,9 @@ const ProfileMain = ({ handlerPreviewImages }) => {
                 </Route>
                 <Route path="/dashboard/profile/subscription" exact>
                     <ProfileSubscription />
+                </Route>
+                <Route path="/dashboard/profile/sports" exact>
+                    <ProfileSports />
                 </Route>
                 <Route path="/dashboard/profile/subscribe" exact>
                     <ProfileChoosePlan />

@@ -1,5 +1,6 @@
 // Dependencies
 import React, { useState, useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Card from 'react-bootstrap/Card'
@@ -12,7 +13,8 @@ import { FaTwitter, FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/f
 // Redux
 import { setProfileRequest } from '../../../../../../store/profile/actions'
 
-const ProfileSocial = ({ token, profile, setProfileRequest }) => {
+const ProfileSocial = ({ token, profile, setProfileRequest, history }) => {
+    const [isSubscriber, setIsSubscriber] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [formState, setFormState] = useState({
         social: {
@@ -35,8 +37,12 @@ const ProfileSocial = ({ token, profile, setProfileRequest }) => {
                 }
             })
         }
-
+        const verifySubscriber = () => {
+            const subscriber = profile.subscription.status === 'ACTIVE'
+            setIsSubscriber(subscriber)
+        }
         setFormFieldValues()
+        verifySubscriber()
     }, [profile])
 
     const handleFieldChange = (e) => {
@@ -62,6 +68,23 @@ const ProfileSocial = ({ token, profile, setProfileRequest }) => {
         }
 
         setIsLoading(false)
+    }
+
+    const handleSubscribeNow = () => {
+        history.push('/dashboard/profile/subscribe')
+    }
+
+    if (!isSubscriber) {
+        return (
+            <div className="empty__profile-subscription">
+                <p className="lead">
+                    Upgrade to <b>Athletes Pro</b> to gain access to social network feature.
+                </p>
+                <div className="empty__profile-subscription__button">
+                    <Button variant="success" onClick={handleSubscribeNow}>Subscribe now</Button>
+                </div>
+            </div>
+        )
     }
 
     return (
@@ -132,4 +155,4 @@ const mapStateToProps = (state) => ({
     profile: state.profile
 })
 
-export default connect(mapStateToProps, { setProfileRequest })(ProfileSocial)
+export default withRouter(connect(mapStateToProps, { setProfileRequest })(ProfileSocial))

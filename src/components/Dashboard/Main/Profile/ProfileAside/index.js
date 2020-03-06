@@ -34,6 +34,9 @@ const ProfileAside = () => {
             <ListGroup.Item as="li" className={isActive("social")}>
               <Link to="/dashboard/profile/social" className="text-dark">Social</Link>
             </ListGroup.Item>
+            <ListGroup.Item as="li" className={isActive("sports")}>
+              <Link to="/dashboard/profile/sports" className="text-dark">Sports</Link>
+            </ListGroup.Item>
             <ListGroup.Item as="li" className={isActive("subscription") || isActive("subscribe")}>
               <Link to="/dashboard/profile/subscription" className="text-dark">Subscription</Link>
             </ListGroup.Item>

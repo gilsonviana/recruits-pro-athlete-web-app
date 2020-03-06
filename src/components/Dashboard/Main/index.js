@@ -30,6 +30,9 @@ const Main = () => {
                             <Route path={`/dashboard/profile`}>
                                 <Profile />
                             </Route>
+                            <Route path={`/dashboard/videos`}>
+        
+                            </Route>
                         </Switch>
                     </div>
                 </div>
