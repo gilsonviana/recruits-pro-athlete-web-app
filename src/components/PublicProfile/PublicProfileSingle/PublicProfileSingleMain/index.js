@@ -20,7 +20,7 @@ const PublicProfileSingleMain = () => {
     return (
         <main className="page__public-profile-single__main">
             <div className="page__public-profile-single__main__content">
-                <Tabs defaultActiveKey="events" id="uncontrolled-tab-example" className="pl-md-4">
+                <Tabs defaultActiveKey="info" id="uncontrolled-tab-example" className="pl-md-4">
                     <Tab eventKey="info" title={<PublicProfileSingleMainNavItem title="Info" icon={FaRegIdBadge}/>}>
                         <PublicProfileSingleMainInfo />
                     </Tab>
