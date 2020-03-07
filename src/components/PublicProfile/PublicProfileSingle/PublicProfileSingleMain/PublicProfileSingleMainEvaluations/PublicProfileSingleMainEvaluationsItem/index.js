@@ -1,6 +1,8 @@
 // Dependencies
 import React from 'react'
 import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
+import { FaMapMarkerAlt } from 'react-icons/fa'
 
 // Assets
 import './style.css'
@@ -16,10 +18,11 @@ const PublicProfileSingleMainEvaluationsItem = () => {
                             <img src={avatarPlaceholder}/>
                         </div>
                         <div>
-                            <span><b>John Doe</b>, location <b>2401 Lakeshore, Saint Cloud, FL</b></span><br />
+                            <p className="m-0"><b>John Doe</b>, <FaMapMarkerAlt /> <b>2401 Lakeshore, Saint Cloud, FL</b></p>
                             <span className="text-muted">February 28 at 10:00 AM</span>
                         </div>
                     </div>
+                    <Button variant="light" className="mt-4 text-success" style={{marginLeft: `3rem`}}>Metrics</Button>
                 </Card.Body>
             </Card>
         </div>
