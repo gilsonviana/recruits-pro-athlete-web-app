@@ -18,7 +18,7 @@
 @media screen and (min-width: 768px) {
     .page__public-profile-single__main {
         position: relative;
-        padding-top: 17rem;
+        padding-top: 16.5rem;
         padding-left: 16rem;
     }
 
@@ -39,7 +39,6 @@
 @media screen and (min-width: 992px) {
     .page__public-profile-single__main {
         position: relative;
-        padding-top: 17rem;
         padding-left: 22rem;
     }
 }

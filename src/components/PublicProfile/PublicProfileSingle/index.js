@@ -1,25 +1,101 @@
 // Dependencies
-import React from 'react'
-import PropTypes from 'prop-types'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Badge from 'react-bootstrap/Badge'
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
-// Assets
-import avatarImg from "../../../assets/images/avatar-example.jpg"
+// Service
+import { getAthletePublicProfile } from '../../../services/user'
 
 // Components
+import Navbar from '../../Dashboard/Header'
 import PublicProfileSingleHeader from './PublicProfileSingleHeader'
 import PublicProfileSingleAside from './PublicProfileSingleAside'
 import PublicProfileSingleMain from './PublicProfileSingleMain'
 
 const PublicProfileSingle = () => {
+    const [profile, setProfile] = useState({
+        personal: {
+            avatarUrl: '',
+            coverImgUrl: '',
+            fullName: '',
+            references: {
+                first: {
+                    email: '',
+                    name: ''
+                },
+                second: {
+                    email: '',
+                    name: ''
+                },
+                third: {
+                    email: '',
+                    name: ''
+                }
+            }
+        },
+        education: {
+            graduated: false,
+            gpa: '',
+            graduationYear: '',
+            schoolName: ''
+        },
+        subscription: {
+            status: ''
+        },
+        events: [],
+        evaluations: [],
+        social: {
+            facebook: '',
+            instagram: '',
+            twitter: '',
+            linkedin: ''
+        },
+        location: {
+            country: '',
+            zipcode: '',
+            state: '',
+            city: ''
+        },
+        sports: {
+            primary: {
+                positions: [],
+                name: ''
+            },
+            secondary: {
+                positions: [],
+                name: ''
+            },
+        }
+    })
+
+    const { profileId } = useParams()
+
+    useEffect(() => {
+        const fetchUserById = async () => {
+            const res = await getAthletePublicProfile(profileId)
+            setProfile({
+                ...profile,
+                ...res.athlete
+            })
+        }
+        fetchUserById()
+    }, [profileId])
+
     return (
         <div className="page__public-profile-single">
-            <PublicProfileSingleHeader />
-            <PublicProfileSingleAside />
-            <PublicProfileSingleMain />
+            <Navbar />
+            <PublicProfileSingleHeader 
+                coverImgUrl={profile.personal.coverImgUrl}
+                socialNetworks={profile.social}
+                />
+            <PublicProfileSingleAside 
+                avatarUrl={profile.personal.avatarUrl}
+                fullName={profile.personal.fullName}
+                subscriptionStatus={profile.subscription.status}
+                events={profile.events}
+                evaluations={profile.evaluations}
+                socialNetworks={profile.social}
+                />
+            <PublicProfileSingleMain profile={profile}/>
         </div>
     )
 }

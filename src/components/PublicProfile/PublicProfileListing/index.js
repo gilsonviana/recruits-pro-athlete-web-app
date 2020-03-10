@@ -1,8 +1,7 @@
 // Dependencies
 import React from 'react'
+import PropTypes from 'prop-types'
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 
 // Assets
@@ -11,7 +10,7 @@ import './style.css'
 // Components
 import PublicProfileListingItem from './PublicProfileListingItem'
 
-const PublicProfileListing = () => {
+const PublicProfileListing = ({ athletes }) => {
     return (
         <div className="public-profile__listing">
             <div className="public-profile__listing__wrapper">
@@ -24,13 +23,22 @@ const PublicProfileListing = () => {
                         </Card>
                     </div>
                     <div className="public-profile__listing__content">
-                        <h5 className="mt-4"><b>2</b> Athletes found</h5>
-                        <PublicProfileListingItem />
+                        {athletes.length > 1 ? 
+                            <h5 className="mt-4"><b>{athletes.length}</b> Athletes found</h5> :
+                            <h5 className="mt-4"><b>1</b> Athlete found</h5>
+                        }
+                        {
+                            athletes.map(athlete => <PublicProfileListingItem key={athlete._id} athlete={athlete} />)
+                        }
                     </div>
                 </Container>
             </div>
         </div>
     )
+}
+
+PublicProfileListing.propTypes = {
+    athletes: PropTypes.array.isRequired
 }
 
 export default PublicProfileListing

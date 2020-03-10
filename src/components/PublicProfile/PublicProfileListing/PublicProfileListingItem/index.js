@@ -1,27 +1,39 @@
 // Dependencies
 import React from 'react'
+import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import Card from 'react-bootstrap/Card'
 
 // Assets
 import avatarPlaceholder from '../../../../assets/images/user-avatar-placeholder.png'
 
-const PublicProfileListingItem = () => {
+const PublicProfileListingItem = ({ athlete }) => {
+    console.log(athlete)
     return (
-        <Card className="public-profile__listing__item" style={{fontSize: `.8rem`}}> 
-            <Card.Body>
-                <div className="media">
-                    <div className="rounded-circle border overflow-hidden mr-3" style={{width: `65px`, height: `65px`}}>
-                        <img src={avatarPlaceholder} alt="..." className="img-fluid"/>
+        <Link to={`/public/${athlete.user}`} className="d-block mb-3">
+            <Card className="public-profile__listing__item text-dark" style={{fontSize: `.8rem`}}> 
+                <Card.Body>
+                    <div className="media">
+                        <div className="rounded-circle border overflow-hidden mr-3" style={{width: `65px`, height: `65px`}}>
+                            {athlete.personal.avatarUrl ?
+                                <img src={athlete.personal.avatarUrl} alt={athlete.personal.fullName} className="img-fluid"/>:
+                                <img src={avatarPlaceholder} alt={athlete.personal.fullName} className="img-fluid"/>
+                            }
+                        </div>
+                        <div className="media-body">
+                            <h6 className="mt-0">{athlete.personal.fullName}</h6>
+                            <p className="m-0 text-muted">{athlete.education.schoolName || ""}</p>
+                            <p className="m-0 text-muted">{athlete.location.city || ""}</p>
+                        </div>
                     </div>
-                    <div className="media-body">
-                        <h6 className="mt-0">Media heading</h6>
-                        <span className="text-muted">Cras sit amet nibh libero</span><br />
-                        <span className="text-muted">Cras sit amet nibh libero</span><br />
-                    </div>
-                </div>
-            </Card.Body>
-        </Card>
+                </Card.Body>
+            </Card>
+        </Link>
     )
+}
+
+PublicProfileListingItem.propTypes = {
+    athlete: PropTypes.object.isRequired
 }
 
 export default PublicProfileListingItem

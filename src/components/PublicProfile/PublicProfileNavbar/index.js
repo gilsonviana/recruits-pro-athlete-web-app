@@ -10,6 +10,7 @@ import Button from 'react-bootstrap/Button'
 import brand from '../../../assets/images/logo-dashboard.png'
 import './style.css'
 
+// TODO delete this component
 const PublicProfileNavbar = () => {
     return (
         <Navbar bg="dark" expand="md" variant="dark" className="public-profile-navbar fixed-top" style={{minHeight: `4rem`}}>

@@ -1,13 +1,12 @@
 import axios from "axios"
 import keys from '../../config/keys'
 
-export const getAthleteByName = async (name = "") => {
+export const getAthleteByName = async (query) => {
     try {
         const { data } = await axios({
             method: 'GET',
-            url: `${keys.API}/profile/${name}/athlete`
+            url: `${keys.API}/profile/public/athlete${query}`
         })
-        console.log(data)
         return data
     } catch (e) {
         console.log(e)
@@ -20,6 +19,20 @@ export const getAthleteById = async (id = '') => {
         const { data } = await axios({
             method: 'GET',
             url: `${keys.API}/profile/athlete/${id}`,
+        })
+
+        return data
+    } catch (e) {
+        console.log(e.response)
+        return false
+    }
+}
+
+export const getAthletePublicProfile = async (id = '') => {
+    try {
+        const { data } = await axios({
+            method: 'GET',
+            url: `${keys.API}/profile/athlete/public/${id}`
         })
 
         return data
