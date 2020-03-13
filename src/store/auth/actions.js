@@ -16,6 +16,10 @@ export const doLogin = (credentials) => {
                 }
             })
     
+            if (data.user.role !== 'a') {
+                throw new Error('Unable to login.')
+            }
+
             dispatch({
                 type: SET_TOKEN,
                 payload: data.token
@@ -35,7 +39,7 @@ export const doLogin = (credentials) => {
                     error: e.response.data
                 }
             })
-            return false
+            throw new Error(e.response.message)
         }
     }
 }

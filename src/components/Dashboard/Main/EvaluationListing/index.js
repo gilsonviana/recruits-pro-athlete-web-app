@@ -10,17 +10,22 @@ import Card from 'react-bootstrap/Card'
 // Components
 import EvaluationSearchBar from './EvaluationSearchBar'
 import EvaluationListItem from './EvaluationListItem'
+import MarketingBanner from '../MarketingBanner'
 
-const EvaluationListing = ({ evaluations }) => {
+const EvaluationListing = ({ evaluations, subscriptionStatus }) => {
     const [evaluationsState, setEvaluationsState] = useState(null)
 
     useEffect(() => {
         const populateEvaluationsState = () => {
+            if (evaluations.length >= 1 && subscriptionStatus !== 'ACTIVE') {
+                setEvaluationsState([evaluations[evaluations.length - 1]])
+                return                
+            }
             setEvaluationsState([...evaluations])
         }
 
         populateEvaluationsState()
-    }, [evaluations])
+    }, [evaluations, subscriptionStatus])
 
     const handleSearch = (e) => {
         const { target } = e
@@ -59,12 +64,25 @@ const EvaluationListing = ({ evaluations }) => {
 
     return (
         <div className="page__evaluation__listing">
+        {
+            subscriptionStatus !== 'ACTIVE' && 
+                <MarketingBanner 
+                    title="Do more with Athletes Pro" 
+                    text={`
+                        Boost your profile with unlimited video uploads, social media integration, 
+                        contact references and more by subscribing to Athletes Pro.
+                    `} />
+        }
             <Container fluid>
                 <Row noGutters>
                     <Col>
                         <Card className="shadow-sm pt-3 px-3 mb-5 bg-white rounded">
-                            <Card.Title>Evaluations</Card.Title>
                             <Card.Body>
+                            <h5 className="font-weight-bold">Evaluations</h5>
+                            <p className="lead">
+                                Track your performance and read insightful notes from coaches and trainers.
+                            </p>
+                            {evaluations.length >= 1 && subscriptionStatus !== 'ACTIVE' && <span className="text-danger font-weight-bold lead d-block mb-4">You have reached the limit of evaluations you can see.</span>}
                             <EvaluationSearchBar handleOnChange={handleSearch} handleFilter={handleSearchFilter}/>
                             {
                                 (evaluationsState.length > 0) ?
@@ -92,11 +110,13 @@ const EvaluationListing = ({ evaluations }) => {
 }
 
 EvaluationListing.propTypes = {
-    evaluations: PropTypes.array.isRequired
+    evaluations: PropTypes.array.isRequired,
+    subscriptionStatus: PropTypes.string.isRequired
 }
 
 const mapStateToProps = (state) => ({
-    evaluations: state.profile.evaluations
+    evaluations: state.profile.evaluations,
+    subscriptionStatus: state.profile.subscription.status
 })
 
 export default connect(mapStateToProps)(EvaluationListing)

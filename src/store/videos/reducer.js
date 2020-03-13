@@ -18,6 +18,11 @@ export default (state = initialState, action) => {
             return [
                 ...action.payload
             ]
+        case "RESET_PROFILE": {
+            return [
+                ...initialState
+            ]
+        }
         default:
             return state
     }

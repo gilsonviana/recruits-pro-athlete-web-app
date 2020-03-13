@@ -46,9 +46,9 @@ const Header = ({ doLogout, token, fullName, avatarUrl, history }) => {
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="app-mobile-navbar-nav" />
             <Navbar.Collapse id="app-mobile-navbar-nav">
-                <Form inline>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                    <Button variant="outline-success">Search</Button>
+                <Form inline onSubmit={handleSearch}>
+                    <FormControl type="text" onChange={e => setSearchName(e.target.value)} placeholder="Search" className="mr-sm-2" />
+                    <Button type="submit" variant="outline-success">Search</Button>
                 </Form>
                 <Nav className="mr-auto">
                     <Nav.Link href="#home">Overview</Nav.Link>

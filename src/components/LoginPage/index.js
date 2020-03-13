@@ -60,14 +60,7 @@ const LoginPage = ({ history, token, doLogin, getSubscriptionPlans }) => {
         setIsLoading(true)
         
         try {
-            const res = await doLogin(formState)
-
-            // Redirect user if profile role different than `a` = Athlete
-            if (res.user.role !== 'a') {
-                // TODO create welcome page for Evaluator and point user to Mobile App
-                alert('Evaluator')
-                return
-            }
+            await doLogin(formState)
             history.push('/redirect')
         } catch (e) {
             setIsLoading(false)
