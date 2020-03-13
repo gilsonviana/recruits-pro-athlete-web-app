@@ -41,18 +41,18 @@ const Aside = ({ subscription }) => {
                                 </Link>
                             </li>
                             <li className="menu-item">
-                                <Link className="menu-item-link text-dark" to={(!isSubscriber()) ? '/dashboard/profile/subscribe' : '/'}>
-                                    <FaRegNewspaper className="menu-item-icon" />
-                                    <span className="menu-item-text">Events</span>
-                                    {(!isSubscriber()) && <Badge pill variant="success" className="float-right mt-1">Pro</Badge>}
-                                </Link>
-                            </li>
-                            <li className="menu-item">
-                                <Link className="menu-item-link text-dark" to={(!isSubscriber()) ? '/dashboard/profile/videos' : '/'}>
+                                <Link className="menu-item-link text-dark" to={'/dashboard/videos'}>
                                     <FiVideo className="menu-item-icon" />
                                     <span className="menu-item-text">Videos</span>
-                                    {(!isSubscriber()) && <Badge pill variant="success" className="float-right mt-1">Pro</Badge>}
+                                    {/* {(!isSubscriber()) && <Badge pill variant="success" className="float-right mt-1">Pro</Badge>} */}
                                 </Link>
+                            </li>
+                            <li className="menu-item-link text-muted">
+                                {/* <Link className="menu-item-link text-dark" to={(!isSubscriber()) ? '/dashboard/profile/subscribe' : '/'}> */}
+                                    <FaRegNewspaper className="menu-item-icon" />
+                                    <span className="menu-item-text">Events</span>
+                                    {(!isSubscriber()) && <Badge pill variant="success" className="float-right mt-1">Coming soon</Badge>}
+                                {/* </Link> */}
                             </li>
                         </ul>
                     </nav>

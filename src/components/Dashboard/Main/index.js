@@ -10,6 +10,7 @@ import Profile from './Profile'
 
 // Assets
 import './style.css'
+import Videos from './Videos'
 
 const Main = () => {
     return (
@@ -31,7 +32,7 @@ const Main = () => {
                                 <Profile />
                             </Route>
                             <Route path={`/dashboard/videos`}>
-        
+                                <Videos />
                             </Route>
                         </Switch>
                     </div>

@@ -1,5 +1,6 @@
 // Dependencies
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -11,7 +12,7 @@ import Alert from 'react-bootstrap/Alert'
 import './style.css'
 import bg from '../../../../assets/images/dots.png'
 
-const MarketingBanner = ({ history }) => {
+const MarketingBanner = ({ history, title, text }) => {
     const [showAlert, setShowAlert] = useState(true)
 
     const handleSubscribe = () => {
@@ -26,11 +27,8 @@ const MarketingBanner = ({ history }) => {
                         <div className="banner__marketing__content">
                             <Row>
                                 <Col xs={12} md={7}>
-                                    <h4>Do more with Athletes Pro</h4>
-                                    <p className="lead">
-                                        Boost your profile with unlimited video upload, social media integration, 
-                                        contact references and more by subscribing to <b>Athletes Pro</b>.
-                                    </p>
+                                    <h4>{title}</h4>
+                                    <p className="lead">{text}</p>
                                 </Col>
                                 <Col xs={12} md={{span: 4, offset: 1}} className="d-flex align-items-center">
                                     <Button onClick={handleSubscribe}>Subscribe</Button>
@@ -46,6 +44,12 @@ const MarketingBanner = ({ history }) => {
     return (
         <></>
     )
+}
+
+MarketingBanner.propTypes = {
+    title: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    history: PropTypes.object.isRequired
 }
 
 export default withRouter(MarketingBanner)

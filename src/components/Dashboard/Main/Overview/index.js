@@ -16,7 +16,13 @@ const Overview = ({ evaluations, subscriptionStatus }) =>  {
     return (
         <div className="page__overview">
             {
-                subscriptionStatus !== 'ACTIVE' && <MarketingBanner />
+                subscriptionStatus !== 'ACTIVE' && 
+                    <MarketingBanner 
+                        title="Do more with Athletes Pro" 
+                        text={`
+                            Boost your profile with unlimited video uploads, social media integration, 
+                            contact references and more by subscribing to Athletes Pro.
+                        `} />
             }
             <OverviewWelcome />
             <Container fluid>
