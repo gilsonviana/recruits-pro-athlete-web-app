@@ -10,7 +10,7 @@ import Datepicker from 'react-datepicker'
 // Assets
 import "./style.css";
 
-const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
+const CreateProfilePersonal = ({ handleTabKey, handleOnChange, doLogout }) => {
     const [dob, setDob] = useState(new Date())
     const [errorMessage, setErrorMessage] = useState({
         number: '',
@@ -292,6 +292,7 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
                     </Form.Group>
                 </Form.Row>
                 <Form.Group className="clearfix">
+                    <Button variant="link" onClick={doLogout}>Cancel</Button>
                     <Button className="create-profile__personal__button-next float-right" onClick={() => handleTabKey("location")}>
                         Next <FaArrowRight className="ml-2" />
                     </Button>
@@ -303,7 +304,8 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange }) => {
 
 CreateProfilePersonal.propTypes = {
     handleTabKey: PropTypes.func.isRequired,
-    handleOnChange: PropTypes.func.isRequired
+    handleOnChange: PropTypes.func.isRequired,
+    doLogout: PropTypes.func.isRequired,
 };
 
 export default CreateProfilePersonal;

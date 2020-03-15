@@ -18,6 +18,7 @@ import Toast from 'react-bootstrap/Toast'
 
 // Redux
 import { setProfileRequest, setProfileImagesRequest } from '../../store/profile/actions'
+import { doLogout } from '../../store/auth/actions'
 
 // Components
 import CreateProfileHeader from "./CreateProfileHeader";
@@ -31,7 +32,7 @@ import "./style.css";
 import brand from '../../assets/images/logo-dashboard.png'
 import userAvatarPlaceholder from "../../assets/images/user-avatar-placeholder.png";
 
-const CreateProfile = ({ history, token, setProfileRequest, setProfileImagesRequest }) => {
+const CreateProfile = ({ history, token, setProfileRequest, setProfileImagesRequest, doLogout }) => {
     const [showToast, setShowToast] = useState({
         isVisible: false,
         message: ''
@@ -438,6 +439,7 @@ const CreateProfile = ({ history, token, setProfileRequest, setProfileImagesRequ
                             >
                                 <Tab eventKey="personal" title="Personal">
                                     <CreateProfilePersonal
+                                        doLogout={doLogout}
                                         handleTabKey={handleChangeTabKey}
                                         handleOnChange={handlePersonalFormOnChange} />
                                 </Tab>
@@ -470,10 +472,11 @@ CreateProfile.propTypes = {
     token: PropTypes.string.isRequired,
     setProfileRequest: PropTypes.func.isRequired,
     setProfileImagesRequest: PropTypes.func.isRequired,
+    doLogout: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
     token: state.auth.token
 })
 
-export default connect(mapStateToProps, { setProfileRequest, setProfileImagesRequest })(withRouter(CreateProfile));
+export default connect(mapStateToProps, { setProfileRequest, setProfileImagesRequest, doLogout })(withRouter(CreateProfile));
