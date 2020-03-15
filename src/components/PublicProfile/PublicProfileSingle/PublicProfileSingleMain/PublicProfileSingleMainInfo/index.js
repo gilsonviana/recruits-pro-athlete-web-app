@@ -12,8 +12,9 @@ import moment from 'moment'
 
 // Assets
 import './style.css'
+import lock from '../../../../../assets/images/lock.png'
 
-const PublicProfileSingleMainInfo = ({ personal, location, sports, education }) => {
+const PublicProfileSingleMainInfo = ({ personal, location, sports, education, isSubscriber }) => {
     const dob = personal.dob ? new Date(personal.dob) : ''
     const city = location.hasOwnProperty('city') ? location.city : ''
     const state = location.hasOwnProperty('state') ? location.state : ''
@@ -46,8 +47,8 @@ const PublicProfileSingleMainInfo = ({ personal, location, sports, education }) 
                                     <Card.Body>
                                         <Card.Title>Information</Card.Title>
                                         {dob && <Card.Text><FaRegCalendarAlt className="mr-1"/> Born on {moment(dob).format('MMMM d YYYY')}</Card.Text>}
-                                        <Card.Text><MdEmail className="mr-1"/> {personal.email || ''}</Card.Text>
-                                        <Card.Text><FaMobileAlt className="mr-1"/> {personal.hasOwnProperty('phone') ? personal.phone.number : ''}</Card.Text>
+                                        <Card.Text><MdEmail className="mr-1"/> <a alt={`${personal.fullName} email`} href={`mailto: ${personal.email}`}>{personal.email || ''}</a></Card.Text>
+                                        {isSubscriber && <Card.Text><FaMobileAlt className="mr-1"/> {personal.hasOwnProperty('phone') ? personal.phone.number : ''}</Card.Text>}
                                         <Card.Text><FaHome className="mr-1"/> Lives in <b>{city}</b>, <b>{state}</b></Card.Text>
                                     </Card.Body>
                                 </Card>
@@ -63,7 +64,13 @@ const PublicProfileSingleMainInfo = ({ personal, location, sports, education }) 
                                 </Card>
                             </Tab.Pane>
                             <Tab.Pane eventKey="#references">
-                                <Card>
+                                <div className="public-profile__single-main__info__content__blocked">
+                                    <p className="m-0 mb-2 lead text-center">
+                                        Content available for <b>Athletes Pro</b> only.
+                                    </p>
+                                    <img src={lock} alt="content blocked" className="img-fluid"/>
+                                </div>
+                                <Card style={!isSubscriber && {filter: `blur(.2rem)`}}>
                                     <Card.Body>
                                         <Card.Title>References</Card.Title>
                                         <Card.Text><FaUserAlt className="mr-1" /> {personal.references.first.name || ''} | <MdEmail className="mr-1" /> <a href={`mailto:${personal.references.first.email}`} alt="send email"><span className="text-info">{personal.references.first.email || ''}</span></a></Card.Text>
@@ -105,7 +112,8 @@ PublicProfileSingleMainInfo.propTypes = {
     personal: PropTypes.object,
     location: PropTypes.object,
     sports: PropTypes.object,
-    education: PropTypes.object
+    education: PropTypes.object,
+    isSubscriber: PropTypes.bool
 }  
 
 export default PublicProfileSingleMainInfo

@@ -1,6 +1,7 @@
 import * as types from './types'
 import axios from 'axios'
 import config from '../../config/keys'
+import { SET_PROFILE_VIDEOS, REMOVE_PROFILE_VIDEOS } from '../profile/types'
 
 export const addVideo = (token, videoDetails = { platform: '', title: '', url: '' }) => {
     return async dispatch => {
@@ -16,6 +17,10 @@ export const addVideo = (token, videoDetails = { platform: '', title: '', url: '
             dispatch({
                 type: types.ADD_VIDEO,
                 payload: data.video
+            })
+            dispatch({
+                type: SET_PROFILE_VIDEOS,
+                payload: data.video._id
             })
             return true
         } catch (e) {
@@ -37,6 +42,10 @@ export const deleteVideo = (token, id) => {
 
             dispatch({
                 type: types.DELETE_VIDEO,
+                payload: id
+            })
+            dispatch({
+                type: REMOVE_PROFILE_VIDEOS,
                 payload: id
             })
         } catch (e) {

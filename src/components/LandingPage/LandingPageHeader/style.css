@@ -1,0 +1,13 @@
+.page__landing__header .navbar-brand img {
+    max-height: 80px;
+}
+
+@media screen and (min-width: 768px) {
+    .page__landing__header__link {
+        padding: .3rem 2rem;
+        border-radius: 2rem;
+        background: #00ff00;
+        letter-spacing: .05rem;
+        box-shadow: 0rem 1rem 3rem -0.9rem rgba(80, 80, 80, 0.9)
+    }
+}

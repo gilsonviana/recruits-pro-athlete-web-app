@@ -18,7 +18,8 @@ const PublicProfileListing = ({ athletes }) => {
                     <div className="public-profile__listing__banner">
                         <Card className="py-4">
                             <Card.Body>
-                                <Card.Title>Take your game to a next level</Card.Title>
+                                <Card.Title className="font-weight-bold">Take your game to a next level</Card.Title>
+                                <Card.Title className="lead">Sign up for <b>Athletes Pro</b> today</Card.Title>
                             </Card.Body>
                         </Card>
                     </div>

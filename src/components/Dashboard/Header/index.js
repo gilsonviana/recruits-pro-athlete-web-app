@@ -35,7 +35,6 @@ const Header = ({ doLogout, token, fullName, avatarUrl, history }) => {
             })
         }
     }
-    // TODO config handle search for mobile navbar
     return (
         <>
         <Navbar fixed="top" className="d-md-none" bg="dark" variant="dark" expand="md">
@@ -66,10 +65,10 @@ const Header = ({ doLogout, token, fullName, avatarUrl, history }) => {
         </Navbar>
         <header className="app__header bg-dark fixed-top d-none d-md-block">
             <div className="app__header__top__bar">
-                <div className="app__header__top__bar__brand mr-4">
+                <Link to={token ? '/dashboard' : '/'} className="app__header__top__bar__brand mr-4">
                     <img src={brand} alt="Recruits Pro Logo" className="d-none d-md-flex"/>
                     <h3 className="text-white d-md-none">Recruits Pro</h3>
-                </div>
+                </Link>
                 <Form inline onSubmit={handleSearch}>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={e => setSearchName(e.target.value.trim())}/>
                     <Button type="submit" variant="outline-success">Search</Button>

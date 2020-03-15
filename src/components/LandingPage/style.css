@@ -1,0 +1,4 @@
+.page__landing {
+    min-height: 100vh;
+    background: url('../../assets/images/bg-landing.png') bottom  right -20rem / cover no-repeat, linear-gradient(360deg, rgba(80, 255, 80, 0.45), transparent 10%);
+}

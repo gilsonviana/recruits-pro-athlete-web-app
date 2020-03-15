@@ -64,7 +64,8 @@ const PublicProfileSingle = () => {
                 positions: [],
                 name: ''
             },
-        }
+        },
+        videos: []
     })
 
     const { profileId } = useParams()

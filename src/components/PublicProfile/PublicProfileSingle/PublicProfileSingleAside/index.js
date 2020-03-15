@@ -23,7 +23,7 @@ const PublicProfileSingleAside = ({ avatarUrl, fullName, subscriptionStatus, eve
                         {
                             avatarUrl ? 
                                 <div className="page__public-profile-single__aside__avatar rounded-circle">
-                                    <img src="https://recruits-pro-athletes-avatar-cover.s3.us-east-2.amazonaws.com/1582592813685avatr.jpg" alt={`${fullName} avatar`}/>
+                                    <img src={avatarUrl} alt={`${fullName} avatar`}/>
                                 </div> :
                                 <div className="page__public-profile-single__aside__avatar rounded-circle" style={{background: `#f6f7f9`, padding: `2rem`}}>
                                     <img src={avatarPlaceholder} alt={`${fullName} has no avatar`}/>

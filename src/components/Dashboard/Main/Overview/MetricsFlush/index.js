@@ -28,7 +28,7 @@ const MetricsFlush = ({ evaluations, videos }) => {
                         <ReactTooltip place="top" type="dark" effect="float"/>
                     </Col>
                     <Col xs={12} md={4}>
-                        <div data-tip="Total number of events you've attended." data-iscapture="true" className="text-center h-100 pt-3 border-right border-grey">
+                        <div data-tip="Total number of events you've attended to." data-iscapture="true" className="text-center h-100 pt-3 border-right border-grey">
                             <h4 className="text-muted">Events</h4>
                             <p className="font-weight-bold">
                                 <FaRegNewspaper className="mr-2 text-muted" />0

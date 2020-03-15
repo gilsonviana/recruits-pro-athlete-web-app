@@ -23,14 +23,13 @@
 .public-profile__single-main__info__content {
     font-size: .88rem;
 }
-/* @media screen and (min-width: 768px) {
-    .public-profile__single-main__info {
-        width: 465px;
-    }
+
+.public-profile__single-main__info__content__blocked {
+    position: absolute;
+    z-index: 1;
+    text-align: center;
 }
 
-@media screen and (min-width: 992px) {
-    .public-profile__single-main__info {
-        width: 565px;
-    }
-} */
+.public-profile__single-main__info__content__blocked img {
+    width: 120px;
+}

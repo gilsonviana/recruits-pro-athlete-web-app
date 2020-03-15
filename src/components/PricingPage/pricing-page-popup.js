@@ -10,10 +10,8 @@ const PricingPagePopup = ({ handleClose, handleSignupFree, handleSignupPro }) =>
         <div className="pricing-page-popup px-3" onClick={handleClose}>
             <Card className="pricing-page-popup__content">
                 <Card.Body className="p-4">
-                    <Card.Title>
-                        <h1>Make the right decision.</h1>
-                    </Card.Title>
-
+                    <Card.Title className="font-weight-bold">Make the right decision for your career</Card.Title>
+                    <Card.Text className="lead">Sign up for <b>Athletes Pro</b> and have unlimited videos upload, full evaluation insight from coaches and trainers, and more.</Card.Text>
                 </Card.Body>
                 <Card.Footer className="px-4 bg-light border-0 d-flex flex-row justify-content-between">
                     <Button onClick={handleSignupPro}>Select PRO plan</Button>

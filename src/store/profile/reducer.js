@@ -69,6 +69,7 @@ const initialState = {
         }
     },
     evaluations: [],
+    videos: [],
     meta: {
         isCompleted: false,
         lastVisit: ''
@@ -108,6 +109,22 @@ export default (state = initialState, action) => {
                     avatarUrl: action.payload.avatarUrl,
                     coverImgUrl: action.payload.coverImgUrl
                 }
+            }
+        case types.SET_PROFILE_VIDEOS:
+            return {
+                ...state,
+                videos: [
+                    ...state.videos,
+                    action.payload
+                ]
+            }
+        case types.REMOVE_PROFILE_VIDEOS:
+            return {
+                ...state,
+                videos: [
+                    ...state.videos.slice(0, state.videos.indexOf(action.payload)),
+                    ...state.videos.slice(state.videos.indexOf(action.payload) + 1)
+                ]
             }
         case types.RESET_PROFILE:
             return {

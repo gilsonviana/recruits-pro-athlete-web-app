@@ -17,7 +17,8 @@ import PublicProfileSingleMainEvents from './PublicProfileSingleMainEvents'
 import PublicProfileSingleMainVideos from './PublicProfileSingleMainVideos'
 
 const PublicProfileSingleMain = ({ profile }) => {
-    console.log('PublicProfileSingleMain', profile)
+    const isSubscriber = profile.subscription.status !== 'ACTIVE' ? false : true
+
     return (
         <main className="page__public-profile-single__main">
             <div className="page__public-profile-single__main__content">
@@ -28,16 +29,20 @@ const PublicProfileSingleMain = ({ profile }) => {
                             location={profile.location}
                             sports={profile.sports}
                             education={profile.education}
+                            isSubscriber={isSubscriber}
                         />
                     </Tab>
                     <Tab eventKey="evaluations" title={<PublicProfileSingleMainNavItem title="Evaluations" icon={FaWpforms}/>}>
-                        <PublicProfileSingleMainEvaluations evaluations={profile.evaluations} subscriptionStatus={profile.subscription.status}/>
+                        <PublicProfileSingleMainEvaluations 
+                            evaluations={profile.evaluations} 
+                            subscriptionStatus={profile.subscription.status}/>
                     </Tab>
                     <Tab eventKey="events" title={<PublicProfileSingleMainNavItem title="Events" icon={FaRegNewspaper}/>}>
                         <PublicProfileSingleMainEvents />
                     </Tab>
                     <Tab eventKey="videos" title={<PublicProfileSingleMainNavItem title="Videos" icon={FiVideo}/>}>
-                        <PublicProfileSingleMainVideos />
+                        <PublicProfileSingleMainVideos 
+                            videos={profile.videos}/>
                     </Tab>
                 </Tabs>
             </div>

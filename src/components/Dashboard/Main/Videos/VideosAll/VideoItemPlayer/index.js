@@ -16,11 +16,13 @@ const VideoItemPlayer = ({ videoUrl, title, id, deleteVideo }) => {
     return (
         <div className="video-item-player-wrapper">
             <div className="video-item-player-header">
-                {/** TODO add character limit to video title*/}
                 <h6 className="font-weight-bold m-0">{title}</h6>
-                <DropdownButton title={<FiMoreVertical/>} variant="light" id="bg-nested-dropdown">
-                    <Dropdown.Item eventKey="1" onClick={handleDelete}>Remove video</Dropdown.Item>
-                </DropdownButton>
+                {
+                    id && 
+                    <DropdownButton title={<FiMoreVertical/>} variant="light" id="bg-nested-dropdown">
+                        <Dropdown.Item eventKey="1" onClick={handleDelete}>Remove video</Dropdown.Item>
+                    </DropdownButton>
+                }
             </div>
             <ReactPlayer
                 url={videoUrl}
@@ -36,7 +38,7 @@ const VideoItemPlayer = ({ videoUrl, title, id, deleteVideo }) => {
 VideoItemPlayer.propTypes = {
     videoUrl: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
+    id: PropTypes.string,
     deleteVideo: PropTypes.func
 }
 
