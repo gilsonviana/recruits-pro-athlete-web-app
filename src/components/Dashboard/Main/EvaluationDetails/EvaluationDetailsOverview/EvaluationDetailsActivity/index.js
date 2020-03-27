@@ -1,5 +1,6 @@
 // Dependencies
 import React from 'react'
+import PropTypes from 'prop-types'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
@@ -7,19 +8,23 @@ import Col from 'react-bootstrap/Col'
 import EvaluationDetailsChart from './EvaluationDetailsChart'
 import EvaluationDetailsChartSummary from './EvaluationDetailsChartSummary'
 
-const EvaluationDetailsActivity = () => {
+const EvaluationDetailsActivity = ({ metric }) => {
     return (
         <div className="evaluation-details-activity mt-4">
             <Row>
                 <Col xs={12} md={6} lg={8}>
-                    <EvaluationDetailsChart />
+                    <EvaluationDetailsChart metric={metric}/>
                 </Col>
                 <Col xs={12} md={6} lg={4}>
-                    <EvaluationDetailsChartSummary />
+                    {/* <EvaluationDetailsChartSummary /> */}
                 </Col>
             </Row>
         </div>
     )
+}
+
+EvaluationDetailsActivity.propTypes = {
+    metric: PropTypes.object
 }
 
 export default EvaluationDetailsActivity

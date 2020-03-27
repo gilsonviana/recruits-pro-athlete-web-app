@@ -139,7 +139,9 @@ const LoginPage = ({ history, token, doLogin, getSubscriptionPlans }) => {
                 justifyContent: 'space-between'
             }}>
                 <header className="page__login__header">
-                    <img src={logo} alt="Recruits pro logo" />
+                    <Link to="/">
+                        <img src={logo} alt="Recruits pro logo" />
+                    </Link>
                 </header>
                 <Row>
                     <Col xs={12} md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }}>

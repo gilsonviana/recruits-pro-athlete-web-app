@@ -77,6 +77,7 @@ const SignupPage = ({ history, signUp, getSubscriptionPlans }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setIsLoading(true)
     const res = await signUp(formState)
 
     if (!res) {
@@ -87,16 +88,10 @@ const SignupPage = ({ history, signUp, getSubscriptionPlans }) => {
       return
     }
 
-    getSubscriptionPlans()
+    await getSubscriptionPlans()
 
-    setIsLoading(true)
-
-    // TODO remove for production mode
-    setTimeout(() => {
-      setIsLoading(false)
-      history.push('/choose-plan')
-    }, 3000)
-
+    setIsLoading(false)
+    history.push('/choose-plan')
   }
 
   const isFormValid = () => {
@@ -203,7 +198,9 @@ const SignupPage = ({ history, signUp, getSubscriptionPlans }) => {
         justifyContent: 'space-between'
       }}>
         <header className="page__signup__header">
-          <img src={logo} alt="Recruits pro logo"/>
+          <Link to="/">
+            <img src={logo} alt="Recruits pro logo"/>
+          </Link>
         </header>
         <Row>
           <Col xs={12} md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }}>
@@ -233,7 +230,7 @@ const SignupPage = ({ history, signUp, getSubscriptionPlans }) => {
                     }
                   </form>
                   <div className="page__signup__content__footer">
-                    <Link to="/">Login</Link>
+                    <Link to="/login">Login</Link>
                   </div>
                 </div>
               </div>

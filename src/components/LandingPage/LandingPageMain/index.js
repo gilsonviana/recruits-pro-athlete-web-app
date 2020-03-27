@@ -13,7 +13,9 @@ const LandingPageMain = () => {
                 <Row>
                     <Col md={6}>
                         <div className="page__landing__main__content">
-                            <h1 className="page__landing__main__content__title">Build your Professional Career</h1>
+                            <h1 className="page__landing__main__content__title">
+                                Improving Your Game Is Knowing Your Numbers
+                            </h1>
                             <p className="mt-4 lead text-black-50">
                                 <b>Athletes Pro</b> is the go-to tool to create a great
                                 impression on coaches, scouts and others.

@@ -1,7 +1,7 @@
 // Dependencies
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Toast from 'react-bootstrap/Toast'
 import Form from 'react-bootstrap/Form'
@@ -139,7 +139,9 @@ const ResetPasswordNew = ({
                 }}
             >
                 <header className="page__reset-password-code__header">
-                    <img src={logo} alt="Recruits pro logo" />
+                    <Link to="/">
+                        <img src={logo} alt="Recruits pro logo" />
+                    </Link>
                 </header>
                 <Row>
                     <Col xs={12} md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }}>

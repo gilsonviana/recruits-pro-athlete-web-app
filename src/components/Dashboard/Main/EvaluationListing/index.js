@@ -30,7 +30,7 @@ const EvaluationListing = ({ evaluations, subscriptionStatus }) => {
     const handleSearch = (e) => {
         const { target } = e
 
-        setEvaluationsState([...evaluations.filter(evaluation => evaluation.userId.personal.fullName.indexOf(target.value) >= 0)])
+        setEvaluationsState([...evaluations.filter(evaluation => evaluation.evaluatorId.personal.fullName.indexOf(target.value) >= 0)])
     }
 
     const handleSearchFilter = (filter = {
@@ -94,10 +94,10 @@ const EvaluationListing = ({ evaluations, subscriptionStatus }) => {
                                     <EvaluationListItem 
                                         key={evaluation._id} 
                                         id={evaluation._id} 
-                                        fullName={evaluation.userId.personal.fullName} 
+                                        fullName={evaluation.evaluatorId.personal.fullName} 
                                         date={evaluation.createdAt} 
                                         sportCategory={evaluation.form.sport}
-                                        avatar={evaluation.userId.personal.avatarUrl}/>)  
+                                        avatar={evaluation.evaluatorId.personal.avatarUrl}/>)  
                                 : <p>No evaluation matches the criteria.</p>
                             }
                             </Card.Body>

@@ -25,7 +25,7 @@ const PublicProfileSingleHeader = ({ coverImgUrl, socialNetworks }) => {
 }
 
 PublicProfileSingleHeader.propTypes = {
-    coverImgUrl: PropTypes.string.isRequired,
+    coverImgUrl: PropTypes.string,
     socialNetworks: PropTypes.shape({
         facebook: PropTypes.string,
         instagram: PropTypes.string,

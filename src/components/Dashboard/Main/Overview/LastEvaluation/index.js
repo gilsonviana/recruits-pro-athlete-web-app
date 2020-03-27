@@ -17,7 +17,7 @@ const LastEvaluation = ({ evaluation }) => {
                 <Card.Body>
                     <div className="d-flex text-muted">
                         <GiWhistle size={20} className="mr-2" />
-                        <h5>{evaluation.userId.personal.fullName || <Skeleton width={50}/>}</h5>
+                        <h5>{evaluation.evaluatorId.personal.fullName || <Skeleton width={50}/>}</h5>
                     </div>
                 </Card.Body>
                 <Card.Footer className="bg-transparent border-0 m-0 p-0">

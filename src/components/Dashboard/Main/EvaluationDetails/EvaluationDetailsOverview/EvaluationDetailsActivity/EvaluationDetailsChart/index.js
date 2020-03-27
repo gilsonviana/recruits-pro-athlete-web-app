@@ -1,5 +1,6 @@
 // Dependencies
 import React, { useMemo } from "react";
+import PropTypes from 'prop-types'
 // @https://github.com/tannerlinsley/react-charts
 import { Chart } from "react-charts";
 import Card from "react-bootstrap/Card";
@@ -7,7 +8,7 @@ import Card from "react-bootstrap/Card";
 // Components
 import EvaluationDetailsChartEmptyState from './EvaluationDetailsChartEmptyState'
 
-const EvaluationDetailsChart = () => {
+const EvaluationDetailsChart = ({ metric }) => {
   const data = useMemo(
     () => [
       {
@@ -34,18 +35,25 @@ const EvaluationDetailsChart = () => {
     <Card className="evaluation-details-chart shadow-sm pt-3 px-3 mb-4 bg-white rounded">
       <Card.Title>Activity</Card.Title>
       <Card.Body>
-        {/* <EvaluationDetailsChartEmptyState /> */}
-        <div
-          style={{
-            width: '100%',
-            height: '15rem'
-          }}
-        >
-          <Chart data={data} axes={axes} />
-        </div>
+        {
+          !metric._id ? 
+            <EvaluationDetailsChartEmptyState /> :
+            <div
+              style={{
+                width: '100%',
+                height: '15rem'
+              }}
+            >
+              <Chart data={data} axes={axes} />
+            </div>
+        }
       </Card.Body>
     </Card>
   );
 };
+
+EvaluationDetailsChart.propTypes = {
+  metric: PropTypes.object
+}
 
 export default EvaluationDetailsChart;

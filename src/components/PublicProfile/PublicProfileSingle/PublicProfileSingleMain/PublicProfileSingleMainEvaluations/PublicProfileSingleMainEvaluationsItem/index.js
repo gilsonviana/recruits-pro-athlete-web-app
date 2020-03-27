@@ -21,12 +21,12 @@ const PublicProfileSingleMainEvaluationsItem = ({ evaluation }) => {
             <Card>
                 <Card.Body>
                     <div className="media">
-                        {evaluation.userId.personal.avatarUrl ? 
-                            <img className="public-profile__evaluations__card__header__img" src={evaluation.userId.personal.avatarUrl} alt={`coach ${evaluation.userId.personal.fullName}`}/> :
-                            <img className="public-profile__evaluations__card__header__img" src={avatarPlaceholder} alt={`coach ${evaluation.userId.personal.avatarUrl} has no avatar`}/>
+                        {evaluation.evaluatorId.personal.avatarUrl ? 
+                            <img className="public-profile__evaluations__card__header__img" src={evaluation.evaluatorId.personal.avatarUrl} alt={`coach ${evaluation.evaluatorId.personal.fullName}`}/> :
+                            <img className="public-profile__evaluations__card__header__img" src={avatarPlaceholder} alt={`coach ${evaluation.evaluatorId.personal.avatarUrl} has no avatar`}/>
                         }
                         <div className="media-body">
-                            <p className="m-0"><b>{evaluation.userId.personal.fullName}</b>, <FaMapMarkerAlt /> <b>{address}</b></p>
+                            <p className="m-0"><b>{evaluation.evaluatorId.personal.fullName}</b>, <FaMapMarkerAlt /> <b>{address}</b></p>
                             <p className="m-0 mb-4 text-muted">{date}</p>
                             <Button onClick={() => setShowMetrics(!showMetrics)} variant="light" className="public-profile__single-main__evaluations__item__button text-success">Metrics</Button>
                         </div>

@@ -1,11 +1,10 @@
 // Dependencies
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import Table from 'react-bootstrap/Table'
 
-const EvaluationDetailsMetrics = ({ metrics }) => {
+const EvaluationDetailsMetrics = ({ metrics, handleSelect }) => {
     return (
         <Card className="evaluation-details-metrics shadow-sm pt-3 px-3 mb-5 bg-white rounded">
             <Card.Title>Metrics</Card.Title>
@@ -21,8 +20,8 @@ const EvaluationDetailsMetrics = ({ metrics }) => {
                     <tbody>
                         {
                             metrics.map(metric => 
-                                <tr className="border-top" key={metric._id}>
-                                    <td><Link to="">{metric.name}</Link></td>
+                                <tr className="border-top" key={metric._id} onClick={() => handleSelect(metric._id)} style={{cursor: 'pointer'}}>
+                                    <td>{metric.name}</td>
                                     <td>{metric.category}</td>
                                     <td>{metric.value}</td>
                                     <td>{metric.notes}</td>
@@ -37,7 +36,8 @@ const EvaluationDetailsMetrics = ({ metrics }) => {
 }
 
 EvaluationDetailsMetrics.propTypes = {
-    metrics: PropTypes.array.isRequired
+    metrics: PropTypes.array.isRequired,
+    handleSelect: PropTypes.func.isRequired
 }
 
 export default EvaluationDetailsMetrics
