@@ -4,8 +4,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from "react-router-dom";
 import { FiHome, FiVideo } from 'react-icons/fi'
-import { FaWpforms, FaRegNewspaper } from 'react-icons/fa'
-import Badge from 'react-bootstrap/Badge'
+import { FaWpforms, FaDumbbell } from 'react-icons/fa'
 
 // Assets
 import './style.css'
@@ -44,16 +43,19 @@ const Aside = ({ subscription }) => {
                                 <Link className="menu-item-link text-dark" to={'/dashboard/videos'}>
                                     <FiVideo className="menu-item-icon" />
                                     <span className="menu-item-text">Videos</span>
-                                    {/* {(!isSubscriber()) && <Badge pill variant="success" className="float-right mt-1">Pro</Badge>} */}
                                 </Link>
                             </li>
-                            <li className="menu-item-link text-muted">
-                                {/* <Link className="menu-item-link text-dark" to={(!isSubscriber()) ? '/dashboard/profile/subscribe' : '/'}> */}
+                            <li className="menu-item">
+                                <Link className="menu-item-link text-dark" to={'/dashboard/workouts'}>
+                                    <FaDumbbell size={18} className="menu-item-icon" />
+                                    <span className="menu-item-text">Workouts</span>
+                                </Link>
+                            </li>
+                            {/* <li className="menu-item-link text-muted">
                                     <FaRegNewspaper className="menu-item-icon" />
                                     <span className="menu-item-text">Events</span>
                                     {(!isSubscriber()) && <Badge pill variant="success" className="float-right mt-1">Coming soon</Badge>}
-                                {/* </Link> */}
-                            </li>
+                            </li> */}
                         </ul>
                     </nav>
                 </div>

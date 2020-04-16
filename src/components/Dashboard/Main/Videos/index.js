@@ -72,7 +72,6 @@ const Videos = ({ token, subscriptionStatus, getVideos, addVideo, deleteVideo })
                     position: 'absolute',
                     left: `50%`,
                     transform: `translateX(${-50}%)`,
-                    // backgroundColor: `#eb5a46`,
                     backgroundColor: showToast.backgroundColor,
                     color: `#eee`,
                     width: `100%`

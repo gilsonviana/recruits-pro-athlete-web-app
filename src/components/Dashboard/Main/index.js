@@ -11,6 +11,7 @@ import Profile from './Profile'
 // Assets
 import './style.css'
 import Videos from './Videos'
+import Workouts from './Workouts'
 
 const Main = () => {
     return (
@@ -33,6 +34,9 @@ const Main = () => {
                             </Route>
                             <Route path={`/dashboard/videos`}>
                                 <Videos />
+                            </Route>
+                            <Route path={`/dashboard/workouts`}>
+                                <Workouts />
                             </Route>
                         </Switch>
                     </div>

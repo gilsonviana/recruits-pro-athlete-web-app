@@ -1,0 +1,21 @@
+.page__workouts__sidebar__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: all .3s ease-in-out;
+}
+
+.page__workouts__sidebar__item:hover {
+    background-color: #eee;
+}
+
+.page__workouts__sidebar__item__avatar {
+    overflow: hidden;
+    width: 35px;
+    margin-right: 1rem;
+}
+
+.page__workouts__sidebar__item__avatar img {
+    width: 100%;
+    height: auto;
+}
