@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import moment from 'moment'
 import { IoIosVideocam } from 'react-icons/io'
 import './style.css'
 
@@ -11,12 +10,9 @@ const WorkoutsSidebarItem = ({
     avatarUrl,
     title,
     name,
-    date,
     type,
     id
 }) => {
-    const workoutDate = moment(date).format('MMM Do, YYYY')
-
     return (
         <Link to={`/dashboard/workouts/${id}`} className="text-dark">
             <div className="page__workouts__sidebar__item my-2 px-2">
@@ -44,7 +40,6 @@ WorkoutsSidebarItem.propTypes = {
     avatarUrl: PropTypes.string,
     title: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired
 }
 
 export default WorkoutsSidebarItem

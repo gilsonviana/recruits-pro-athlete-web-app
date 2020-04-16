@@ -22,7 +22,7 @@ const WorkoutsSidebar = ({
             <WorkoutSidebarSearch handleSearch={handleOnSearch} />
             {/* Loop through workouts and render workouts sidebar item */}
             {
-                workoutsState.map(({ evaluatorId, name, createdAt, type, _id }, i) => <WorkoutsSidebarItem key={i} avatarUrl={evaluatorId.personal.avatarUrl} name={evaluatorId.personal.fullName} title={name} date={createdAt} type={type} id={_id}/>)
+                workoutsState.map(({ evaluatorId, name, createdAt, type, _id }, i) => <WorkoutsSidebarItem key={i} avatarUrl={evaluatorId.personal.avatarUrl} name={evaluatorId.personal.fullName} title={name} type={type} id={_id}/>)
             }
         </div>
     )

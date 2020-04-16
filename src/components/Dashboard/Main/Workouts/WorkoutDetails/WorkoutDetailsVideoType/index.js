@@ -9,7 +9,7 @@ const WorkoutDetailsVideoType = ({
     notes
 }) => {
     return (
-        <div className="page__workouts__details__video">
+        <div className="page__workouts__details__video lead">
             <h5 className="text-secondary">Instructions:</h5>
             <p>{notes}</p>
             <div data-tip="External video link" data-iscapture="true" className="d-inline">
