@@ -7,13 +7,13 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { FiVideo } from 'react-icons/fi'
-import { FaWpforms, FaRegNewspaper } from 'react-icons/fa'
+import { FaWpforms, FaDumbbell } from 'react-icons/fa'
 import ReactTooltip from 'react-tooltip'
 
 // Assets
 import './style.css'
 
-const MetricsFlush = ({ evaluations, videos }) => {
+const MetricsFlush = ({ evaluations, videos, workouts }) => {
     return (
         <Card>
             <Container fluid className="widget__metrics__flush">
@@ -28,10 +28,10 @@ const MetricsFlush = ({ evaluations, videos }) => {
                         <ReactTooltip place="top" type="dark" effect="float"/>
                     </Col>
                     <Col xs={12} md={4}>
-                        <div data-tip="Total number of events you've attended to." data-iscapture="true" className="text-center h-100 pt-3 border-right border-grey">
-                            <h4 className="text-muted">Events</h4>
+                        <div data-tip="Total number of workouts shared with you." data-iscapture="true" className="text-center h-100 pt-3 border-right border-grey">
+                            <h4 className="text-muted">Workouts</h4>
                             <p className="font-weight-bold">
-                                <FaRegNewspaper className="mr-2 text-muted" />0
+                                <FaDumbbell className="mr-2 text-muted" />{workouts.length > 0 ? workouts.length : '0'}
                             </p>
                         </div>
                         <ReactTooltip place="top" type="dark" effect="float"/>
@@ -53,11 +53,13 @@ const MetricsFlush = ({ evaluations, videos }) => {
 
 MetricsFlush.propTypes = {
     evaluations: PropTypes.array.isRequired,
+    workouts: PropTypes.array.isRequired,
     videos: PropTypes.array.isRequired
 }
 
 const mapStateToProps = (state) => ({
     evaluations: state.profile.evaluations,
+    workouts: state.profile.workouts,
     videos: state.profile.videos
 })
 
