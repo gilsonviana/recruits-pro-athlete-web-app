@@ -7,7 +7,6 @@ import Skeleton from 'react-loading-skeleton'
 import { getAthleteByName } from '../../services/user'
 
 // Components
-// import PublicProfileNavbar from './PublicProfileNavbar'
 import Navbar from '../Dashboard/Header'
 import PublicProfile404 from './PublicProfile404'
 import PublicProfileListing from './PublicProfileListing'

@@ -13,8 +13,17 @@
     text-align: center;
 }
 
+.public-profile__listing__banner__btn {
+    width: 100%;
+}
+
 @media screen and (min-width: 768px) {
     .public-profile__listing__content {
         padding: 0 2rem;
     }
+
+    .public-profile__listing__banner__btn {
+        width: 170px !important;
+        margin: auto;
+    }    
 }

@@ -3,6 +3,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { Button } from '../../../styled-components'
 
 // Assets
 import './style.css'
@@ -10,7 +13,15 @@ import './style.css'
 // Components
 import PublicProfileListingItem from './PublicProfileListingItem'
 
-const PublicProfileListing = ({ athletes }) => {
+const PublicProfileListing = ({ athletes, token, history }) => {
+    const handleOnClick = (action = 'subscribe') => {
+        if (action === 'subscribe') {
+            return history.push('/dashboard/profile/subscribe')
+        }
+
+        history.push('/signup')
+    }
+
     return (
         <div className="public-profile__listing">
             <div className="public-profile__listing__wrapper">
@@ -19,7 +30,17 @@ const PublicProfileListing = ({ athletes }) => {
                         <Card className="py-4">
                             <Card.Body>
                                 <Card.Title className="font-weight-bold">Take your game to a next level</Card.Title>
-                                <Card.Title className="lead">Sign up for <b>Athletes Pro</b> today</Card.Title>
+                                {
+                                    token ? 
+                                    <>
+                                        <Card.Title className="lead">Subscribe for <b>Athletes Pro</b> today</Card.Title>
+                                        <Button className="public-profile__listing__banner__btn" onClick={handleOnClick}>Subscribe now</Button>
+                                    </> :
+                                    <>
+                                        <Card.Title className="lead">Sign up for <b>Athletes Pro</b> today</Card.Title>
+                                        <Button className="public-profile__listing__banner__btn" onClick={handleOnClick}>Sign up now</Button>
+                                    </>
+                                }
                             </Card.Body>
                         </Card>
                     </div>
@@ -39,7 +60,12 @@ const PublicProfileListing = ({ athletes }) => {
 }
 
 PublicProfileListing.propTypes = {
-    athletes: PropTypes.array.isRequired
+    athletes: PropTypes.array.isRequired,
+    token: PropTypes.string.isRequired
 }
 
-export default PublicProfileListing
+const mapStateToProps = (state) => ({
+    token: state.auth.token
+})
+
+export default withRouter(connect(mapStateToProps)(PublicProfileListing))
