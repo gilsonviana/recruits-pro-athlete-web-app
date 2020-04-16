@@ -29,6 +29,7 @@ const WorkoutDetails = ({
 
     useEffect(() => {
         setWorkoutState(workouts.filter(workout => workout._id === id)[0])
+        console.log(workouts)
     }, [workouts, useParams()])
 
     return (

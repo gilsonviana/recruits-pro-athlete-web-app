@@ -1,4 +1,5 @@
 import * as types from './types'
+import { GET_WORKOUTS } from '../workouts/types'
 
 const initialState = {
     personal: {
@@ -130,6 +131,11 @@ export default (state = initialState, action) => {
         case types.RESET_PROFILE:
             return {
                 ...initialState
+            }
+        case GET_WORKOUTS:
+            return {
+                ...state,
+                workouts: [...action.payload]
             }
         default:
             return state
