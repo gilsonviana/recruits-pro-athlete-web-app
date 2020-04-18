@@ -1,5 +1,5 @@
 import * as types from './types'
-import { GET_WORKOUTS } from '../workouts/types'
+import { GET_WORKOUTS, DELETE_WORKOUT } from '../workouts/types'
 
 const initialState = {
     personal: {
@@ -136,6 +136,14 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 workouts: [...action.payload]
+            }
+        case DELETE_WORKOUT:
+            return {
+                ...state,
+                workouts: [
+                    ...state.workouts.slice(0, action.payload.index),
+                    ...state.workouts.slice(action.payload.index + 1)
+                ]
             }
         default:
             return state

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_WORKOUTS } from './types'
+import { GET_WORKOUTS, DELETE_WORKOUT } from './types'
 import config from '../../config/keys'
 
 export const getWorkouts = (token = '') => {
@@ -19,6 +19,29 @@ export const getWorkouts = (token = '') => {
             })
 
             return data.workouts
+        } catch (e) {
+            throw new Error(e)
+        }
+    }
+}
+
+export const deleteWorkout = (token = '', id = '', index = null) => {
+    return async (dispatch) => {
+        dispatch({
+            type: DELETE_WORKOUT,
+            payload: {
+                index
+            }
+        })
+
+        try {
+            await axios({
+                method: 'DELETE',
+                url: `${config.API}/workout/${id}`,
+                headers: {
+                    'Authorization': token
+                }
+            })
         } catch (e) {
             throw new Error(e)
         }

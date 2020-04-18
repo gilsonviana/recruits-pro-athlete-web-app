@@ -70,7 +70,12 @@ const VideosAdd = ({ subscriptionStatus, videos, addVideo, loading }) => {
     return (
         <div className="page__videos__videos-add">
             <Form noValidate onSubmit={handleSubmit} className="position-relative clearfix">
-                {limitReached && <Form.Text className="text-danger font-weight-bold lead">You have reached the videos upload limit.</Form.Text>}
+                {limitReached && 
+                    <>
+                        <Form.Text className="text-danger font-weight-bold lead">You have reached the videos upload limit.</Form.Text>
+                        <Form.Text className="text-danger font-weight-bold lead">Hit subscribe above to add unlimited videos and access all premium features.</Form.Text>
+                    </>
+                }
                 <Form.Group>
                     <Form.Label className="d-block font-weight-bold">Platform</Form.Label>
                     <Form.Check inline name="youtube" defaultChecked label={<FaYoutube size={`2rem`} color="#FF0000"/>} type="radio" id={`inline-youtube-radio`}/>
