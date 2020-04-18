@@ -9,7 +9,8 @@ import WorkoutDetailsMetricsFilterCategories from './WorkoutDetailsMetricsFilter
 
 const WorkoutDetailsMetricsFilter = ({
     categories,
-    handleSearch
+    handleSearch,
+    handleFilter
 }) => {
     const [showFilter, setShowFilter] = useState(false)
 
@@ -29,14 +30,15 @@ const WorkoutDetailsMetricsFilter = ({
                     </Col>
                 </Form.Row>
             </Form>
-            {(showFilter) && <WorkoutDetailsMetricsFilterCategories categories={categories} />}
+            {(showFilter) && <WorkoutDetailsMetricsFilterCategories categories={categories} handleFilter={handleFilter} />}
         </div>
     )
 }
 
 WorkoutDetailsMetricsFilter.propTypes = {
     categories: PropTypes.array.isRequired,
-    handleSearch: PropTypes.func.isRequired
+    handleSearch: PropTypes.func.isRequired,
+    handleFilter: PropTypes.func.isRequired
 }
 
 export default WorkoutDetailsMetricsFilter

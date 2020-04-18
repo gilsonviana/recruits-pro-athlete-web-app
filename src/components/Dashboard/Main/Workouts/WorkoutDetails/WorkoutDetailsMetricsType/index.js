@@ -8,7 +8,8 @@ import WorkoutDetailsMetricsTypeItem from './WorkoutDetailsMetricsTypeItem'
 const WorkoutDetailsMetricsType = ({
     categories,
     metrics,
-    handleSearch
+    handleSearch,
+    handleFilter
 }) => {
     const renderMetricsList = () => {
         return (
@@ -19,7 +20,7 @@ const WorkoutDetailsMetricsType = ({
     }
     return (
         <div className="page__workouts__details__metrics">
-            <WorkoutDetailsMetricsFilter categories={categories} handleSearch={handleSearch}/>
+            <WorkoutDetailsMetricsFilter categories={categories} handleSearch={handleSearch} handleFilter={handleFilter}/>
             <Accordion>
                 {renderMetricsList()}
             </Accordion>
@@ -30,7 +31,8 @@ const WorkoutDetailsMetricsType = ({
 WorkoutDetailsMetricsType.propTypes = {
     categories: PropTypes.array.isRequired,
     metrics: PropTypes.array.isRequired,
-    handleSearch: PropTypes.func.isRequired
+    handleSearch: PropTypes.func.isRequired,
+    handleFilter: PropTypes.func.isRequired
 }
 
 export default WorkoutDetailsMetricsType

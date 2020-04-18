@@ -5,6 +5,10 @@
     border: none;
 }
 
+.page__workouts__details__metrics__filter__categories__chip.--active {
+    background-color: #00ee00;
+}
+
 .page__workouts__details__metrics__filter__categories__chip:focus {
    outline: none; 
 }

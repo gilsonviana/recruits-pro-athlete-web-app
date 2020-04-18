@@ -51,6 +51,10 @@ const WorkoutDetails = ({
         setWorkoutMetricsState(workoutState.metrics.filter(workout => workout.name.indexOf(target.value) >= 0))
     }
 
+    const handleOnFilter = (category = "all") => {
+        setWorkoutMetricsState(workoutState.metrics.filter(workout => workout.category === category || category === 'all'))
+    }
+
     return (
         <div className="page__workouts__details">
             <div className="page__workouts__details__header">
@@ -65,7 +69,7 @@ const WorkoutDetails = ({
             {
                 workoutState.type == 'l' ?
                 <WorkoutDetailsVideoType videoLink={workoutState.videoLink} notes={workoutState.notes} /> :
-                <WorkoutDetailsMetricsType categories={workoutState.categories} metrics={workoutMetricsState} handleSearch={handleOnSearch}/>
+                <WorkoutDetailsMetricsType categories={workoutState.categories} metrics={workoutMetricsState} handleSearch={handleOnSearch} handleFilter={handleOnFilter}/>
             }
         </div>
     )
