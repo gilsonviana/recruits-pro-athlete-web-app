@@ -13,6 +13,24 @@ const WorkoutsSidebarItem = ({
     type,
     id
 }) => {
+    const renderItemContent = () => {
+        if (type === 'l') {
+            return (
+                <div className="page__workouts__sidebar__item__content">
+                    <IoIosVideocam />
+                    <p className="m-0 ml-2 d-inline-block">{title}</p>
+                    <p className="m-0 text-muted">{name}</p>
+                </div>
+            )
+        }
+        return (
+            <div className="page__workouts__sidebar__item__content">
+                <p className="m-0 d-inline-block">{title}</p>
+                <p className="m-0 text-muted">{name}</p>
+            </div>
+        )
+    }
+
     return (
         <Link to={`/dashboard/workouts/${id}`} className="text-dark">
             <div className="page__workouts__sidebar__item my-2 px-2">
@@ -23,14 +41,7 @@ const WorkoutsSidebarItem = ({
                             <img src={avatarPlaceholder} alt={`${name} does not have avatar`}/>
                     }
                 </div>
-                <div className="page__workouts__sidebar__item__content">
-                    {
-                        type === 'l' && <IoIosVideocam />
-                    }
-                    <p className="m-0 ml-2 d-inline-block">{title}</p>
-                    <p className="m-0 text-muted">{name}</p>
-                    {/* <p>{workoutDate}</p> */}
-                </div>
+                { renderItemContent() }
             </div>
         </Link>
     )

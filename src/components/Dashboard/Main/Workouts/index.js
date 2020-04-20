@@ -10,6 +10,7 @@ import WorkoutsSidebar from './WorkoutsSidebar'
 import WorkoutDetails from './WorkoutDetails'
 import Toast from 'react-bootstrap/Toast'
 import Loader from 'react-loader-spinner';
+import MarketingBanner from "../MarketingBanner";
 
 // Redux
 import { getWorkouts } from '../../../../store/workouts/actions'
@@ -17,11 +18,14 @@ import { getWorkouts } from '../../../../store/workouts/actions'
 const Workouts = ({
     token,
     workouts,
-    getWorkouts
+    getWorkouts,
+    subscriptionStatus
 }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [showToast, setShowToast] = useState(false)
     const [workoutsState, setWorkoutsState] = useState([])
+
+    const limitReached = subscriptionStatus !== 'ACTIVE' && workouts.length >= 3 ? true : false
 
     useEffect(() => {
         setIsLoading(true)
@@ -36,10 +40,19 @@ const Workouts = ({
             }
         }
         fetchWorkouts()
-    }, [])
+    }, [subscriptionStatus])
 
     return (
         <div className="page__workouts">
+            {
+                subscriptionStatus !== 'ACTIVE' && 
+                    <MarketingBanner 
+                        title="Do more with Athletes Pro" 
+                        text={`
+                            Boost your profile with unlimited video uploads, social media integration, 
+                            contact references and more by subscribing to Athletes Pro.
+                        `} />
+            }
             <div className="fixed-top"> 
                 <Toast onClose={() => setShowToast(!showToast)} show={showToast} delay={3000} autohide style={{
                     position: 'absolute',
@@ -77,6 +90,13 @@ const Workouts = ({
                         }
                     </Col>
                     <Col lg={{span: 8, offset: 1}}>
+                        {
+                            limitReached &&
+                            <>
+                                <h6 className="text-danger font-weight-bold lead">You have reached the videos upload limit.</h6>
+                                <h6 className="text-danger font-weight-bold lead">Hit subscribe above to unlock unlimited workouts and access all premium features.</h6>
+                            </>
+                        }
                         <h5>Workout</h5>
                         <hr />
                         <Switch>
@@ -104,7 +124,8 @@ Workouts.propTypes = {
 
 const mapStateToProps = (state) => ({
     token: state.auth.token,
-    workouts: state.profile.workouts
+    workouts: state.profile.workouts,
+    subscriptionStatus: state.profile.subscription.status,
 })
 
 export default connect(mapStateToProps, { getWorkouts })(Workouts)
