@@ -36,7 +36,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "homepage": "http://athletes-pro-app.s3-website.us-east-2.amazonaws.com/athletes",
+  "homepage": ".",
   "eslintConfig": {
     "extends": "react-app"
   },

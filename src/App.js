@@ -26,7 +26,7 @@ import LandingPage from './components/LandingPage';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/athletes">
       <Switch>
         <Route path="/" exact>
           <LandingPage />
