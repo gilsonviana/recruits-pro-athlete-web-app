@@ -22,14 +22,15 @@ import ResetPasswordNewRoute from './components/ResetPasswordNewRoute';
 import ResetPasswordNew from './components/ResetPasswordNew';
 import PublicProfile from './components/PublicProfile';
 import PublicProfileSingle from './components/PublicProfile/PublicProfileSingle';
-import LandingPage from './components/LandingPage';
+// import LandingPage from './components/LandingPage';
 
 function App() {
   return (
     <Router basename="/athletes">
       <Switch>
         <Route path="/" exact>
-          <LandingPage />
+          <LoginPage />
+          {/* <LandingPage /> */}
         </Route>
         <Route path="/public" exact>
           <PublicProfile />
