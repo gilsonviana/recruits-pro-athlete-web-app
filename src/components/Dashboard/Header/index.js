@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { FiUser, FiLogOut } from 'react-icons/fi'
+import { FiSettings, FiLogOut } from 'react-icons/fi'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
@@ -110,7 +110,7 @@ const Header = ({ doLogout, token, fullName, avatarUrl, history }) => {
                                     }}
                                 >
                                     <Link to={`/dashboard/profile`} className="dropdown-item" as={<Dropdown.Item />}>
-                                        <FiUser className="dropdown-icon oi oi-person" /> Profile
+                                        <FiSettings className="dropdown-icon oi oi-person" /> Settings
                                     </Link>
                                     <Dropdown.Item onClick={doLogout}>
                                         <FiLogOut className="dropdown-icon oi oi-account-logout" /> Logout

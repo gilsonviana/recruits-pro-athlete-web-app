@@ -8,7 +8,6 @@ import Card from 'react-bootstrap/Card'
 import avatarPlaceholder from '../../../../assets/images/user-avatar-placeholder.png'
 
 const PublicProfileListingItem = ({ athlete }) => {
-    console.log(athlete)
     return (
         <Link to={`/public/${athlete.user}`} className="d-block mb-3">
             <Card className="public-profile__listing__item text-dark" style={{fontSize: `.8rem`}}> 
@@ -16,8 +15,8 @@ const PublicProfileListingItem = ({ athlete }) => {
                     <div className="media">
                         <div className="rounded-circle border overflow-hidden mr-3" style={{width: `65px`, height: `65px`}}>
                             {athlete.personal.avatarUrl ?
-                                <img src={athlete.personal.avatarUrl} alt={athlete.personal.fullName} className="img-fluid"/>:
-                                <img src={avatarPlaceholder} alt={athlete.personal.fullName} className="img-fluid"/>
+                                <img src={athlete.personal.avatarUrl} alt={athlete.personal.fullName} style={{height: '100%', width: 'auto'}}/>:
+                                <img src={avatarPlaceholder} alt={athlete.personal.fullName} style={{height: '100%', width: 'auto'}} />
                             }
                         </div>
                         <div className="media-body">

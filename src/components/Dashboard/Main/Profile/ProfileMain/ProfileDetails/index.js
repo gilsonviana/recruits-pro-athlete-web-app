@@ -479,7 +479,7 @@ const ProfileDetails = ({ setProfileRequest, setProfileImagesRequest, handlerPre
                     </div>
                     <div>
                         <Accordion.Toggle as="h5" variant="link" eventKey="height" className="profile__form__toggle">
-                            <FaCaretRight className="float-left mt-1" color="#00ff00"/>Height
+                            <FaCaretRight className="float-left mt-1" color="#00ff00"/>Height / Weight
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="height">
                             <div className="px-3">

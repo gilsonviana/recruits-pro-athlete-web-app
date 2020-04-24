@@ -32,7 +32,7 @@ const ProfileAside = () => {
               <Link to="/dashboard/profile/account" className="text-dark">Account</Link>
             </ListGroup.Item>
             <ListGroup.Item as="li" className={isActive("social")}>
-              <Link to="/dashboard/profile/social" className="text-dark">Social</Link>
+              <Link to="/dashboard/profile/social" className="text-dark">Social networks</Link>
             </ListGroup.Item>
             <ListGroup.Item as="li" className={isActive("sports")}>
               <Link to="/dashboard/profile/sports" className="text-dark">Sports</Link>

@@ -3,13 +3,13 @@ import React from "react";
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from "react-router-dom";
-import { FiHome, FiVideo } from 'react-icons/fi'
+import { FiUser, FiHome, FiVideo } from 'react-icons/fi'
 import { FaWpforms, FaDumbbell } from 'react-icons/fa'
 
 // Assets
 import './style.css'
 
-const Aside = ({ subscription }) => {
+const Aside = ({ subscription, profileId }) => {
 
     /**
      * Use to verify if user has a subscription id
@@ -27,6 +27,12 @@ const Aside = ({ subscription }) => {
                 <div className="app__aside__content__menu overflow-hidden ps">
                     <nav className="stacked-menu">
                         <ul className="menu">
+                            <li className="menu-item">
+                                <Link className="menu-item-link text-dark" to={`/public/${profileId}`}>
+                                    <FiUser className="menu-item-icon" />
+                                    <span className="menu-item-text">Profile</span>
+                                </Link>
+                            </li>
                             <li className="menu-item">
                                 <Link className="menu-item-link text-dark" to="/dashboard">
                                     <FiHome className="menu-item-icon" />
@@ -69,7 +75,8 @@ Aside.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-    subscription: state.profile.subscription
+    subscription: state.profile.subscription,
+    profileId: state.auth._id
 })
 
 export default connect(mapStateToProps)(Aside)

@@ -37,7 +37,6 @@ export const getAthletePublicProfile = async (id = '') => {
 
         return data
     } catch (e) {
-        console.log(e.response)
-        return false
+        throw new Error(e)
     }
 }

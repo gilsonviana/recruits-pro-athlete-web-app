@@ -22,7 +22,10 @@ export const doLogin = (credentials) => {
 
             dispatch({
                 type: SET_TOKEN,
-                payload: data.token
+                payload: {
+                    token: data.token,
+                    _id: data.user._id
+                }
             })
     
             dispatch({

@@ -71,7 +71,7 @@ const ProfileChoosePlan = ({ token, subscriptionPlans }) => {
                             <h4 className="text-muted mb-0">/month</h4>
                         </Card.Title>
                     )}
-                <Card.Subtitle className="my-4">The perfect plan to go if you want to up skill your game.</Card.Subtitle>
+                <Card.Subtitle className="my-4">Become a Pro! Upgrade to Athlete Pro for unlimited access all premium features.</Card.Subtitle>
                 <Select
                     className="mb-4"
                     placeholder="Monthly"
@@ -98,6 +98,14 @@ const ProfileChoosePlan = ({ token, subscriptionPlans }) => {
                     <li className="page__choose-plan__card__features__item">
                         <FiCheck className="page__choose-plan__card__features__item__icon" color="#fff"/>
                         Upload performance videos
+                    </li>
+                    <li className="page__choose-plan__card__features__item">
+                        <FiCheck className="page__choose-plan__card__features__item__icon" color="#fff"/>
+                        Access to all shared workouts
+                    </li>
+                    <li className="page__choose-plan__card__features__item">
+                        <FiCheck className="page__choose-plan__card__features__item__icon" color="#fff"/>
+                        And much more!
                     </li>
                 </ul>
             </Card.Body>
