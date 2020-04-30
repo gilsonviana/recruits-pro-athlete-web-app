@@ -26,7 +26,7 @@ import PublicProfileSingle from './components/PublicProfile/PublicProfileSingle'
 
 function App() {
   return (
-    <Router basename="/athletes">
+    <Router>
       <Switch>
         <Route path="/" exact>
           <LoginPage />
