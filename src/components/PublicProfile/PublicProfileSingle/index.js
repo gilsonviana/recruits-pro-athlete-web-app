@@ -1,6 +1,6 @@
 // Dependencies
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 
 // Service
 import { getAthletePublicProfile } from '../../../services/user'
@@ -69,6 +69,7 @@ const PublicProfileSingle = () => {
     })
 
     const { profileId } = useParams()
+    const location = useLocation()
 
     useEffect(() => {
         const fetchUserById = async () => {

@@ -35,12 +35,22 @@ const LoginPage = ({ history, token, doLogin, getSubscriptionPlans }) => {
     })
 
     useEffect(() => {
+        // const verifyRoute = () => {
+        //     let href = window.location.href.split('/')
+
+        //     if (href) {
+        //         if (href.indexOf('/public') >= 0) {
+        //             return <Redirect to={`/public/${href.pop()}`}/>
+        //         }
+        //     }
+        // }
         const verifyToken = () => {
             if (token) {
                 history.push('/redirect')
             }
         }
 
+        // verifyRoute()
         verifyToken()
         
         getSubscriptionPlans()

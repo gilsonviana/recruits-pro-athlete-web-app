@@ -8,7 +8,7 @@ const PublicProfileSingleMainEvents = () => {
     return (
         <div className="public-profile__single__main__events text-center">
             <img src={clipboardImg} style={{width: 'auto', height: `120px`, margin: 'auto'}} alt="no videos available"/>
-            <h5 className="text-muted mt-4">No events yets</h5>
+            <h5 className="text-muted mt-4">No events yet</h5>
         </div>
     )
 }

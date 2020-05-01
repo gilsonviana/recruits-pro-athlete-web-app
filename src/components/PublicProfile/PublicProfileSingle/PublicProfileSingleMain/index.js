@@ -22,15 +22,10 @@ const PublicProfileSingleMain = ({ profile }) => {
     return (
         <main className="page__public-profile-single__main">
             <div className="page__public-profile-single__main__content">
-                <Tabs defaultActiveKey="info" id="uncontrolled-tab-example" className="pl-md-4">
-                    <Tab eventKey="info" title={<PublicProfileSingleMainNavItem title="Info" icon={FaRegIdBadge}/>}>
-                        <PublicProfileSingleMainInfo 
-                            personal={profile.personal}
-                            location={profile.location}
-                            sports={profile.sports}
-                            education={profile.education}
-                            isSubscriber={isSubscriber}
-                        />
+                <Tabs defaultActiveKey="videos" id="uncontrolled-tab-example" className="pl-md-4">
+                    <Tab eventKey="videos" title={<PublicProfileSingleMainNavItem title="Videos" icon={FiVideo}/>}>
+                        <PublicProfileSingleMainVideos 
+                            videos={profile.videos}/>
                     </Tab>
                     <Tab eventKey="evaluations" title={<PublicProfileSingleMainNavItem title="Evaluations" icon={FaWpforms}/>}>
                         <PublicProfileSingleMainEvaluations 
@@ -40,9 +35,14 @@ const PublicProfileSingleMain = ({ profile }) => {
                     <Tab eventKey="events" title={<PublicProfileSingleMainNavItem title="Events" icon={FaRegNewspaper}/>}>
                         <PublicProfileSingleMainEvents />
                     </Tab>
-                    <Tab eventKey="videos" title={<PublicProfileSingleMainNavItem title="Videos" icon={FiVideo}/>}>
-                        <PublicProfileSingleMainVideos 
-                            videos={profile.videos}/>
+                    <Tab eventKey="info" title={<PublicProfileSingleMainNavItem title="Info" icon={FaRegIdBadge}/>}>
+                        <PublicProfileSingleMainInfo 
+                            personal={profile.personal}
+                            location={profile.location}
+                            sports={profile.sports}
+                            education={profile.education}
+                            isSubscriber={isSubscriber}
+                        />
                     </Tab>
                 </Tabs>
             </div>

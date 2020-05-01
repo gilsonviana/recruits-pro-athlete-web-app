@@ -12,11 +12,11 @@ import VideoItemPlayer from '../../../../Dashboard/Main/Videos/VideosAll/VideoIt
 import videoImg from '../../../../../assets/images/video-camera.png'
 
 const PublicProfileSingleMainVideos = ({ videos }) => {
-    if (!videos) {
+    if (videos.length <= 0) {
         return (
             <div className="public-profile__single__main__videos text-center">
                 <img src={videoImg} style={{width: 'auto', height: `120px`, margin: 'auto'}} alt="no videos available"/>
-                <h5 className="text-muted mt-4">No videos yets</h5>
+                <h5 className="text-muted mt-4">No videos yet</h5>
             </div>
         )
     }

@@ -16,7 +16,7 @@ const PublicProfileSingleMainEvaluations = ({ evaluations, subscriptionStatus })
         return (
             <div className="public-profile__single-main__evaluations text-center" style={{margin: `auto`}}>
                 <img src={noEvaluationsImage} style={{width: 'auto', height: `120px`, margin: 'auto'}} alt="no videos available"/>
-                <h5 className="text-muted mt-4">No evaluations yets</h5>
+                <h5 className="text-muted mt-4">No evaluations yet</h5>
             </div>
         )
     }
