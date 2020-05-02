@@ -36,6 +36,29 @@
     margin-bottom: 1.2rem;
 }
 
+.page__public-profile-single__aside__modal__share {
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all .2s ease-in-out;
+    color: #112;
+}
+
+.page__public-profile-single__aside__modal__share:hover {
+    background-color: #eee;
+    color: inherit;
+}
+
+.page__public-profile-single__aside__modal__share:active {
+    background-color: #00ec00;
+}
+
+.page__public-profile-single .toast-fixed-top {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99999;
+}
+
 @media screen and (min-width: 768px) {
     .page__public-profile-single__aside {
         position: fixed;
@@ -43,7 +66,7 @@
     }
 
     .page__public-profile-single__aside__avatar {
-        transform: translateX(calc(-50% - 0.8rem));
+        transform: translateX(-50%);
     }
 }
 
@@ -63,7 +86,6 @@
         min-height: 100vh;
         background-color: #f6f7f9;
         padding-top: 7rem;
-        padding-left: 1.5rem;
         border-right: 1px solid rgba(20, 20, 31, .1);
     }    
 }
