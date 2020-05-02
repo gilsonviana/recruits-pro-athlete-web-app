@@ -425,7 +425,7 @@ const ProfileDetails = ({ setProfileRequest, setProfileImagesRequest, handlerPre
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="personal">
                             <div className="px-3">
-                                <Form.Row>
+                                {/* <Form.Row>
                                     <Col md={3}>
                                         <Form.Label htmlFor="heading">Heading</Form.Label>
                                     </Col>
@@ -434,7 +434,7 @@ const ProfileDetails = ({ setProfileRequest, setProfileImagesRequest, handlerPre
                                         <Form.Text className="text-muted float-left">Insert a positive message here.</Form.Text>
                                         <Form.Text className="float-right">120 max characters.</Form.Text>
                                     </Col>
-                                </Form.Row>
+                                </Form.Row> */}
                                 <Form.Row className="mb-2">
                                     <Col md={3}>
                                         <Form.Label>Profile picture</Form.Label>

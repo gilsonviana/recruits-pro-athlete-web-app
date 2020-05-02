@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import './style.css'
 import avatarPlaceholder from '../../../../../assets/images/user-avatar-placeholder.png'
 
-const ProfileHeader = ({ images, avatarUrl, coverImgUrl, fullName, heading }) => {
+const ProfileHeader = ({ images, avatarUrl, coverImgUrl, fullName }) => {
     const { avatar, cover } = images
 
     if (cover) {
@@ -24,9 +24,9 @@ const ProfileHeader = ({ images, avatarUrl, coverImgUrl, fullName, heading }) =>
                 <div style={{background: '#ddd'}}>
                     <h3 className="mt-4">{fullName}</h3>
                 </div>
-                <div className="page__profile__header__heading lead d-inline-block px-1">
+                {/* <div className="page__profile__header__heading lead d-inline-block px-1">
                     <p>{heading}</p>
-                </div>
+                </div> */}
             </header>
         )
     }
@@ -42,9 +42,9 @@ const ProfileHeader = ({ images, avatarUrl, coverImgUrl, fullName, heading }) =>
                 }
             </div>
             <h3 className="mt-4">{fullName}</h3>
-            <div className="page__profile__header__heading lead d-inline-block px-1">
+            {/* <div className="page__profile__header__heading lead d-inline-block px-1">
                 <p>{heading}</p>
-            </div>
+            </div> */}
         </header>
     )
 }
