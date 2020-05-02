@@ -57,21 +57,22 @@ const ProfileChoosePlan = ({ token, subscriptionPlans }) => {
 
     return (
         <Card className="page__choose-plan__card mt-4 mt-md-0">
-            <BookmarkIcon className="page__choose-plan__card__bookmark" />
+            {/* <BookmarkIcon className="page__choose-plan__card__bookmark" /> */}
+            <div className="ribbon mt-4 m-lg-0">Limited Time</div>
             <Card.Body>
                 <Badge variant="success" className="mb-4">Pro</Badge>
                 {selectedOption && selectedOption.label === "Yearly" ? (
                     <Card.Title className="d-flex">
-                        <h1 className="mb-0">$50</h1>{" "}
+                        <h1 className="mb-0">$25</h1>{" "}
                         <h4 className="text-muted mb-0">/yearly</h4>
                     </Card.Title>
                 ) : (
                         <Card.Title className="d-flex">
-                            <h1 className="mb-0">$5</h1>{" "}
+                            <h1 className="mb-0">$4</h1>{" "}
                             <h4 className="text-muted mb-0">/month</h4>
                         </Card.Title>
                     )}
-                <Card.Subtitle className="my-4">Become a Pro! Upgrade to Athlete Pro for unlimited access all premium features.</Card.Subtitle>
+                <Card.Subtitle className="my-4">Become a Pro! Upgrade to Athlete Pro for unlimited access to all premium features.</Card.Subtitle>
                 <Select
                     className="mb-4"
                     placeholder="Monthly"

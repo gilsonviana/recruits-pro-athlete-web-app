@@ -30,6 +30,20 @@
     margin-right: .5rem;
 }
 
+.page__choose-plan__card .ribbon {
+    background-color: #77FF77;
+    color: #222;
+    border-radius: 0 20px 20px 0;
+    font-size: 19px;
+    font-weight: 300;
+    padding: 10px 15px;
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+    position: absolute;
+    top: 40px;
+    right: -16px;
+}
+
 @media screen and (min-width: 992px) {
     .page__choose-plan__card {
         width: 400px;
