@@ -89,14 +89,14 @@ const PublicProfileSingleMainInfo = ({ personal, location, sports, education, is
                                 <Card>
                                     <Card.Body>
                                         <Card.Title>Sports</Card.Title>
-                                        <h4 className="text-uppercase font-weight-bold">{primarySport}</h4>
+                                        <b>Primary</b>
+                                        <h5 className="text-uppercase font-weight-bold">{primarySport}</h5>
                                         <FaCaretRight className="mr-1"/><span>{primaryPositions}</span>
                                         <hr />
-                                        <div className="text-muted">
-                                            <Card.Text>Other sport</Card.Text>
-                                            <h6>{secondarySport}</h6>
-                                            <FaCaretRight className="mr-1"/><span>{secondaryPositions}</span>
-                                        </div>
+                                        <b>Secondary</b>
+                                        {/* <Card.Text>Other sport</Card.Text> */}
+                                        <h5 className="text-uppercase font-weight-bold">{secondarySport}</h5>
+                                        <FaCaretRight className="mr-1"/><span>{secondaryPositions}</span>
                                     </Card.Body>
                                 </Card>
                             </Tab.Pane>
