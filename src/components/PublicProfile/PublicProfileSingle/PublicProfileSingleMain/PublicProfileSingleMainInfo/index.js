@@ -6,8 +6,9 @@ import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import Tab from 'react-bootstrap/Tab'
 import ListGroup from 'react-bootstrap/ListGroup'
-import { FaUserAlt, FaGraduationCap, FaHome, FaRegCalendarAlt, FaMobileAlt, FaCaretRight, FaUserGraduate } from 'react-icons/fa'
+import { FaWeight, FaUserAlt, FaGraduationCap, FaHome, FaRegCalendarAlt, FaMobileAlt, FaCaretRight, FaUserGraduate } from 'react-icons/fa'
 import { MdEmail, MdGrade } from 'react-icons/md'
+import { GiBodyHeight, GiPodium } from 'react-icons/gi'
 import moment from 'moment'
 
 // Assets
@@ -22,6 +23,9 @@ const PublicProfileSingleMainInfo = ({ personal, location, sports, education, is
     const primaryPositions = sports.primary.positions.join(" | ")
     const secondarySport = sports.secondary.hasOwnProperty('name') ? sports.secondary.name : ''
     const secondaryPositions = sports.secondary.positions.join(" | ")
+
+    const ICON_SIZE = '1.3rem'
+    
 
     return (
         <div className="public-profile__single-main__info">
@@ -46,10 +50,23 @@ const PublicProfileSingleMainInfo = ({ personal, location, sports, education, is
                                 <Card>
                                     <Card.Body>
                                         <Card.Title>Information</Card.Title>
-                                        {dob && <Card.Text><FaRegCalendarAlt className="mr-1"/> Born on {moment(dob).format('MMMM d YYYY')}</Card.Text>}
-                                        <Card.Text><MdEmail className="mr-1"/> <a alt={`${personal.fullName} email`} href={`mailto: ${personal.email}`}>{personal.email || ''}</a></Card.Text>
-                                        {isSubscriber && <Card.Text><FaMobileAlt className="mr-1"/> {personal.hasOwnProperty('phone') ? personal.phone.number : ''}</Card.Text>}
-                                        <Card.Text><FaHome className="mr-1"/> Lives in <b>{city}</b>, <b>{state}</b></Card.Text>
+                                        {dob && <Card.Text className="d-flex align-items-center"><FaRegCalendarAlt size={ICON_SIZE} className="mr-2"/> Born on {moment(dob).format('MMMM d YYYY')}</Card.Text>}
+                                        <Card.Text className="d-flex align-items-center"><MdEmail size={ICON_SIZE} className="mr-2"/> <a alt={`${personal.fullName} email`} href={`mailto: ${personal.email}`}>{personal.email || ''}</a></Card.Text>
+                                        {isSubscriber && <Card.Text className="d-flex align-items-center"><FaMobileAlt size={ICON_SIZE} className="mr-2"/> {personal.hasOwnProperty('phone') ? personal.phone.number : ''}</Card.Text>}
+                                        <Card.Text className="d-flex align-items-center"><FaHome size={ICON_SIZE} className="mr-2"/> Lives in <b>{city}</b>, <b>{state}</b></Card.Text>
+                                        { (personal.height.hasOwnProperty('feet')) && (
+                                            <>
+                                                <hr />
+                                                <Card.Text className="d-flex align-items-center"><GiBodyHeight size={ICON_SIZE} className="mr-2"/> Height, <b>{personal.height.feet}'{personal.height.inches}''</b></Card.Text>
+                                            </>
+                                        )}
+                                        { (personal.weight) && <Card.Text className="d-flex align-items-center"><FaWeight size={ICON_SIZE} className="mr-2"/> Weight, <b>{personal.weight} lb</b></Card.Text>}
+                                        { (education.skillLevel) && (
+                                            <>
+                                                <hr />
+                                                <Card.Text className="d-flex align-items-center"><GiPodium size={ICON_SIZE} className="mr-2"/> Skill level, <b>{education.skillLevel}</b></Card.Text>
+                                            </>
+                                        )}
                                     </Card.Body>
                                 </Card>
                             </Tab.Pane>
@@ -57,19 +74,24 @@ const PublicProfileSingleMainInfo = ({ personal, location, sports, education, is
                                 <Card>
                                     <Card.Body>
                                         <Card.Title>Education</Card.Title>
-                                        {education.schoolName && <Card.Text><FaGraduationCap className="mr-1"/> Studied at <b>{education.schoolName}</b></Card.Text>}
-                                        {education.graduated && <Card.Text><FaUserGraduate className="mr-1"/> Graduated on <b>{education.graduationYear}</b></Card.Text>}
-                                        {education.gpa && <Card.Text><MdGrade className="mr-1"/> GPA <b>{education.gpa}</b></Card.Text>}
+                                        <Card.Text><FaGraduationCap className="mr-1"/> Studied at <b>{education.schoolName}</b></Card.Text>
+                                        {education.graduated ? 
+                                            <Card.Text><FaUserGraduate className="mr-1"/> Graduated on <b>{education.graduationYear}</b></Card.Text> :
+                                            <Card.Text><FaUserGraduate className="mr-1"/> Graduation year <b>{education.graduationYear}</b></Card.Text>
+                                        }
+                                        <Card.Text><MdGrade className="mr-1"/> GPA <b>{education.gpa}</b></Card.Text>
                                     </Card.Body>
                                 </Card>
                             </Tab.Pane>
                             <Tab.Pane eventKey="#references">
+                               {!isSubscriber && 
                                 <div className="public-profile__single-main__info__content__blocked">
                                     <p className="m-0 mb-2 lead text-center">
                                         Content available for <b>Athletes Pro</b> only.
                                     </p>
                                     <img src={lock} alt="content blocked" className="img-fluid"/>
                                 </div>
+                               }
                                 <Card style={!isSubscriber && {filter: `blur(.2rem)`}}>
                                     <Card.Body>
                                         <Card.Title>References</Card.Title>
@@ -94,7 +116,6 @@ const PublicProfileSingleMainInfo = ({ personal, location, sports, education, is
                                         <FaCaretRight className="mr-1"/><span>{primaryPositions}</span>
                                         <hr />
                                         <b>Secondary</b>
-                                        {/* <Card.Text>Other sport</Card.Text> */}
                                         <h5 className="text-uppercase font-weight-bold">{secondarySport}</h5>
                                         <FaCaretRight className="mr-1"/><span>{secondaryPositions}</span>
                                     </Card.Body>

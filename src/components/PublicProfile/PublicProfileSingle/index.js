@@ -1,6 +1,6 @@
 // Dependencies
 import React, { useState, useEffect } from 'react'
-import { useParams, useLocation } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 // Service
 import { getAthletePublicProfile } from '../../../services/user'
@@ -17,6 +17,11 @@ const PublicProfileSingle = () => {
             avatarUrl: '',
             coverImgUrl: '',
             fullName: '',
+            height: {
+                feet: '',
+                inches: ''
+            },
+            weight: '',
             references: {
                 first: {
                     email: '',
@@ -69,7 +74,6 @@ const PublicProfileSingle = () => {
     })
 
     const { profileId } = useParams()
-    const location = useLocation()
 
     useEffect(() => {
         const fetchUserById = async () => {

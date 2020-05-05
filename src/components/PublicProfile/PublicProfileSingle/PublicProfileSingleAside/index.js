@@ -49,7 +49,8 @@ const PublicProfileSingleAside = ({ avatarUrl, fullName, subscriptionStatus, eve
                         }
                         <Button 
                             onClick={() => setShowModal(true)}
-                            variant="light" 
+                            variant="light"
+                            style={{backgroundColor: '#00ec00'}} 
                             className="page__public-profile-single__aside__share shadow-sm mb-4">
                             <FiShare /> Share
                         </Button>
@@ -154,7 +155,7 @@ const PublicProfileSingleAside = ({ avatarUrl, fullName, subscriptionStatus, eve
             <Toast 
                 onClose={() => setShowToast(false)} 
                 show={showToast} 
-                delay={8000} 
+                delay={2500} 
                 autohide 
                 style={{
                     position: 'absolute',
