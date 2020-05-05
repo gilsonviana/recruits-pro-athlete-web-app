@@ -13,18 +13,16 @@ const LastEvaluation = ({ evaluation }) => {
     return (
         <Link to={`/dashboard/evaluation/${evaluation._id}`} className="text-dark">
             <Card className="widget__last-evaluation shadow-sm pt-3 px-3 mb-5 bg-white rounded">
-                <Card.Title>Last evaluation</Card.Title>
+                <div className="d-flex justify-content-between">
+                    <Card.Title>Last evaluation</Card.Title>
+                    <p>{(evaluation) && date}</p>
+                </div>
                 <Card.Body>
                     <div className="d-flex text-muted">
                         <GiWhistle size={20} className="mr-2" />
                         <h5>{evaluation.evaluatorId.personal.fullName || <Skeleton width={50}/>}</h5>
                     </div>
                 </Card.Body>
-                <Card.Footer className="bg-transparent border-0 m-0 p-0">
-                    <div className="text-right">
-                        <p>{(evaluation) && date}</p>
-                    </div>
-                </Card.Footer>
             </Card>
         </Link>
     )
