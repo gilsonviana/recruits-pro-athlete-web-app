@@ -24,14 +24,14 @@ const PublicProfileSingleMainInfo = ({ personal, location, sports, education, is
     const secondarySport = sports.secondary.hasOwnProperty('name') ? sports.secondary.name : ''
     const secondaryPositions = sports.secondary.positions.join(" | ")
 
-    const ICON_SIZE = '1.3rem'
+    const ICON_SIZE = '1rem'
     
 
     return (
         <div className="public-profile__single-main__info">
             <Tab.Container defaultActiveKey="#information">
                 <Row>
-                    <Col md={3}>
+                    <Col lg={3} className="mb-4 mb-lg-0">
                         <ListGroup className="public-profile__single-main__info__nav shadow-sm mb-4 mb-md-0">
                             <ListGroup.Item action href="#information">
                                 Information
@@ -44,27 +44,27 @@ const PublicProfileSingleMainInfo = ({ personal, location, sports, education, is
                             </ListGroup.Item>
                         </ListGroup>
                     </Col>
-                    <Col md={{span: 4, offset: 0}}>
+                    <Col lg={{span: 4, offset: 0}} className="mb-4 mb-lg-0">
                         <Tab.Content className="public-profile__single-main__info__content mb-4 mb-md-0">
                             <Tab.Pane eventKey="#information">
                                 <Card>
                                     <Card.Body>
                                         <Card.Title>Information</Card.Title>
                                         {dob && <Card.Text className="d-flex align-items-center"><FaRegCalendarAlt size={ICON_SIZE} className="mr-2"/> Born on {moment(dob).format('MMMM d YYYY')}</Card.Text>}
-                                        <Card.Text className="d-flex align-items-center"><MdEmail size={ICON_SIZE} className="mr-2"/> <a alt={`${personal.fullName} email`} href={`mailto: ${personal.email}`}>{personal.email || ''}</a></Card.Text>
                                         {isSubscriber && <Card.Text className="d-flex align-items-center"><FaMobileAlt size={ICON_SIZE} className="mr-2"/> {personal.hasOwnProperty('phone') ? personal.phone.number : ''}</Card.Text>}
-                                        <Card.Text className="d-flex align-items-center"><FaHome size={ICON_SIZE} className="mr-2"/> Lives in <b>{city}</b>, <b>{state}</b></Card.Text>
+                                        {isSubscriber && <Card.Text className="d-flex align-items-center"><MdEmail size={ICON_SIZE} className="mr-2"/> <a alt={`${personal.fullName} email`} href={`mailto: ${personal.email}`}>{personal.email || ''}</a></Card.Text>}
+                                        <Card.Text className="d-flex align-items-center"><FaHome size={ICON_SIZE} className="mr-2"/> Lives in&nbsp;<b>{city}</b>&nbsp;<b>{state}</b></Card.Text>
                                         { (personal.height.hasOwnProperty('feet')) && (
                                             <>
                                                 <hr />
-                                                <Card.Text className="d-flex align-items-center"><GiBodyHeight size={ICON_SIZE} className="mr-2"/> Height, <b>{personal.height.feet}'{personal.height.inches}''</b></Card.Text>
+                                                <div className="d-flex align-items-center"><h6 className="mr-2 font-weight-bold">H</h6>&nbsp;<b>{personal.height.feet}'{personal.height.inches}''</b></div>
                                             </>
                                         )}
-                                        { (personal.weight) && <Card.Text className="d-flex align-items-center"><FaWeight size={ICON_SIZE} className="mr-2"/> Weight, <b>{personal.weight} lb</b></Card.Text>}
+                                        { (personal.weight) && <Card.Text className="d-flex align-items-center"><FaWeight size={ICON_SIZE} className="mr-2"/> Weight&nbsp;<b>{personal.weight} lb</b></Card.Text>}
                                         { (education.skillLevel) && (
                                             <>
                                                 <hr />
-                                                <Card.Text className="d-flex align-items-center"><GiPodium size={ICON_SIZE} className="mr-2"/> Skill level, <b>{education.skillLevel}</b></Card.Text>
+                                                <Card.Text className="d-flex align-items-center"><GiPodium size={ICON_SIZE} className="mr-2"/> Skill level&nbsp;<b>{education.skillLevel}</b></Card.Text>
                                             </>
                                         )}
                                     </Card.Body>
@@ -74,7 +74,7 @@ const PublicProfileSingleMainInfo = ({ personal, location, sports, education, is
                                 <Card>
                                     <Card.Body>
                                         <Card.Title>Education</Card.Title>
-                                        <Card.Text><FaGraduationCap className="mr-1"/> Studied at <b>{education.schoolName}</b></Card.Text>
+                                        <Card.Text><FaGraduationCap className="mr-1"/> School <b>{education.schoolName}</b></Card.Text>
                                         {education.graduated ? 
                                             <Card.Text><FaUserGraduate className="mr-1"/> Graduated on <b>{education.graduationYear}</b></Card.Text> :
                                             <Card.Text><FaUserGraduate className="mr-1"/> Graduation year <b>{education.graduationYear}</b></Card.Text>
@@ -105,7 +105,7 @@ const PublicProfileSingleMainInfo = ({ personal, location, sports, education, is
                             </Tab.Pane>
                         </Tab.Content>
                     </Col>
-                    <Col md={{span: 4, offset: 0}}>
+                    <Col lg={{span: 4, offset: 0}}>
                         <Tab.Content className="public-profile__single-main__info__content">
                             <Tab.Pane eventKey="#information">
                                 <Card>
@@ -114,10 +114,15 @@ const PublicProfileSingleMainInfo = ({ personal, location, sports, education, is
                                         <b>Primary</b>
                                         <h5 className="text-uppercase font-weight-bold">{primarySport}</h5>
                                         <FaCaretRight className="mr-1"/><span>{primaryPositions}</span>
-                                        <hr />
-                                        <b>Secondary</b>
-                                        <h5 className="text-uppercase font-weight-bold">{secondarySport}</h5>
-                                        <FaCaretRight className="mr-1"/><span>{secondaryPositions}</span>
+                                        {
+                                            secondarySport && 
+                                            <>
+                                                <hr />
+                                                <b>Secondary</b>
+                                                <h5 className="text-uppercase font-weight-bold">{secondarySport}</h5>
+                                                <FaCaretRight className="mr-1"/><span>{secondaryPositions}</span>
+                                            </>
+                                        }
                                     </Card.Body>
                                 </Card>
                             </Tab.Pane>

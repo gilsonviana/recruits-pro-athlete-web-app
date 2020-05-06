@@ -9,11 +9,12 @@ import moment from 'moment'
 
 const LastEvaluation = ({ evaluation }) => {
     const date = moment(evaluation.createdAt).format('MMM Do, YYYY')
-
+    console.log(evaluation);
+    
     return (
         <Link to={`/dashboard/evaluation/${evaluation._id}`} className="text-dark">
-            <Card className="widget__last-evaluation shadow-sm pt-3 px-3 mb-5 bg-white rounded">
-                <div className="d-flex justify-content-between">
+            <Card className="widget__last-evaluation shadow-sm mb-5 bg-white rounded">
+                <div className="d-flex justify-content-between pt-3 px-3" style={{background: 'rgba(0, 236, 0, .4)'}}>
                     <Card.Title>Last evaluation</Card.Title>
                     <p>{(evaluation) && date}</p>
                 </div>

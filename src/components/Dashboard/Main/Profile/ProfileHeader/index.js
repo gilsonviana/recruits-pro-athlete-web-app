@@ -21,9 +21,9 @@ const ProfileHeader = ({ images, avatarUrl, coverImgUrl, fullName }) => {
                         <img src={avatarPlaceholder} alt="profile"/>
                     }
                 </div>
-                <div style={{background: '#ddd'}}>
-                    <h3 className="mt-4">{fullName}</h3>
-                </div>
+                <h3 className="mt-4">{fullName}</h3>
+                {/* <div style={{background: '#ddd'}}>
+                </div> */}
                 {/* <div className="page__profile__header__heading lead d-inline-block px-1">
                     <p>{heading}</p>
                 </div> */}
