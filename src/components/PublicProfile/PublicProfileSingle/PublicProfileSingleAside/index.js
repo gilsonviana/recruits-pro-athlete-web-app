@@ -54,14 +54,14 @@ const PublicProfileSingleAside = ({ avatarUrl, fullName, subscriptionStatus, eve
                             className="page__public-profile-single__aside__share shadow-sm mb-4">
                             <FiShare /> Share
                         </Button>
-                        <h4 className="text-md-left d-block ml-lg-2 mb-4">{fullName} {isPro && <Badge variant="success">Pro</Badge>}</h4>
+                        <h4 className="d-block ml-lg-2 mb-4">{fullName} {isPro && <Badge variant="success">Pro</Badge>}</h4>
                     </Col>
-                    <Col xs={12} className="d-none d-md-flex flex-md-column flex-lg-row ml-lg-2 mb-4">
-                        <div className="flex-lg-grow-1">
+                    <Col xs={12} className="page__public-profile-single__aside__detail d-none d-md-flex flex-md-column flex-lg-row ml-lg-2 mb-4">
+                        <div className="flex-lg-grow-1 text-center">
                             <h6 className="text-uppercase text-muted">events</h6>
                             <h4 className="font-weight-bold">{events.length}</h4>
                         </div>
-                        <div className="flex-lg-grow-1">
+                        <div className="flex-lg-grow-1 text-center">
                             <h6 className="text-uppercase text-muted">evaluations</h6>
                             <h4 className="font-weight-bold">{evaluations.length}</h4>
                         </div>

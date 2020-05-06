@@ -26,6 +26,7 @@
     margin-left: auto;
 }
 
+/* maybe */
 @media screen and (min-width: 768px) {
     .app__main {
         padding-left: 15rem;
