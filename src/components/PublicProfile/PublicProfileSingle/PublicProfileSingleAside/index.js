@@ -54,7 +54,7 @@ const PublicProfileSingleAside = ({ avatarUrl, fullName, subscriptionStatus, eve
                             className="page__public-profile-single__aside__share shadow-sm mb-4">
                             <FiShare /> Share
                         </Button>
-                        <h4 className="d-block ml-lg-2 mb-4">{fullName} {isPro && <Badge variant="success">Pro</Badge>}</h4>
+                        <h4 className="d-block ml-lg-2 mb-4">{fullName} {isPro && <Badge className="font-weight-normal" style={{backgroundColor: '#00EC00'}}>Pro</Badge>}</h4>
                     </Col>
                     <Col xs={12} className="page__public-profile-single__aside__detail d-none d-md-flex flex-md-column flex-lg-row ml-lg-2 mb-4">
                         <div className="flex-lg-grow-1 text-center">
@@ -66,17 +66,6 @@ const PublicProfileSingleAside = ({ avatarUrl, fullName, subscriptionStatus, eve
                             <h4 className="font-weight-bold">{evaluations.length}</h4>
                         </div>
                     </Col>
-                    {/* <Col xs={12} className="d-none d-md-block">
-                        <h6 className="mr-3 d-inline-block text-uppercase text-muted">videos</h6><FiVideo color="#6c757d"/>
-                        <div className="page__public-single__aside__videos d-flex">
-                            <div className="rounded">
-                            </div>
-                            <div className="rounded">
-                            </div>
-                            <div className="rounded">
-                            </div>
-                        </div>
-                    </Col> */}
                 </Row>
             </Container>
             <div className="public-profile__single__main__social d-md-none">

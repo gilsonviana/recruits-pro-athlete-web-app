@@ -13,7 +13,7 @@ const WorkoutDetailsVideoType = ({
             <h5 className="text-secondary">Instructions:</h5>
             <p>{notes}</p>
             <div data-tip="External video link" data-iscapture="true" className="d-inline">
-                <Button as="a" href={videoLink} variant="success" target="_blank" rel="nofollow noopener">Click to watch video workout <FiExternalLink /></Button>
+                <Button className="text-dark" as="a" href={videoLink} variant="success" target="_blank" rel="nofollow noopener" style={{backgroundColor: '#00EC00', border: 'none'}}>Click to watch video workout <FiExternalLink /></Button>
             </div>
             <ReactTooltip place="top" type="dark" effect="float"/>
         </div>

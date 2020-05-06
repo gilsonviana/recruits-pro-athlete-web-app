@@ -170,18 +170,17 @@ const PricingPage = ({ history, token, subscriptionPlans }) => {
                           {selectedOption &&
                           selectedOption.label === "Yearly" ? (
                             <Card.Title className="d-flex">
-                              <h1 className="mb-0">$50</h1>{" "}
+                              <h1 className="mb-0">$25</h1>{" "}
                               <h4 className="text-muted mb-0">/yearly</h4>
                             </Card.Title>
                           ) : (
                             <Card.Title className="d-flex">
-                              <h1 className="mb-0">$5</h1>{" "}
+                              <h1 className="mb-0">$4</h1>{" "}
                               <h4 className="text-muted mb-0">/month</h4>
                             </Card.Title>
                           )}
                           <Card.Subtitle className="my-4">
-                            The perfect plan to go if you want to up skill your
-                            game.
+                            Become a Pro! Upgrade to Athlete Pro for unlimited access to all premium features.
                           </Card.Subtitle>
                           <Select
                             className="mb-4"

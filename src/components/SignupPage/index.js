@@ -221,7 +221,7 @@ const SignupPage = ({ history, signUp, getSubscriptionPlans }) => {
                     <InputText value={formState.username} type="text" placeholder="Enter full name" name="username" onChange={handleChange} onBlur={isFieldValid} />
                     <InputText type="password" placeholder="Enter password" name="password" onChange={handleChange} onBlur={isFieldValid} />
                     <p className="my-3">
-                      By signing up, you agree and accept our <Link to="">terms of use</Link> and <Link to="">privacy policy</Link>.
+                      By signing up, you agree and accept our <Link to="" className="font-weight-bold" style={{color: '#00EC00'}}>Terms of Use</Link> and <Link to="" className="font-weight-bold" style={{color: '#00EC00'}}>Privacy Policy</Link>.
                     </p>
                     {
                       (isFormValid()) ?
@@ -230,7 +230,7 @@ const SignupPage = ({ history, signUp, getSubscriptionPlans }) => {
                     }
                   </form>
                   <div className="page__signup__content__footer">
-                    <Link to="/login">Login</Link>
+                    <Link to="/login" className="text-dark">Login</Link>
                   </div>
                 </div>
               </div>
@@ -246,9 +246,9 @@ const SignupPage = ({ history, signUp, getSubscriptionPlans }) => {
         }}>
           <Col xs={12} md={{ span: 4, offset: 4 }}>
             <footer className="page__signup__footer">
-              <Link to="">Privacy policy</Link>
+              <Link to="" className="text-dark">Privacy policy</Link>
               <p>/</p>
-              <Link to="">Terms of service</Link>
+              <Link to="" className="text-dark">Terms of service</Link>
             </footer>
           </Col>
         </Row>

@@ -92,7 +92,8 @@ const PublicProfileSingleMainInfo = ({ personal, location, sports, education, is
                                     <img src={lock} alt="content blocked" className="img-fluid"/>
                                 </div>
                                }
-                                <Card style={!isSubscriber && {filter: `blur(.2rem)`}}>
+                               {!isSubscriber ?
+                                <Card style={{filter: `blur(.2rem)`}}>
                                     <Card.Body>
                                         <Card.Title>References</Card.Title>
                                         <Card.Text><FaUserAlt className="mr-1" /> {personal.references.first.name || ''} | <MdEmail className="mr-1" /> <a href={`mailto:${personal.references.first.email}`} alt="send email"><span className="text-info">{personal.references.first.email || ''}</span></a></Card.Text>
@@ -102,6 +103,18 @@ const PublicProfileSingleMainInfo = ({ personal, location, sports, education, is
                                         <Card.Text><FaUserAlt className="mr-1" /> {personal.references.third.name || ''} | <MdEmail className="mr-1" /> <a href={`mailto:${personal.references.third.email}`} alt="send email"><span className="text-info">{personal.references.third.email || ''}</span></a></Card.Text>
                                     </Card.Body>
                                 </Card>
+                                :
+                                <Card>
+                                    <Card.Body>
+                                        <Card.Title>References</Card.Title>
+                                        <Card.Text><FaUserAlt className="mr-1" /> {personal.references.first.name || ''} | <MdEmail className="mr-1" /> <a href={`mailto:${personal.references.first.email}`} alt="send email"><span className="text-info">{personal.references.first.email || ''}</span></a></Card.Text>
+                                        <hr />
+                                        <Card.Text><FaUserAlt className="mr-1" /> {personal.references.second.name || ''} | <MdEmail className="mr-1" /> <a href={`mailto:${personal.references.second.email}`} alt="send email"><span className="text-info">{personal.references.second.email || ''}</span></a></Card.Text>
+                                        <hr />
+                                        <Card.Text><FaUserAlt className="mr-1" /> {personal.references.third.name || ''} | <MdEmail className="mr-1" /> <a href={`mailto:${personal.references.third.email}`} alt="send email"><span className="text-info">{personal.references.third.email || ''}</span></a></Card.Text>
+                                    </Card.Body>
+                                </Card>
+                                }
                             </Tab.Pane>
                         </Tab.Content>
                     </Col>

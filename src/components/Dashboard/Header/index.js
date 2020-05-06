@@ -1,9 +1,8 @@
 // Dependencies
 import React, { useState } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { FiSettings, FiLogOut } from 'react-icons/fi'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Navbar from 'react-bootstrap/Navbar'
@@ -12,6 +11,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
+import Col from 'react-bootstrap/Col'
 
 // Redux
 import { doLogout } from '../../../store/auth/actions'
@@ -22,7 +22,7 @@ import avatarPlaceholder from '../../../assets/images/user-avatar-placeholder.pn
 
 import './style.css'
 
-const Header = ({ doLogout, token, fullName, avatarUrl, history }) => {
+const Header = ({ doLogout, token, fullName, avatarUrl, history, profileId }) => {
     const [searchName, setSearchName] = useState('')
 
     const handleSearch = (e) => {
@@ -45,22 +45,31 @@ const Header = ({ doLogout, token, fullName, avatarUrl, history }) => {
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="app-mobile-navbar-nav" />
             <Navbar.Collapse id="app-mobile-navbar-nav">
-                <Form inline onSubmit={handleSearch}>
-                    <FormControl type="text" onChange={e => setSearchName(e.target.value)} placeholder="Search" className="mr-sm-2" />
-                    <Button type="submit" variant="outline-success">Search</Button>
+                <Form onSubmit={handleSearch}>
+                    <Form.Row>
+                        <Col sm={8}>
+                            <FormControl type="text" onChange={e => setSearchName(e.target.value)} placeholder="Search" className="mr-sm-2" />
+                        </Col>
+                        <Col sm={4} className="mt-2 mt-sm-0">
+                            <Button type="submit" variant="outline-success">Search</Button>
+                        </Col>
+                    </Form.Row> 
                 </Form>
-                <Nav className="mr-auto">
-                    <Nav.Link href="#home">Overview</Nav.Link>
-                    <Nav.Link href="#link">Evaluations</Nav.Link>
-                    <Nav.Link href="#link">Events</Nav.Link>
-                    <Nav.Link href="#link">Videos</Nav.Link>
-                    <NavDropdown title="Settings" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.3">Overview</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.1">Evaluations</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">Events</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.4">Videos</NavDropdown.Item>
-                    </NavDropdown>
-                </Nav>
+                {
+                    !token ?
+                    <Nav className="mr-auto mt-4">
+                        <Link to={'/login'} className="nav-link text-white btn btn-outline-success">Login</Link>
+                        <Link to={'/signup'} className="nav-link text-dark btn btn-success mt-3" style={{backgroundColor: '#00EC00'}}>Sign up</Link>
+                    </Nav> :
+                    <Nav className="mr-auto">
+                        <Link to={`/public/${profileId}`} className="nav-link">Profile</Link>
+                        <Link to={`/dashboard`} className="nav-link">Overview</Link>
+                        <Link to={`/dashboard/evaluations`} className="nav-link">Evaluations</Link>
+                        <Link to={`/dashboard/videos`} className="nav-link">Videos</Link>
+                        <Link to={`/dashboard/profile`} className="nav-link">Settings</Link>
+                        <Nav.Link onClick={doLogout}>Logout</Nav.Link>
+                    </Nav>
+                }
             </Navbar.Collapse>
         </Navbar>
         <header className="app__header bg-dark fixed-top d-none d-md-block">
@@ -71,14 +80,13 @@ const Header = ({ doLogout, token, fullName, avatarUrl, history }) => {
                 </Link>
                 <Form inline onSubmit={handleSearch}>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={e => setSearchName(e.target.value.trim())}/>
-                    <Button type="submit" variant="outline-success">Search</Button>
+                    <Button type="submit" className="text-dark" style={{backgroundColor: '#00EC00', border: 'none'}}>Search</Button>
                 </Form>
                 {
                     !token ?
                         <Nav className="ml-auto mr-4">
                             <Nav.Link href="/login" className="text-white">Login</Nav.Link>
-                            <Nav.Link variant="success" href="/signup" className="text-white d-md-none">Sign up</Nav.Link>
-                            <Nav.Link as={Button} variant="success" href="/signup" className="text-white d-none d-md-inline-block">Sign up</Nav.Link>
+                            <Nav.Link as={Button} variant="success" href="/signup" className="text-dark d-none d-md-inline-block" style={{backgroundColor: '#00EC00'}}>Sign up</Nav.Link>
                         </Nav> :
                     <div className="app__header__top__bar__list d-none d-md-flex">
                         <div className="app__header__top__bar__item">
@@ -137,7 +145,8 @@ Header.propTypes = {
 const mapStateToProps = (state) => ({
     token: state.auth.token,
     fullName: state.profile.personal.fullName,
-    avatarUrl: state.profile.personal.avatarUrl
+    avatarUrl: state.profile.personal.avatarUrl,
+    profileId: state.auth._id
 })
 
 export default withRouter(connect(mapStateToProps, { doLogout })(Header))

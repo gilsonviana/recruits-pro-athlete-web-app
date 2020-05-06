@@ -12,6 +12,7 @@ import VideoItemPlayer from '../../../../Dashboard/Main/Videos/VideosAll/VideoIt
 import videoImg from '../../../../../assets/images/video-camera.png'
 
 const PublicProfileSingleMainVideos = ({ videos }) => {
+    console.log(videos)
     if (videos.length <= 0) {
         return (
             <div className="public-profile__single__main__videos text-center">
@@ -27,7 +28,7 @@ const PublicProfileSingleMainVideos = ({ videos }) => {
                 <Row>
                     {
                         videos.map((video, i) => 
-                            <Col key={i} md="4" lg="3"><VideoItemPlayer videoUrl={video.url} title={video.title} /></Col>
+                            <Col key={i} xl="6"><VideoItemPlayer videoUrl={video.url} title={video.title} /></Col>
                         )
                     }
                 </Row>

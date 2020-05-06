@@ -35,22 +35,12 @@ const LoginPage = ({ history, token, doLogin, getSubscriptionPlans }) => {
     })
 
     useEffect(() => {
-        // const verifyRoute = () => {
-        //     let href = window.location.href.split('/')
-
-        //     if (href) {
-        //         if (href.indexOf('/public') >= 0) {
-        //             return <Redirect to={`/public/${href.pop()}`}/>
-        //         }
-        //     }
-        // }
         const verifyToken = () => {
             if (token) {
                 history.push('/redirect')
             }
         }
 
-        // verifyRoute()
         verifyToken()
         
         getSubscriptionPlans()
@@ -158,7 +148,7 @@ const LoginPage = ({ history, token, doLogin, getSubscriptionPlans }) => {
                         <section className="page__login__content">
                             <div className="page__login__content__box">
                                 <div className="page__login__content__box__form">
-                                    <h3 className="page__login__content__box__form__title font-weight-bold">Log in to Athletes Pro</h3>
+                                    <h3 className="page__login__content__box__form__title font-weight-bold">Athlete Login</h3>
                                     <form onSubmit={handleSubmit}>
                                         {
                                             (showError.isVisible) &&
@@ -170,13 +160,13 @@ const LoginPage = ({ history, token, doLogin, getSubscriptionPlans }) => {
                                         <InputText autoComplete="on" type="password" placeholder="Enter password" name="password" onChange={handleChange} />
                                         {
                                             (!isFormValid() || !formState.password || !formState.email) ?
-                                                <Button disabled={true} type="submit">Log in</Button> :
-                                                <Button disabled={false} type="submit">Log in</Button>
+                                                <Button disabled={true} className="text-dark" type="submit">Log in</Button> :
+                                                <Button disabled={false} className="text-dark" type="submit">Log in</Button>
                                         }
                                     </form>
                                     <div className="page__login__content__footer">
-                                        <Link to="/reset-password">Forgot password?</Link>
-                                        <Link to="/signup">Sign up for an account</Link>
+                                        <Link to="/reset-password" className="text-dark">Forgot password?</Link>
+                                        <Link to="/signup" className="text-dark">Sign up for an account</Link>
                                     </div>
                                 </div>
                             </div>
@@ -192,9 +182,9 @@ const LoginPage = ({ history, token, doLogin, getSubscriptionPlans }) => {
                 }}>
                     <Col xs={12} md={{ span: 4, offset: 4 }}>
                         <footer className="page__login__footer">
-                            <Link to="">Privacy policy</Link>
+                            <Link to="" className="text-dark">Privacy policy</Link>
                             <p>/</p>
-                            <Link to="">Terms of service</Link>
+                            <Link to="" className="text-dark">Terms of service</Link>
                         </footer>
                     </Col>
                 </Row>
