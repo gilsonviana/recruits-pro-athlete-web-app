@@ -6,9 +6,14 @@ import Skeleton from "react-loading-skeleton";
 import Card from 'react-bootstrap/Card'
 import { GiWhistle } from "react-icons/gi";
 import moment from 'moment'
+import ImgPlaceholder from '../../../../../assets/images/user-avatar-placeholder.png'
+
+import './style.css'
 
 const LastEvaluation = ({ evaluation }) => {
     const date = moment(evaluation.createdAt).format('MMM Do, YYYY')
+    const evaluatorAvatar = evaluation.evaluatorId.personal.avatarUrl
+    console.log(evaluation);
     
     return (
         <Link to={`/dashboard/evaluation/${evaluation._id}`} className="text-dark">
@@ -17,10 +22,19 @@ const LastEvaluation = ({ evaluation }) => {
                     <Card.Title>Last evaluation</Card.Title>
                     <p>{(evaluation) && date}</p>
                 </div>
-                <Card.Body>
-                    <div className="d-flex text-muted">
-                        <GiWhistle size={20} className="mr-2" />
+                <Card.Body className="d-xl-flex text-center">
+                    {
+                        evaluatorAvatar ? 
+                        <div className="widget__last-evaluation__avatar bg-light rounded-circle overflow-hidden mx-auto mx-xl-0 mr-xl-4">
+                            <img className="img-fluid" src={evaluatorAvatar} alt={`evaluator`}/>
+                        </div> :
+                        <div className="widget__last-evaluation__avatar bg-light rounded-circle overflow-hidden mx-auto mx-xl-0 mr-xl-4">
+                            <img className="img-fluid" src={ImgPlaceholder} alt={`evaluator`}/>
+                        </div>
+                    }
+                    <div className="text-muted">
                         <h5>{evaluation.evaluatorId.personal.fullName || <Skeleton width={50}/>}</h5>
+                        <h6>{evaluation.form.name}</h6>
                     </div>
                 </Card.Body>
             </Card>

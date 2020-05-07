@@ -51,19 +51,19 @@ const PublicProfileSingleMainInfo = ({ personal, location, sports, education, is
                                         <Card.Title>Information</Card.Title>
                                         {dob && <Card.Text className="d-flex align-items-center"><FaRegCalendarAlt size={ICON_SIZE} className="mr-2"/> Born on {moment(dob).format('MMMM d YYYY')}</Card.Text>}
                                         {isSubscriber && <Card.Text className="d-flex align-items-center"><FaMobileAlt size={ICON_SIZE} className="mr-2"/> {personal.hasOwnProperty('phone') ? personal.phone.number : ''}</Card.Text>}
-                                        {isSubscriber && <Card.Text className="d-flex align-items-center"><MdEmail size={ICON_SIZE} className="mr-2"/> <a alt={`${personal.fullName} email`} href={`mailto: ${personal.email}`}>{personal.email || ''}</a></Card.Text>}
+                                        {/* {isSubscriber && <Card.Text className="d-flex align-items-center"><MdEmail size={ICON_SIZE} className="mr-2"/> <a alt={`${personal.fullName} email`} href={`mailto: ${personal.email}`}>{personal.email || ''}</a></Card.Text>} */}
                                         <Card.Text className="d-flex align-items-center"><FaHome size={ICON_SIZE} className="mr-2"/> Lives in&nbsp;<b>{city}</b>&nbsp;<b>{state}</b></Card.Text>
                                         { (personal.height.hasOwnProperty('feet')) && (
                                             <>
                                                 <hr />
-                                                <div className="d-flex"><h6 className="mr-2 font-weight-bold">H</h6> <b>{personal.height.feet}'{personal.height.inches}''</b></div>
+                                                <div className="d-flex"><h6 className="mr-2 font-weight-bold">H</h6>Height&nbsp;<b>{personal.height.feet}'{personal.height.inches}''</b></div>
                                             </>
                                         )}
-                                        { (personal.weight) && <div className="d-flex"><h6 className="mr-2 font-weight-bold">W</h6> Weight&nbsp;<b>{personal.weight} lb</b></div>}
+                                        { (personal.weight) && <div className="d-flex"><h6 className="mr-1 font-weight-bold">W</h6>Weight&nbsp;<b>{personal.weight} lb</b></div>}
                                         { (education.skillLevel) && (
                                             <>
                                                 <hr />
-                                                <div className="d-flex"><h6 className="mr-2 font-weight-bold">S</h6> Skill level&nbsp;<b>{education.skillLevel}</b></div>
+                                                <div className="d-flex"><h6 className="mr-2 font-weight-bold">S</h6>Skill level&nbsp;<b>{education.skillLevel}</b></div>
                                             </>
                                         )}
                                     </Card.Body>
