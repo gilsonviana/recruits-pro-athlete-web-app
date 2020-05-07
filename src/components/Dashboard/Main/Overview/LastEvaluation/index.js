@@ -9,7 +9,6 @@ import moment from 'moment'
 
 const LastEvaluation = ({ evaluation }) => {
     const date = moment(evaluation.createdAt).format('MMM Do, YYYY')
-    console.log(evaluation);
     
     return (
         <Link to={`/dashboard/evaluation/${evaluation._id}`} className="text-dark">

@@ -6,9 +6,8 @@ import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import Tab from 'react-bootstrap/Tab'
 import ListGroup from 'react-bootstrap/ListGroup'
-import { FaWeight, FaUserAlt, FaGraduationCap, FaHome, FaRegCalendarAlt, FaMobileAlt, FaCaretRight, FaUserGraduate } from 'react-icons/fa'
+import { FaUserAlt, FaGraduationCap, FaHome, FaRegCalendarAlt, FaMobileAlt, FaCaretRight, FaUserGraduate } from 'react-icons/fa'
 import { MdEmail, MdGrade } from 'react-icons/md'
-import { GiBodyHeight, GiPodium } from 'react-icons/gi'
 import moment from 'moment'
 
 // Assets
@@ -57,14 +56,14 @@ const PublicProfileSingleMainInfo = ({ personal, location, sports, education, is
                                         { (personal.height.hasOwnProperty('feet')) && (
                                             <>
                                                 <hr />
-                                                <div className="d-flex align-items-center"><h6 className="mr-2 font-weight-bold">H</h6>&nbsp;<b>{personal.height.feet}'{personal.height.inches}''</b></div>
+                                                <div className="d-flex"><h6 className="mr-2 font-weight-bold">H</h6> <b>{personal.height.feet}'{personal.height.inches}''</b></div>
                                             </>
                                         )}
-                                        { (personal.weight) && <Card.Text className="d-flex align-items-center"><FaWeight size={ICON_SIZE} className="mr-2"/> Weight&nbsp;<b>{personal.weight} lb</b></Card.Text>}
+                                        { (personal.weight) && <div className="d-flex"><h6 className="mr-2 font-weight-bold">W</h6> Weight&nbsp;<b>{personal.weight} lb</b></div>}
                                         { (education.skillLevel) && (
                                             <>
                                                 <hr />
-                                                <Card.Text className="d-flex align-items-center"><GiPodium size={ICON_SIZE} className="mr-2"/> Skill level&nbsp;<b>{education.skillLevel}</b></Card.Text>
+                                                <div className="d-flex"><h6 className="mr-2 font-weight-bold">S</h6> Skill level&nbsp;<b>{education.skillLevel}</b></div>
                                             </>
                                         )}
                                     </Card.Body>

@@ -14,7 +14,6 @@ const WorkoutsSidebar = ({
 
     const handleOnSearch = (e) => {
         e.preventDefault()
-        console.log('handleOnSearch', e.target.value)
     }
 
     return (

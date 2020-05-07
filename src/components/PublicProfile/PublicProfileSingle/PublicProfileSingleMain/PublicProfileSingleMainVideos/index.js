@@ -12,7 +12,6 @@ import VideoItemPlayer from '../../../../Dashboard/Main/Videos/VideosAll/VideoIt
 import videoImg from '../../../../../assets/images/video-camera.png'
 
 const PublicProfileSingleMainVideos = ({ videos }) => {
-    console.log(videos)
     if (videos.length <= 0) {
         return (
             <div className="public-profile__single__main__videos text-center">

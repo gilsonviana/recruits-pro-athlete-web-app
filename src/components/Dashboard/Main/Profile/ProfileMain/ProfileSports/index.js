@@ -174,7 +174,6 @@ const ProfileSports = ({ token, sports, setProfileRequest }) => {
     }
 
     const _handleFieldValidation = ({ target }) => {
-        console.log(target.name, target.value, errorMessage[target.name])
         if (!target.value) {
             setErrorMessage({
                 ...errorMessage,
@@ -220,7 +219,6 @@ const ProfileSports = ({ token, sports, setProfileRequest }) => {
         }
 
         if (errorFields.length > 0) {
-            console.log('errorFields.length > 0')
             setShowToast({
                 isVisible: true,
                 message: errorFields.length > 1 ? `

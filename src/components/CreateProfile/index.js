@@ -395,7 +395,7 @@ const CreateProfile = ({ history, token, setProfileRequest, setProfileImagesRequ
                 </Navbar.Collapse>
             </Navbar>
             <div className="fixed-top"> 
-                <Toast onClose={() => setShowToast({isVisible: false, message: ''})} show={showToast.isVisible} delay={8000} autohide style={{
+                <Toast onClose={() => setShowToast({isVisible: false, message: ''})} show={showToast.isVisible} delay={3000} autohide style={{
                     position: 'absolute',
                     left: `50%`,
                     transform: `translateX(${-50}%)`,
