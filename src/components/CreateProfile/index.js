@@ -380,7 +380,7 @@ const CreateProfile = ({ history, token, setProfileRequest, setProfileImagesRequ
                 </div>
             )}
             <Navbar bg="dark" expand="md" variant="dark" className="public-profile-navbar" style={{minHeight: `4rem`}}>
-                <Navbar.Brand href="#home">
+                <Navbar.Brand href="/">
                     <div className="app__header__top__bar__brand">
                         <img src={brand} alt="Recruits Pro Logo"/>
                     </div>

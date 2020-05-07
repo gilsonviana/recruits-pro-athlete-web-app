@@ -12,8 +12,8 @@ export default (state = initialState, action) => {
         case SET_TOKEN:
             return {
                 ...state,
-                _id: action.payload._id,
-                token: action.payload.token
+                // _id: action.payload._id,
+                token: action.payload
             }
         case UNSET_TOKEN:
             return {

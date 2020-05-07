@@ -47,6 +47,10 @@
     padding: 1rem;
 }
 
+.page__create-profile__wrapper .nav-item.nav-link {
+    color: #343a40 !important;
+}
+
 @media screen and (min-width: 768px) {
     .page__create-profile {
         padding-top: 0;

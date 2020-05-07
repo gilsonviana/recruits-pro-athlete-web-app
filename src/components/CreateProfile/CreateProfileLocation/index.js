@@ -220,13 +220,13 @@ const CreateProfileLocation = ({ handleTabKey, handleOnChange }) => {
                 </Form.Row>
                 <Form.Group className="clearfix">
                     <Button
-                        className="create-profile__location__button-next float-left"
-                        onClick={() => handleTabKey("personal")}>
+                        className="create-profile__location__button-next float-left text-dark border-0"
+                        onClick={() => handleTabKey("personal")} style={{backgroundColor: '#00EC00'}}>
                         <FaArrowLeft className="mr-2" /> Previous
                     </Button>
                     <Button
-                        className="create-profile__location__button-next float-right mt-3 mt-md-0"
-                        onClick={() => handleTabKey("education")}>
+                        className="create-profile__location__button-next float-right mt-3 mt-md-0 text-dark border-0"
+                        onClick={() => handleTabKey("education")} style={{backgroundColor: '#00EC00'}}>
                         Next<FaArrowRight className="ml-2" />
                     </Button>
                 </Form.Group>

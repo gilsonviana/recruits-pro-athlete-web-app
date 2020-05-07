@@ -41,7 +41,7 @@ const LoginPage = ({ history, token, doLogin, getSubscriptionPlans }) => {
             }
         }
 
-        verifyToken()
+        // verifyToken()
         
         getSubscriptionPlans()
     }, [getSubscriptionPlans, history, token])
@@ -195,7 +195,7 @@ const LoginPage = ({ history, token, doLogin, getSubscriptionPlans }) => {
 
 LoginPage.propTypes = {
     history: PropTypes.object.isRequired,
-    token: PropTypes.string.isRequired,
+    token: PropTypes.string,
     doLogin: PropTypes.func.isRequired,
     getSubscriptionPlans: PropTypes.func.isRequired
 }

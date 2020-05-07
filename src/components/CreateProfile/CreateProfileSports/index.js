@@ -186,10 +186,10 @@ const CreateProfileSports = ({ handleTabKey, handleOnChange, handleSubmit }) => 
                     <Form.Text className="text-muted">Separate positions by comma.</Form.Text>
                 </Form.Group>
                 <Form.Group className="clearfix">
-                    <Button className="create-profile__education__button-next float-left" onClick={() => handleTabKey('education')}>
+                    <Button className="create-profile__education__button-next float-left text-dark border-0" onClick={() => handleTabKey('education')} style={{backgroundColor: '#00EC00'}}>
                         <FaArrowLeft className="mr-2"/>Previous
                     </Button>
-                    <Button type="submit" className="create-profile__education__button-next float-right mt-3 mt-md-0">
+                    <Button type="submit" className="create-profile__education__button-next float-right mt-3 mt-md-0 text-dark border-0" style={{backgroundColor: '#00EC00'}}>
                         Submit
                     </Button>
                 </Form.Group>

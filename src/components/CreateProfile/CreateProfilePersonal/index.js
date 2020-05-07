@@ -292,8 +292,8 @@ const CreateProfilePersonal = ({ handleTabKey, handleOnChange, doLogout }) => {
                     </Form.Group>
                 </Form.Row>
                 <Form.Group className="clearfix">
-                    <Button variant="link" onClick={doLogout}>Cancel</Button>
-                    <Button className="create-profile__personal__button-next float-right" onClick={() => handleTabKey("location")}>
+                    <Button className="text-dark" variant="link" onClick={doLogout}>Cancel</Button>
+                    <Button className="create-profile__personal__button-next float-right border-0 text-dark" onClick={() => handleTabKey("location")} style={{backgroundColor: '#00EC00'}}>
                         Next <FaArrowRight className="ml-2" />
                     </Button>
                 </Form.Group>
