@@ -71,11 +71,13 @@ export const signUp = (credentials) => {
                     fullName: credentials.username
                 }
             })
-            console.log(data);
             
             dispatch({
                 type: SET_TOKEN,
-                payload: data.token
+                payload: {
+                    _id: data._id,
+                    token: data.token
+                }
             })
 
             dispatch({
