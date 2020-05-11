@@ -41,7 +41,7 @@ const LoginPage = ({ history, token, doLogin, getSubscriptionPlans }) => {
             }
         }
 
-        // verifyToken()
+        verifyToken()
         
         getSubscriptionPlans()
     }, [getSubscriptionPlans, history, token])
