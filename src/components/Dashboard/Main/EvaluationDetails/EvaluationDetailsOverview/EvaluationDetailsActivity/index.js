@@ -8,14 +8,14 @@ import Col from 'react-bootstrap/Col'
 import EvaluationDetailsChart from './EvaluationDetailsChart'
 import EvaluationDetailsChartSummary from './EvaluationDetailsChartSummary'
 
-const EvaluationDetailsActivity = ({ metric }) => {
+const EvaluationDetailsActivity = ({ metricName, evaluations }) => {
     return (
         <div className="evaluation-details-activity mt-4">
             <Row>
-                <Col xs={12} md={6} lg={8}>
-                    <EvaluationDetailsChart metric={metric}/>
+                <Col xl={8}>
+                    <EvaluationDetailsChart metricName={metricName} evaluations={evaluations}/>
                 </Col>
-                <Col xs={12} md={6} lg={4}>
+                <Col xl={4}>
                     {/* <EvaluationDetailsChartSummary /> */}
                 </Col>
             </Row>

@@ -1,37 +1,61 @@
 // Dependencies
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import Card from "react-bootstrap/Card";
+import moment from 'moment'
 
 // Components
 import EvaluationDetailsChartEmptyState from './EvaluationDetailsChartEmptyState'
 import CustomizedAxisTick from './CustomizedAxisTick'
 import CustomizedLabel from './CustomizedLabel'
 
-const EvaluationDetailsChart = ({ metric }) => {
-  console.log(metric)
-  const data = [
-    {
-      name: metric.name, value: 12,
-    },
-    {
-      name: metric.name, value: 22,
+const EvaluationDetailsChart = ({ metricName, evaluations }) => {
+  const [chartData, setChartData] = useState([])
+
+  useEffect(() => {
+    const populateChartData = () => {
+      const evaluatorId = evaluations[0].evaluatorId._id || ''
+      
+      let metrics = []
+
+      evaluations.filter(evaluation => evaluation.evaluatorId._id === evaluatorId).map(evaluation => {
+        const evaluationDate = moment(evaluation.createdAt).format('MMM D Y')
+
+        evaluation.form.metrics.map(metric => {
+          if (metric.name === metricName) {
+            metrics = [
+              ...metrics,
+              {
+                value: metric.value,
+                name: evaluationDate
+              }
+            ]
+          }
+        })
+      })
+      
+      setChartData(metrics)  
     }
-  ];
+    populateChartData()
+    
+  }, [metricName])
 
   return (
     <Card className="evaluation-details-chart shadow-sm pt-3 px-3 mb-4 bg-white rounded">
-      <Card.Title>Activity</Card.Title>
+      <div className="d-flex">
+        <Card.Title>Activity: </Card.Title>
+        <p className="ml-1 font-weight-bold">{metricName}</p>
+      </div>
       <Card.Body>
         {
-          !metric._id ? 
+          !metricName ? 
             <EvaluationDetailsChartEmptyState /> :
-            <div>
+            <ResponsiveContainer height={250} width="100%">
               <LineChart
                 width={500}
                 height={300}
-                data={data}
+                data={chartData}
                 margin={{
                   top: 20, right: 30, left: 20, bottom: 10,
                 }}
@@ -40,10 +64,9 @@ const EvaluationDetailsChart = ({ metric }) => {
                 <XAxis dataKey="name" height={60} tick={<CustomizedAxisTick />} />
                 <YAxis />
                 <Tooltip />
-                <Legend />
                 <Line type="monotone" strokeWidth={2} dataKey="value" stroke="#00EC00" label={<CustomizedLabel />} />
               </LineChart>
-            </div>
+            </ResponsiveContainer>
         }
       </Card.Body>
     </Card>

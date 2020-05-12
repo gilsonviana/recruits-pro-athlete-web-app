@@ -9,12 +9,7 @@ import EvaluationDetailsActivity from './EvaluationDetailsActivity'
 import EvaluationDetailsMetrics from './EvaluationDetailsMetrics'
 
 const EvaluationDetailsOverview = ({ evaluation, evaluations }) => {
-    const [activityMetric, setActivityMetric] = useState({
-        _id: '',
-        name: '',
-        category: '',
-        value: ''     
-    })
+    const [activityMetric, setActivityMetric] = useState('')
 
     const [numberOfEvaluations] = useState(() => {
         const evaluatorTotal = evaluations.filter(item => item.evaluatorId._id === evaluation.evaluatorId._id)
@@ -22,7 +17,7 @@ const EvaluationDetailsOverview = ({ evaluation, evaluations }) => {
     })
 
     const handleOnMetricSelect = (id = '') => {
-        setActivityMetric(evaluation.form.metrics.filter(metric => metric._id === id)[0])
+        setActivityMetric(evaluation.form.metrics.filter(metric => metric._id === id)[0]['name'])
     }
 
     return (
@@ -32,7 +27,7 @@ const EvaluationDetailsOverview = ({ evaluation, evaluations }) => {
                 numberOfEvaluations={numberOfEvaluations}
                 address={evaluation.location.description}
             />
-            <EvaluationDetailsActivity metric={activityMetric}/>
+            <EvaluationDetailsActivity metricName={activityMetric} evaluations={evaluations}/>
             <EvaluationDetailsMetrics 
                 metrics={evaluation.form.metrics}
                 handleSelect={handleOnMetricSelect}
