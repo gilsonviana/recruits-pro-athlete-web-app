@@ -1,6 +1,7 @@
 // Dependencies
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 // Service
 import { getAthletePublicProfile } from '../../../services/user'
@@ -11,7 +12,7 @@ import PublicProfileSingleHeader from './PublicProfileSingleHeader'
 import PublicProfileSingleAside from './PublicProfileSingleAside'
 import PublicProfileSingleMain from './PublicProfileSingleMain'
 
-const PublicProfileSingle = () => {
+const PublicProfileSingle = ({ history }) => {
     const [profile, setProfile] = useState({
         personal: {
             avatarUrl: '',
@@ -77,11 +78,15 @@ const PublicProfileSingle = () => {
 
     useEffect(() => {
         const fetchUserById = async () => {
-            const res = await getAthletePublicProfile(profileId)
-            setProfile({
-                ...profile,
-                ...res.athlete
-            })
+            try {
+                const res = await getAthletePublicProfile(profileId)
+                setProfile({
+                    ...profile,
+                    ...res.athlete
+                })
+            } catch (e) {
+                history.push('/dashboard')
+            }
         }
         fetchUserById()
     }, [profileId])
@@ -106,4 +111,8 @@ const PublicProfileSingle = () => {
     )
 }
 
-export default PublicProfileSingle
+PublicProfileSingle.propTypes = {
+    history: PropTypes.object.isRequired
+}
+
+export default withRouter(PublicProfileSingle)

@@ -76,7 +76,7 @@ Aside.propTypes = {
 
 const mapStateToProps = (state) => ({
     subscription: state.profile.subscription,
-    profileId: state.auth._id
+    profileId: state.profile._id
 })
 
 export default connect(mapStateToProps)(Aside)

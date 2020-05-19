@@ -9,7 +9,7 @@ import avatarPlaceholder from '../../../../assets/images/user-avatar-placeholder
 
 const PublicProfileListingItem = ({ athlete }) => {
     return (
-        <Link to={`/public/${athlete.user}`} className="d-block mb-3">
+        <Link to={`/public/${athlete._id}`} className="d-block mb-3">
             <Card className="public-profile__listing__item text-dark" style={{fontSize: `.8rem`}}> 
                 <Card.Body>
                     <div className="media">
