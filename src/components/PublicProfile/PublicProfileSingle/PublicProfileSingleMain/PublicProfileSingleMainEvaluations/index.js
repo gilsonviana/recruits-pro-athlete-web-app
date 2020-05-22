@@ -1,15 +1,25 @@
 // Dependencies
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 // Components
 import PublicProfileSingleMainEvaluationsItem from './PublicProfileSingleMainEvaluationsItem'
+import PublicProfileSingleMainVideoEvaluationsItem from './PublicProfileSingleMainVideoEvaluationsItem'
 
 // Assets
 import './style.css'
 import noEvaluationsImage from '../../../../../assets/images/form.png'
 
-const PublicProfileSingleMainEvaluations = ({ evaluations, subscriptionStatus }) => {
+const PublicProfileSingleMainEvaluations = ({ evaluations, videoEvaluations, subscriptionStatus }) => {
+    const [evaluationsState, setEvaluationsState] = useState()
+
+    useEffect(() => {
+        setEvaluationsState([
+            ...evaluations,
+            ...videoEvaluations
+        ])
+    }, [evaluations, videoEvaluations])
+    
     const isSubscriber = subscriptionStatus === 'ACTIVE' ? true : false
 
     if (evaluations.length === 0) {
@@ -24,7 +34,7 @@ const PublicProfileSingleMainEvaluations = ({ evaluations, subscriptionStatus })
     if (!isSubscriber) {
         return (
             <div className="public-profile__single-main__evaluations">
-                {evaluations.length > 0 && <PublicProfileSingleMainEvaluationsItem evaluation={evaluations[0]}/>}
+                {evaluations.length > 0 && <PublicProfileSingleMainEvaluationsItem evaluation={evaluations[evaluations.length - 1]}/>}
             </div>
         )
     }
@@ -32,7 +42,16 @@ const PublicProfileSingleMainEvaluations = ({ evaluations, subscriptionStatus })
     return (
         <div className="public-profile__single-main__evaluations">
             {
-                evaluations.map((evaluation, i) => <PublicProfileSingleMainEvaluationsItem key={i} evaluation={evaluation}/>)
+                evaluationsState.sort((a, b) => {
+                    let x = new Date(b.createdAt), 
+                        y = new Date(a.createdAt)
+                    return y > x ? - 1 : y < x ? 1 : 0
+                }).map((evaluation, i) => {
+                    if (evaluation.videoUrl !== undefined) {
+                        return <PublicProfileSingleMainVideoEvaluationsItem key={i} evaluation={evaluation}/>
+                    }
+                    return <PublicProfileSingleMainEvaluationsItem key={i} evaluation={evaluation}/>
+                })
             }
         </div>
     )
@@ -40,6 +59,7 @@ const PublicProfileSingleMainEvaluations = ({ evaluations, subscriptionStatus })
 
 PublicProfileSingleMainEvaluations.propTypes = {
     evaluations: PropTypes.array.isRequired,
+    videoEvaluations: PropTypes.array.isRequired,
     subscriptionStatus: PropTypes.string.isRequired
 }
 

@@ -32,7 +32,7 @@ export const doLogin = (credentials) => {
                 type: SET_PROFILE_REQUEST,
                 payload: data.athlete
             })
-            
+
             return data
         } catch (e) {
             dispatch({

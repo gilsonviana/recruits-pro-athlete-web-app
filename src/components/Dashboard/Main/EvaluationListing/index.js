@@ -10,9 +10,10 @@ import Card from 'react-bootstrap/Card'
 // Components
 import EvaluationSearchBar from './EvaluationSearchBar'
 import EvaluationListItem from './EvaluationListItem'
+import EvaluationListVideoItem from './EvaluationListVideoItem'
 import MarketingBanner from '../MarketingBanner'
 
-const EvaluationListing = ({ evaluations, subscriptionStatus }) => {
+const EvaluationListing = ({ evaluations, videoEvaluations, subscriptionStatus }) => {
     const [evaluationsState, setEvaluationsState] = useState(null)
 
     useEffect(() => {
@@ -21,11 +22,14 @@ const EvaluationListing = ({ evaluations, subscriptionStatus }) => {
                 setEvaluationsState([evaluations[evaluations.length - 1]])
                 return                
             }
-            setEvaluationsState([...evaluations])
+            setEvaluationsState([
+                ...evaluations,
+                ...videoEvaluations
+            ])
         }
 
         populateEvaluationsState()
-    }, [evaluations, subscriptionStatus])
+    }, [evaluations, videoEvaluations, subscriptionStatus])
 
     const handleSearch = (e) => {
         const { target } = e
@@ -58,6 +62,36 @@ const EvaluationListing = ({ evaluations, subscriptionStatus }) => {
         })])
     }
 
+    const renderEvaluationList = () => {
+        if (evaluationsState.length > 0) {
+            return evaluationsState.sort((a, b) => {
+                let x = new Date(b.createdAt), 
+                    y = new Date(a.createdAt)
+                return y > x ? - 1 : y < x ? 1 : 0
+            }).map(evaluation => {
+                if (evaluation.hasOwnProperty('videoUrl')) {
+                    return <EvaluationListVideoItem 
+                                key={evaluation._id}
+                                id={evaluation._id}
+                                fullName={evaluation.evaluator.personal.fullName}
+                                avatar={evaluation.evaluator.personal.avatarUrl}
+                                date={evaluation.createdAt}
+                            />
+                }
+
+                return <EvaluationListItem 
+                            key={evaluation._id} 
+                            id={evaluation._id} 
+                            fullName={evaluation.evaluatorId.personal.fullName} 
+                            date={evaluation.createdAt} 
+                            sportCategory={evaluation.form.sport}
+                            avatar={evaluation.evaluatorId.personal.avatarUrl} />
+            })  
+        } else {
+            return <p>No evaluation matches the criteria.</p>
+        }
+    }
+
     if (!evaluationsState) {
         return <></>
     }
@@ -78,28 +112,15 @@ const EvaluationListing = ({ evaluations, subscriptionStatus }) => {
                     <Col>
                         <Card className="shadow-sm pt-3 px-3 mb-5 bg-white rounded">
                             <Card.Body>
-                            <h5 className="font-weight-bold">Evaluations</h5>
-                            <p className="lead">
-                                Track your performance and read insightful notes from coaches and trainers.
-                            </p>
-                            {evaluations.length >= 1 && subscriptionStatus !== 'ACTIVE' && <span className="text-danger font-weight-bold lead d-block mb-4">You have reached the limit of evaluations you can see.</span>}
-                            <EvaluationSearchBar handleOnChange={handleSearch} handleFilter={handleSearchFilter}/>
-                            {
-                                (evaluationsState.length > 0) ?
-                                evaluationsState.sort((a, b) => {
-                                    let x = new Date(b.createdAt), 
-                                        y = new Date(a.createdAt)
-                                    return y > x ? - 1 : y < x ? 1 : 0
-                                }).map(evaluation => 
-                                    <EvaluationListItem 
-                                        key={evaluation._id} 
-                                        id={evaluation._id} 
-                                        fullName={evaluation.evaluatorId.personal.fullName} 
-                                        date={evaluation.createdAt} 
-                                        sportCategory={evaluation.form.sport}
-                                        avatar={evaluation.evaluatorId.personal.avatarUrl}/>)  
-                                : <p>No evaluation matches the criteria.</p>
-                            }
+                                <h5 className="font-weight-bold">Evaluations</h5>
+                                <p className="lead">
+                                    Track your performance and read insightful notes from coaches and trainers.
+                                </p>
+                                {evaluations.length >= 1 && subscriptionStatus !== 'ACTIVE' && <span className="text-danger font-weight-bold lead d-block mb-4">You have reached the limit of evaluations you can see.</span>}
+                                <EvaluationSearchBar handleOnChange={handleSearch} handleFilter={handleSearchFilter}/>
+                                {
+                                    renderEvaluationList()
+                                }
                             </Card.Body>
                         </Card>
                     </Col>
@@ -116,6 +137,7 @@ EvaluationListing.propTypes = {
 
 const mapStateToProps = (state) => ({
     evaluations: state.profile.evaluations,
+    videoEvaluations: state.profile.videoEvaluations,
     subscriptionStatus: state.profile.subscription.status
 })
 

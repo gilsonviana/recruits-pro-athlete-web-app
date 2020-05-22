@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import PropTypes from "prop-types"
 import Skeleton from "react-loading-skeleton";
 import Card from 'react-bootstrap/Card'
-import { GiWhistle } from "react-icons/gi";
 import moment from 'moment'
 import ImgPlaceholder from '../../../../../assets/images/user-avatar-placeholder.png'
 

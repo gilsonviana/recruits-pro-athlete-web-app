@@ -12,7 +12,7 @@ import { createSubscription } from "../../../../../../services/paypal"
 
 // Assets
 import './style.css'
-import { ReactComponent as BookmarkIcon } from "../../../../../../assets/images/bookmark-black-shape.svg";
+// import { ReactComponent as BookmarkIcon } from "../../../../../../assets/images/bookmark-black-shape.svg";
 
 const ProfileChoosePlan = ({ token, subscriptionPlans }) => {
     const [selectedOption, setSelectedOption] = useState(null)

@@ -49,6 +49,7 @@ const PublicProfileSingle = ({ history }) => {
         },
         events: [],
         evaluations: [],
+        videoEvaluations: [],
         social: {
             facebook: '',
             instagram: '',

@@ -18,7 +18,7 @@ import PublicProfileSingleMainVideos from './PublicProfileSingleMainVideos'
 
 const PublicProfileSingleMain = ({ profile }) => {
     const isSubscriber = profile.subscription.status !== 'ACTIVE' ? false : true
-
+    
     return (
         <main className="page__public-profile-single__main">
             <div className="page__public-profile-single__main__content">
@@ -30,6 +30,7 @@ const PublicProfileSingleMain = ({ profile }) => {
                     <Tab eventKey="evaluations" title={<PublicProfileSingleMainNavItem title="Evaluations" icon={FaWpforms}/>}>
                         <PublicProfileSingleMainEvaluations 
                             evaluations={profile.evaluations} 
+                            videoEvaluations={profile.videoEvaluations} 
                             subscriptionStatus={profile.subscription.status}/>
                     </Tab>
                     <Tab eventKey="events" title={<PublicProfileSingleMainNavItem title="Events" icon={FaRegNewspaper}/>}>

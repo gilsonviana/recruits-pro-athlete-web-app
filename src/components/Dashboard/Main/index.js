@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router-dom'
 // Components
 import Overview from './Overview'
 import EvaluationDetails from './EvaluationDetails'
+import VideoEvaluationDetails from './VideoEvaluationDetails'
 import EvaluationListing from './EvaluationListing'
 import Profile from './Profile'
 
@@ -28,6 +29,9 @@ const Main = () => {
                             </Route>
                             <Route path={`/dashboard/evaluation/:evaluationId`} exact>
                                 <EvaluationDetails />
+                            </Route>
+                            <Route path={`/dashboard/video-evaluation/:evaluationId`} exact>
+                                <VideoEvaluationDetails />
                             </Route>
                             <Route path={`/dashboard/profile`}>
                                 <Profile />

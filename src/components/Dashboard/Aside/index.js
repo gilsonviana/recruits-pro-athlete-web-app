@@ -14,13 +14,13 @@ const Aside = ({ subscription, profileId }) => {
     /**
      * Use to verify if user has a subscription id
      */
-    const isSubscriber = () => {
-        if (!subscription.id) {
-            return false
-        }
+    // const isSubscriber = () => {
+    //     if (!subscription.id) {
+    //         return false
+    //     }
 
-        return true
-    }
+    //     return true
+    // }
     return (
         <aside className="app__aside d-none d-md-block">
             <div className="app__aside__content">

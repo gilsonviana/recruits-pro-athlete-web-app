@@ -70,6 +70,7 @@ const initialState = {
         }
     },
     evaluations: [],
+    videoEvaluations: [],
     videos: [],
     workouts: [],
     meta: {
