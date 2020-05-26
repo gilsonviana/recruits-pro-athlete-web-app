@@ -9,9 +9,37 @@ import ImgPlaceholder from '../../../../../assets/images/user-avatar-placeholder
 
 import './style.css'
 
-const LastEvaluation = ({ evaluation }) => {
-    const date = moment(evaluation.createdAt).format('MMM Do, YYYY')
-    const evaluatorAvatar = evaluation.evaluatorId.personal.avatarUrl
+const LastEvaluation = ({ evaluations }) => {
+    const { useState, useEffect } = React
+    const [evaluation, setEvaluation] = useState({
+        _id: '',
+        athleteId: '',
+        createdAt: '',
+        form: {
+            name: ''
+        },  
+        evaluatorId: {
+            personal: {
+                avatarUrl: '',
+                fullName: ''
+            }
+        }
+
+    })
+    const [date, setDate] = useState('')
+
+    useEffect(() => {
+        const prevEvaluations = evaluations
+            
+        setDate(moment(prevEvaluations[prevEvaluations.length - 1].createdAt).format('MMM Do, YYYY'))
+        setEvaluation({
+            ...prevEvaluations.pop()
+        })
+    }, [evaluations])
+
+    if (!evaluation._id) {
+        return <></>
+    }
     
     return (
         <Link to={`/dashboard/evaluation/${evaluation._id}`} className="text-dark">
@@ -22,15 +50,15 @@ const LastEvaluation = ({ evaluation }) => {
                 </div>
                 <Card.Body className="d-xl-flex text-center">
                     {
-                        evaluatorAvatar ? 
+                        evaluation.evaluatorId.avatarUrl ? 
                         <div className="widget__last-evaluation__avatar bg-light rounded-circle overflow-hidden mx-auto mx-xl-0 mr-xl-4">
-                            <img className="img-fluid" src={evaluatorAvatar} alt={`evaluator`}/>
+                            <img className="img-fluid" src={evaluation.evaluatorId.avatarUrl} alt={`evaluator`}/>
                         </div> :
                         <div className="widget__last-evaluation__avatar bg-light rounded-circle overflow-hidden mx-auto mx-xl-0 mr-xl-4">
                             <img className="img-fluid" src={ImgPlaceholder} alt={`evaluator`}/>
                         </div>
                     }
-                    <div className="text-muted">
+                    <div className="text-muted text-center text-lg-left">
                         <h5>{evaluation.evaluatorId.personal.fullName || <Skeleton width={50}/>}</h5>
                         <h6>{evaluation.form.name}</h6>
                     </div>
@@ -41,11 +69,11 @@ const LastEvaluation = ({ evaluation }) => {
 }
 
 LastEvaluation.propTypes = {
-    evaluation: PropTypes.object.isRequired
+    evaluations: PropTypes.array.isRequired
 }
 
 const mapStateToProps = (state) => ({
-    evaluation: state.profile.evaluations[state.profile.evaluations.length - 1]
+    evaluations: state.profile.evaluations
 })
 
 export default connect(mapStateToProps)(LastEvaluation)

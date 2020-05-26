@@ -13,14 +13,14 @@ import { Button, InputText } from '../../styled-components'
 import { getAthleteById } from '../../services/user'
 
 // Redux
-import { signUp } from '../../store/auth/actions'
+import { signUp, signUpSetPassword } from '../../store/auth/actions'
 import { getSubscriptionPlans } from '../../store/subscriptionPlans/actions'
 
 // Assets
 import logo from '../../assets/images/logo.png'
 import "./style.css";
 
-const SignupPage = ({ history, signUp, getSubscriptionPlans }) => {
+const SignupPage = ({ history, signUp, signUpSetPassword, getSubscriptionPlans }) => {
   const [isLoading, setIsLoading] = useState(false)
 
   const [formState, setFormState] = useState({
@@ -38,13 +38,13 @@ const SignupPage = ({ history, signUp, getSubscriptionPlans }) => {
     isVisible: true,
     name: {
       email: {
-        message: null
+        message: ''
       },
       username: {
-        message: null
+        message: ''
       },
       password: {
-        message: null
+        message: ''
       }
     }
   })
@@ -78,21 +78,40 @@ const SignupPage = ({ history, signUp, getSubscriptionPlans }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsLoading(true)
-    const res = await signUp(formState)
 
-    if (!res) {
-      setShowToast({
-        isVisible: true,
-        message: 'Email already in use. Login if you have an account.'
-      })
+    if (userId) {
+      _setPasswordRequest()
       return
     }
 
-    await getSubscriptionPlans()
+      try {
+        await signUp(formState)
 
-    setIsLoading(false)
-    history.push('/choose-plan')
+        setIsLoading(false)
+    
+        await getSubscriptionPlans()
+    
+        history.push('/choose-plan')
+      } catch (e) {
+        setShowToast({
+          isVisible: true,
+          message: 'Email already in use. Login if you have an account.'
+        })
+      }
   }
+
+  const _setPasswordRequest = async () => {
+    try {
+      await signUpSetPassword(userId, formState)
+  
+      await getSubscriptionPlans()
+  
+      setIsLoading(false)
+      history.push('/choose-plan')
+    } catch (e) {
+      setIsLoading(false)
+    }
+  } 
 
   const isFormValid = () => {
     return Object.values(showError.name).every(item => item.message === '')
@@ -257,4 +276,4 @@ const SignupPage = ({ history, signUp, getSubscriptionPlans }) => {
   );
 };
 
-export default connect(null, { signUp, getSubscriptionPlans })(withRouter(SignupPage));
+export default connect(null, { signUp, signUpSetPassword, getSubscriptionPlans })(withRouter(SignupPage));

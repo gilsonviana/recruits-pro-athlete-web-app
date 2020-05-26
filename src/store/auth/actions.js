@@ -58,8 +58,41 @@ export const doLogout = () => {
     }
 }
 
-export const signUp = (credentials) => {
+export const signUpSetPassword = (userId, credentials = { username: '', email: '', password: '' }) => {
     return async dispatch => {
+        try {
+            const { data } = await axios({
+                method: 'POST',
+                url: `${keys.API}/auth/password/${userId}`,
+                data: {
+                    password: credentials.password
+                }
+            })
+            dispatch({
+                type: SET_TOKEN,
+                payload: {
+                    _id: userId,
+                    token: data.token
+                }
+            })
+
+            dispatch({
+                type: SET_PROFILE_PERSONAL,
+                payload: {
+                    fullName: credentials.username,
+                    email: credentials.email
+                }
+            })
+
+        } catch (e) {
+            console.log(e.response)
+            throw new Error(e)
+        }
+    }
+}
+
+export const signUp = (credentials) => {
+    return async dispatch => {        
         try {
             const { data } = await axios({
                 method: "POST",
@@ -90,8 +123,7 @@ export const signUp = (credentials) => {
 
             return true
         } catch (e) {
-            console.log(e.response)
-            return false
+            throw new Error(e)
         }
     }
 }
