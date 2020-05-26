@@ -6,7 +6,7 @@ import storage from 'redux-persist/lib/storage'
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 // Reducers
-import subscriptionPlans from './subscriptionPlans/reducer'
+import subscriptionPlans from './plans/reducer'
 import auth from './auth/reducer'
 import profile from './profile/reducer'
 import error from './error/reducer'

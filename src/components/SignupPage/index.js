@@ -14,7 +14,7 @@ import { getAthleteById } from '../../services/user'
 
 // Redux
 import { signUp, signUpSetPassword } from '../../store/auth/actions'
-import { getSubscriptionPlans } from '../../store/subscriptionPlans/actions'
+import { getSubscriptionPlans } from '../../store/plans/actions'
 
 // Assets
 import logo from '../../assets/images/logo.png'

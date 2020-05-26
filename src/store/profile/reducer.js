@@ -46,13 +46,6 @@ const initialState = {
         graduationYear: '',
         gpa: ''
     },
-    subscription: {
-        id: '',
-        status: '',
-        createTime: '',
-        linkSelf: '',
-        startTime: '',
-    },
     social: {
         facebook: '',
         instagram: '',
