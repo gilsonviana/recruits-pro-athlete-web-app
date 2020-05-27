@@ -40,8 +40,4 @@ VideosAll.propTypes = {
     handleDelete: PropTypes.func.isRequired
 }
 
-const mapStateToProps = state => ({
-    videos: state.videos
-})
-
-export default connect(mapStateToProps)(VideosAll)
+export default VideosAll

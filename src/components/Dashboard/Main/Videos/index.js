@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from "react-redux";
 import { Switch, Route } from 'react-router-dom'
@@ -15,9 +15,9 @@ import VideosAdd from './VideosAdd'
 import MarketingBanner from "../MarketingBanner";
 
 // Redux
-import { getVideos, addVideo, deleteVideo } from '../../../../store/videos/actions'
+import { addVideo, deleteVideo } from '../../../../store/videos/actions'
 
-const Videos = ({ token, subscriptionStatus, getVideos, addVideo, deleteVideo }) => {
+const Videos = ({ token, subscriptionStatus, videos, addVideo, deleteVideo }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [showToast, setShowToast] = useState({
         isVisible: false, 
@@ -25,35 +25,38 @@ const Videos = ({ token, subscriptionStatus, getVideos, addVideo, deleteVideo })
         backgroundColor: ''
     })
 
-    useEffect(() => {
-        getVideos(token)
-    }, [getVideos, subscriptionStatus])
-
     const handleAddVideo = async (videoDetails) => {
         try {
             setIsLoading(true)
-            const res = await addVideo(token, videoDetails)
-            if (res) {
-                setIsLoading(false)
-                setShowToast({
-                    isVisible: true,
-                    message: 'Video saved successfully.',
-                    backgroundColor: '#28a745'
-                })
-            }
+            await addVideo(token, videoDetails)
+            setIsLoading(false)
+            setShowToast({
+                isVisible: true,
+                message: 'Video saved successfully.',
+                backgroundColor: '#28a745'
+            })
         } catch (e) {
             setIsLoading(false)
             setShowToast({
                 isVisible: true,
-                message: 'Unable to save your video at this time. Please, try again later.',
+                message: 'Unable to save video.',
                 backgroundColor: '#eb5a46'
             })
         }
     }
 
-    const handleDeleteVideo = (id) => {
+    const handleDeleteVideo = async (id) => {
         if (!id) return false
-        deleteVideo(token, id)
+        
+        try {
+            await deleteVideo(token, id)
+        } catch (e) {
+            setShowToast({
+                isVisible: true,
+                message: 'Unable to delete video.',
+                backgroundColor: '#eb5a46'
+            })
+        }
     }
 
     return (
@@ -93,7 +96,7 @@ const Videos = ({ token, subscriptionStatus, getVideos, addVideo, deleteVideo })
                     <Col lg={{span: 8, offset: 1}}>
                         <Switch>
                             <Route path="/dashboard/videos" exact>
-                                <VideosAll handleDelete={handleDeleteVideo}/>
+                                <VideosAll videos={videos} handleDelete={handleDeleteVideo}/>
                             </Route>
                             <Route path="/dashboard/videos/add" exact>
                                 <VideosAdd addVideo={handleAddVideo} loading={isLoading}/>
@@ -109,7 +112,7 @@ const Videos = ({ token, subscriptionStatus, getVideos, addVideo, deleteVideo })
 Videos.propTypes = {
     token: PropTypes.string.isRequired,
     subscriptionStatus: PropTypes.string.isRequired,
-    getVideos: PropTypes.func.isRequired,
+    videos: PropTypes.array.isRequired,
     addVideo: PropTypes.func.isRequired,
     deleteVideo: PropTypes.func.isRequired,
 }
@@ -119,4 +122,4 @@ const mapStateToProps = state => ({
     subscriptionStatus: state.subscription.status,
     videos: state.videos
 })
-export default connect(mapStateToProps, { getVideos, addVideo, deleteVideo })(Videos)
+export default connect(mapStateToProps, { addVideo, deleteVideo })(Videos)

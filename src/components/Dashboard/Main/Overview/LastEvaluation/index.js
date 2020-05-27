@@ -9,21 +9,6 @@ import ImgPlaceholder from '../../../../../assets/images/user-avatar-placeholder
 import './style.css'
 
 const LastEvaluation = ({ evaluation }) => {
-    // const [evaluation, setEvaluation] = useState({
-    //     _id: '',
-    //     athleteId: '',
-    //     createdAt: '',
-    //     form: {
-    //         name: ''
-    //     },  
-    //     evaluatorId: {
-    //         personal: {
-    //             avatarUrl: '',
-    //             fullName: ''
-    //         }
-    //     }
-
-    // })
     const evaluationDate = moment(evaluation.createdAt).format('MMM Do, YYYY')
     
     return (

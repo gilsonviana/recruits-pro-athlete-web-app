@@ -14,9 +14,12 @@ export default (state = initialState, action) => {
                 action.payload
             ]
         case DELETE_VIDEO: 
+            // return [
+            //     ...state.slice(0, state.filter(i => i._id === action.payload)[0]),
+            //     ...state.slice(state.filter(i => i._id === action.payload[0]) + 1)
+            // ]
             return [
-                ...state.slice(0, state.filter(i => i._id === action.payload)[0]),
-                ...state.slice(state.filter(i => i._id === action.payload[0]) + 1)
+                ...state.filter(video => video._id !== action.payload.id)
             ]
         case GET_VIDEOS:
             return [
