@@ -13,7 +13,7 @@ import { FaTwitter, FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/f
 // Redux
 import { setProfileRequest } from '../../../../../../store/profile/actions'
 
-const ProfileSocial = ({ token, profile, setProfileRequest, history }) => {
+const ProfileSocial = ({ token, profile, subscriptionStatus, setProfileRequest, history }) => {
     const [isSubscriber, setIsSubscriber] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [formState, setFormState] = useState({
@@ -38,7 +38,7 @@ const ProfileSocial = ({ token, profile, setProfileRequest, history }) => {
             })
         }
         const verifySubscriber = () => {
-            const subscriber = profile.subscription.status === 'ACTIVE'
+            const subscriber = subscriptionStatus === 'ACTIVE'
             setIsSubscriber(subscriber)
         }
         setFormFieldValues()
@@ -147,12 +147,14 @@ const ProfileSocial = ({ token, profile, setProfileRequest, history }) => {
 ProfileSocial.propTypes = {
     token: PropTypes.string.isRequired,
     profile: PropTypes.object.isRequired,
+    subscriptionStatus: PropTypes.string.isRequired,
     setProfileRequest: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
     token: state.auth.token,
-    profile: state.profile
+    profile: state.profile,
+    subscriptionStatus: state.subscription.status
 })
 
 export default withRouter(connect(mapStateToProps, { setProfileRequest })(ProfileSocial))

@@ -107,13 +107,13 @@ const PublicProfileSingle = ({ history }) => {
                 evaluations={profile.evaluations}
                 socialNetworks={profile.social}
                 />
-            <PublicProfileSingleMain profile={profile}/>
+            <PublicProfileSingleMain profile={profile} subscriptionStatus={profile.subscription.status}/>
         </div>
     )
 }
 
 PublicProfileSingle.propTypes = {
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
 }
 
 export default withRouter(PublicProfileSingle)

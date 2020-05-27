@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
 // Redux
-import { unsubscribeRequest } from '../../../../../../store/profile/actions'
+import { unsubscribeRequest } from '../../../../../../store/subscription/actions'
 
 // Components
 import ProfileSubscriptionEmptyState from './ProfileSubscriptionEmptyState'

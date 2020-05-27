@@ -10,7 +10,7 @@ import './style.css'
 
 const LastEvaluation = ({ evaluation }) => {
     const evaluationDate = moment(evaluation.createdAt).format('MMM Do, YYYY')
-    
+
     return (
         <Link to={`/dashboard/evaluation/${evaluation._id}`} className="text-dark">
             <Card className="widget__last-evaluation shadow-sm mb-5 bg-white rounded">
@@ -20,9 +20,9 @@ const LastEvaluation = ({ evaluation }) => {
                 </div>
                 <Card.Body className="d-xl-flex text-center">
                     {
-                        evaluation.evaluatorId.avatarUrl ? 
+                        evaluation.evaluatorId.personal.avatarUrl ? 
                         <div className="widget__last-evaluation__avatar bg-light rounded-circle overflow-hidden mx-auto mx-xl-0 mr-xl-4">
-                            <img className="img-fluid" src={evaluation.evaluatorId.avatarUrl} alt={`evaluator`}/>
+                            <img className="img-fluid" src={evaluation.evaluatorId.personal.avatarUrl} alt={`evaluator`}/>
                         </div> :
                         <div className="widget__last-evaluation__avatar bg-light rounded-circle overflow-hidden mx-auto mx-xl-0 mr-xl-4">
                             <img className="img-fluid" src={ImgPlaceholder} alt={`evaluator`}/>

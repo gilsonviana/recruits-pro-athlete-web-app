@@ -16,8 +16,8 @@ import PublicProfileSingleMainEvaluations from './PublicProfileSingleMainEvaluat
 import PublicProfileSingleMainEvents from './PublicProfileSingleMainEvents'
 import PublicProfileSingleMainVideos from './PublicProfileSingleMainVideos'
 
-const PublicProfileSingleMain = ({ profile }) => {
-    const isSubscriber = profile.subscription.status !== 'ACTIVE' ? false : true
+const PublicProfileSingleMain = ({ profile, subscriptionStatus }) => {
+    const isSubscriber = subscriptionStatus !== 'ACTIVE' ? false : true
     
     return (
         <main className="page__public-profile-single__main">
@@ -31,7 +31,7 @@ const PublicProfileSingleMain = ({ profile }) => {
                         <PublicProfileSingleMainEvaluations 
                             evaluations={profile.evaluations} 
                             videoEvaluations={profile.videoEvaluations} 
-                            subscriptionStatus={profile.subscription.status}/>
+                            subscriptionStatus={subscriptionStatus}/>
                     </Tab>
                     <Tab eventKey="events" title={<PublicProfileSingleMainNavItem title="Events" icon={FaRegNewspaper}/>}>
                         <PublicProfileSingleMainEvents />
@@ -52,7 +52,8 @@ const PublicProfileSingleMain = ({ profile }) => {
 }
 
 PublicProfileSingleMain.propTypes = {
-    profile: PropTypes.object.isRequired
+    profile: PropTypes.object.isRequired,
+    subscriptionStatus: PropTypes.string.isRequired
 }
 
 export default PublicProfileSingleMain

@@ -20,7 +20,7 @@ import { setProfileRequest, setProfileImagesRequest } from '../../../../../../st
 // Assets
 import './style.css'
 
-const ProfileDetails = ({ setProfileRequest, setProfileImagesRequest, handlerPreviewImages, token, profile, history }) => {
+const ProfileDetails = ({ setProfileRequest, setProfileImagesRequest, handlerPreviewImages, token, profile, subscriptionStatus, history }) => {
     const [isSubscriber, setIsSubscriber] = useState(false)
     const [showToast, setShowToast] = useState({
         isVisible: false,
@@ -119,7 +119,7 @@ const ProfileDetails = ({ setProfileRequest, setProfileImagesRequest, handlerPre
             })
         }
         const verifySubscriber = () => {
-            const subscriber = profile.subscription.status === 'ACTIVE'
+            const subscriber = subscriptionStatus === 'ACTIVE'
             setIsSubscriber(subscriber)
         }
         setFormFieldValues()
@@ -233,7 +233,7 @@ const ProfileDetails = ({ setProfileRequest, setProfileImagesRequest, handlerPre
         const { target } = e
 
         if (target.name === 'avatar') {
-            if (target.files[0].size > 2054305) {
+            if (target.files.length > 0 && target.files[0].size > 2054305) {
                 setErrorMessage({
                     ...errorMessage,
                     [target.name]: {
@@ -425,16 +425,6 @@ const ProfileDetails = ({ setProfileRequest, setProfileImagesRequest, handlerPre
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="personal">
                             <div className="px-3">
-                                {/* <Form.Row>
-                                    <Col md={3}>
-                                        <Form.Label htmlFor="heading">Heading</Form.Label>
-                                    </Col>
-                                    <Col md={9} className="mb-3">
-                                        <Form.Control autoComplete="off" value={formState.personal.heading || ''} type="text" name="heading" maxLength={120} onChange={(e) => handleFieldChange('personal', e)}/>
-                                        <Form.Text className="text-muted float-left">Insert a positive message here.</Form.Text>
-                                        <Form.Text className="float-right">120 max characters.</Form.Text>
-                                    </Col>
-                                </Form.Row> */}
                                 <Form.Row className="mb-2">
                                     <Col md={3}>
                                         <Form.Label>Profile picture</Form.Label>
@@ -750,11 +740,13 @@ ProfileDetails.propTypes = {
     handlerPreviewImages: PropTypes.func.isRequired,
     token: PropTypes.string.isRequired,
     profile: PropTypes.object.isRequired,
+    subscriptionStatus: PropTypes.string.isRequired
 }
 
 const mapStateToProps = (state) => ({
     token: state.auth.token,
-    profile: state.profile
+    profile: state.profile,
+    subscriptionStatus: state.subscription.status
 })
 
 export default withRouter(connect(mapStateToProps, { setProfileRequest, setProfileImagesRequest })(ProfileDetails))

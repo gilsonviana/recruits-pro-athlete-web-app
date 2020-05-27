@@ -15,21 +15,23 @@ const EvaluationListItemAvatar = ({ avatarUrl, sport }) => {
     return (
         <div className="evaluation-list-item-avatar mr-3">
             {
-                (sport === 'baseball') ?
+                (sport === 'baseball' || sport === 'Baseball') ?
                     <div className="evaluation-list-item-avatar__wrapper">
                         <img className="evaluation-list-item-avatar__icon" src={BaseballIcon} alt={`${sport} type`}/>
                     </div> :
-                (sport === 'basketball') ?
+                (sport === 'basketball' || sport === 'Basketball') ?
                     <div className="evaluation-list-item-avatar__wrapper">
                         <img className="evaluation-list-item-avatar__icon" src={BasketballIcon} alt={`${sport} type`}/>
                     </div> :
-                (sport === 'football') ?
+                (sport === 'football' || sport === 'Football') ?
                     <div className="evaluation-list-item-avatar__wrapper">
                         <img className="evaluation-list-item-avatar__icon" src={FootballIcon} alt={`${sport} type`}/>
                     </div> :
+                (sport === 'soccer' || sport === 'Soccer') ?
                     <div className="evaluation-list-item-avatar__wrapper">
                         <img className="evaluation-list-item-avatar__icon" src={SoccerIcon} alt={`${sport} type`}/>
-                    </div>
+                    </div> :
+                    <></>
             }
             {avatarUrl ? 
                 <img className="evaluation-list-item-avatar__img rounded rounded-sm" alt="Evaluator" src={avatarUrl}/> :
