@@ -1,5 +1,4 @@
 import * as types from './types'
-import { GET_WORKOUTS, DELETE_WORKOUT } from '../workouts/types'
 
 const initialState = {
     personal: {
@@ -62,10 +61,6 @@ const initialState = {
             positions: []
         }
     },
-    // evaluations: [],
-    // videoEvaluations: [],
-    // videos: [],
-    // workouts: [],
     meta: {
         isCompleted: false,
         lastVisit: ''
@@ -81,14 +76,6 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 ...action.payload
-            }
-        case types.SET_PROFILE_SUBSCRIPTION_REQUEST:
-            return {
-                ...state,
-                subscription: {
-                    ...state.subscription,
-                    ...action.payload
-                }
             }
         case types.SET_PROFILE_UNSUBSCRIBE_REQUEST:
             return {
@@ -125,19 +112,6 @@ export default (state = initialState, action) => {
         case types.RESET_PROFILE:
             return {
                 ...initialState
-            }
-        case GET_WORKOUTS:
-            return {
-                ...state,
-                workouts: [...action.payload]
-            }
-        case DELETE_WORKOUT:
-            return {
-                ...state,
-                workouts: [
-                    ...state.workouts.slice(0, action.payload.index),
-                    ...state.workouts.slice(action.payload.index + 1)
-                ]
             }
         default:
             return state

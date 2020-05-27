@@ -8,6 +8,10 @@ export default (state = initialState, action) => {
             return [
                 ...action.payload
             ] 
+        case types.DELETE_WORKOUT:
+            return [
+                ...state.filter(workout => workout._id !== action.payload.id)
+            ]
         case types.RESET_WORKOUTS:
             return initialState
         default:

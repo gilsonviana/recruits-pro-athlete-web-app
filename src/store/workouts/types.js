@@ -1,4 +1,3 @@
 export const SET_WORKOUTS = "SET_WORKOUTS"
-export const GET_WORKOUTS = "GET_WORKOUTS"
 export const DELETE_WORKOUT = "DELETE_WORKOUT"
 export const RESET_WORKOUTS = "RESET_WORKOUTS"

@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
@@ -9,38 +9,19 @@ import Col from 'react-bootstrap/Col'
 import WorkoutsSidebar from './WorkoutsSidebar'
 import WorkoutDetails from './WorkoutDetails'
 import Toast from 'react-bootstrap/Toast'
-import Loader from 'react-loader-spinner';
 import MarketingBanner from "../MarketingBanner";
 
-// Redux
-import { getWorkouts } from '../../../../store/workouts/actions'
-
 const Workouts = ({
-    token,
     workouts,
-    getWorkouts,
-    subscriptionStatus
+    subscriptionStatus,
 }) => {
-    const [isLoading, setIsLoading] = useState(false)
-    const [showToast, setShowToast] = useState(false)
-    const [workoutsState, setWorkoutsState] = useState([])
+    const [showToast, setShowToast] = useState({
+        isVisible: false, 
+        message: '', 
+        backgroundColor: ''
+    })
 
     const limitReached = subscriptionStatus !== 'ACTIVE' && workouts.length >= 3 ? true : false
-
-    useEffect(() => {
-        setIsLoading(true)
-        const fetchWorkouts = async () => {
-            try {
-                const res = await getWorkouts(token)
-                setWorkoutsState(res)
-                setIsLoading(false)
-            } catch (e) {
-                setShowToast(true)
-                setIsLoading(false)
-            }
-        }
-        fetchWorkouts()
-    }, [subscriptionStatus])
 
     return (
         <div className="page__workouts">
@@ -54,7 +35,7 @@ const Workouts = ({
                         `} />
             }
             <div className="fixed-top"> 
-                <Toast onClose={() => setShowToast(!showToast)} show={showToast} delay={3000} autohide style={{
+                <Toast onClose={() => setShowToast({isVisible: false, message: '', backgroundColor: ''})} show={showToast.isVisible} delay={3000} autohide style={{
                     position: 'absolute',
                     left: `50%`,
                     transform: `translateX(${-50}%)`,
@@ -62,7 +43,7 @@ const Workouts = ({
                     color: `#eee`,
                     width: `100%`
                 }}>
-                    <Toast.Body>Failed to get workouts, please check your internet connection.</Toast.Body>
+                    <Toast.Body>{showToast.message}</Toast.Body>
                 </Toast>
             </div>
             <div className="page__workouts__header px-4 px-lg-2">
@@ -75,17 +56,8 @@ const Workouts = ({
                 <Row>
                     <Col lg={3}>
                         {
-                            isLoading ?
-                            <div className="text-center">
-                                <Loader 
-                                    type="Oval"
-                                    color="#00FF00"
-                                    height={75}
-                                    width={75}
-                                />
-                            </div> :
                             workouts.length > 0 ?
-                                <WorkoutsSidebar workouts={workoutsState} /> :
+                                <WorkoutsSidebar workouts={workouts} /> :
                                 <p>You don't have any workouts</p>
                         }
                     </Col>
@@ -117,15 +89,13 @@ const Workouts = ({
 }
 
 Workouts.propTypes = {
-    token: PropTypes.string.isRequired,
     workouts: PropTypes.array.isRequired,
-    getWorkouts: PropTypes.func.isRequired
+    subscriptionStatus: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = (state) => ({
-    token: state.auth.token,
     workouts: state.workouts,
     subscriptionStatus: state.subscription.status,
 })
 
-export default connect(mapStateToProps, { getWorkouts })(Workouts)
+export default connect(mapStateToProps)(Workouts)

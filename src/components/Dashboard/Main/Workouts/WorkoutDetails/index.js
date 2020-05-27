@@ -40,9 +40,8 @@ const WorkoutDetails = ({
     }, [workouts, useParams()])
 
     const handleOnDelete = () => {
-        const index = workouts.findIndex((workout) => workout._id === workoutState._id)
         history.push('/dashboard/workouts')
-        deleteWorkout(token, workoutState._id, index)
+        deleteWorkout(token, workoutState._id)
     }
 
     const handleOnSearch = (e) => {
