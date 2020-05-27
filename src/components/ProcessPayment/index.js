@@ -1,26 +1,28 @@
 // Dependencies
 import React from "react";
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { Redirect } from 'react-router-dom'
 import Loader from 'react-loader-spinner'
 
 // Redux
-import { setProfileSubscriptionRequest } from '../../store/profile/actions'
+import { setSubscriptionRequest } from '../../store/subscription/actions'
 
-const ProcessPayment = ({ token, setProfileSubscriptionRequest }) => {
+const ProcessPayment = ({ token, setSubscriptionRequest }) => {
     const [isLoading, setIsLoading] = React.useState(true)
+
     React.useEffect(() => {
         const updateUserProfile = async () => {
             const query = new URLSearchParams(window.location.search)
             const subscriptionId = query.get('subscription_id')
     
-            await setProfileSubscriptionRequest(token, subscriptionId)
+            await setSubscriptionRequest(token, subscriptionId)
     
             setIsLoading(false)
         }
 
         updateUserProfile()
-    }, [token, setProfileSubscriptionRequest])
+    }, [token])
 
     if (isLoading) {
         return (
@@ -38,8 +40,13 @@ const ProcessPayment = ({ token, setProfileSubscriptionRequest }) => {
     return <Redirect to="/create-profile" />
 }
 
+ProcessPayment.propTypes = {
+    token: PropTypes.string.isRequired,
+    setSubscriptionRequest: PropTypes.func.isRequired
+}
+
 const mapStateToProps = (state) => ({
     token: state.auth.token
 })
 
-export default connect(mapStateToProps, { setProfileSubscriptionRequest })(ProcessPayment)
+export default connect(mapStateToProps, { setSubscriptionRequest })(ProcessPayment)

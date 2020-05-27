@@ -45,26 +45,3 @@ export const deleteVideo = (token, id) => {
         }
     }
 }
-
-export const getVideos = (token) => {
-    return async dispatch => {
-        try {
-            const { data } = await axios({
-                method: 'GET',
-                url: `${config.API}/video`,
-                headers: {
-                    'Authorization': token
-                }
-            })
-
-            dispatch({
-                type: types.GET_VIDEOS,
-                payload: data.videos
-            })
-
-            return data.videos
-        } catch (e) {
-            throw new Error(e)
-        }
-    }
-}

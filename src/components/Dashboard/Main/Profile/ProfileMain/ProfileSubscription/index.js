@@ -10,14 +10,14 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
 // Redux
-import { setProfileUnsubscribeRequest } from '../../../../../../store/profile/actions'
+import { unsubscribeRequest } from '../../../../../../store/profile/actions'
 
 // Components
 import ProfileSubscriptionEmptyState from './ProfileSubscriptionEmptyState'
 
-const ProfileSubscription = ({ token, subscription, setProfileUnsubscribeRequest }) => {
+const ProfileSubscription = ({ token, subscription, unsubscribeRequest }) => {
     const handleUnsubscribe = () => {
-        setProfileUnsubscribeRequest(token, subscription.id)
+        unsubscribeRequest(token, subscription.id)
     }
     
     if (!subscription.id || subscription.status !== "ACTIVE") {
@@ -54,7 +54,7 @@ const ProfileSubscription = ({ token, subscription, setProfileUnsubscribeRequest
 ProfileSubscription.propTypes = {
     token: PropTypes.string.isRequired,
     subscription: PropTypes.object.isRequired,
-    setProfileUnsubscribeRequest: PropTypes.func.isRequired
+    unsubscribeRequest: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -62,4 +62,4 @@ const mapStateToProps = (state) => ({
     subscription: state.subscription,
 })
 
-export default connect(mapStateToProps, { setProfileUnsubscribeRequest })(ProfileSubscription)
+export default connect(mapStateToProps, { unsubscribeRequest })(ProfileSubscription)

@@ -1,4 +1,4 @@
-import { ADD_VIDEO, DELETE_VIDEO, GET_VIDEOS, SET_VIDEOS, RESET_VIDEOS } from './types'
+import { ADD_VIDEO, DELETE_VIDEO, SET_VIDEOS, RESET_VIDEOS } from './types'
 
 const initialState = []
 
@@ -20,10 +20,6 @@ export default (state = initialState, action) => {
             // ]
             return [
                 ...state.filter(video => video._id !== action.payload.id)
-            ]
-        case GET_VIDEOS:
-            return [
-                ...action.payload
             ]
         case RESET_VIDEOS: {
             return initialState
