@@ -9,18 +9,7 @@ import { FaWpforms, FaDumbbell } from 'react-icons/fa'
 // Assets
 import './style.css'
 
-const Aside = ({ subscription, profileId }) => {
-
-    /**
-     * Use to verify if user has a subscription id
-     */
-    // const isSubscriber = () => {
-    //     if (!subscription.id) {
-    //         return false
-    //     }
-
-    //     return true
-    // }
+const Aside = ({ profileId }) => {
     return (
         <aside className="app__aside d-none d-md-block">
             <div className="app__aside__content">
@@ -57,11 +46,6 @@ const Aside = ({ subscription, profileId }) => {
                                     <span className="menu-item-text">Workouts</span>
                                 </Link>
                             </li>
-                            {/* <li className="menu-item-link text-muted">
-                                    <FaRegNewspaper className="menu-item-icon" />
-                                    <span className="menu-item-text">Events</span>
-                                    {(!isSubscriber()) && <Badge pill variant="success" className="float-right mt-1">Coming soon</Badge>}
-                            </li> */}
                         </ul>
                     </nav>
                 </div>
@@ -71,11 +55,10 @@ const Aside = ({ subscription, profileId }) => {
 }
 
 Aside.propTypes = {
-    subscription: PropTypes.object.isRequired
+    profileId: PropTypes.string.isRequired
 }
 
 const mapStateToProps = (state) => ({
-    subscription: state.profile.subscription,
     profileId: state.profile._id
 })
 

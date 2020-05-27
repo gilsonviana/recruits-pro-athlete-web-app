@@ -6,18 +6,26 @@ import storage from 'redux-persist/lib/storage'
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 // Reducers
-import subscriptionPlans from './plans/reducer'
+import plans from './plans/reducer'
 import auth from './auth/reducer'
 import profile from './profile/reducer'
 import error from './error/reducer'
 import videos from './videos/reducer'
+import subscription from './subscription/reducer'
+import evaluations from './evaluations/reducer'
+import videoEvaluations from './videoEvaluations/reducer'
+import workouts from './workouts/reducer'
 
 const reducers = combineReducers({
-    subscriptionPlans,
     auth,
     profile,
+    subscription,
+    videos,
+    plans,
     error,
-    videos
+    evaluations,
+    videoEvaluations,
+    workouts
 })
 
 const persistConfig = {
@@ -30,7 +38,6 @@ const persistedReducer = persistReducer(persistConfig, reducers)
 export default () => {
     const middlewares = [thunk]
     const enhancedMiddlewares = applyMiddleware(...middlewares)
-    // const store = createStore(reducers, composeWithDevTools(enhancedMiddlewares))
 
     let store = createStore(persistedReducer, {}, composeWithDevTools(enhancedMiddlewares))
     let persistor = persistStore(store)

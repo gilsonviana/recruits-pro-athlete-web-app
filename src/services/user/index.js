@@ -9,7 +9,6 @@ export const getAthleteByName = async (query) => {
         })
         return data
     } catch (e) {
-        console.log(e)
         return false
     }
 }
@@ -23,7 +22,6 @@ export const getAthleteById = async (id = '') => {
 
         return data
     } catch (e) {
-        console.log(e.response)
         return false
     }
 }

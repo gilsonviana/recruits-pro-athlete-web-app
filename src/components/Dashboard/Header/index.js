@@ -145,7 +145,7 @@ const mapStateToProps = (state) => ({
     token: state.auth.token,
     fullName: state.profile.personal.fullName,
     avatarUrl: state.profile.personal.avatarUrl,
-    profileId: state.auth._id
+    profileId: state.profile._id
 })
 
 export default withRouter(connect(mapStateToProps, { doLogout })(Header))

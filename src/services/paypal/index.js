@@ -16,7 +16,6 @@ export const createSubscription = async (token, planId) => {
 
         return data
     } catch (e) {
-        console.log(e.response)
         return false
     }
 }

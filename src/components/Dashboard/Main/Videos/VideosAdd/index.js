@@ -124,7 +124,7 @@ VideosAdd.propTypes = {
 }
 
 const mapStateToProps = state => ({
-    subscriptionStatus: state.profile.subscription.status,
+    subscriptionStatus: state.subscription.status,
     videos: state.videos
 })
 

@@ -59,7 +59,7 @@ ProfileSubscription.propTypes = {
 
 const mapStateToProps = (state) => ({
     token: state.auth.token,
-    subscription: state.profile.subscription,
+    subscription: state.subscription,
 })
 
 export default connect(mapStateToProps, { setProfileUnsubscribeRequest })(ProfileSubscription)

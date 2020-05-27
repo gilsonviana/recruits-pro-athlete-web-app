@@ -40,7 +40,7 @@ OverviewWelcome.propTypes = {
 
 const mapStateToProps = (state) => ({
     name: state.profile.personal.fullName,
-    evaluations: state.profile.evaluations
+    evaluations: state.evaluations
 })
 
 export default connect(mapStateToProps)(OverviewWelcome)

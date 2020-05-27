@@ -13,7 +13,7 @@ describe('Auth reducer', () => {
     })
 
     it('should set token', () => {
-        expect(reducer(initialState, {type: types.SET_TOKEN, payload: 'ACCESS_TOKEN'})).toEqual({
+        expect(reducer(initialState, {type: types.SET_TOKEN, payload: {token: 'ACCESS_TOKEN'}})).toEqual({
             ...initialState,
             token: 'ACCESS_TOKEN'
         })

@@ -136,9 +136,9 @@ EvaluationListing.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-    evaluations: state.profile.evaluations,
-    videoEvaluations: state.profile.videoEvaluations,
-    subscriptionStatus: state.profile.subscription.status
+    evaluations: state.evaluations,
+    videoEvaluations: state.videoEvaluations,
+    subscriptionStatus: state.subscription.status
 })
 
 export default connect(mapStateToProps)(EvaluationListing)

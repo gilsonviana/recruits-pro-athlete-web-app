@@ -44,7 +44,7 @@ VideoEvaluationDetails.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-    evaluations: state.profile.videoEvaluations
+    evaluations: state.videoEvaluations
 })
 
 export default connect(mapStateToProps)(VideoEvaluationDetails)

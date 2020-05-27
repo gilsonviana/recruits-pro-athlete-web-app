@@ -83,7 +83,7 @@ WorkoutDetails.propTypes = {
 
 const mapStateToProps = (state) => ({
     token: state.auth.token,
-    workouts: state.profile.workouts
+    workouts: state.workouts
 })
 
 export default withRouter(connect(mapStateToProps, { deleteWorkout })(WorkoutDetails))

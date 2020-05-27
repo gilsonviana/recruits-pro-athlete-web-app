@@ -124,8 +124,8 @@ Workouts.propTypes = {
 
 const mapStateToProps = (state) => ({
     token: state.auth.token,
-    workouts: state.profile.workouts,
-    subscriptionStatus: state.profile.subscription.status,
+    workouts: state.workouts,
+    subscriptionStatus: state.subscription.status,
 })
 
 export default connect(mapStateToProps, { getWorkouts })(Workouts)

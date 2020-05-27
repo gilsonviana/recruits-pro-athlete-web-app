@@ -12,9 +12,10 @@ export default (state = initialState, action) => {
     switch(action.type) {
         case types.SET_SUBSCRIPTION:
             return {
-                ...state,
                 ...action.payload
             }
+        case types.RESET_SUBSCRIPTION:
+            return initialState
         default:
             return state
     }

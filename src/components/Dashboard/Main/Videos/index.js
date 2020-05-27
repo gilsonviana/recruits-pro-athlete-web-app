@@ -116,7 +116,7 @@ Videos.propTypes = {
 
 const mapStateToProps = state => ({
     token: state.auth.token,
-    subscriptionStatus: state.profile.subscription.status,
+    subscriptionStatus: state.subscription.status,
     videos: state.videos
 })
 export default connect(mapStateToProps, { getVideos, addVideo, deleteVideo })(Videos)

@@ -1,9 +1,13 @@
-import { ADD_VIDEO, DELETE_VIDEO, GET_VIDEOS } from './types'
+import { ADD_VIDEO, DELETE_VIDEO, GET_VIDEOS, SET_VIDEOS, RESET_VIDEOS } from './types'
 
 const initialState = []
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case SET_VIDEOS:
+            return [
+                ...action.payload
+            ]
         case ADD_VIDEO:
             return [
                 ...state,
@@ -18,10 +22,8 @@ export default (state = initialState, action) => {
             return [
                 ...action.payload
             ]
-        case "RESET_PROFILE": {
-            return [
-                ...initialState
-            ]
+        case RESET_VIDEOS: {
+            return initialState
         }
         default:
             return state

@@ -119,7 +119,7 @@ const ProfileChoosePlan = ({ token, subscriptionPlans }) => {
 
 const mapStateToProps = (state) => ({
     token: state.auth.token,
-    subscriptionPlans: state.subscriptionPlans
+    subscriptionPlans: state.plans
 })
 
 export default connect(mapStateToProps)(ProfileChoosePlan)

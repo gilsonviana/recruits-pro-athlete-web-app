@@ -2,6 +2,11 @@ import axios from 'axios'
 import { SET_TOKEN, UNSET_TOKEN, SET_RESETOKEN } from './types'
 import { SET_PROFILE_REQUEST, SET_PROFILE_PERSONAL, RESET_PROFILE } from '../profile/types'
 import { SET_ERROR_MESSAGE } from '../error/types'
+import { SET_SUBSCRIPTION, RESET_SUBSCRIPTION } from '../subscription/types'
+import { SET_EVALUATIONS, RESET_EVALUATIONS } from '../evaluations/types'
+import { SET_VIDEO_EVALUATIONS, RESET_VIDEO_EVALUATIONS } from '../videoEvaluations/types'
+import { SET_VIDEOS, RESET_VIDEOS } from '../videos/types'
+import { SET_WORKOUTS, RESET_WORKOUTS } from '../workouts/types'
 import keys from '../../config/keys'
 
 export const doLogin = (credentials) => {
@@ -19,20 +24,48 @@ export const doLogin = (credentials) => {
             if (data.user.role !== 'a') {
                 throw new Error('Unable to login.')
             }
-
+            
             dispatch({
                 type: SET_TOKEN,
                 payload: {
                     token: data.token,
-                    _id: data.user._id
                 }
             })
-    
+            dispatch({
+                type: SET_SUBSCRIPTION,
+                payload: data.athlete.subscription
+            })
+            dispatch({
+                type: SET_EVALUATIONS,
+                payload: data.athlete.evaluations
+            })
+            dispatch({
+                type: SET_VIDEO_EVALUATIONS,
+                payload: data.athlete.videoEvaluations
+            })
+            dispatch({
+                type: SET_VIDEOS,
+                payload: data.athlete.videos
+            })
+            dispatch({
+                type: SET_WORKOUTS,
+                payload: data.athlete.workouts
+            })
             dispatch({
                 type: SET_PROFILE_REQUEST,
-                payload: data.athlete
+                payload: {
+                    personal: { ...data.athlete.personal },
+                    location: { ...data.athlete.location },
+                    education: { ...data.athlete.education },
+                    social: { ...data.athlete.social },
+                    sports: { ...data.athlete.sports },
+                    meta: { ...data.athlete.meta },
+                    _id: data.athlete._id,
+                    createdAt: data.athlete.createdAt,
+                    updatedAt: data.athlete.updatedAt
+                }
             })
-
+        
             return data
         } catch (e) {
             dispatch({
@@ -54,6 +87,21 @@ export const doLogout = () => {
         })
         dispatch({
             type: RESET_PROFILE
+        })
+        dispatch({
+            type: RESET_SUBSCRIPTION
+        })
+        dispatch({
+            type:RESET_EVALUATIONS
+        })
+        dispatch({
+            type: RESET_VIDEO_EVALUATIONS
+        })
+        dispatch({
+            type: RESET_VIDEOS
+        })
+        dispatch({
+            type: RESET_WORKOUTS
         })
     }
 }
@@ -85,7 +133,6 @@ export const signUpSetPassword = (userId, credentials = { username: '', email: '
             })
 
         } catch (e) {
-            console.log(e.response)
             throw new Error(e)
         }
     }
@@ -149,7 +196,6 @@ export const getResetToken = (email) => {
 
             return true
         } catch (e) {
-            console.log(e)
             return false
         }
     }

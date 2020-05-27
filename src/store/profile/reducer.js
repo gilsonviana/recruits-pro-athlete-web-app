@@ -62,10 +62,10 @@ const initialState = {
             positions: []
         }
     },
-    evaluations: [],
-    videoEvaluations: [],
-    videos: [],
-    workouts: [],
+    // evaluations: [],
+    // videoEvaluations: [],
+    // videos: [],
+    // workouts: [],
     meta: {
         isCompleted: false,
         lastVisit: ''

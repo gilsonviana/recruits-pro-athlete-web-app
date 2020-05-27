@@ -73,7 +73,7 @@ LastEvaluation.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-    evaluations: state.profile.evaluations
+    evaluations: state.evaluations
 })
 
 export default connect(mapStateToProps)(LastEvaluation)

@@ -49,8 +49,8 @@ Overview.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-    evaluations: state.profile.evaluations,
-    subscriptionStatus: state.profile.subscription.status
+    evaluations: state.evaluations,
+    subscriptionStatus: state.subscription.status
 })
 
 export default connect(mapStateToProps)(Overview)
