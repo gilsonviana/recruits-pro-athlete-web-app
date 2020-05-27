@@ -1,6 +1,5 @@
 // Dependencies
 import React from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
@@ -57,10 +56,4 @@ MetricsFlush.propTypes = {
     videos: PropTypes.number.isRequired
 }
 
-const mapStateToProps = (state) => ({
-    evaluations: state.evaluations.length,
-    workouts: state.workouts.length,
-    videos: state.videos.length
-})
-
-export default connect(mapStateToProps)(MetricsFlush)
+export default MetricsFlush

@@ -12,7 +12,19 @@ import MetricsFlush from './MetricsFlush'
 import LastEvaluation from './LastEvaluation'
 import MarketingBanner from '../MarketingBanner'
 
-const Overview = ({ evaluations, subscriptionStatus }) =>  {
+const Overview = ({ evaluations, workouts, videos, subscriptionStatus }) =>  {
+    const { useEffect, useState } = React
+
+    const [evaluationsState, setEvaluationsState] = useState([])
+    const [workoutsState, setWorkoutsState] = useState([])
+    const [videosState, setVideosState] = useState([])
+
+    useEffect(() => {
+        setEvaluationsState([...evaluations])
+        setWorkoutsState([...workouts])
+        setVideosState([...videos])
+    }, [evaluations, workouts, videos])
+
     return (
         <div className="page__overview">
             {
@@ -28,12 +40,16 @@ const Overview = ({ evaluations, subscriptionStatus }) =>  {
             <Container fluid>
                 <Row className="mb-4">
                     <Col>
-                        <MetricsFlush />
+                        <MetricsFlush 
+                            evaluations={evaluationsState.length}
+                            workouts={workoutsState.length}
+                            videos={videosState.length}
+                        />
                     </Col>
                 </Row>
                 <Row>
                     <Col xs={12} md={6} lg={4}>
-                        {(evaluations.length > 0) && <LastEvaluation />}
+                        {(evaluations.length > 0) && <LastEvaluation evaluation={evaluations[evaluations.length - 1]}/>}
                     </Col>
                     <Col xs={12} md={6} lg={4}></Col>
                     <Col xs={12} md={6} lg={4}></Col>
@@ -45,11 +61,15 @@ const Overview = ({ evaluations, subscriptionStatus }) =>  {
 
 Overview.propTypes = {
     evaluations: PropTypes.array.isRequired,
+    workouts: PropTypes.array.isRequired,
+    videos: PropTypes.array.isRequired,
     subscriptionStatus: PropTypes.string.isRequired
 }
 
 const mapStateToProps = (state) => ({
     evaluations: state.evaluations,
+    workouts: state.workouts,
+    videos: state.videos,
     subscriptionStatus: state.subscription.status
 })
 

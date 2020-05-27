@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from "prop-types"
 import Skeleton from "react-loading-skeleton";
@@ -9,44 +8,30 @@ import ImgPlaceholder from '../../../../../assets/images/user-avatar-placeholder
 
 import './style.css'
 
-const LastEvaluation = ({ evaluations }) => {
-    const { useState, useEffect } = React
-    const [evaluation, setEvaluation] = useState({
-        _id: '',
-        athleteId: '',
-        createdAt: '',
-        form: {
-            name: ''
-        },  
-        evaluatorId: {
-            personal: {
-                avatarUrl: '',
-                fullName: ''
-            }
-        }
+const LastEvaluation = ({ evaluation }) => {
+    // const [evaluation, setEvaluation] = useState({
+    //     _id: '',
+    //     athleteId: '',
+    //     createdAt: '',
+    //     form: {
+    //         name: ''
+    //     },  
+    //     evaluatorId: {
+    //         personal: {
+    //             avatarUrl: '',
+    //             fullName: ''
+    //         }
+    //     }
 
-    })
-    const [date, setDate] = useState('')
-
-    useEffect(() => {
-        const prevEvaluations = evaluations
-            
-        setDate(moment(prevEvaluations[prevEvaluations.length - 1].createdAt).format('MMM Do, YYYY'))
-        setEvaluation({
-            ...prevEvaluations.pop()
-        })
-    }, [evaluations])
-
-    if (!evaluation._id) {
-        return <></>
-    }
+    // })
+    const evaluationDate = moment(evaluation.createdAt).format('MMM Do, YYYY')
     
     return (
         <Link to={`/dashboard/evaluation/${evaluation._id}`} className="text-dark">
             <Card className="widget__last-evaluation shadow-sm mb-5 bg-white rounded">
                 <div className="d-flex justify-content-between pt-3 px-3" style={{background: 'rgba(0, 236, 0, .4)'}}>
                     <Card.Title>Last evaluation</Card.Title>
-                    <p>{(evaluation) && date}</p>
+                    <p>{(evaluationDate) && evaluationDate}</p>
                 </div>
                 <Card.Body className="d-xl-flex text-center">
                     {
@@ -69,11 +54,22 @@ const LastEvaluation = ({ evaluations }) => {
 }
 
 LastEvaluation.propTypes = {
-    evaluations: PropTypes.array.isRequired
+    // evaluation: PropTypes.shape({
+    //     _id: '',
+    //     athleteId: '',
+    //     createdAt: '',
+    //     form: {
+    //         name: ''
+    //     },  
+    //     evaluatorId: {
+    //         personal: {
+    //             avatarUrl: '',
+    //             fullName: ''
+    //         }
+    //     }
+
+    // })
+    evaluation: PropTypes.object.isRequired
 }
 
-const mapStateToProps = (state) => ({
-    evaluations: state.evaluations
-})
-
-export default connect(mapStateToProps)(LastEvaluation)
+export default LastEvaluation
