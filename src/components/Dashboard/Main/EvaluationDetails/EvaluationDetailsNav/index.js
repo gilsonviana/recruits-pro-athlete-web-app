@@ -7,9 +7,33 @@ import Tab from 'react-bootstrap/Tab'
 // Components
 import EvaluationDetailsOverview from '../EvaluationDetailsOverview'
 import EvaluationDetailsNotes from '../EvaluationDetailsNotes'
+import Badge from 'react-bootstrap/Badge'
+
+import './style.css'
 
 const EvaluationDetailsNav = ({ evaluation }) => {
     const [key, setKey] = useState('overview')
+
+    const RankTitle = () => {
+        return (
+            <span className="text-dark">Rank <Badge variant="light">New</Badge></span>
+        )
+    }
+
+    const renderRanking = () => {
+        if (true) {
+            return (
+                <Tab tabClassName="controlled-evaluation-details-nav-has-rank" eventKey="rank" title={<RankTitle />}>
+                    <EvaluationDetailsNotes notes={evaluation.notes}/>
+                </Tab>
+            )
+        }
+        return (
+            <Tab eventKey="rank" title="Rank" disabled={!evaluation.notes && true}>
+                <EvaluationDetailsNotes notes={evaluation.notes}/>
+            </Tab>
+        )
+    }
 
     return (
         <Tabs id="controlled-evaluation-details-nav" activeKey={key} onSelect={k => setKey(k)} className="evaluation-details-nav my-4">
@@ -19,6 +43,9 @@ const EvaluationDetailsNav = ({ evaluation }) => {
             <Tab eventKey="notes" title="Notes" disabled={!evaluation.notes && true}>
                 <EvaluationDetailsNotes notes={evaluation.notes}/>
             </Tab>
+            {
+                renderRanking()
+            }
         </Tabs>
     )
 }
