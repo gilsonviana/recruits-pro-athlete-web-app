@@ -108,23 +108,15 @@ const EvaluationListing = ({ evaluations, videoEvaluations, subscriptionStatus }
                     `} />
         }
             <Container fluid>
-                <Row noGutters>
-                    <Col>
-                        <Card className="shadow-sm pt-3 px-3 mb-5 bg-white rounded">
-                            <Card.Body>
-                                <h5 className="font-weight-bold">Evaluations</h5>
-                                <p className="lead">
-                                    Track your performance and read insightful notes from coaches and trainers.
-                                </p>
-                                {evaluations.length >= 1 && subscriptionStatus !== 'ACTIVE' && <span className="text-danger font-weight-bold lead d-block mb-4">You have reached the limit of evaluations you can see.</span>}
-                                <EvaluationSearchBar handleOnChange={handleSearch} handleFilter={handleSearchFilter}/>
-                                {
-                                    renderEvaluationList()
-                                }
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
+                <h5 className="font-weight-bold">Evaluations</h5>
+                <p className="lead">
+                    Track your performance and read insightful notes from coaches and trainers.
+                </p>
+                {evaluations.length >= 1 && subscriptionStatus !== 'ACTIVE' && <span className="text-danger font-weight-bold lead d-block mb-4">You have reached the limit of evaluations you can see.</span>}
+                <EvaluationSearchBar handleOnChange={handleSearch} handleFilter={handleSearchFilter}/>
+                {
+                    renderEvaluationList()
+                }
             </Container>
         </div>
     )

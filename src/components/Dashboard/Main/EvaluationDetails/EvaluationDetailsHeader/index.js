@@ -7,7 +7,7 @@ import { AiOutlineMail } from 'react-icons/ai'
 import './style.css'
 import ImageEvaluator from '../../../../../assets/images/user-avatar-placeholder.png'
 
-const EvaluationDetailsHeader = ({ fullName, email, avatar }) => {
+const EvaluationDetailsHeader = ({ fullName, email, avatar, formName, sportName }) => {
     return (
         <header className="page__evaluation__details__header">
             <div className="page__evaluation__details__header__wrapper d-flex flex-column flex-md-row">
@@ -20,7 +20,17 @@ const EvaluationDetailsHeader = ({ fullName, email, avatar }) => {
                 </div>
                 <div className="page__evaluation__details__header__title text-center text-md-left">
                     <h3>{fullName}</h3>
-                    <AiOutlineMail className="mr-2" /><span>{email}</span>
+                    <div className="mb-2">
+                        <AiOutlineMail className="mr-2" /><span>{email}</span>
+                    </div>
+                    <div>
+                        <span className="font-weight-bold" style={{fontSize: '.8rem'}}>Form: </span>
+                        <span>{formName}</span>
+                    </div>
+                    <div>
+                        <span className="font-weight-bold" style={{fontSize: '.8rem'}}>Sport: </span>
+                        <span>{sportName}</span>
+                    </div>
                 </div>
             </div>
         </header>
@@ -28,6 +38,8 @@ const EvaluationDetailsHeader = ({ fullName, email, avatar }) => {
 }
 
 EvaluationDetailsHeader.propTypes = {
+    formName: PropTypes.string.isRequired,
+    sportName: PropTypes.string.isRequired,
     fullName: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     avatar: PropTypes.string

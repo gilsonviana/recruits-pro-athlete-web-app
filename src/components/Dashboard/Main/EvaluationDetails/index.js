@@ -29,6 +29,8 @@ const EvaluationDetails = ({ evaluations }) => {
     return (
         <Container fluid className="page__evaluation__details">
             <EvaluationDetailsHeader 
+                formName={evaluation.form.name}
+                sportName={evaluation.form.sport}
                 avatar={evaluation.evaluatorId.personal.avatarUrl} 
                 fullName={evaluation.evaluatorId.personal.fullName} 
                 email={evaluation.evaluatorId.personal.email}/>

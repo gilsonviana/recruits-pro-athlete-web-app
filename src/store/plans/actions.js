@@ -6,8 +6,8 @@ export const getSubscriptionPlans = () => {
     dispatch({
       type: SET_SUBSCRIPTION_PLANS,
       payload: [
-        { plan_id: "P-72S11980A5042111UL2O6G4I", name: "Monthly" },
-        { plan_id: "P-7PJ28516C52875803L2O6HRY", name: "Yearly" },
+        { plan_id: "P-5RH556461F121723WL2WYCUA", name: "Monthly" },
+        { plan_id: "P-87659893M77501912L2WYAZY", name: "Yearly" },
       ],
     });
   };

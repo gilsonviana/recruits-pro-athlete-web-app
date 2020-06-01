@@ -7,6 +7,7 @@ import Tab from 'react-bootstrap/Tab'
 // Components
 import EvaluationDetailsOverview from '../EvaluationDetailsOverview'
 import EvaluationDetailsNotes from '../EvaluationDetailsNotes'
+import EvaluationDetailsRank from '../EvaluationDetailsRank'
 import Badge from 'react-bootstrap/Badge'
 
 import './style.css'
@@ -24,19 +25,19 @@ const EvaluationDetailsNav = ({ evaluation }) => {
         if (true) {
             return (
                 <Tab tabClassName="controlled-evaluation-details-nav-has-rank" eventKey="rank" title={<RankTitle />}>
-                    <EvaluationDetailsNotes notes={evaluation.notes}/>
+                    <EvaluationDetailsRank />
                 </Tab>
             )
         }
         return (
             <Tab eventKey="rank" title="Rank" disabled={!evaluation.notes && true}>
-                <EvaluationDetailsNotes notes={evaluation.notes}/>
+                <EvaluationDetailsRank />
             </Tab>
         )
     }
 
     return (
-        <Tabs id="controlled-evaluation-details-nav" activeKey={key} onSelect={k => setKey(k)} className="evaluation-details-nav my-4">
+        <Tabs id="controlled-evaluation-details-nav" activeKey={'rank'} onSelect={k => setKey(k)} className="evaluation-details-nav my-4">
             <Tab eventKey="overview" title="Overview">
                 <EvaluationDetailsOverview evaluation={evaluation}/>
             </Tab>
