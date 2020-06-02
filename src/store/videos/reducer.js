@@ -6,18 +6,14 @@ export default (state = initialState, action) => {
     switch (action.type) {
         case SET_VIDEOS:
             return [
-                ...action.payload
+                ...action.payload.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
             ]
         case ADD_VIDEO:
             return [
-                ...state,
-                action.payload
+                action.payload,
+                ...state
             ]
         case DELETE_VIDEO: 
-            // return [
-            //     ...state.slice(0, state.filter(i => i._id === action.payload)[0]),
-            //     ...state.slice(state.filter(i => i._id === action.payload[0]) + 1)
-            // ]
             return [
                 ...state.filter(video => video._id !== action.payload.id)
             ]
