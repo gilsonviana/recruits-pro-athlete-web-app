@@ -1,0 +1,19 @@
+.evaluation-details-rank-table-row {
+    height: 45px;
+}
+
+.evaluation-details-rank-table-row td {
+    vertical-align: middle;
+}
+
+.evaluation-details-rank-table-col__img {
+    height: 45px;
+    width: 45px;   
+    overflow: hidden;
+}
+
+.evaluation-details-rank-table-col__img__element {
+    height: auto;
+    width: 100%;
+    border-radius: 50%;   
+}
