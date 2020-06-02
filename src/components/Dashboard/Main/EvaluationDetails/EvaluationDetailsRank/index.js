@@ -6,6 +6,7 @@ import Table from 'react-bootstrap/Table'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { FaSortDown, FaSortUp } from 'react-icons/fa'
 
 import { getRankingByFormId } from '../../../../../services/ranking'
 
@@ -16,6 +17,8 @@ import './style.css'
 const EvaluationDetailsRank = ({ form, token, fullName }) => {
     const [rankingState, setRankingState] = useState(null)
     const [selectedMetric, setSelectedMetric] = useState(null)
+    const [selectedMetricName, setSelectedMetricName] = useState("")
+    const [isSort, setIsSort] = useState(false)
 
     useEffect(() => {
         const setRanking = async () => {
@@ -33,20 +36,46 @@ const EvaluationDetailsRank = ({ form, token, fullName }) => {
         }
     }, [])
 
-    const getRankingByMetricName = (metricName = '') => {      
-        setSelectedMetric(rankingState.map(rank => {
-            return {
-                ...rank,
-                form: {
-                    ...rank.form,
-                    metrics: [
-                        ...rank.form.metrics.filter(metric => metric.name === metricName)
-                    ]
+    const getRankingByMetricName = (metricName = '') => {     
+        setSelectedMetricName(metricName) 
+        if (rankingState) {
+            setSelectedMetric(rankingState.map(rank => {
+                return {
+                    ...rank,
+                    form: {
+                        ...rank.form,
+                        metrics: [
+                            ...rank.form.metrics.filter(metric => metric.name === metricName)
+                        ]
+                    }
                 }
-            }
-        }).filter(rank => rank.form.metrics.length > 0).sort((a, b) => {
-            return b.form.metrics[0].value - a.form.metrics[0].value
-        }))
+            }).filter(rank => rank.form.metrics.length > 0).sort((a, b) => {
+                return b.form.metrics[0].value - a.form.metrics[0].value
+            }))
+        }
+    }
+
+    const sortSelectedMetric = () => {
+        if (rankingState) {
+            setSelectedMetric(rankingState.map(rank => {
+                return {
+                    ...rank,
+                    form: {
+                        ...rank.form,
+                        metrics: [
+                            ...rank.form.metrics.filter(metric => metric.name === selectedMetricName)
+                        ]
+                    }
+                }
+            }).filter(rank => rank.form.metrics.length > 0).sort((a, b) => {
+                if (!isSort) {
+                    setIsSort(!isSort)
+                    return a.form.metrics[0].value - b.form.metrics[0].value
+                }
+                setIsSort(!isSort)
+                return b.form.metrics[0].value - a.form.metrics[0].value
+            }))
+        }
     }
 
     const renderMetrics = () => {
@@ -79,7 +108,10 @@ const EvaluationDetailsRank = ({ form, token, fullName }) => {
                             <td></td>
                             <td>Name</td>
                             <td>Value</td>
-                            <td>#</td>
+                            <td className="d-flex" style={{cursor: 'pointer'}} onClick={sortSelectedMetric}>
+                                #
+                                <FaSortDown />
+                            </td>
                         </tr>
                     </thead>
                     <tbody>
