@@ -52,7 +52,10 @@ const EvaluationDetailsRank = ({ form, token, fullName }) => {
             }).filter(rank => rank.form.metrics.length > 0).sort((a, b) => {
                 return b.form.metrics[0].value - a.form.metrics[0].value
             }))
+            return
         }
+
+        setSelectedMetric(false)
     }
 
     const sortSelectedMetric = () => {
@@ -164,7 +167,7 @@ const EvaluationDetailsRank = ({ form, token, fullName }) => {
         <div className="evaluation-details-rank">
             <h5 className="font-weight-bold">Evaluation Ranking</h5>
             <p className="lead">
-                See how you are ranking among other athletes using the same metric form.
+                See how you rank among other athletes using the same metric form.
             </p>
             <Container fluid>
                 <Row>
