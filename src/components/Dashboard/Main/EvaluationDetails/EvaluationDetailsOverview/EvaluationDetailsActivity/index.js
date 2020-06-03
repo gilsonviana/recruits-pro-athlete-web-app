@@ -8,12 +8,12 @@ import Col from 'react-bootstrap/Col'
 import EvaluationDetailsChart from './EvaluationDetailsChart'
 import EvaluationDetailsChartSummary from './EvaluationDetailsChartSummary'
 
-const EvaluationDetailsActivity = ({ metricName, evaluations }) => {
+const EvaluationDetailsActivity = ({ evaluatorId, metricName, evaluations }) => {
     return (
         <div className="evaluation-details-activity mt-4">
             <Row>
                 <Col xl={8}>
-                    <EvaluationDetailsChart metricName={metricName} evaluations={evaluations}/>
+                    <EvaluationDetailsChart evaluatorId={evaluatorId} metricName={metricName} evaluations={evaluations}/>
                 </Col>
                 <Col xl={4}>
                     {/* <EvaluationDetailsChartSummary /> */}
@@ -24,7 +24,7 @@ const EvaluationDetailsActivity = ({ metricName, evaluations }) => {
 }
 
 EvaluationDetailsActivity.propTypes = {
-    metric: PropTypes.object
+    evaluatorId: PropTypes.string.isRequired
 }
 
 export default EvaluationDetailsActivity

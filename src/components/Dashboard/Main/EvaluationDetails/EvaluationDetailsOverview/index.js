@@ -27,7 +27,7 @@ const EvaluationDetailsOverview = ({ evaluation, evaluations }) => {
                 numberOfEvaluations={numberOfEvaluations}
                 address={evaluation.location.description}
             />
-            <EvaluationDetailsActivity metricName={activityMetric} evaluations={evaluations}/>
+            <EvaluationDetailsActivity evaluatorId={evaluation.evaluatorId._id} metricName={activityMetric} evaluations={evaluations}/>
             <EvaluationDetailsMetrics 
                 metrics={evaluation.form.metrics}
                 handleSelect={handleOnMetricSelect}

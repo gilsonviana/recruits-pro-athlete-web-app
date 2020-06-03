@@ -10,18 +10,15 @@ import EvaluationDetailsChartEmptyState from './EvaluationDetailsChartEmptyState
 import CustomizedAxisTick from './CustomizedAxisTick'
 import CustomizedLabel from './CustomizedLabel'
 
-const EvaluationDetailsChart = ({ metricName, evaluations }) => {
+const EvaluationDetailsChart = ({ evaluatorId, metricName, evaluations }) => {
   const [chartData, setChartData] = useState([])
 
   useEffect(() => {
     const populateChartData = () => {
-      const evaluatorId = evaluations[0].evaluatorId._id || ''
-      
       let metrics = []
 
       evaluations.filter(evaluation => evaluation.evaluatorId._id === evaluatorId).map(evaluation => {
         const evaluationDate = moment(evaluation.createdAt).format('MMM D Y')
-
         evaluation.form.metrics.map(metric => {
           if (metric.name === metricName) {
             metrics = [
@@ -74,7 +71,7 @@ const EvaluationDetailsChart = ({ metricName, evaluations }) => {
 };
 
 EvaluationDetailsChart.propTypes = {
-  metric: PropTypes.object
+  evaluatorId: PropTypes.string.isRequired
 }
 
 export default EvaluationDetailsChart;
