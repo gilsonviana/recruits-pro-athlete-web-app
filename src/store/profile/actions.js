@@ -90,3 +90,21 @@ export const setProfileImagesRequest = (token, { avatar = null, cover = null }) 
         }
     }
 }
+
+// export const getSelf = (token, fields) => async dispatch => {
+//     try {
+//         const { data } = await axios({
+//             method: 'GET',
+//             url: `${keys.API}/profile/self?fields=${fields}`,
+//             headers: {
+//                 "Authorization": token
+//             }
+//         })
+
+//         if (data.athlete.length > 0) {
+
+//         }
+//     } catch (e) {
+//         throw new Error(e)
+//     }
+// }

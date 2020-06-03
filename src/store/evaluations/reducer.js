@@ -10,6 +10,11 @@ export default (state = initialState, action) => {
             ]
         case types.RESET_EVALUATIONS:
             return initialState
+        case types.UPDATE_EVALUATIONS_LIST:
+            return [
+                ...state,
+                ...action.payload.evaluations
+            ]
         default:
             return state;
     }

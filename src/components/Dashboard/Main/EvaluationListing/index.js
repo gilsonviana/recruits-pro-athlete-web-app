@@ -3,9 +3,6 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Card from 'react-bootstrap/Card'
 
 // Components
 import EvaluationSearchBar from './EvaluationSearchBar'
@@ -13,7 +10,9 @@ import EvaluationListItem from './EvaluationListItem'
 import EvaluationListVideoItem from './EvaluationListVideoItem'
 import MarketingBanner from '../MarketingBanner'
 
-const EvaluationListing = ({ evaluations, videoEvaluations, subscriptionStatus }) => {
+import { getLatestEvaluations } from '../../../../store/evaluations/actions'
+
+const EvaluationListing = ({ token, evaluations, videoEvaluations, subscriptionStatus, getLatestEvaluations }) => {
     const [evaluationsState, setEvaluationsState] = useState(null)
 
     useEffect(() => {
@@ -29,6 +28,8 @@ const EvaluationListing = ({ evaluations, videoEvaluations, subscriptionStatus }
         }
 
         populateEvaluationsState()
+        getLatestEvaluations(token, evaluations.length)
+
     }, [evaluations, videoEvaluations, subscriptionStatus])
 
     const handleSearch = (e) => {
@@ -123,14 +124,17 @@ const EvaluationListing = ({ evaluations, videoEvaluations, subscriptionStatus }
 }
 
 EvaluationListing.propTypes = {
+    token: PropTypes.string.isRequired,
     evaluations: PropTypes.array.isRequired,
-    subscriptionStatus: PropTypes.string.isRequired
+    subscriptionStatus: PropTypes.string.isRequired,
+    getLatestEvaluations: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
+    token: state.auth.token,
     evaluations: state.evaluations,
     videoEvaluations: state.videoEvaluations,
     subscriptionStatus: state.subscription.status
 })
 
-export default connect(mapStateToProps)(EvaluationListing)
+export default connect(mapStateToProps, { getLatestEvaluations })(EvaluationListing)
