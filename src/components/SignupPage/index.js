@@ -93,6 +93,7 @@ const SignupPage = ({ history, signUp, signUpSetPassword, getSubscriptionPlans }
     
         history.push('/choose-plan')
       } catch (e) {
+        setIsLoading(false)
         setShowToast({
           isVisible: true,
           message: 'Email already in use. Login if you have an account.'
