@@ -174,7 +174,6 @@ const LoginPage = ({ history, token, doLogin, getSubscriptionPlans }) => {
                     </Col>
                 </Row>
                 <Row style={{
-                    position: 'absolute',
                     width: `100%`,
                     bottom: 0,
                     left: 0,

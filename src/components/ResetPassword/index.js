@@ -185,4 +185,5 @@ ResetPassword.propTypes = {
     getResetToken: PropTypes.func.isRequired
 }
 
-export default withRouter(connect(null, { getResetToken }))
+
+export default withRouter(connect(null, { getResetToken })(ResetPassword))
