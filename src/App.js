@@ -22,7 +22,6 @@ import ResetPasswordNewRoute from './components/ResetPasswordNewRoute';
 import ResetPasswordNew from './components/ResetPasswordNew';
 import PublicProfile from './components/PublicProfile';
 import PublicProfileSingle from './components/PublicProfile/PublicProfileSingle';
-// import LandingPage from './components/LandingPage';
 
 function App() {
   return (
@@ -30,7 +29,6 @@ function App() {
       <Switch>
         <Route path="/" exact>
           <LoginPage />
-          {/* <LandingPage /> */}
         </Route>
         <Route path="/public" exact>
           <PublicProfile />
