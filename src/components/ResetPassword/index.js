@@ -38,13 +38,14 @@ const ResetPassword = ({ history, getResetToken }) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         setIsLoading(true)
-        const res = await getResetToken(formState.email)
-        if (!res) {
+        try {
+            await getResetToken(formState.email)
+            setIsLoading(false)
+            history.push(`${location.pathname}/code`)
+        } catch (e) {
             setIsLoading(false)
             setShowToast(true)
-            return
         }
-        history.push(`${location.pathname}/code`)
     }
 
     const handleOnChange = (e) => {
@@ -184,4 +185,4 @@ ResetPassword.propTypes = {
     getResetToken: PropTypes.func.isRequired
 }
 
-export default connect(null, { getResetToken })(withRouter(ResetPassword))
+export default withRouter(connect(null, { getResetToken }))
