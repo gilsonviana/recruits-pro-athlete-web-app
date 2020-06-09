@@ -27,8 +27,18 @@ const EvaluationListing = ({ token, evaluations, videoEvaluations, subscriptionS
             ])
         }
 
+        const tryGetLatestEvaluations = async () => {
+            try {
+                await getLatestEvaluations(token, evaluations.length)
+            } catch (e) {
+                console.error(e);
+                
+            }
+        }
+
         populateEvaluationsState()
-        getLatestEvaluations(token, evaluations.length)
+        tryGetLatestEvaluations()
+        
 
     }, [evaluations, videoEvaluations, subscriptionStatus])
 
