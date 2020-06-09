@@ -1,6 +1,7 @@
 import * as types from './types'
 
 const listItem = {
+    _id: '',
     type: '',
     senderName: '',
     date: '',
@@ -24,12 +25,7 @@ export default (state = initialState, action) => {
         case types.NOTIFICATION_MARK_ALL:
             return {
                 ...state,
-                list: [
-                    ...state.list.map(item => ({
-                        ...item,
-                        read: true
-                    }))
-                ]
+                list: []
             }
         case types.NOTIFICATION_RESET:
             return initialState

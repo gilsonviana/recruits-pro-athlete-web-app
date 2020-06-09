@@ -1,0 +1,38 @@
+.fabell {
+    position: relative;
+}
+
+.fabell__badge {
+    background: #00fc00;
+    color: black;
+    position: absolute;
+    font-size: 0.7rem;
+    line-height: 1.5rem;
+    width: 25px;
+    height: 25px;
+    border-radius: calc(35px / 2);
+    right: -20px;
+    top: 0px;
+    font-weight: bold;
+}
+
+.app__header__top__bar__item-bell__item {
+    border-bottom: 1px solid lightgray;
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+.app__header__top__bar__item-bell__item * {
+    font-size: .8rem !important;
+    margin: 0;
+}
+
+.app__header__top__bar__item-bell__header {
+    border-bottom: 1px solid lightgray;
+    text-align: right;
+}
+
+.app__header__top__bar__item-bell__header button {
+    font-size: .8rem !important;
+    text-decoration: none !important;
+}

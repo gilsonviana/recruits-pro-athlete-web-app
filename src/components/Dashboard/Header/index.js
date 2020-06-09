@@ -12,6 +12,8 @@ import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 
+import Notification from './Notification'
+
 // Redux
 import { doLogout } from '../../../store/auth/actions'
 
@@ -88,7 +90,7 @@ const Header = ({ doLogout, token, fullName, avatarUrl, history, profileId }) =>
                             <Nav.Link as={Button} variant="success" href="/signup" className="text-dark d-none d-md-inline-block" style={{backgroundColor: '#00EC00'}}>Sign up</Nav.Link>
                         </Nav> :
                     <div className="app__header__top__bar__list d-none d-md-flex">
-                        
+                        <Notification />
                         <div className="app__header__top__bar__item">
                             <Dropdown className="dropdown d-flex text-light">
                                 <Dropdown.Toggle

@@ -15,6 +15,7 @@ import subscription from './subscription/reducer'
 import evaluations from './evaluations/reducer'
 import videoEvaluations from './videoEvaluations/reducer'
 import workouts from './workouts/reducer'
+import notifications from './notifications/reducer'
 
 const reducers = combineReducers({
     auth,
@@ -25,7 +26,8 @@ const reducers = combineReducers({
     error,
     evaluations,
     videoEvaluations,
-    workouts
+    workouts,
+    notifications
 })
 
 const persistConfig = {

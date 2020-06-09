@@ -42,12 +42,7 @@ describe('Notification reducer', () => {
     it('Should mark all notifications as read', () => {
         expect(reducer(initialState, {type: types.NOTIFICATION_MARK_ALL})).toEqual({
             ...initialState,
-            list: [{
-                type: 'EVALUATION',
-                senderName: 'Gilson Viana',
-                date: '2020-06-09T21:11:26.099Z',
-                read: true
-            }]
+            list: []
         })
     })
 })
