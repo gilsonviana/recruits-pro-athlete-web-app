@@ -18,7 +18,7 @@ export default (state = initialState, action) => {
                 ...state,
                 list: [
                     ...state.list,
-                    action.payload.notication
+                    action.payload.notification
                 ]
             }
         case types.NOTIFICATION_MARK_ALL:
