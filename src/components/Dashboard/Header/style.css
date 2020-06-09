@@ -23,16 +23,33 @@
 .app__header__top__bar__list {
     display: flex;
     flex: 2;
+    flex-direction: row;
     align-items: center;
+    justify-content: flex-end;
 }
 
-.app__header__top__bar__item {
-    margin-left: auto;
+.app__header__top__bar__item-bell .btn-account {
+    background: none !important;
+    border: 0;
+    outline: 0;
+}
+
+.app__header__top__bar__item-bell .btn-account::after {
+    display: none;
+}
+
+.app__header__top__bar__item-bell .btn-account:focus,
+.app__header__top__bar__item-bell .btn-account:active {
+    box-shadow: none !important;
+    background: none;
+    border: none;
 }
 
 .app__header__top__bar__item .dropdown,
-.app__header__top__bar__item .show.dropdown:focus {
-    outline: none;
+.app__header__top__bar__item .show.dropdown:focus, 
+.app__header__top__bar__item-bell .dropdown,
+.app__header__top__bar__item-bell .show.dropdown:focus {
+    outline: none !important;
 }
 
 .app__header__top__bar__item .btn-account {
@@ -63,6 +80,18 @@
 
 .app__header__top__bar__item .show > .btn-account:focus {
     box-shadow: none;
+}
+
+.app__header__top__bar__item-bell .btn-account .fabell {
+    position: relative;
+    margin-bottom: 0;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 4rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 1.25rem;
+    margin-right: .75rem;
 }
 
 .app__header__top__bar__item .btn-account .user-avatar {
