@@ -21,7 +21,7 @@ const NotificationItem = ({ notification }) => {
     }
 
     return (
-        <Link  to={`/dashboard/evaluation/${notification._id}`} className="dropdown-item app__header__top__bar__item-bell__item" as={<Dropdown.Item />}>
+        <Link  to={`/dashboard/evaluation/${notification.id}`} className="dropdown-item app__header__top__bar__item-bell__item" as={<Dropdown.Item />}>
             <h6>New {renderType(notification.type)} from <span className="font-weight-bold">{notification.senderName}</span></h6>
             <span className="text-muted">{renderDate(notification.date)}</span>
         </Link>
@@ -30,7 +30,7 @@ const NotificationItem = ({ notification }) => {
 
 NotificationItem.propTypes = {
     notification: PropTypes.shape({
-        _id: PropTypes.string,
+        id: PropTypes.string,
         type: PropTypes.string,
         senderName: PropTypes.string,
         date: PropTypes.string,

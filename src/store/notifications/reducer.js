@@ -1,13 +1,5 @@
 import * as types from './types'
 
-const listItem = {
-    _id: '',
-    type: '',
-    senderName: '',
-    date: '',
-    read: false
-}
-
 const initialState = {
     list: []
 }
