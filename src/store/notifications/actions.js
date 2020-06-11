@@ -14,3 +14,9 @@ export const markAllNotification = () => dispatch => {
         type: types.NOTIFICATION_MARK_ALL
     })
 }
+
+export const clearNotification = () => dispatch => {
+    dispatch({
+        type: types.NOTIFICATION_SET_IS_READ
+    })
+}

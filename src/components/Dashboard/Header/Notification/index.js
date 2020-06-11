@@ -8,13 +8,21 @@ import PropTypes from 'prop-types'
 import NotificationItem from './NotificationItem'
 import NotificationEmptyState from './NotificationEmptyState'
 
-import { markAllNotification } from '../../../../store/notifications/actions'
+import { markAllNotification, clearNotification } from '../../../../store/notifications/actions'
 
 import './style.css'
 
-const Notification = ({ notifications, markAllNotification }) => {
-    console.log("Notification", notifications);
-    
+const Notification = ({ notifications, markAllNotification, clearNotification }) => {
+    const renderNotificationNumber = () => {
+        if (notifications.list.length > 0) {
+            const notificationsNumber = notifications.list.filter(item => item.read === false).length
+            if (notificationsNumber > 0) {
+                return <div className="fabell__badge">{notificationsNumber}</div>
+            }
+        }
+        return null
+    }
+
     const renderNotificationItems = () => {
         if (notifications.list.length > 0) {
             return notifications.list.map((notification, i) => <NotificationItem key={i} notification={notification}/>)
@@ -30,11 +38,12 @@ const Notification = ({ notifications, markAllNotification }) => {
                     aria-haspopup="true"
                     aria-expanded="false"
                 >
-                    <span className="fabell">
+                    <span 
+                        className="fabell" 
+                        onClick={() => clearNotification()}
+                    >
                         <FaBell />
-                        {notifications.list.length > 0 && 
-                            <div className="fabell__badge">{notifications.list.length}</div>
-                        }
+                        {renderNotificationNumber()}
                     </span>
                 </Dropdown.Toggle>
                 <Dropdown.Menu
@@ -45,9 +54,7 @@ const Notification = ({ notifications, markAllNotification }) => {
                         left: `0px`,
                         willChange: `top, left`,
                         overflowY: 'scroll',
-                        height: `380px`,
-                        display: 'flex',
-                        flexDirection: 'column'
+                        height: `380px`
                     }}
                 >
                     {
@@ -68,11 +75,12 @@ const Notification = ({ notifications, markAllNotification }) => {
 
 Notification.propTypes = {
     notifications: PropTypes.object.isRequired,
-    markAllNotification: PropTypes.func.isRequired
+    markAllNotification: PropTypes.func.isRequired,
+    clearNotification: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
     notifications: state.notifications
 })
 
-export default connect(mapStateToProps, { markAllNotification })(Notification)
+export default connect(mapStateToProps, { markAllNotification, clearNotification })(Notification)

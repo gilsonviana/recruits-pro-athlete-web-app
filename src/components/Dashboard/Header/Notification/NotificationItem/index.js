@@ -13,14 +13,15 @@ const NotificationItem = ({ notification }) => {
 
     const renderType = (type = "") => {
         switch(type) {
-            case "EVALUATION":
+            case "NEW_EVALUATION":
                 return <span className="font-weight-bold">evaluation</span>
             default:
-                return 'TYPE'
+                return ''
         }
     }
+
     return (
-        <Link  to={`/dashboard/profile`} className="dropdown-item app__header__top__bar__item-bell__item" as={<Dropdown.Item />}>
+        <Link  to={`/dashboard/evaluation/${notification._id}`} className="dropdown-item app__header__top__bar__item-bell__item" as={<Dropdown.Item />}>
             <h6>New {renderType(notification.type)} from <span className="font-weight-bold">{notification.senderName}</span></h6>
             <span className="text-muted">{renderDate(notification.date)}</span>
         </Link>

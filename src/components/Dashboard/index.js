@@ -1,6 +1,9 @@
 // Dependencies
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import socketIoClient from 'socket.io-client'
+import KEYS from '../../config/keys'
 
 // Components
 import Header from './Header'
@@ -9,21 +12,20 @@ import Main from './Main'
 
 import { addNotification } from '../../store/notifications/actions'
 
-const Dashboard = ({ addNotification }) => {
+const Dashboard = ({ token, addNotification }) => {
     const { useEffect } = React
 
     useEffect(() => {
-        // TODO: CONNECT TO WEBSOCKET
-        setTimeout(() => {
-            console.log("addNotification");
-            
-            addNotification({
-                type: 'EVALUATION',
-                senderName: 'Gilson Viana',
-                date: '2020-06-09T21:11:26.099Z',
-                read: false
-            })
-        }, 2000)
+        const socket = socketIoClient(KEYS.WS, {
+            query: {
+                token
+            }
+        })
+
+        socket.on("NEW_EVALUATION", data => {
+            console.log("Dashboard->useEffect->NewEvaluation", data);
+            addNotification(data)
+        })
     }, [])
 
     return (
@@ -35,4 +37,13 @@ const Dashboard = ({ addNotification }) => {
     )
 }
 
-export default connect(null, { addNotification })(Dashboard)
+Dashboard.propTypes = {
+    token: PropTypes.string.isRequired,
+    addNotification: PropTypes.func.isRequired
+}
+
+const mapStateToProps = state => ({
+    token: state.auth.token
+})
+
+export default connect(mapStateToProps, { addNotification })(Dashboard)

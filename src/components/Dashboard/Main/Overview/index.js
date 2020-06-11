@@ -5,8 +5,6 @@ import { connect } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import socketIOClient from "socket.io-client";
-import KEYS from "../../../../config/keys";
 
 // Components
 import OverviewWelcome from "./OverviewWelcome";
@@ -22,18 +20,6 @@ const Overview = ({ evaluations, workouts, videos, subscriptionStatus }) => {
     const [videosState, setVideosState] = useState([]);
 
     useEffect(() => {
-        // const socket = socketIOClient("http://192.168.0.111:3000", {
-        //     transports: ["websocket"],
-        // });
-        // socket.on("connect", function () {
-        //     console.log("connected!");
-        //     socket.emit("greet", { message: "Hello Mr.Server!" });
-        // });
-
-        // socket.on("respond", function (data) {
-        //     console.log(data);
-        // });
-
         setEvaluationsState([...evaluations]);
         setWorkoutsState([...workouts]);
         setVideosState([...videos]);

@@ -27,6 +27,16 @@ export default (state = initialState, action) => {
                 ...state,
                 list: []
             }
+        case types.NOTIFICATION_SET_IS_READ:
+            return {
+                ...state,
+                list: [
+                    ...state.list.map(item => ({
+                        ...item,
+                        read: true
+                    }))
+                ]
+            }
         case types.NOTIFICATION_RESET:
             return initialState
         default:

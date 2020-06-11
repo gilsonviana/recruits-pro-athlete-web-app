@@ -2,6 +2,7 @@ import reducer from './reducer'
 import * as types from './types'
 
 const initialState = {
+    isRead: false,
     list: [{
         type: 'EVALUATION',
         senderName: 'Gilson Viana',
@@ -27,6 +28,7 @@ describe('Notification reducer', () => {
             }
         }})).toEqual({
             ...initialState,
+            isRead: false,
             list: [
                 ...initialState.list,
                 {
@@ -43,6 +45,13 @@ describe('Notification reducer', () => {
         expect(reducer(initialState, {type: types.NOTIFICATION_MARK_ALL})).toEqual({
             ...initialState,
             list: []
+        })
+    })
+
+    it('Should set is read to true', () => {
+        expect(reducer(initialState, {type: types.NOTIFICATION_SET_IS_READ})).toEqual({
+            ...initialState,
+            isRead: true
         })
     })
 })
