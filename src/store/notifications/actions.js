@@ -1,4 +1,6 @@
 import * as types from './types'
+import keys from '../../config/keys'
+import axios from 'axios'
 
 export const addNotification = (notification) => dispatch => {
     dispatch({
@@ -9,10 +11,21 @@ export const addNotification = (notification) => dispatch => {
     })
 }
 
-export const markAllNotification = () => dispatch => {
+export const markAllNotification = (token) => async dispatch => {
     dispatch({
         type: types.NOTIFICATION_MARK_ALL
     })
+    try {
+        await axios({
+            url: `${keys.API}/notification`,
+            method: 'DELETE',
+            headers: {
+                "Authorization": token
+            }
+        })
+    } catch (e) {
+        throw new Error(e)
+    }
 }
 
 export const clearNotification = () => dispatch => {

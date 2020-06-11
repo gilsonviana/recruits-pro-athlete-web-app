@@ -6,6 +6,12 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch(action.type) {
+        case types.NOTIFICATION_SET_LIST:
+            return {
+                list: [
+                    ...action.payload.list
+                ]
+            }
         case types.NOTIFICATION_ADD:
             return {
                 ...state,

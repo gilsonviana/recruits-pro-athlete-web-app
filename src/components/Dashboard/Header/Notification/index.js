@@ -12,7 +12,7 @@ import { markAllNotification, clearNotification } from '../../../../store/notifi
 
 import './style.css'
 
-const Notification = ({ notifications, markAllNotification, clearNotification }) => {
+const Notification = ({ token, notifications, markAllNotification, clearNotification }) => {
     const renderNotificationNumber = () => {
         if (notifications.list.length > 0) {
             const notificationsNumber = notifications.list.filter(item => item.read === false).length
@@ -61,7 +61,7 @@ const Notification = ({ notifications, markAllNotification, clearNotification })
                         notifications.list.length > 0 ?
                         <>
                         <div className="app__header__top__bar__item-bell__header">
-                            <Button variant="link" onClick={() => markAllNotification()}>Mark All as Read</Button>
+                            <Button variant="link" onClick={() => markAllNotification(token)}>Mark All as Read</Button>
                         </div>
                         {renderNotificationItems()}
                         </> :
@@ -74,12 +74,14 @@ const Notification = ({ notifications, markAllNotification, clearNotification })
 }
 
 Notification.propTypes = {
+    token: PropTypes.string.isRequired,
     notifications: PropTypes.object.isRequired,
     markAllNotification: PropTypes.func.isRequired,
     clearNotification: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
+    token: state.auth.token,
     notifications: state.notifications
 })
 

@@ -7,6 +7,7 @@ import { SET_EVALUATIONS, RESET_EVALUATIONS } from '../evaluations/types'
 import { SET_VIDEO_EVALUATIONS, RESET_VIDEO_EVALUATIONS } from '../videoEvaluations/types'
 import { SET_VIDEOS, RESET_VIDEOS } from '../videos/types'
 import { SET_WORKOUTS, RESET_WORKOUTS } from '../workouts/types'
+import { NOTIFICATION_SET_LIST, NOTIFICATION_RESET } from '../notifications/types'
 import keys from '../../config/keys'
 
 export const doLogin = (credentials) => {
@@ -50,6 +51,12 @@ export const doLogin = (credentials) => {
             dispatch({
                 type: SET_WORKOUTS,
                 payload: data.athlete.workouts
+            })
+            dispatch({
+                type: NOTIFICATION_SET_LIST,
+                payload: {
+                    list: data.athlete.notifications
+                }
             })
             dispatch({
                 type: SET_PROFILE_REQUEST,
@@ -102,6 +109,9 @@ export const doLogout = () => {
         })
         dispatch({
             type: RESET_WORKOUTS
+        })
+        dispatch({
+            type: NOTIFICATION_RESET
         })
     }
 }
