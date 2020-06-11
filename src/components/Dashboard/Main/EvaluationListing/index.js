@@ -10,9 +10,7 @@ import EvaluationListItem from './EvaluationListItem'
 import EvaluationListVideoItem from './EvaluationListVideoItem'
 import MarketingBanner from '../MarketingBanner'
 
-import { getLatestEvaluations } from '../../../../store/evaluations/actions'
-
-const EvaluationListing = ({ token, evaluations, videoEvaluations, subscriptionStatus, getLatestEvaluations }) => {
+const EvaluationListing = ({ token, evaluations, videoEvaluations, subscriptionStatus }) => {
     const [evaluationsState, setEvaluationsState] = useState(null)
 
     useEffect(() => {
@@ -27,17 +25,7 @@ const EvaluationListing = ({ token, evaluations, videoEvaluations, subscriptionS
             ])
         }
 
-        const tryGetLatestEvaluations = async () => {
-            try {
-                await getLatestEvaluations(token, evaluations.length)
-            } catch (e) {
-                console.error(e);
-                
-            }
-        }
-
         populateEvaluationsState()
-        tryGetLatestEvaluations()
         
 
     }, [evaluations, videoEvaluations, subscriptionStatus])
@@ -137,7 +125,6 @@ EvaluationListing.propTypes = {
     token: PropTypes.string.isRequired,
     evaluations: PropTypes.array.isRequired,
     subscriptionStatus: PropTypes.string.isRequired,
-    getLatestEvaluations: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -147,4 +134,4 @@ const mapStateToProps = (state) => ({
     subscriptionStatus: state.subscription.status
 })
 
-export default connect(mapStateToProps, { getLatestEvaluations })(EvaluationListing)
+export default connect(mapStateToProps)(EvaluationListing)

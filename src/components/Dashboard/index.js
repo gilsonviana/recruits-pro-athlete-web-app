@@ -11,8 +11,9 @@ import Aside from './Aside'
 import Main from './Main'
 
 import { addNotification } from '../../store/notifications/actions'
+import { updateEvaluationList } from '../../store/evaluations/actions'
 
-const Dashboard = ({ token, addNotification }) => {
+const Dashboard = ({ token, addNotification, updateEvaluationList }) => {
     const { useEffect } = React
 
     useEffect(() => {
@@ -24,7 +25,8 @@ const Dashboard = ({ token, addNotification }) => {
 
         socket.on("NEW_EVALUATION", data => {
             console.log("Dashboard->useEffect->NewEvaluation", data);
-            addNotification(data)
+            addNotification(data.socketResponse)
+            updateEvaluationList(data.socketEvaluation)
         })
     }, [])
 
@@ -39,11 +41,12 @@ const Dashboard = ({ token, addNotification }) => {
 
 Dashboard.propTypes = {
     token: PropTypes.string.isRequired,
-    addNotification: PropTypes.func.isRequired
+    addNotification: PropTypes.func.isRequired,
+    updateEvaluationList: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
     token: state.auth.token
 })
 
-export default connect(mapStateToProps, { addNotification })(Dashboard)
+export default connect(mapStateToProps, { addNotification, updateEvaluationList })(Dashboard)
