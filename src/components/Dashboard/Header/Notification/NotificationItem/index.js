@@ -15,6 +15,8 @@ const NotificationItem = ({ notification }) => {
         switch(type) {
             case "NEW_EVALUATION":
                 return <span className="font-weight-bold">evaluation</span>
+            case "NEW_WORKOUT":
+                return <span className="font-weight-bold">workout</span>
             default:
                 return ''
         }

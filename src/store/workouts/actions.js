@@ -1,6 +1,15 @@
 import axios from 'axios'
-import { DELETE_WORKOUT } from './types'
+import { DELETE_WORKOUT, WORKOUTS_UPDATE_LIST } from './types'
 import config from '../../config/keys'
+
+export const updateWorkoutList = (workout) => dispatch => {
+    dispatch({
+        type: WORKOUTS_UPDATE_LIST,
+        payload: {
+            workout
+        }
+    })
+}
 
 export const deleteWorkout = (token = '', id = '') => {
     return async (dispatch) => {

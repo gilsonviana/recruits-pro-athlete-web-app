@@ -25,7 +25,7 @@ const Notification = ({ token, notifications, markAllNotification, clearNotifica
 
     const renderNotificationItems = () => {
         if (notifications.list.length > 0) {
-            return notifications.list.map((notification, i) => <NotificationItem key={i} notification={notification}/>)
+            return notifications.list.sort((a, b) => new Date(b.date) - new Date(a.date)).map((notification, i) => <NotificationItem key={i} notification={notification}/>)
         }
     }
     return (

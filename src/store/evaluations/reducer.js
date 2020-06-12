@@ -13,7 +13,7 @@ export default (state = initialState, action) => {
         case types.UPDATE_EVALUATIONS_LIST:
             return [
                 ...state,
-                ...action.payload.evaluation
+                action.payload.evaluation
             ]
         default:
             return state;
