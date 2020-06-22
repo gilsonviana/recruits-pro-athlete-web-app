@@ -11,6 +11,7 @@ import OverviewWelcome from "./OverviewWelcome";
 import MetricsFlush from "./MetricsFlush";
 import LastEvaluation from "./LastEvaluation";
 import LastWorkout from './LastWorkout';
+import LastVideo from './LastVideo';
 import MarketingBanner from "../MarketingBanner";
 
 const Overview = ({ evaluations, workouts, videos, subscriptionStatus }) => {
@@ -50,18 +51,14 @@ const Overview = ({ evaluations, workouts, videos, subscriptionStatus }) => {
                 </Row>
                 <Row>
                     <Col xs={12} md={6} lg={4}>
-                        {evaluations.length > 0 && (
-                            <LastEvaluation
-                                evaluation={evaluations[evaluations.length - 1]}
-                            />
-                        )}
+                        {evaluations.length > 0 && <LastEvaluation evaluation={evaluations[evaluations.length - 1]} />}
                     </Col>
                     <Col xs={12} md={6} lg={4}>
-                        <LastWorkout
-                            workout={workouts[workouts.length - 1]}
-                        />
+                        {workouts.length > 0 && <LastWorkout workout={workouts[workouts.length - 1]} />}
                     </Col>
-                    <Col xs={12} md={6} lg={4}></Col>
+                    <Col xs={12} md={6} lg={4}>
+                        {videos.length > 0 && <LastVideo video={videos[videos.length - 1]} />}
+                    </Col>
                 </Row>
             </Container>
         </div>
