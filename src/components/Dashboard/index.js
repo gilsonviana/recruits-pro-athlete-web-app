@@ -21,7 +21,14 @@ const Dashboard = ({ token, addNotification, updateEvaluationList, updateWorkout
         const socket = socketIoClient(KEYS.WS, {
             query: {
                 token
-            }
+            },
+            secure: true,
+            reconnect: true,
+            transports: ['websocket']
+        })
+
+        socket.on("Welcome", data => {
+            console.info(data)
         })
 
         socket.on("NEW_EVALUATION", data => {

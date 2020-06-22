@@ -10,6 +10,7 @@ import Col from "react-bootstrap/Col";
 import OverviewWelcome from "./OverviewWelcome";
 import MetricsFlush from "./MetricsFlush";
 import LastEvaluation from "./LastEvaluation";
+import LastWorkout from './LastWorkout';
 import MarketingBanner from "../MarketingBanner";
 
 const Overview = ({ evaluations, workouts, videos, subscriptionStatus }) => {
@@ -55,7 +56,11 @@ const Overview = ({ evaluations, workouts, videos, subscriptionStatus }) => {
                             />
                         )}
                     </Col>
-                    <Col xs={12} md={6} lg={4}></Col>
+                    <Col xs={12} md={6} lg={4}>
+                        <LastWorkout
+                            workout={workouts[workouts.length - 1]}
+                        />
+                    </Col>
                     <Col xs={12} md={6} lg={4}></Col>
                 </Row>
             </Container>

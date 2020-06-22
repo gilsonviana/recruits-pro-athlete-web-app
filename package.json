@@ -40,6 +40,7 @@
     "eject": "react-scripts eject"
   },
   "homepage": "https://athletes.recruitspro.com",
+  "proxy": "https://athletes.recruitspro.com",
   "eslintConfig": {
     "extends": "react-app"
   },
